@@ -29,5 +29,13 @@ contact-rich / multi-finger 손 작업 (병뚜껑, 재배치, 도구 사용 등)
 - **Zotero/Mendeley**: `references.bib` import → 같은 폴더 PDF 자동 연결
 - 또는 폴더째 클라우드(Dropbox/Drive)에 올려 동기화
 
+## related_works/ (CoRL 2026 AutoDex 참고 논문)
+
+AutoDex 논문 related work용으로 모은 PDF 30편. 하위 폴더로 분류:
+- `autonomous/` — self-supervised / autonomous real-world 데이터 수집, reset-free RL (QT-Opt, MT-Opt, Pinto Supersizing, MTRF, MEDAL++, OPTIMUS, Real2Render2Real, Working Backwards 등)
+- `dexterous/` — dexterous 관련 (Being-H0, large video planner)
+- `system/` — 대규모 데이터 수집 시스템 (DROID, RH20T, MobileALOHA, RoboTurk, DexCap)
+- `real/` — RealDex
+
 ## 주의
 - arXiv:2605.13925 survey는 task/하드웨어 세부가 부정확 → 인용 금지. 하드웨어 사양은 KIT survey 표 기준.
