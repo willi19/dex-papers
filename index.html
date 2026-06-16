@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dex-papers · browser</title>
+<style>
+  :root {
+    --bg: #0f1115; --panel: #181b22; --panel2: #1f232c; --border: #2a2f3a;
+    --text: #e6e8ee; --muted: #9aa3b2; --accent: #6ea8fe; --accent2: #2b8a5b;
+    --chip: #262b35; --chipOn: #3a6df0;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--bg);
+    border-bottom: 1px solid var(--border); padding: 16px 20px 12px; }
+  h1 { margin: 0 0 4px; font-size: 18px; }
+  h1 .count { color: var(--muted); font-weight: 400; font-size: 14px; }
+  .search { width: 100%; max-width: 460px; padding: 9px 12px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--panel2); color: var(--text);
+    font-size: 14px; margin-top: 8px; }
+  .search:focus { outline: none; border-color: var(--accent); }
+  .barlabel { color: var(--muted); font-size: 12px; text-transform: uppercase;
+    letter-spacing: .04em; margin: 12px 0 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { cursor: pointer; user-select: none; padding: 4px 10px; border-radius: 999px;
+    background: var(--chip); border: 1px solid var(--border); color: var(--text);
+    font-size: 12px; white-space: nowrap; }
+  .chip .n { color: var(--muted); margin-left: 4px; }
+  .chip.on { background: var(--chipOn); border-color: var(--chipOn); color: #fff; }
+  .chip.on .n { color: #dce6ff; }
+  .chip.coll { background: #20303f; }
+  .chip.coll.on { background: var(--accent2); border-color: var(--accent2); }
+  .clear { cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: 12px;
+    background: transparent; border: 1px dashed var(--border); color: var(--muted); }
+  .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  main { padding: 16px 20px 60px; display: grid; gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+  .card h2 { margin: 0; font-size: 14.5px; line-height: 1.35; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .badge { font-size: 11px; padding: 2px 7px; border-radius: 6px; background: var(--panel2);
+    color: var(--muted); border: 1px solid var(--border); }
+  .badge.coll { color: var(--accent); }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .links a { font-size: 12px; text-decoration: none; padding: 4px 9px; border-radius: 7px;
+    border: 1px solid var(--border); color: var(--text); background: var(--panel2); }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
+  .links a.pdf { background: #2a1f12; }
+  .links a.disabled { opacity: .3; pointer-events: none; }
+  .ctags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .ctag { font-size: 11px; color: var(--muted); cursor: pointer; padding: 1px 6px;
+    border-radius: 5px; background: var(--chip); }
+  .ctag:hover { color: var(--accent); }
+  .ctag.on { background: var(--chipOn); color: #fff; }
+  .empty { color: var(--muted); padding: 40px; text-align: center; grid-column: 1/-1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>dex-papers <span class="count" id="count"></span></h1>
+  <input class="search" id="search" type="search" placeholder="Search title or tag…" autocomplete="off">
+  <div class="barlabel">Collections</div>
+  <div class="chips" id="collbar"></div>
+  <div class="barlabel">Tags <span style="text-transform:none">(click to filter — AND)</span></div>
+  <div class="chips" id="tagbar"></div>
+  <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
+</header>
+<main id="grid"></main>
+
+<script src="papers.js"></script>
+<script>
+  const P = window.PAPERS || [];
+  const activeTags = new Set();
+  const activeColls = new Set();
+  let query = "";
+
+  const grid = document.getElementById("grid");
+  const tagbar = document.getElementById("tagbar");
+  const collbar = document.getElementById("collbar");
+  const countEl = document.getElementById("count");
+
+  // build href for local PDF: encode each path segment (handles spaces, "?")
+  const pdfHref = (f) => f.split("/").map(encodeURIComponent).join("/");
+
+  // counts
+  const tagCounts = {}, collCounts = {};
+  P.forEach(p => {
+    (p.tags || []).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1);
+    collCounts[p.collection] = (collCounts[p.collection]||0)+1;
+  });
+  const allTags = Object.keys(tagCounts).sort((a,b)=> tagCounts[b]-tagCounts[a] || a.localeCompare(b));
+  const allColls = Object.keys(collCounts).sort();
+
+  function renderBars() {
+    collbar.innerHTML = "";
+    allColls.forEach(c => {
+      const el = document.createElement("span");
+      el.className = "chip coll" + (activeColls.has(c) ? " on" : "");
+      el.innerHTML = c + ' <span class="n">' + collCounts[c] + '</span>';
+      el.onclick = () => { activeColls.has(c) ? activeColls.delete(c) : activeColls.add(c); render(); };
+      collbar.appendChild(el);
+    });
+    tagbar.innerHTML = "";
+    allTags.forEach(t => {
+      const el = document.createElement("span");
+      el.className = "chip" + (activeTags.has(t) ? " on" : "");
+      el.innerHTML = t + ' <span class="n">' + tagCounts[t] + '</span>';
+      el.onclick = () => toggleTag(t);
+      tagbar.appendChild(el);
+    });
+  }
+
+  function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
+
+  function match(p) {
+    for (const t of activeTags) if (!(p.tags||[]).includes(t)) return false;
+    if (activeColls.size && !activeColls.has(p.collection)) return false;
+    if (query) {
+      const hay = (p.title + " " + (p.tags||[]).join(" ") + " " + (p.venue||"")).toLowerCase();
+      if (!hay.includes(query)) return false;
+    }
+    return true;
+  }
+
+  function linkEl(label, href, cls) {
+    if (href) return '<a class="'+cls+'" href="'+href+'" target="_blank" rel="noopener">'+label+'</a>';
+    return '<a class="'+cls+' disabled">'+label+'</a>';
+  }
+
+  function render() {
+    renderBars();
+    const list = P.filter(match);
+    countEl.textContent = "· " + list.length + " / " + P.length;
+    grid.innerHTML = "";
+    if (!list.length) { grid.innerHTML = '<div class="empty">No papers match.</div>'; return; }
+    list.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const tags = (p.tags||[]).map(t =>
+        '<span class="ctag'+(activeTags.has(t)?' on':'')+'" data-tag="'+t+'">'+t+'</span>').join("");
+      card.innerHTML =
+        '<div class="badges"><span class="badge coll">'+p.collection+'</span>' +
+          (p.venue ? '<span class="badge">'+p.venue+'</span>' : '') + '</div>' +
+        '<h2>'+p.title+'</h2>' +
+        '<div class="ctags">'+tags+'</div>' +
+        '<div class="links">' +
+          linkEl("PDF", pdfHref(p.file), "pdf") +
+          linkEl("arXiv", p.arxiv, "") +
+          linkEl("Project", p.project, "") +
+        '</div>';
+      card.querySelectorAll(".ctag").forEach(e =>
+        e.onclick = () => toggleTag(e.dataset.tag));
+      grid.appendChild(card);
+    });
+  }
+
+  document.getElementById("search").addEventListener("input", e => {
+    query = e.target.value.trim().toLowerCase(); render();
+  });
+  document.getElementById("clear").onclick = () => {
+    activeTags.clear(); activeColls.clear(); query = "";
+    document.getElementById("search").value = ""; render();
+  };
+
+  render();
+</script>
+</body>
+</html>
