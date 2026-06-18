@@ -1,0 +1,1619 @@
+{
+ "categories": {
+  "A": "Caps / Twist",
+  "B": "Tool use",
+  "C": "Paper / Deformable",
+  "D": "Packaging",
+  "E": "Kitchen / Food",
+  "F": "Assembly / Insertion",
+  "G": "Rope / Cable",
+  "H": "Clothing",
+  "I": "Bimanual hold+act",
+  "J": "Handover / Throw-catch",
+  "K": "In-hand / Regrasp",
+  "L": "Precision / Small",
+  "M": "Press / Squeeze",
+  "N": "Devices",
+  "O": "Stack / Sort"
+ },
+ "tasks": [
+  {
+   "id": 1,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "페트병 뚜껑 열기",
+   "en": "unscrew a plastic bottle cap",
+   "papers": [
+    {
+     "title": "DexCap: Scalable and Portable Mocap Data Collection System for Dexterous Manipulation",
+     "arxiv": "2403.07788",
+     "year": 2024,
+     "note": "Multi-finger hand trained from mocap unscrews a bottle cap (uncapping); reports ~30% success with human-mocap-only data."
+    },
+    {
+     "title": "EgoDex: Learning Dexterous Manipulation from Large-Scale Egocentric Video",
+     "arxiv": "2505.11709",
+     "year": 2025,
+     "note": "Dexterous policies learned from egocentric video include unscrewing a bottle cap among demonstrated behaviors."
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "유리병·잼 뚜껑 열기",
+   "en": "open a glass jar lid",
+   "papers": [
+    {
+     "title": "Twisting Lids Off with Two Hands",
+     "arxiv": "2403.02338",
+     "year": 2024,
+     "note": "Two multi-fingered hands coordinate to grasp a jar-like container with one hand and twist the lid off about its axis with the other (sim-to-real RL)."
+    },
+    {
+     "title": "Embodied AI with Two Arms: Zero-shot Learning, Safety and Modularity",
+     "arxiv": "2404.03570",
+     "year": 2024,
+     "note": "Bimanual robot stabilizes a screw-cap container and unscrews the lid; 58.3% of containers opened zero-shot."
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "약통 child-proof 뚜껑 열기",
+   "en": "open a child-proof medicine bottle",
+   "papers": [
+    {
+     "title": "Planning for Multi-stage Forceful Manipulation",
+     "arxiv": "2101.02679",
+     "year": 2021,
+     "note": "Explicitly opens a push-and-twist child-proof bottle via planned forceful push-twist actions (grasp-twist, finger-twist, palm-twist, tool-twist)."
+    },
+    {
+     "title": "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning",
+     "arxiv": "2206.08686",
+     "year": 2022,
+     "note": "Bi-DexHands includes an environment where two hands cooperate to hold a bottle and open its cap without dropping the cap."
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "치약 뚜껑 열고 닫기",
+   "en": "open and close a toothpaste cap",
+   "papers": [
+    {
+     "title": "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning",
+     "arxiv": "2503.21860",
+     "year": 2025,
+     "note": "Demonstrates 'opening the toothpaste': left hand holds the tube while the right hand's thumb and index finger pop open the small cap (DexManipNet)."
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "보온병 마개 돌려 열기",
+   "en": "twist open a thermos stopper",
+   "papers": []
+  },
+  {
+   "id": 6,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "밸브·수도꼭지 돌리기",
+   "en": "turn a valve or faucet",
+   "papers": [
+    {
+     "title": "Benchmarking Reinforcement Learning Methods for Dexterous Robotic Manipulation with a Three-Fingered Gripper",
+     "arxiv": "2408.14747",
+     "year": 2024,
+     "note": "Three-fingered 9-DoF gripper rotates a sensorized target valve precisely 180 degrees via image-based RL."
+    },
+    {
+     "title": "Rapid Motor Adaptation for Robotic Manipulator Arms",
+     "arxiv": "2312.04670",
+     "year": 2023,
+     "note": "Includes a Faucet Turning task where the agent pushes the handle with one finger to rotate it."
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "문 손잡이 돌려 열기",
+   "en": "turn a door handle to open",
+   "papers": [
+    {
+     "title": "DoorBot: Closed-Loop Task Planning and Manipulation for Door Opening in the Wild with Haptic Feedback",
+     "arxiv": "2504.09358",
+     "year": 2025,
+     "note": "Haptic-aware closed-loop manipulation opens unseen doors with lever handles and doorknobs; success rate up to ~90%."
+    },
+    {
+     "title": "A Versatile Door Opening System with Mobile Manipulator through Adaptive Position-Force Control and Reinforcement Learning",
+     "arxiv": "2307.04422",
+     "year": 2023,
+     "note": "Mobile manipulator turns handles and opens doors via adaptive position-force control and RL."
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "category": "Caps / Twist",
+   "cat": "A",
+   "ko": "열쇠로 자물쇠 열기",
+   "en": "unlock a lock with a key",
+   "papers": [
+    {
+     "title": "ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations",
+     "arxiv": "2506.11775",
+     "year": 2025,
+     "note": "Dexterous hand inserts and turns a key in a lock (Key Lock task) with >50% success, learned from exoskeleton demos + RL."
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "드라이버로 나사 조이기/풀기",
+   "en": "tighten or loosen a screw with a screwdriver",
+   "papers": [
+    {
+     "title": "Haptics of Screwing and Unscrewing for its Application in Smart Factories for Disassembly",
+     "arxiv": "1801.10386",
+     "year": 2018,
+     "note": "Robotic screwdriving/unscrewing study modeling axial force and torque to avoid cam-out while driving screws with a screwdriver."
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "망치로 못 박기",
+   "en": "hammer a nail",
+   "papers": [
+    {
+     "title": "SimToolReal: An Object-Centric Policy for Zero-Shot Dexterous Tool Manipulation",
+     "arxiv": "2602.16863",
+     "year": 2026,
+     "note": "Dexterous hand grasps a hammer by its handle, rotates it in-hand into striking pose, and hammers a nail (zero-shot sim-to-real)."
+    },
+    {
+     "title": "Tool-as-Interface: Learning Robot Policies from Observing Human Tool Use",
+     "arxiv": "2504.04612",
+     "year": 2025,
+     "note": "Imitation-learning framework validated on nail hammering (among other tool tasks) from human tool-use observation."
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "가위로 종이 자르기",
+   "en": "cut paper with scissors",
+   "papers": [
+    {
+     "title": "ScissorBot: Learning Generalizable Scissor Skill for Paper Cutting via Simulation, Imitation, and Sim2Real",
+     "arxiv": "2409.13966",
+     "year": 2024,
+     "note": "Learning-based robotic system that cuts patterned paper with real scissors (sim-to-real)."
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "펜 뚜껑 열고 글씨 쓰기",
+   "en": "uncap a pen and write",
+   "papers": [
+    {
+     "title": "Scaling Cross-Embodied Learning: One Policy for Manipulation, Navigation, Locomotion and Aviation (CrossFormer)",
+     "arxiv": "2408.11812",
+     "year": 2024,
+     "note": "Cross-embodiment policy demonstrated uncapping a Sharpie pen on a bimanual robot."
+    },
+    {
+     "title": "VLBiMan: Vision-Language Anchored One-Shot Demonstration Enables Generalizable Bimanual Robotic Manipulation",
+     "arxiv": "2509.21723",
+     "year": 2025,
+     "note": "Bimanual pen/cap assembly and uncapping tasks via one-shot demonstrations."
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "집게로 물건 집기",
+   "en": "pick objects with tongs",
+   "papers": [
+    {
+     "title": "Mana: Dexterous Manipulation of Articulated Tools",
+     "arxiv": "2606.13677",
+     "year": 2026,
+     "note": "Multi-fingered dexterous manipulation of articulated tools including picking up small objects with tongs."
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "국자로 액체 떠 옮기기",
+   "en": "ladle liquid between containers",
+   "papers": [
+    {
+     "title": "SCOOP'D: Learning Mixed-Liquid-Solid Scooping via Sim2Real Generative Policy",
+     "arxiv": "2510.11566",
+     "year": 2025,
+     "note": "Diffusion policy scoops liquids/granular media with a ladle-like tool, transferring scoops between containers."
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "뒤집개로 음식 뒤집기",
+   "en": "flip food with a spatula",
+   "papers": [
+    {
+     "title": "Tool-as-Interface: Learning Robot Policies from Human Tool Usage through Imitation Learning",
+     "arxiv": "2504.04612",
+     "year": 2025,
+     "note": "Includes a pan/spatula flipping task (eggs, burger buns, meat patties) learned from human play."
+    },
+    {
+     "title": "Robot Learning as an Empirical Science: Best Practices for Policy Evaluation",
+     "arxiv": "2409.09491",
+     "year": 2024,
+     "note": "Dual-arm 'Flip and Serve Pancake' task with each arm holding a spatula to flip and plate a pancake."
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "렌치로 너트 조이기",
+   "en": "tighten a nut with a wrench",
+   "papers": [
+    {
+     "title": "Hybrid Control for Robotic Nut Tightening Task",
+     "arxiv": "2511.21366",
+     "year": 2025,
+     "note": "Hierarchical force/position control for autonomous robotic nut tightening (wrench/socket tool use)."
+    },
+    {
+     "title": "Robust Planning for Multi-stage Forceful Manipulation",
+     "arxiv": "2208.00319",
+     "year": 2022,
+     "note": "Forceful manipulation planning including twisting a nut on a bolt with a grasped spanner/tool."
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "category": "Tool use",
+   "cat": "B",
+   "ko": "칼로 빵·과일 자르기",
+   "en": "cut bread or fruit with a knife",
+   "papers": [
+    {
+     "title": "SliceIt! A Dual Simulator Framework for Learning Robot Food Slicing",
+     "arxiv": "2404.02569",
+     "year": 2024,
+     "note": "Real-to-sim-to-real framework for safely learning robot knife slicing of food items."
+    },
+    {
+     "title": "Learning an Adaptive Cutting Policy for Multi-Material Objects",
+     "arxiv": "2306.11288",
+     "year": 2023,
+     "note": "RSS paper learning a knife cutting policy that adapts to multi-material objects (e.g., fruit/bread)."
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "책 페이지 한 장씩 넘기기",
+   "en": "flip book pages one by one",
+   "papers": [
+    {
+     "title": "Flipbot: Learning Continuous Paper Flipping via Coarse-to-Fine Exteroceptive-Proprioceptive Exploration",
+     "arxiv": "2304.02253",
+     "year": 2023,
+     "note": "Singulates and flips paper-like deformable objects one at a time (page-flipping style task)."
+    },
+    {
+     "title": "Learning thin deformable object manipulation with a multi-sensory integrated soft hand",
+     "arxiv": "2411.13952",
+     "year": 2024,
+     "note": "Soft underactuated hand singulates and turns thin sheets/pages using tactile sensing."
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "휴지 한 장 뽑기",
+   "en": "pull a single tissue from a box",
+   "papers": [
+    {
+     "title": "PP-Tac: Paper Picking Using Tactile Feedback in Dexterous Robotic Hands",
+     "arxiv": "2504.16649",
+     "year": 2025,
+     "note": "Dexterous hand picks up single thin paper-like sheets via tactile feedback; closest to pulling a tissue."
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "종이 반으로 접기",
+   "en": "fold paper in half",
+   "papers": [
+    {
+     "title": "Learning Neural Force Manifolds for Sim2Real Robotic Symmetrical Paper Folding",
+     "arxiv": "2301.01968",
+     "year": 2023,
+     "note": "Robot folds sheets of paper in half using a learned force manifold from physics simulation."
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "봉투 열어 편지 꺼내기",
+   "en": "open an envelope and take out a letter",
+   "papers": []
+  },
+  {
+   "id": 22,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "종이 구겨 버리기",
+   "en": "crumple paper and toss it",
+   "papers": []
+  },
+  {
+   "id": 23,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "스티커 떼어 붙이기",
+   "en": "peel a sticker and stick it",
+   "papers": []
+  },
+  {
+   "id": 24,
+   "category": "Paper / Deformable",
+   "cat": "C",
+   "ko": "신문 펼치기",
+   "en": "unfold a newspaper",
+   "papers": []
+  },
+  {
+   "id": 25,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "박스 뚜껑 열기",
+   "en": "open box flaps",
+   "papers": []
+  },
+  {
+   "id": 26,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "테이프로 박스 봉하기",
+   "en": "tape a box shut",
+   "papers": []
+  },
+  {
+   "id": 27,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "지퍼백 열고 닫기",
+   "en": "open and close a ziplock bag",
+   "papers": [
+    {
+     "title": "Functional Contour-following via Haptic Perception and Reinforcement Learning",
+     "arxiv": null,
+     "year": 2018,
+     "note": "Robot closes a deformable ziplock bag's zipper via tactile (BioTac) haptic feedback and contextual-bandit RL; directly performs ziplock closing (T-Haptics 2018, no arXiv ID)."
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "비닐봉지 묶기",
+   "en": "tie a plastic bag",
+   "papers": [
+    {
+     "title": "Iterative Interactive Modeling for Knotting Plastic Bags",
+     "arxiv": null,
+     "year": 2022,
+     "note": "Dual-arm robot adjusts a randomly-dropped plastic bag to a standing pose then runs learned primitives to tie/knot it (CoRL 2022; PMLR gao23a, no arXiv ID found)."
+    },
+    {
+     "title": "DexKnot: Generalizable Visuomotor Policy Learning for Dexterous Bag-Knotting Manipulation",
+     "arxiv": "2603.07136",
+     "year": 2026,
+     "note": "Learns a dexterous visuomotor policy that ties/knots plastic bags."
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "과자 봉지 뜯기",
+   "en": "tear open a snack bag",
+   "papers": [
+    {
+     "title": "A gripper for flap separation and opening of sealed bags",
+     "arxiv": "2603.10890",
+     "year": 2026,
+     "note": "Custom gripper separates and grasps the flaps of sealed flat pouches and opens the seal; closest real match (opening sealed bags, not literal tearing of a snack bag)."
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "선물 포장 풀기",
+   "en": "unwrap a gift",
+   "papers": []
+  },
+  {
+   "id": 31,
+   "category": "Packaging",
+   "cat": "D",
+   "ko": "뽁뽁이로 물건 싸기",
+   "en": "wrap an item in bubble wrap",
+   "papers": [
+    {
+     "title": "Learning-based Cooperative Robotic Paper Wrapping: A Unified Control Policy with Residual Force Control",
+     "arxiv": "2511.03181",
+     "year": 2025,
+     "note": "Bimanual cooperative robot wraps objects in paper/wrapping material via learned residual-force control; closest match to wrapping an item."
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "컵에 물 따르기",
+   "en": "pour water into a cup",
+   "papers": [
+    {
+     "title": "Accurate Pouring with an Autonomous Robot Using an RGB-D Camera",
+     "arxiv": null,
+     "year": 2018,
+     "note": "PR2 robot pours water into a cup to a target level using RGB-D liquid-level feedback; 250+ real pours."
+    },
+    {
+     "title": "Robot gaining accurate pouring skills through self-supervised learning and generalization",
+     "arxiv": null,
+     "year": 2021,
+     "note": "Self-supervised GRU policy pours precise water amounts into a cup on a real manipulator."
+    }
+   ]
+  },
+  {
+   "id": 33,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "계란 깨서 그릇에 담기",
+   "en": "crack an egg into a bowl",
+   "papers": [
+    {
+     "title": "DexMan: Learning Bimanual Dexterous Manipulation from Human and Generated Videos",
+     "arxiv": "2510.08475",
+     "year": 2025,
+     "note": "Bimanual dexterous humanoid skills learned from videos; task suite includes egg cracking into a bowl."
+    },
+    {
+     "title": "DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning",
+     "arxiv": "2410.24185",
+     "year": 2024,
+     "note": "Automated bimanual dexterous data generation; includes delicate egg/bowl-style placement tasks."
+    }
+   ]
+  },
+  {
+   "id": 34,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "바나나 껍질 까기",
+   "en": "peel a banana",
+   "papers": [
+    {
+     "title": "Goal-conditioned dual-action imitation learning for dexterous dual-arm robot manipulation",
+     "arxiv": "2203.09749",
+     "year": 2022,
+     "note": "Dual-arm robot peels a real banana end-to-end via goal-conditioned dual-action imitation learning."
+    }
+   ]
+  },
+  {
+   "id": 35,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "오렌지 껍질 까기",
+   "en": "peel an orange",
+   "papers": []
+  },
+  {
+   "id": 36,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "빵에 잼 바르기",
+   "en": "spread jam on bread",
+   "papers": [
+    {
+     "title": "Mash, Spread, Slice! Learning to Manipulate Object States via Visual Spatial Progress",
+     "arxiv": "2509.24129",
+     "year": 2025,
+     "note": "Franka robot performs spreading of coatable substances on a surface (e.g. spread on bread/donut) using visual spatial-progress rewards."
+    }
+   ]
+  },
+  {
+   "id": 37,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "토스터에 빵 넣고 꺼내기",
+   "en": "put and remove toast from a toaster",
+   "papers": [
+    {
+     "title": "A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation",
+     "arxiv": "2507.05331",
+     "year": 2025,
+     "note": "TRI bimanual LBM evaluation suite includes toaster bread-loading / make-toast tasks; uncertain whether removal is explicitly performed."
+    }
+   ]
+  },
+  {
+   "id": 38,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "채소 다듬기",
+   "en": "trim vegetables",
+   "papers": [
+    {
+     "title": "Vegetable Peeling: A Case Study in Constrained Dexterous Manipulation",
+     "arxiv": "2407.07884",
+     "year": 2024,
+     "note": "Allegro hand reorients a vegetable while a second arm peels/processes it; constrained dexterous food prep (closest to trimming/processing vegetables)."
+    }
+   ]
+  },
+  {
+   "id": 39,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "국수 면 집어 그릇에 담기",
+   "en": "pick up noodles into a bowl",
+   "papers": [
+    {
+     "title": "Learning Bimanual Scooping Policies for Food Acquisition",
+     "arxiv": "2211.14652",
+     "year": 2022,
+     "note": "Franka robot acquires noodles (twirling/grouping with a fork) and scoops food into/off a plate; real-world noodle acquisition."
+    }
+   ]
+  },
+  {
+   "id": 40,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "후추통 흔들어 뿌리기",
+   "en": "shake a pepper shaker",
+   "papers": [
+    {
+     "title": "DexUMI: Using Human Hand as the Universal Manipulation Interface for Dexterous Manipulation",
+     "arxiv": "2505.21864",
+     "year": 2025,
+     "note": "Dexterous hand grasps seasoning and sprinkles it over food (sprinkling salt task); closest match to shaking/sprinkling seasoning."
+    }
+   ]
+  },
+  {
+   "id": 41,
+   "category": "Kitchen / Food",
+   "cat": "E",
+   "ko": "와인 코르크 따기",
+   "en": "uncork a wine bottle",
+   "papers": [
+    {
+     "title": "Method for Bottle Opening with a Dual-Arm Robot",
+     "arxiv": null,
+     "year": 2024,
+     "note": "Dual-arm TIAGo++ grips bottle and cap and unscrews/opens it using force control plus a deep-RL gripper-rotation policy (Biomimetics/MDPI; closest published robot-uncorking-type task)."
+    }
+   ]
+  },
+  {
+   "id": 42,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "너트·볼트 체결",
+   "en": "thread a nut onto a bolt",
+   "papers": [
+    {
+     "title": "FORGE: Force-Guided Exploration for Robust Contact-Rich Manipulation under Uncertainty",
+     "arxiv": "2408.04587",
+     "year": 2024,
+     "note": "Sim-to-real force-aware RL whose multistage planetary-gear assembly explicitly includes a nut-threading (thread nut onto bolt) sub-task."
+    },
+    {
+     "title": "Hybrid Control for Robotic Nut Tightening Task",
+     "arxiv": "2511.21366",
+     "year": 2025,
+     "note": "Autonomous nut-tightening system threading a nut onto a fixed bolt via a motion-primitive planner with force/position control switching."
+    }
+   ]
+  },
+  {
+   "id": 43,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "플러그 콘센트에 꽂기",
+   "en": "plug into an electrical outlet",
+   "papers": [
+    {
+     "title": "Robot, Feed Thyself: Plugging In to Unmodified Electrical Outlets",
+     "arxiv": null,
+     "year": 2010,
+     "note": "Robot locates and inserts a plug into an unmodified wall outlet using electric-field sensing to align prongs with the socket holes."
+    }
+   ]
+  },
+  {
+   "id": 44,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "USB 꽂기",
+   "en": "insert a USB connector",
+   "papers": [
+    {
+     "title": "Precise and Dexterous Robotic Manipulation via Human-in-the-Loop Reinforcement Learning",
+     "arxiv": "2410.21845",
+     "year": 2024,
+     "note": "HIL-SERL: vision-based RL grasps a free USB connector and inserts it into the slot with near-perfect success."
+    },
+    {
+     "title": "Deep Reinforcement Learning for Industrial Insertion Tasks with Visual Inputs and Natural Rewards",
+     "arxiv": "1906.05841",
+     "year": 2019,
+     "note": "Learns connector/USB-style industrial insertion from visual inputs with self-supervised rewards."
+    }
+   ]
+  },
+  {
+   "id": 45,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "레고 블록 조립",
+   "en": "assemble Lego blocks",
+   "papers": [
+    {
+     "title": "A Lightweight and Transferable Design for Robust LEGO Manipulation",
+     "arxiv": "2309.02354",
+     "year": 2023,
+     "note": "Robot end-of-arm tool that robustly picks, places, and assembles (stacks/inserts) LEGO bricks onto target studs."
+    },
+    {
+     "title": "Eye-in-Finger: Smart Fingers for Delicate Assembly and Disassembly of LEGO",
+     "arxiv": "2503.06848",
+     "year": 2025,
+     "note": "Tool-tip vision-in-finger enabling sub-millimeter robotic LEGO assembly and disassembly."
+    }
+   ]
+  },
+  {
+   "id": 46,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "펜 분해·조립(심 넣기)",
+   "en": "assemble a pen by inserting the refill",
+   "papers": []
+  },
+  {
+   "id": 47,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "배터리 넣기",
+   "en": "insert batteries",
+   "papers": [
+    {
+     "title": "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware",
+     "arxiv": "2304.13705",
+     "year": 2023,
+     "note": "ACT/ALOHA includes a battery-slot task: one gripper places and pushes a battery into a remote-control slot against a spring while the other holds the remote."
+    },
+    {
+     "title": "You Only Demonstrate Once: Category-Level Manipulation from Single Visual Demonstration",
+     "arxiv": "2201.12716",
+     "year": 2022,
+     "note": "Battery-insertion among its category-level contact-rich tasks: pick a battery and insert it into a spring-loaded receptacle."
+    }
+   ]
+  },
+  {
+   "id": 48,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "퍼즐 조각 맞추기",
+   "en": "fit a jigsaw puzzle piece",
+   "papers": [
+    {
+     "title": "Jigsaw-based Benchmarking for Learning Robotic Manipulation",
+     "arxiv": "2306.04932",
+     "year": 2023,
+     "note": "Benchmark where a robot picks and inserts/fits jigsaw puzzle pieces into place as a manipulation task."
+    }
+   ]
+  },
+  {
+   "id": 49,
+   "category": "Assembly / Insertion",
+   "cat": "F",
+   "ko": "파이프·관 연결",
+   "en": "connect pipe fittings",
+   "papers": []
+  },
+  {
+   "id": 50,
+   "category": "Rope / Cable",
+   "cat": "G",
+   "ko": "신발끈 묶기",
+   "en": "tie a shoelace",
+   "papers": [
+    {
+     "title": "ALOHA Unleashed: A Simple Recipe for Robot Dexterity",
+     "arxiv": "2410.13126",
+     "year": 2024,
+     "note": "First end-to-end bimanual diffusion policy that autonomously ties shoelaces (and hangs shirts) on ALOHA 2."
+    }
+   ]
+  },
+  {
+   "id": 51,
+   "category": "Rope / Cable",
+   "cat": "G",
+   "ko": "리본 묶기",
+   "en": "tie a ribbon bow",
+   "papers": [
+    {
+     "title": "ALOHA Unleashed: A Simple Recipe for Robot Dexterity",
+     "arxiv": "2410.13126",
+     "year": 2024,
+     "note": "Bimanual ALOHA learns to straighten shoelaces and tie them into a bow via diffusion-policy imitation learning."
+    }
+   ]
+  },
+  {
+   "id": 52,
+   "category": "Rope / Cable",
+   "cat": "G",
+   "ko": "케이블 감아 정리",
+   "en": "coil and organize a cable",
+   "papers": [
+    {
+     "title": "Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables",
+     "arxiv": "2405.09581",
+     "year": 2024,
+     "note": "Robot dynamically manipulates and arranges free-end cables into goal configurations (coiling/organizing) via self-supervised learning."
+    },
+    {
+     "title": "Autonomously Untangling Long Cables",
+     "arxiv": "2207.07813",
+     "year": 2022,
+     "note": "Bilateral robot manages and organizes cables up to 3m, including bringing them to a neat untangled arrangement."
+    }
+   ]
+  },
+  {
+   "id": 53,
+   "category": "Rope / Cable",
+   "cat": "G",
+   "ko": "이어폰 줄 풀기",
+   "en": "untangle an earphone cord",
+   "papers": [
+    {
+     "title": "Untangling Dense Knots by Learning Task-Relevant Keypoints",
+     "arxiv": "2011.04999",
+     "year": 2020,
+     "note": "Bilateral robot untangles dense knots in cables/cords using learned task-relevant keypoints (HULK)."
+    },
+    {
+     "title": "Autonomously Untangling Long Cables",
+     "arxiv": "2207.07813",
+     "year": 2022,
+     "note": "Robot autonomously untangles knotted long cables with sliding-and-grasping primitives (SGTM)."
+    }
+   ]
+  },
+  {
+   "id": 54,
+   "category": "Rope / Cable",
+   "cat": "G",
+   "ko": "매듭 짓기",
+   "en": "tie a knot in a rope",
+   "papers": [
+    {
+     "title": "TieBot: Learning to Knot a Tie from Visual Demonstration through a Real-to-Sim-to-Real Approach",
+     "arxiv": "2407.03245",
+     "year": 2024,
+     "note": "Dual-arm robot ties a knot in a tie (deformable) from visual demo; 50% real-world success."
+    },
+    {
+     "title": "Bimanual rope manipulation skill synthesis through context dependent correction policy learning from human demonstration",
+     "arxiv": "2209.13850",
+     "year": 2022,
+     "note": "Humanoid bimanual robot makes knots over a bar with rope via learned correction policy."
+    }
+   ]
+  },
+  {
+   "id": 55,
+   "category": "Rope / Cable",
+   "cat": "G",
+   "ko": "전선 커넥터 연결",
+   "en": "connect a wire connector",
+   "papers": [
+    {
+     "title": "Learning on the Job: Self-Rewarding Offline-to-Online Finetuning for Industrial Insertion of Novel Connectors from Vision",
+     "arxiv": "2210.15206",
+     "year": 2022,
+     "note": "Robot inserts/mates electrical connectors (50 connector types) via self-rewarding offline-to-online RL from vision."
+    },
+    {
+     "title": "Deep Reinforcement Learning for Industrial Insertion Tasks with Visual Inputs and Natural Rewards",
+     "arxiv": "1906.05841",
+     "year": 2019,
+     "note": "Robot performs electric connector plug insertion (mating connector to socket) via deep RL with visual inputs."
+    }
+   ]
+  },
+  {
+   "id": 56,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "수건 개기",
+   "en": "fold a towel",
+   "papers": [
+    {
+     "title": "Teaching a single-arm robot to fold towels (synthetic-data keypoints)",
+     "arxiv": null,
+     "year": 2024,
+     "note": "Single-arm robot folds towels using CNNs trained on synthetic data; Science Robotics (adm8151). arXiv id not confirmed."
+    },
+    {
+     "title": "FabricFlowNet: Bimanual Cloth Manipulation with a Flow-based Policy",
+     "arxiv": "2111.05623",
+     "year": 2021,
+     "note": "Bimanual robot folds cloth/towels into target configurations using a flow-based policy."
+    }
+   ]
+  },
+  {
+   "id": 57,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "티셔츠 개기",
+   "en": "fold a T-shirt",
+   "papers": [
+    {
+     "title": "SpeedFolding: Learning Efficient Bimanual Folding of Garments",
+     "arxiv": "2208.10552",
+     "year": 2022,
+     "note": "Bimanual robot folds crumpled garments (incl. T-shirts) to folded state, 93% success."
+    },
+    {
+     "title": "UniFolding: Towards Sample-efficient, Scalable, and Generalizable Robotic Garment Folding",
+     "arxiv": "2311.01267",
+     "year": 2023,
+     "note": "Robot unfolds and folds T-shirts/garments via sample-efficient human-in-the-loop learning."
+    }
+   ]
+  },
+  {
+   "id": 58,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "옷걸이에 옷 걸기",
+   "en": "hang a shirt on a hanger",
+   "papers": [
+    {
+     "title": "ALOHA Unleashed: A Simple Recipe for Robot Dexterity",
+     "arxiv": "2410.13126",
+     "year": 2024,
+     "note": "Bimanual robot picks a hanger, inserts both sides into shirt collar, and hangs the shirt on a rack."
+    },
+    {
+     "title": "RoboHanger: Learning Generalizable Robotic Hanger Insertion for Diverse Garments",
+     "arxiv": "2412.01083",
+     "year": 2024,
+     "note": "Robot inserts a hanger into diverse garments (hanging a shirt on a hanger) with a generalizable learned policy."
+    }
+   ]
+  },
+  {
+   "id": 59,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "단추 채우기",
+   "en": "button a shirt",
+   "papers": []
+  },
+  {
+   "id": 60,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "지퍼 올리기/내리기",
+   "en": "zip and unzip a zipper",
+   "papers": [
+    {
+     "title": "Contact-Rich Manipulation of a Flexible Object based on Deep Predictive Learning using Vision and Tactility",
+     "arxiv": "2112.06442",
+     "year": 2021,
+     "note": "Robot performs contact-rich unzipping of a fabric bag's zipper via deep predictive learning with vision and tactile."
+    }
+   ]
+  },
+  {
+   "id": 61,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "양말 짝 맞춰 개기",
+   "en": "pair and fold socks",
+   "papers": [
+    {
+     "title": "SpeedFolding: Learning Efficient Bimanual Folding of Garments",
+     "arxiv": "2208.10552",
+     "year": 2022,
+     "note": "Bimanual system folds crumpled garments (incl. socks-class flat items) into folded configurations."
+    },
+    {
+     "title": "UniFolding: Towards Sample-efficient, Scalable, and Generalizable Robotic Garment Folding",
+     "arxiv": "2311.01267",
+     "year": 2023,
+     "note": "Dual-arm garment unfolding and folding pipeline for deformable clothing."
+    }
+   ]
+  },
+  {
+   "id": 62,
+   "category": "Clothing",
+   "cat": "H",
+   "ko": "빨래 널기",
+   "en": "hang laundry on a drying rack",
+   "papers": [
+    {
+     "title": "RoboHanger: Learning Generalizable Robotic Hanger Insertion for Diverse Garments",
+     "arxiv": "2412.01083",
+     "year": 2024,
+     "note": "Bimanual policy inserts a hanger into garments (the core skill for hanging laundry on a rack)."
+    },
+    {
+     "title": "GraphGarment: Learning Garment Dynamics for Bimanual Cloth Manipulation Tasks",
+     "arxiv": "2503.05817",
+     "year": 2025,
+     "note": "Learns garment dynamics and applies them to bimanual manipulation tasks including hanging."
+    }
+   ]
+  },
+  {
+   "id": 63,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "한 손 잡고+다른 손 뚜껑 열기",
+   "en": "hold an object and open its cap",
+   "papers": [
+    {
+     "title": "VTAO-BiManip: Masked Visual-Tactile-Action Pre-training with Object Understanding for Bimanual Dexterous Manipulation",
+     "arxiv": "2501.03606",
+     "year": 2025,
+     "note": "Bimanual dexterous bottle-cap unscrewing: one hand holds the bottle, the other unscrews the cap (sim + real)."
+    },
+    {
+     "title": "Method for Bottle Opening with a Dual-Arm Robot",
+     "arxiv": null,
+     "year": 2024,
+     "note": "Dual-arm TIAGo++ grips bottle with one gripper, cap with the other, unscrews via position+force control (MDPI Biomimetics, no arXiv)."
+    }
+   ]
+  },
+  {
+   "id": 64,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "그릇 잡고+젓기",
+   "en": "hold a bowl and stir",
+   "papers": [
+    {
+     "title": "Robot Cooking with Stir-fry: Bimanual Non-prehensile Manipulation of Semi-fluid Objects",
+     "arxiv": "2205.05960",
+     "year": 2022,
+     "note": "Bimanual leader-follower system: one arm holds/handles the pan/contents while the other stirs."
+    }
+   ]
+  },
+  {
+   "id": 65,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "종이 잡고+자르기",
+   "en": "hold paper and cut with scissors",
+   "papers": [
+    {
+     "title": "ScissorBot: Learning Generalizable Scissor Skill for Paper Cutting via Simulation, Imitation, and Sim2Real",
+     "arxiv": "2409.13966",
+     "year": 2024,
+     "note": "Dual-arm cooperation: one arm holds/rotates the paper, the other manipulates scissors to cut."
+    }
+   ]
+  },
+  {
+   "id": 66,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "못 잡고+망치질",
+   "en": "hold a nail and hammer it",
+   "papers": []
+  },
+  {
+   "id": 67,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "큰 상자 두 손으로 들어 옮기기",
+   "en": "lift a large box with two hands",
+   "papers": [
+    {
+     "title": "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks",
+     "arxiv": "2407.00278",
+     "year": 2024,
+     "note": "Bimanual benchmark with coordinated two-arm lifting/box-pushing tasks requiring simultaneous arm coordination."
+    }
+   ]
+  },
+  {
+   "id": 68,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "쟁반 두 손으로 옮기기",
+   "en": "carry a tray with two hands",
+   "papers": []
+  },
+  {
+   "id": 69,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "병 잡고+따르기",
+   "en": "hold a bottle and pour",
+   "papers": [
+    {
+     "title": "You Only Teach Once: Learn One-Shot Bimanual Robotic Manipulation from Video Demonstrations",
+     "arxiv": "2501.14208",
+     "year": 2025,
+     "note": "Bimanual tasks include pouring water (one arm holds, the other pours) learned one-shot from video."
+    },
+    {
+     "title": "DexCap: Scalable and Portable Mocap Data Collection System for Dexterous Manipulation",
+     "arxiv": "2403.07788",
+     "year": 2024,
+     "note": "Bimanual dexterous-hand robot executes pouring among its evaluated manipulation tasks."
+    }
+   ]
+  },
+  {
+   "id": 70,
+   "category": "Bimanual hold+act",
+   "cat": "I",
+   "ko": "빵 잡고+버터 바르기",
+   "en": "hold bread and spread butter",
+   "papers": []
+  },
+  {
+   "id": 71,
+   "category": "Handover / Throw-catch",
+   "cat": "J",
+   "ko": "한 손→다른 손 물건 넘기기",
+   "en": "hand over an object between two hands",
+   "papers": [
+    {
+     "title": "Dynamic Handover: Throw and Catch with Bimanual Hands",
+     "arxiv": "2309.05655",
+     "year": 2023,
+     "note": "Two Allegro hands on XArms throw and catch objects between hands via multi-agent RL with sim-to-real; covers passing an object from one hand to the other."
+    },
+    {
+     "title": "DyDexHandover: Human-like Bimanual Dynamic Dexterous Handover using RGB-only Perception",
+     "arxiv": "2509.17350",
+     "year": 2025,
+     "note": "Bimanual dynamic handover where one dexterous hand transfers an object to the other using RGB-only perception."
+    }
+   ]
+  },
+  {
+   "id": 72,
+   "category": "Handover / Throw-catch",
+   "cat": "J",
+   "ko": "던져서 받기",
+   "en": "throw and catch an object",
+   "papers": [
+    {
+     "title": "Catch It! Learning to Catch in Flight with Mobile Dexterous Hands",
+     "arxiv": "2409.10319",
+     "year": 2024,
+     "note": "Mobile manipulator with 12-DoF dexterous hand learns to throw and catch objects in flight via two-stage RL."
+    },
+    {
+     "title": "DexCatch: Learning to Catch Arbitrary Objects with Dexterous Hands",
+     "arxiv": "2310.08809",
+     "year": 2023,
+     "note": "End-to-end model-free RL framework (LTC) for throwing-then-catching arbitrary objects with dexterous hands."
+    }
+   ]
+  },
+  {
+   "id": 73,
+   "category": "Handover / Throw-catch",
+   "cat": "J",
+   "ko": "두 손으로 공 굴리기",
+   "en": "roll a ball between two hands",
+   "papers": [
+    {
+     "title": "Dynamic Handover: Throw and Catch with Bimanual Hands",
+     "arxiv": "2309.05655",
+     "year": 2023,
+     "note": "Two facing dexterous hands pass objects back and forth; closest match to rolling/passing a ball between two hands (bimanual coordination)."
+    }
+   ]
+  },
+  {
+   "id": 74,
+   "category": "Handover / Throw-catch",
+   "cat": "J",
+   "ko": "무거운 물건 양손 재배치",
+   "en": "reposition a heavy object with both hands",
+   "papers": [
+    {
+     "title": "A Certified-Complete Bimanual Manipulation Planner",
+     "arxiv": "1705.02573",
+     "year": 2017,
+     "note": "Plans bimanual pick-and-place for large/heavy objects that can only be moved when grasped with both hands, repositioning from initial to goal placement."
+    },
+    {
+     "title": "Bimanual Grasp Synthesis for Dexterous Robot Hands",
+     "arxiv": "2411.15903",
+     "year": 2024,
+     "note": "Bimanual grasping for handling heavy objects, with two-hand strategies outperforming single-hand for repositioning."
+    }
+   ]
+  },
+  {
+   "id": 75,
+   "category": "In-hand / Regrasp",
+   "cat": "K",
+   "ko": "손 안에서 큐브 돌리기",
+   "en": "in-hand cube reorientation",
+   "papers": [
+    {
+     "title": "Learning Dexterous In-Hand Manipulation",
+     "arxiv": "1808.00177",
+     "year": 2018,
+     "note": "OpenAI Shadow Hand reorients a cube to arbitrary target orientations via RL trained in sim with domain randomization, transferred to real hardware."
+    },
+    {
+     "title": "DROP: Dexterous Reorientation via Online Planning",
+     "arxiv": "2409.14562",
+     "year": 2024,
+     "note": "Online sampling-based predictive control for contact-rich in-hand cube reorientation with vision-based pose estimation."
+    }
+   ]
+  },
+  {
+   "id": 76,
+   "category": "In-hand / Regrasp",
+   "cat": "K",
+   "ko": "펜 손가락으로 돌리기",
+   "en": "pen spinning in the fingers",
+   "papers": [
+    {
+     "title": "Lessons from Learning to Spin \"Pens\"",
+     "arxiv": "2407.18902",
+     "year": 2024,
+     "note": "First learning-based approach to spin pen-like objects in the fingers, achieving multiple revolutions with smooth finger gaiting."
+    },
+    {
+     "title": "Soft Robotic Dynamic In-Hand Pen Spinning",
+     "arxiv": "2411.12734",
+     "year": 2024,
+     "note": "SWIFT system learns dynamic pen spinning with a soft robotic hand from real-world data; generalizes to brush and screwdriver."
+    }
+   ]
+  },
+  {
+   "id": 77,
+   "category": "In-hand / Regrasp",
+   "cat": "K",
+   "ko": "동전 손가락 사이 이동",
+   "en": "finger-walk a coin across fingers",
+   "papers": []
+  },
+  {
+   "id": 78,
+   "category": "In-hand / Regrasp",
+   "cat": "K",
+   "ko": "공 손바닥에서 굴리기",
+   "en": "roll a ball in the palm",
+   "papers": [
+    {
+     "title": "Getting the Ball Rolling: Learning a Dexterous Policy for a Biomimetic Tendon-Driven Hand with Rolling Contact Joints",
+     "arxiv": "2308.02453",
+     "year": 2023,
+     "note": "RL policy rolls/rotates a sphere in the Faive Hand with zero-shot sim-to-real transfer (in-palm ball rolling)."
+    },
+    {
+     "title": "Sampling-Based Model Predictive Control for Dexterous Manipulation on a Biomimetic Tendon-Driven Hand",
+     "arxiv": "2411.06183",
+     "year": 2024,
+     "note": "Demonstrates ball rolling, flipping, and catching in sim and on a physical biomimetic hand."
+    }
+   ]
+  },
+  {
+   "id": 79,
+   "category": "In-hand / Regrasp",
+   "cat": "K",
+   "ko": "쥐었다 다시 잡기",
+   "en": "regrasp an object in hand",
+   "papers": [
+    {
+     "title": "Geometric In-Hand Regrasp Planning: Alternating Optimization of Finger Gaits and In-Grasp Manipulation",
+     "arxiv": "1804.04292",
+     "year": 2018,
+     "note": "Planner that moves from an initial grasp to a desired grasp using finger gaiting plus in-grasp manipulation (in-hand regrasping)."
+    },
+    {
+     "title": "Robotic in-hand manipulation with relaxed optimization",
+     "arxiv": "2406.04950",
+     "year": 2024,
+     "note": "Path planner executing both re-grasping and finger-gaiting actions to change the grasp in hand."
+    }
+   ]
+  },
+  {
+   "id": 80,
+   "category": "In-hand / Regrasp",
+   "cat": "K",
+   "ko": "손 안에서 도구 방향 바꾸기",
+   "en": "reorient a tool in hand",
+   "papers": [
+    {
+     "title": "In-Hand Manipulation of Articulated Tools with Dexterous Robot Hands with Sim-to-Real Transfer",
+     "arxiv": "2509.23075",
+     "year": 2025,
+     "note": "Dexterous in-hand manipulation/reorientation of articulated tools with tactile-force feedback and sim-to-real transfer."
+    },
+    {
+     "title": "Object-Centric Dexterous Manipulation from Human Motion Data",
+     "arxiv": "2411.04005",
+     "year": 2024,
+     "note": "Learns object-centric dexterous in-hand reorientation including tool-like objects from human motion data."
+    }
+   ]
+  },
+  {
+   "id": 81,
+   "category": "Precision / Small",
+   "cat": "L",
+   "ko": "바늘에 실 꿰기",
+   "en": "thread a needle",
+   "papers": [
+    {
+     "title": "Precise Robotic Needle-Threading with Tactile Perception and Reinforcement Learning",
+     "arxiv": "2311.02396",
+     "year": 2023,
+     "note": "T-NT: vision-based tactile sensors locate the thread tail-end, then tactile-guided RL inserts the thread into the needle eyelet."
+    }
+   ]
+  },
+  {
+   "id": 82,
+   "category": "Precision / Small",
+   "cat": "L",
+   "ko": "동전 저금통에 넣기",
+   "en": "insert a coin into a slot",
+   "papers": [
+    {
+     "title": "DEXOP: A Device for Robotic Transfer of Dexterous Human Manipulation",
+     "arxiv": "2509.04441",
+     "year": 2025,
+     "note": "Hand-exoskeleton perioperation system; demonstrated tasks include picking up a coin from a table and retrieving an M2 screw (coin handling, not slot-insertion specifically)."
+    }
+   ]
+  },
+  {
+   "id": 83,
+   "category": "Precision / Small",
+   "cat": "L",
+   "ko": "작은 나사 손으로 돌리기",
+   "en": "turn a tiny screw by hand",
+   "papers": [
+    {
+     "title": "Dexterous In-Hand Manipulation of Slender Cylindrical Objects through Deep Reinforcement Learning with Tactile Sensing",
+     "arxiv": "2304.05141",
+     "year": 2023,
+     "note": "Three-fingered tactile hand rotates/repositions a thin cylindrical object (stick) in-hand via finger contacts; nearest analog to finger-turning a small screw/cylinder. Not a literal screw-in-thread task."
+    }
+   ]
+  },
+  {
+   "id": 84,
+   "category": "Precision / Small",
+   "cat": "L",
+   "ko": "핀셋으로 부품 집기",
+   "en": "pick a small part with tweezers",
+   "papers": [
+    {
+     "title": "Hierarchical Reinforcement Learning for Articulated Tool Manipulation with Multifingered Hand",
+     "arxiv": "2507.06822",
+     "year": 2025,
+     "note": "Multifingered hand actuates a tweezer-like articulated tool to grasp/pick small objects of varying size (70.8% success)."
+    }
+   ]
+  },
+  {
+   "id": 85,
+   "category": "Precision / Small",
+   "cat": "L",
+   "ko": "콩·알갱이 하나씩 옮기기",
+   "en": "move beans or grains one by one",
+   "papers": [
+    {
+     "title": "In-Hand Singulation and Scooping Manipulation with a 5 DOF Tactile Gripper",
+     "arxiv": "2408.00610",
+     "year": 2024,
+     "note": "Tactile (GelSight) gripper singulates individual objects buried in granular media by touch (84% success); closest match to picking grains one at a time."
+    }
+   ]
+  },
+  {
+   "id": 86,
+   "category": "Precision / Small",
+   "cat": "L",
+   "ko": "카드 한 장 뽑기",
+   "en": "pick a single card from a deck",
+   "papers": [
+    {
+     "title": "In-Hand Singulation and Scooping Manipulation with a 5 DOF Tactile Gripper",
+     "arxiv": "2408.00610",
+     "year": 2024,
+     "note": "Same gripper scoops/picks a single thin card (credit card) from a stack in confined space (100% success on card scooping)."
+    },
+    {
+     "title": "Learning thin deformable object manipulation with a multi-sensory integrated soft hand",
+     "arxiv": "2411.13952",
+     "year": 2024,
+     "note": "Soft underactuated hand singles out and picks thin deformable objects (pages/cards) using multi-sensory feedback."
+    }
+   ]
+  },
+  {
+   "id": 87,
+   "category": "Press / Squeeze",
+   "cat": "M",
+   "ko": "치약 짜기",
+   "en": "squeeze toothpaste onto a brush",
+   "papers": []
+  },
+  {
+   "id": 88,
+   "category": "Press / Squeeze",
+   "cat": "M",
+   "ko": "스프레이 펌프 누르기",
+   "en": "press a spray pump",
+   "papers": [
+    {
+     "title": "In-Hand Manipulation of Articulated Tools with Dexterous Robot Hands with Sim-to-Real Transfer",
+     "arxiv": "2509.23075",
+     "year": 2025,
+     "note": "Dexterous hand grasps and actuates articulated tools (scissors, pliers, staplers, surgical instruments) by pressing/squeezing the trigger; same problem class as pressing a spray pump."
+    },
+    {
+     "title": "DexTOG: Learning Task-Oriented Dexterous Grasp with Language",
+     "arxiv": "2504.04573",
+     "year": 2025,
+     "note": "Shadow-hand task-oriented grasps explicitly include 'spray bottle pressing' and 'spray bottle triggering' (finger positioned to press button/pull trigger)."
+    }
+   ]
+  },
+  {
+   "id": 89,
+   "category": "Press / Squeeze",
+   "cat": "M",
+   "ko": "리모컨 버튼 누르기",
+   "en": "press remote-control buttons",
+   "papers": []
+  },
+  {
+   "id": 90,
+   "category": "Press / Squeeze",
+   "cat": "M",
+   "ko": "비누 펌프 누르기",
+   "en": "press a soap pump dispenser",
+   "papers": []
+  },
+  {
+   "id": 91,
+   "category": "Press / Squeeze",
+   "cat": "M",
+   "ko": "키보드 타이핑",
+   "en": "type on a keyboard",
+   "papers": [
+    {
+     "title": "Deep Reinforcement Learning for Tactile Robotics: Learning to Type on a Braille Keyboard",
+     "arxiv": "2008.02646",
+     "year": 2020,
+     "note": "RL agent learns to press/type characters on a (braille) keyboard, demonstrated in sim and on a real tactile robot."
+    },
+    {
+     "title": "RoboPianist: Dexterous Piano Playing with Deep Reinforcement Learning",
+     "arxiv": "2304.04150",
+     "year": 2023,
+     "note": "Two anthropomorphic hands press sequences of keys on a keyboard (piano) via RL; closest dexterous key-pressing match."
+    }
+   ]
+  },
+  {
+   "id": 92,
+   "category": "Devices",
+   "cat": "N",
+   "ko": "노트북 열기/닫기",
+   "en": "open and close a laptop",
+   "papers": []
+  },
+  {
+   "id": 93,
+   "category": "Devices",
+   "cat": "N",
+   "ko": "서랍 열고 물건 넣기",
+   "en": "open a drawer and place an item inside",
+   "papers": [
+    {
+     "title": "Bi-ACT: Bilateral Control-Based Imitation Learning via Action Chunking with Transformer",
+     "arxiv": "2401.17698",
+     "year": 2024,
+     "note": "Includes a 'Put-in-Drawer' task: robot opens a drawer and places an object inside via bilateral-control imitation learning."
+    }
+   ]
+  },
+  {
+   "id": 94,
+   "category": "Devices",
+   "cat": "N",
+   "ko": "안경 케이스 열고 꺼내기",
+   "en": "open a case and take out glasses",
+   "papers": [
+    {
+     "title": "DexMan: Learning Bimanual Dexterous Manipulation from Human and Generated Videos",
+     "arxiv": "2510.08475",
+     "year": 2025,
+     "note": "Bimanual dexterous skills from videos (OakInk-v2 / TACO objects) include opening a case/container and removing a contained object such as glasses."
+    }
+   ]
+  },
+  {
+   "id": 95,
+   "category": "Devices",
+   "cat": "N",
+   "ko": "우산 펴고 접기",
+   "en": "open and close an umbrella",
+   "papers": []
+  },
+  {
+   "id": 96,
+   "category": "Devices",
+   "cat": "N",
+   "ko": "렌즈 캡 끼우고 빼기",
+   "en": "put on and take off a lens cap",
+   "papers": []
+  },
+  {
+   "id": 97,
+   "category": "Stack / Sort",
+   "cat": "O",
+   "ko": "컵 쌓기",
+   "en": "stack cups",
+   "papers": [
+    {
+     "title": "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation",
+     "arxiv": "2306.11706",
+     "year": 2023,
+     "note": "Generalist agent whose real-robot task suite includes stacking cups (and stacking objects/blocks)."
+    },
+    {
+     "title": "You Only Teach Once: Learn One-Shot Bimanual Robotic Manipulation from Video Demonstrations",
+     "arxiv": null,
+     "year": 2025,
+     "note": "YOTO bimanual one-shot tasks include stacking cups; arxiv id not confirmed."
+    }
+   ]
+  },
+  {
+   "id": 98,
+   "category": "Stack / Sort",
+   "cat": "O",
+   "ko": "블록 탑 쌓기",
+   "en": "stack blocks into a tower",
+   "papers": [
+    {
+     "title": "Mastering Stacking of Diverse Shapes with Large-Scale Iterative Reinforcement Learning on Real Robots",
+     "arxiv": "2312.11374",
+     "year": 2023,
+     "note": "DeepMind RGB-Stacking: real robot arm stacks objects/blocks via large-scale RL."
+    },
+    {
+     "title": "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation",
+     "arxiv": "2306.11706",
+     "year": 2023,
+     "note": "Performs block-stacking benchmark (stacking objects into a tower) among many tasks."
+    }
+   ]
+  },
+  {
+   "id": 99,
+   "category": "Stack / Sort",
+   "cat": "O",
+   "ko": "색깔별 분류하기",
+   "en": "sort objects by color",
+   "papers": [
+    {
+     "title": "A Deep Learning-Based Autonomous Robot Manipulator for Sorting Application",
+     "arxiv": "2009.03565",
+     "year": 2020,
+     "note": "Robot manipulator detects object color and sorts objects by color via deep learning vision + grasping."
+    }
+   ]
+  },
+  {
+   "id": 100,
+   "category": "Stack / Sort",
+   "cat": "O",
+   "ko": "책 책장에 꽂기",
+   "en": "shelve a book",
+   "papers": [
+    {
+     "title": "Multi-Stage Book Perception and Bimanual Manipulation for Rearranging Book Shelves",
+     "arxiv": null,
+     "year": 2023,
+     "note": "Bimanual system perceives books and places/inserts a book onto a shelf (Springer chapter; no arxiv id found)."
+    }
+   ]
+  }
+ ]
+}
