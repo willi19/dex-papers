@@ -56,11 +56,25 @@
   .ctag:hover { color: var(--accent); }
   .ctag.on { background: var(--chipOn); color: #fff; }
   .empty { color: var(--muted); padding: 40px; text-align: center; grid-column: 1/-1; }
+  .modal-bg { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.78);
+    display: none; flex-direction: column; }
+  .modal-bg.open { display: flex; }
+  .modal-bar { display: flex; align-items: center; gap: 10px; padding: 8px 14px;
+    background: var(--panel); border-bottom: 1px solid var(--border); }
+  .modal-bar .t { flex: 1; font-size: 13px; color: var(--text);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .modal-bar a, .modal-bar button { font-size: 12px; padding: 5px 10px; border-radius: 7px;
+    border: 1px solid var(--border); background: var(--panel2); color: var(--text);
+    text-decoration: none; cursor: pointer; font-family: inherit; }
+  .modal-bar a:hover, .modal-bar button:hover { border-color: var(--accent); color: var(--accent); }
+  .modal-bg iframe { flex: 1; width: 100%; border: 0; background: #525659; }
 </style>
 </head>
 <body>
 <header>
-  <h1>dex-papers <span class="count" id="count"></span></h1>
+  <h1>dex-papers <span class="count" id="count"></span>
+    <a href="overview.html" style="float:right;font-size:12.5px;font-weight:400;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--accent)">📄 Landscape overview →</a>
+  </h1>
   <input class="search" id="search" type="search" placeholder="Search title or tag…" autocomplete="off">
   <div class="barlabel">Collections</div>
   <div class="chips" id="collbar"></div>
@@ -69,6 +83,15 @@
   <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
 </header>
 <main id="grid"></main>
+
+<div class="modal-bg" id="pdfModal">
+  <div class="modal-bar">
+    <span class="t" id="pdfTitle"></span>
+    <a id="pdfNewTab" href="#" target="_blank" rel="noopener">↗ New tab</a>
+    <button id="pdfClose">✕ Close (Esc)</button>
+  </div>
+  <iframe id="pdfFrame" title="PDF viewer"></iframe>
+</div>
 
 <script src="papers.js"></script>
 <script>
@@ -147,12 +170,20 @@
         '<h2>'+p.title+'</h2>' +
         '<div class="ctags">'+tags+'</div>' +
         '<div class="links">' +
-          linkEl("PDF", pdfHref(p.file), "pdf") +
+          (p.summary ? '<a href="'+p.summary+'">📄 Summary</a>' : '') +
+          (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>'
+                  : '<a class="pdf disabled">PDF</a>') +
           linkEl("arXiv", p.arxiv, "") +
           linkEl("Project", p.project, "") +
         '</div>';
       card.querySelectorAll(".ctag").forEach(e =>
         e.onclick = () => toggleTag(e.dataset.tag));
+      card.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
+        a.onclick = (e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let new-tab work
+          e.preventDefault();
+          openPdf(a.getAttribute("href"), p.title);
+        });
       grid.appendChild(card);
     });
   }
@@ -164,6 +195,24 @@
     activeTags.clear(); activeColls.clear(); query = "";
     document.getElementById("search").value = ""; render();
   };
+
+  // in-page PDF viewer (works from file:// — iframe is a same-origin subresource, not a fetch)
+  const pdfModal = document.getElementById("pdfModal");
+  const pdfFrame = document.getElementById("pdfFrame");
+  const pdfTitle = document.getElementById("pdfTitle");
+  const pdfNewTab = document.getElementById("pdfNewTab");
+  function openPdf(href, title) {
+    pdfFrame.src = href;
+    pdfTitle.textContent = title;
+    pdfNewTab.href = href;
+    pdfModal.classList.add("open");
+  }
+  function closePdf() { pdfModal.classList.remove("open"); pdfFrame.src = "about:blank"; }
+  document.getElementById("pdfClose").onclick = closePdf;
+  pdfModal.addEventListener("click", e => { if (e.target === pdfModal) closePdf(); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && pdfModal.classList.contains("open")) closePdf();
+  });
 
   render();
 </script>
