@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamic Handover: Throw and Catch with Bimanual Hands · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Dynamic Handover: Throw and Catch with Bimanual Hands</h1>
+ <div class="badges"><span class="badge">CoRL 2023</span><span class="badge lab">UC San Diego and Peking University (Xiaolong Wang group)</span><span class="badge m">RL</span><span class="badge m">multi-agent-RL</span><span class="badge m">sim-to-real</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/dynamic_handover.png" alt="teaser figure">
+ <div class="report"><p class="lead">Dynamic Handover studies high-speed, dynamic object handover performed by a system of two multi-finger dexterous hands mounted on robot arms. One hand throws an object and the other catches it in mid-air, requiring fast, precise collaboration between the two arm-hand agents. The policy is trained with Multi-Agent Reinforcement Learning (MARL) in simulation and deployed on physical robots through sim-to-real transfer. To close the sim-to-real gap, the authors introduce algorithm designs including a learned object trajectory prediction model. The work targets a regime of dexterous manipulation previously dominated by human performers.</p><p>Formulates the throw-and-catch handover as a multi-agent problem, with the throwing hand and catching hand trained jointly via Multi-Agent RL. Trains entirely in simulation and transfers to real hardware using sim-to-real techniques to bridge the dynamics gap. Learns a trajectory prediction model that estimates in real time where the in-flight object is heading, letting the catcher position itself ahead of the object. Targets high-speed, dynamic actions rather than slow quasi-static handovers, demanding precise coordination and timing between the two hands. Evaluates on a diversity of objects, including basic geometric shapes and real-life objects, plus perturbation and failure-case analyses.</p><p>A bimanual dexterous system of two multi-finger hands that throws and catches objects, trained with Multi-Agent RL in simulation. A sim-to-real pipeline that transfers the learned throw-and-catch policy to real robots. A learned object trajectory prediction model enabling real-time estimation of the object&#x27;s flight path for the catching hand. Real-world evaluation across multiple objects (basic geometric and real-life objects) showing improvements over multiple baselines, including multi-agent vs. alternative baselines. Robustness studies including perturbation tests (orthogonal, opposing, along-direction) and failure-case analyses.</p><p>It enables two arm-mounted multi-finger robot hands to dynamically throw an object with one hand and catch it in mid-air with the other, generalizing across a variety of objects in the real world.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2309.05655" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2309.05655" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://binghao-huang.github.io/dynamic_handover/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

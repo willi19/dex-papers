@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning</h1>
+ <div class="badges"><span class="badge">ICRA 2025</span><span class="badge lab">NVIDIA / UT-Austin</span><span class="badge m">imitation</span><span class="badge m">data-generation</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/dexmimicgen.png" alt="teaser figure">
+ <div class="report"><p class="lead">DexMimicGen is a large-scale automated data generation system that synthesizes manipulation trajectories from a handful of human demonstrations for bimanual dexterous robots, including humanoids with multi-fingered hands. It targets the data-acquisition bottleneck in imitation learning, which is especially acute for bimanual dexterous settings where a human must simultaneously control two arms and two dexterous hands. From a small set of teleoperated source demos, the system segments each demonstration into object-centric subtasks and re-composes/transforms them to generate many new successful trajectories across randomized scene configurations in simulation. The resulting synthetic datasets are used to train behavioral cloning policies, and the work also demonstrates a real-to-sim-to-real pipeline on real hardware.</p><p>Extends the MimicGen idea of replaying and adapting object-centric subtask segments from a few human demos to the much harder bimanual dexterous / humanoid setting with two arms and multi-fingered hands. Each task is decomposed into subtasks that are transformed to new object poses and stitched together, letting a handful of demos seed thousands of automatically generated trajectories in randomized scenes. Explicitly handles different two-arm coordination requirements, organizing tasks by parallel (independent), coordination (both arms cooperate on one object), and sequential (ordered handoff) structure. Spans three robot embodiments to show generality: bimanual Panda arms with parallel-jaw grippers, bimanual Panda arms with dexterous hands, and the GR-1 humanoid with dexterous (Inspire) hands. Uses the generated data with simple behavioral cloning, and studies how data-generation and policy-learning choices affect performance, finding that policy success improves with larger generated datasets. Includes a real-to-sim-to-real pipeline so policies trained on simulated generated data can be deployed on a real humanoid.</p><p>Generates 21K (over 20,000) synthetic demonstrations from just 60 source human demonstrations, an expansion of roughly 350x. Introduces a suite of 9 bimanual dexterous manipulation simulation environments spanning parallel, coordination, and sequential two-arm behaviors (e.g., Threading, Transport, Box/Drawer Cleanup, Tray Lift, Can Sorting, Piece Assembly, Pouring, Coffee). Demonstrates the system across three embodiments: bimanual Panda + parallel-jaw grippers, bimanual Panda + dexterous hands, and the GR-1 humanoid with dexterous hands. Reports high behavioral-cloning success rates on generated data, including Can Sorting 97.3%, Box Cleanup 92.0%, Tray Lift 88.7%, Transport 83.3%, Piece Assembly 80.7%, Pouring 79.3%, Coffee 77.3%, Drawer Cleanup 76.0%, and Threading 69.3%. Presents a real-to-sim-to-real pipeline and deploys it on a real-world humanoid can-sorting task. Provides an empirical study of how data-generation and policy-learning decisions affect agent performance, showing policy performance scales up with larger generated datasets.</p><p>It automatically produces large bimanual dexterous manipulation datasets (21K demos from 60 human demos) across 9 simulated tasks such as Can Sorting, Coffee, Pouring, Tray Lift, Box/Drawer Cleanup, Threading, Transport, and Piece Assembly, covering parallel, coordinated, and sequential two-arm behaviors. The generated data trains behavioral cloning policies that are evaluated in simulation and, via a real-to-sim-to-real pipeline, deployed on a real humanoid can-sorting task.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2410.24185" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2410.24185" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://dexmimicgen.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

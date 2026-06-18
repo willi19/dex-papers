@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation</h1>
+ <div class="badges"><span class="badge">CoRL 2024</span><span class="badge lab">University of Southern California (USC), Department of Computer Science</span><span class="badge m">voxel</span><span class="badge m">VLA</span><span class="badge m">bimanual</span><span class="badge m">imitation-learning</span></div>
+ <img class="fig" src="../overview_assets/voxact_b.png" alt="teaser figure">
+ <div class="report"><p class="lead">VoxAct-B is a language-conditioned, voxel-based method for asymmetric bimanual manipulation, where one arm acts while the other stabilizes. It uses Vision Language Models (VLMs) to detect the objects of interest and crop the voxel grid around the relevant region, yielding higher effective resolution without extra computational cost. The cropped voxel observation plus a language instruction feeds separate acting and stabilizing policies, each extending the single-arm PerAct architecture. Each policy predicts discretized 6-DoF gripper poses, gripper state, collision flags, and arm identity. It is validated both in RLBench simulation and on dual UR5 robots in the real world.</p><p>Use VLMs to identify the object of interest and crop the voxel grid to that region, raising resolution for fine-grained manipulation without higher compute. Decompose bimanual manipulation into asymmetric acting and stabilizing roles, with one arm holding/stabilizing while the other performs the task. Train separate acting and stabilizing policies, each extending the single-arm voxel-based PerAct policy. Each policy predicts discretized 6-DoF gripper pose, gripper open/close state, collision avoidance flag, and arm identity from voxel observations plus a language instruction. Language-conditioned formulation enables two-hand coordination and improved sample efficiency and generalization.</p><p>Novel VLM-guided voxel-cropping method that reduces voxel grid dimensions while preserving resolution for fine-grained bimanual manipulation. Bimanual extensions of three RLBench tasks (Open Jar, Open Drawer, Put Item in Drawer) as an evaluation benchmark. With 10 demonstrations in simulation, outperforms baselines: Open Jar 38.6% vs 8.0% (VoxPoser), Open Drawer 73.3% vs 40.0% (Bimanual PerActs), Put Item in Drawer 36.0% vs 6.7% (Bimanual PerActs). Real-world validation on dual UR5 robots: 60% success on Open Drawer and 50% on Open Jar (10 trials each).</p><p>It performs asymmetric bimanual manipulation tasks, such as opening a jar or a drawer, by coordinating a stabilizing arm and an acting arm from a single language instruction and voxel observation.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2407.04152" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2407.04152" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://voxact-b.github.io" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

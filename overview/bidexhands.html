@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning (Bi-DexHands) · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning (Bi-DexHands)</h1>
+ <div class="badges"><span class="badge">NeurIPS 2022</span><span class="badge lab">PKU / academic</span><span class="badge m">RL</span><span class="badge m">benchmark</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/bidexhands.png" alt="teaser figure">
+ <div class="report"><p class="lead">Bi-DexHands is a benchmark and learning suite for bimanual dexterous manipulation, introduced in the paper &quot;Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning&quot; (Chen et al., NeurIPS 2022 Datasets and Benchmarks Track). It provides two high-DoF dexterous hands (primarily ShadowHand) in NVIDIA Isaac Gym, with tens of bimanual manipulation tasks and thousands of target objects. The tasks are organized to mirror stages of human motor-skill development drawn from cognitive science. The benchmark is GPU-accelerated, reaching 30,000+ FPS (40,000+ mean FPS in the released code on an RTX 3090 with 2,048 parallel environments).</p><p>Frame dexterous-manipulation benchmark tasks around human motor-development stages (e.g., skills comparable to those of infants at certain ages) to structure difficulty. Use two cooperating high-DoF dexterous hands, requiring joint control of tens of joints, making the problem naturally suited to both single-agent and multi-agent RL formulations. Leverage massively parallel GPU simulation in Isaac Gym to make large-scale RL training tractable on a single consumer GPU. Expose a unified Gym-like API supporting a broad spectrum of learning paradigms: single-agent RL, multi-agent RL, offline RL, multi-task RL, and meta RL. Provide thousands of object variations so that generalization, multi-task, and few-shot learning can be studied, not just single-task mastery.</p><p>A bimanual dexterous-hand benchmark with tens of manipulation tasks and thousands of target objects (16+ environments in the released code, e.g., Catch, Over, Lift, Door, Bottle cap, Scissors, Block stack, Re-orientation, Pour water). GPU-accelerated simulation reaching 30,000+ FPS on a single NVIDIA RTX 3090 (40,000+ mean FPS reported in the codebase running 2,048 parallel environments). Comprehensive algorithm support: single-agent RL (PPO, TRPO, TD3, SAC, DDPG), multi-agent RL (HAPPO, HATRPO, MAPPO, IPPO, MADDPG), and multi-task/meta RL (MTPPO, MTTRPO, MTSAC, ProMP). Empirical finding that PPO masters simpler tasks (e.g., catching, bottle-opening) while multi-agent RL handles complex bimanual coordination (e.g., pot-lifting, block-stacking). Identification of open challenges: existing methods struggle with multi-task and few-shot/generalization settings, motivating future research. Open-source release with point-cloud/visual observation support, offline-RL datasets, and rl-games compatibility.</p><p>It demonstrates two dexterous hands learning a wide range of bimanual skills in simulation, including catching, bottle/door opening, scissors and pen-cap use, pouring water, and block stacking. Single-agent RL solves the simpler tasks while multi-agent RL is used for the harder cooperative coordination tasks.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2206.08686" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2206.08686" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://github.com/PKU-MARL/DexterousHands" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

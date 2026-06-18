@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning</h1>
+ <div class="badges"><span class="badge">arXiv (2407.03162, July 2024)</span><span class="badge lab">UC San Diego (Xiaolong Wang) &amp; University of Hong Kong (Xiaojuan Qi)</span><span class="badge m">teleoperation</span><span class="badge m">imitation-learning</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span></div>
+ <img class="fig" src="../overview_assets/bunny_visionpro.png" alt="teaser figure">
+ <div class="report"><p class="lead">Bunny-VisionPro is a real-time teleoperation system that uses an Apple Vision Pro VR headset to track the human operator&#x27;s hand poses and map them onto a bimanual dexterous robot. Unlike prior vision-based systems, it adds novel low-cost wearable haptic feedback devices (ERM vibration motors driven by fingertip tactile sensors) to improve operator immersion. The pipeline prioritizes safety with collision and singularity avoidance while preserving real-time performance via an efficient loop-joint hand-retargeting formulation. The high-quality demonstrations it collects are used to train imitation-learning policies (ACT, Diffusion Policy, DP3). The hardware setup is two UFactory xArm-7 arms each with a 6-DoF Ability hand (24-DoF total), plus two RealSense L515 cameras.</p><p>Uses Apple Vision Pro for markerless human hand-pose tracking to drive a bimanual dexterous robot in real time. Adds low-cost wearable haptic feedback (ERM vibration motors) actuated from 30 fingertip tactile sensors per hand to enhance immersion. Efficient hand retargeting via loop joints runs in 3.43ms, reported 10.2x faster than a constraint-based approach. Built-in safety: arm motion control with collision and singularity avoidance runs in 15.93ms (~63 Hz). Collected demonstrations train multiple IL policies (ACT, Diffusion Policy, DP3), including multi-stage long-horizon tasks. Evaluated on the Telekinesis benchmark plus 6 custom bimanual tasks (3 short-horizon, 3 long-horizon).</p><p>Outperforms AnyTeleop+ on custom bimanual tasks with 11% higher success rates and 45% reduced task completion time. Achieves 10/10 success on 4 Telekinesis benchmark tasks versus AnyTeleop&#x27;s 9/10 or lower. Improves downstream imitation learning by 22% success rate across three policies (ACT, Diffusion Policy, DP3). Improves generalization: 14% on spatial generalization and 26% on unseen objects. Enables long-horizon manipulation: 73% subtask and 38% full-task success with 30 demonstrations. Releases a low-cost haptic-feedback teleoperation system with open-source code (github.com/Dingry/BunnyVisionPro).</p><p>It lets a human wearing an Apple Vision Pro teleoperate two dexterous robot hands in real time to perform bimanual manipulation, while haptic feedback and safety constraints help collect high-quality demonstrations for training imitation-learning policies.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2407.03162" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2407.03162" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://dingry.github.io/projects/bunny_visionpro.html" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

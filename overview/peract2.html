@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks</h1>
+ <div class="badges"><span class="badge">arXiv 2407.00278 (cs.RO), 2024</span><span class="badge lab">University of Washington, Karlsruhe Institute of Technology (KIT), NVIDIA</span><span class="badge m">imitation-learning</span><span class="badge m">behavior-cloning</span><span class="badge m">language-conditioned</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/peract2.png" alt="teaser figure">
+ <div class="report"><p class="lead">PerAct2 is both a benchmark and a learning method for two-arm robotic manipulation. It extends the RLBench benchmark to bimanual settings, adding 13 new tasks with 23 unique task variations that require coordination and adaptability between arms. The PerAct2 agent is a language-conditioned behavioral cloning policy that integrates language understanding with action prediction to perform coordinated bimanual tasks from user-specified goals. It builds on the original PerAct (Perceiver-Actor) voxel-based transformer framework, adapting it to predict actions for two arms simultaneously.</p><p>Uses a single PerceiverIO transformer backbone that ingests 3D voxel grids built from RGB-D images, proprioception, and a language goal, rather than duplicating the representation per arm. Splits the latent space between the two arms and uses combined self-attention to enable implicit coordination and communication between arms. Outputs discretized 6-DoF end-effector poses, gripper open/close states, and collision-avoidance flags for each arm. Tasks are categorized by coordination type (e.g., temporal/spatial coupling, synchronization, physical coupling) and span prehensile, non-prehensile, and mixed manipulation. The agent is robot-agnostic and was demonstrated in the real world on the ARMAR-6 humanoid.</p><p>Introduces a bimanual extension of RLBench with 13 new tasks and 23 unique task variations requiring two-arm coordination. PerAct2 achieves a 16.8% average task success rate trained on 100 demonstrations. Reports comparisons against baselines including ACT, RVT-LF (10.5%), and PerAct-LF (17.5%) on individual tasks. Trains more efficiently than the leader-follower baseline: 54 hours for PerAct2 vs. 89 hours for PerAct-LF. Releases code, benchmark, and datasets (128x128 and 256x256 image sizes with train/val/test splits) publicly.</p><p>Given a natural-language goal and RGB-D observations, it predicts coordinated 6-DoF actions for two robot arms to perform bimanual manipulation tasks such as handovers, lifting, pushing, and drawer operations.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2407.00278" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2407.00278" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="http://bimanual.github.io" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Towards a Generalizable Bimanual Foundation Policy via Flow-based Video Prediction · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Towards a Generalizable Bimanual Foundation Policy via Flow-based Video Prediction</h1>
+ <div class="badges"><span class="badge">arXiv preprint (2505.24156, May 2025)</span><span class="badge lab">Institute of Artificial Intelligence (TeleAI), China Telecom; Northwestern Polytechnical University; Hong Kong University of Science and Technology</span><span class="badge m">VLA</span><span class="badge m">diffusion</span><span class="badge m">human-video</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/bimanual_flow_video.png" alt="teaser figure">
+ <div class="report"><p class="lead">CogRobot is a foundation policy for bimanual robot manipulation that repurposes a pretrained text-to-video model (CogVideoX-2B) as a high-level visual planner. Instead of predicting video directly from language, it decomposes generation into two stages connected by optical flow: a text-to-flow model that concretizes the language instruction into a motion field, and a flow-to-video model that uses that flow as guidance for fine-grained video prediction. A lightweight diffusion policy then extracts executable joint actions from the predicted video. The optical-flow intermediate reduces reliance on large bimanual datasets and mitigates physical hallucination, task confusion, and instruction ambiguity seen in single-stage video prediction.</p><p>Use optical flow as an intermediate variable, decomposing video generation into text-to-flow and flow-to-video stages, both built on CogVideoX. Fine-tune a pretrained text-to-video foundation model rather than training from scratch, lowering data requirements for bimanual tasks. Text-to-flow model predicts a motion field (rendered as RGB flow video) to disambiguate the language instruction before pixel-level prediction. Flow-to-video model concatenates flow and RGB latents so predicted flow guides fine-grained future-frame generation. A lightweight diffusion policy converts the generated video into executable dual-arm joint actions. Built a custom dual-arm platform (two Realman 7-DoF arms, single-view RealSense RGB) with VR-based teleoperation for data collection.</p><p>A framework for training bimanual foundation policies by fine-tuning text-to-video models, avoiding training from scratch. A two-stage text-to-flow then flow-to-video paradigm using optical flow as guidance to cut data requirements. A custom dual-arm hardware/data platform (two Realman 7-DoF arms) with VR-based teleoperation; evaluated on 4 simulation tasks and 2 real-world tasks with 100 demonstrations each. Simulation (RoboTwin): 100% success on &#x27;Put Apple Cabinet&#x27; vs. 82% for the Diffusion Policy baseline. Real-world: 70% success on &#x27;Lift Bag&#x27; (vs. 50% for DP) and 75% on &#x27;Pull Box&#x27; (vs. 5% for DP). Video-quality gains over direct fine-tuning on RoboMIND: PSNR +2.986, SSIM +0.052, LPIPS -0.054, FVD -488.</p><p>Given a language instruction and a single RGB observation, CogRobot predicts an optical-flow-guided future video of a bimanual task and extracts dual-arm joint actions from it, generalizing across simulated and real-world manipulation tasks.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2505.24156" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2505.24156" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a class="disabled">Project</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

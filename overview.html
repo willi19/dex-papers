@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bimanual & Dexterous Manipulation · landscape overview</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ header{padding:22px 24px 6px;border-bottom:1px solid var(--border);}
+ h1{margin:0 0 4px;font-size:20px;} h1 .c{color:var(--muted);font-weight:400;font-size:14px;}
+ header p{margin:4px 0 0;color:var(--muted);max-width:860px;}
+ .sec{padding:8px 24px 0;} .sec h2{font-size:15px;margin:24px 0 2px;} .sec .sub{color:var(--muted);font-size:12.5px;margin:0 0 10px;}
+ main{padding:0 0 60px;}
+ .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));}
+ .card{background:var(--panel);border:1px solid var(--border);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;}
+ .thumb{display:block;background:#fff;border-bottom:1px solid var(--border);}
+ .thumb img{width:100%;height:178px;object-fit:cover;object-position:top center;display:block;}
+ .body{padding:11px 13px 13px;display:flex;flex-direction:column;gap:7px;}
+ .badges{display:flex;gap:5px;flex-wrap:wrap;}
+ .badge{font-size:10.5px;padding:2px 7px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ h3{margin:1px 0;font-size:14px;line-height:1.3;}
+ .desc{color:var(--muted);font-size:12.7px;margin:0;}
+ .links{display:flex;gap:7px;flex-wrap:wrap;margin-top:3px;}
+ .links a{font-size:12px;text-decoration:none;padding:3px 9px;border-radius:7px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+</style></head><body>
+<header>
+  <div style="margin-bottom:10px"><a href="index.html" style="font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text)">← Back to library</a></div>
+  <h1>Bimanual &amp; Dexterous Manipulation — landscape overview <span class="c">· 35 papers</span></h1>
+  <p>Recent works that perform <b>diverse / multi-task</b> manipulation with two hands or dexterous
+  multi-fingered hands, spanning VLA, RL, diffusion and imitation learning. Each card's <b>📄 Summary</b>
+  opens a tech-report-style write-up of the paper — what it does, how it works, and what it contributes —
+  grounded in the paper and its project page. Figures are each paper's own teaser, rendered from the PDF.</p>
+</header>
+<main>
+  <section class="sec"><h2>① Generalist &amp; Foundation Policies</h2><p class="sub">One model / one recipe across many embodiments and tasks — VLA models and large behavior recipes.</p>
+  <div class="grid">
+    <div class="card">
+      <a class="thumb" href="overview/pi0.html"><img src="overview_assets/pi0.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2024</span><span class="badge lab">Physical Intelligence</span><span class="badge m">VLA</span><span class="badge m">flow-matching</span><span class="badge m">generalist</span></div>
+        <h3>π₀: A Vision-Language-Action Flow Model for General Robot Control</h3>
+        <p class="desc">Flow-matching VLA on a pretrained VLM, trained across single-arm, dual-arm and dexterous platforms.</p>
+        <div class="links">
+          <a href="overview/pi0.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2410.24164" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2410.24164" target="_blank" rel="noopener">PDF</a>
+          <a href="https://www.pi.website/blog/pi0" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/gemini_robotics.html"><img src="overview_assets/gemini_robotics.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2025</span><span class="badge lab">Google DeepMind</span><span class="badge m">VLA</span><span class="badge m">generalist</span><span class="badge m">reasoning</span></div>
+        <h3>Gemini Robotics: Bringing AI into the Physical World</h3>
+        <p class="desc">A VLA generalist built on Gemini 2.0 with strong embodied reasoning and open-vocabulary generalization.</p>
+        <div class="links">
+          <a href="overview/gemini_robotics.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2503.20020" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2503.20020" target="_blank" rel="noopener">PDF</a>
+          <a href="https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/groot_n1.html"><img src="overview_assets/groot_n1.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2025</span><span class="badge lab">NVIDIA</span><span class="badge m">VLA</span><span class="badge m">foundation</span><span class="badge m">dual-system</span></div>
+        <h3>GR00T N1: An Open Foundation Model for Generalist Humanoid Robots</h3>
+        <p class="desc">An open dual-system (VLM + diffusion-transformer) foundation model spanning arms to dexterous humanoids.</p>
+        <div class="links">
+          <a href="overview/groot_n1.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2503.14734" target="_blank" rel="noopener">PDF</a>
+          <a href="https://research.nvidia.com/labs/lpr/publication/gr00tn1_2025/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/rdt_1b.html"><img src="overview_assets/rdt_1b.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICLR 2025</span><span class="badge lab">Tsinghua (THU-ML)</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span><span class="badge m">foundation</span></div>
+        <h3>RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation</h3>
+        <p class="desc">A 1.2B-parameter diffusion transformer for bimanual manipulation, pretrained on 1M+ episodes.</p>
+        <div class="links">
+          <a href="overview/rdt_1b.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2410.07864" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2410.07864" target="_blank" rel="noopener">PDF</a>
+          <a href="https://rdt-robotics.github.io/rdt-robotics/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dexvla.html"><img src="overview_assets/dexvla.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2025</span><span class="badge lab">Midea / ECNU</span><span class="badge m">VLA</span><span class="badge m">diffusion-expert</span><span class="badge m">cross-embodiment</span></div>
+        <h3>DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control</h3>
+        <p class="desc">A VLM plus a plug-in billion-parameter diffusion action expert, trained with an embodiment curriculum.</p>
+        <div class="links">
+          <a href="overview/dexvla.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2502.05855" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2502.05855" target="_blank" rel="noopener">PDF</a>
+          <a href="https://dex-vla.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/aloha_unleashed.html"><img src="overview_assets/aloha_unleashed.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CoRL 2024</span><span class="badge lab">Google DeepMind</span><span class="badge m">imitation-learning</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span><span class="badge m">teleoperation</span></div>
+        <h3>ALOHA Unleashed: A Simple Recipe for Robot Dexterity</h3>
+        <p class="desc">Large-scale teleop data plus a Transformer diffusion policy unlocks challenging bimanual dexterity on ALOHA 2.</p>
+        <div class="links">
+          <a href="overview/aloha_unleashed.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2410.13126" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2410.13126" target="_blank" rel="noopener">PDF</a>
+          <a href="https://aloha-unleashed.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dexteritygen.html"><img src="overview_assets/dexteritygen.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">RSS 2025</span><span class="badge lab">UC Berkeley (BAIR) and Meta FAIR</span><span class="badge m">RL</span><span class="badge m">teleoperation</span><span class="badge m">dexterous</span><span class="badge m">generative</span></div>
+        <h3>DexterityGen: Foundation Controller for Unprecedented Dexterity</h3>
+        <p class="desc">An RL-pretrained generative foundation controller that turns coarse, unsafe human/policy commands into safe, fine dexterous actions.</p>
+        <div class="links">
+          <a href="overview/dexteritygen.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2502.04307" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2502.04307" target="_blank" rel="noopener">PDF</a>
+          <a href="https://zhaohengyin.github.io/dexteritygen/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/mimic_one.html"><img src="overview_assets/mimic_one.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">arXiv 2506.11916 (June 2025)</span><span class="badge lab">mimic robotics &amp; ETH Zurich (ETH AI Center, Soft Robotics Lab, Institute of Neuroinformatics)</span><span class="badge m">diffusion</span><span class="badge m">imitation-learning</span><span class="badge m">teleoperation</span><span class="badge m">dexterous</span></div>
+        <h3>mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity</h3>
+        <p class="desc">A diffusion-policy recipe plus a 16-DoF tendon-driven hand for sample-efficient, smooth real-world humanoid-hand manipulation.</p>
+        <div class="links">
+          <a href="overview/mimic_one.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2506.11916" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2506.11916" target="_blank" rel="noopener">PDF</a>
+          <a href="https://mimicrobotics.github.io/mimic-one/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/bimanual_flow_video.html"><img src="overview_assets/bimanual_flow_video.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">arXiv preprint (2505.24156, May 2025)</span><span class="badge lab">Institute of Artificial Intelligence (TeleAI), China Telecom; Northwestern Polytechnical University; Hong Kong University of Science and Technology</span><span class="badge m">VLA</span><span class="badge m">diffusion</span><span class="badge m">human-video</span><span class="badge m">bimanual</span></div>
+        <h3>Towards a Generalizable Bimanual Foundation Policy via Flow-based Video Prediction</h3>
+        <p class="desc">CogRobot: a bimanual foundation policy that fine-tunes a text-to-video model with optical flow as an intermediate representation, then extracts actions via a diffusion policy.</p>
+        <div class="links">
+          <a href="overview/bimanual_flow_video.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2505.24156" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2505.24156" target="_blank" rel="noopener">PDF</a>
+          <a class="disabled">Project</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+  <section class="sec"><h2>② Reinforcement Learning &amp; Sim-to-Real Dexterity</h2><p class="sub">Learn dexterity (often in sim, from sparse reward or a few demos) and transfer to real multi-fingered hands.</p>
+  <div class="grid">
+    <div class="card">
+      <a class="thumb" href="overview/simreal_humanoid.html"><img src="overview_assets/simreal_humanoid.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CoRL 2025</span><span class="badge lab">UC Berkeley</span><span class="badge m">RL</span><span class="badge m">sim-to-real</span><span class="badge m">bimanual</span></div>
+        <h3>Sim-to-Real Reinforcement Learning for Vision-Based Dexterous Manipulation on Humanoids</h3>
+        <p class="desc">A practical sim-to-real RL recipe for contact-rich, vision-based dexterous tasks on a real humanoid.</p>
+        <div class="links">
+          <a href="overview/simreal_humanoid.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2502.20396" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2502.20396" target="_blank" rel="noopener">PDF</a>
+          <a href="https://toruowo.github.io/recipe/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/demostart.html"><img src="overview_assets/demostart.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2024</span><span class="badge lab">Google DeepMind</span><span class="badge m">RL</span><span class="badge m">auto-curriculum</span><span class="badge m">sim-to-real</span></div>
+        <h3>DemoStart: Demonstration-led Auto-curriculum Applied to Sim-to-Real with Multi-fingered Robots</h3>
+        <p class="desc">Auto-curriculum RL from sparse reward + a few sim demos; ~100× fewer demos, zero-shot sim-to-real.</p>
+        <div class="links">
+          <a href="overview/demostart.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2409.06613" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2409.06613" target="_blank" rel="noopener">PDF</a>
+          <a href="https://sites.google.com/view/demostart" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/bidexhands.html"><img src="overview_assets/bidexhands.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">NeurIPS 2022</span><span class="badge lab">PKU / academic</span><span class="badge m">RL</span><span class="badge m">benchmark</span><span class="badge m">bimanual</span></div>
+        <h3>Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning (Bi-DexHands)</h3>
+        <p class="desc">A 20-task, two-Shadow-Hand Isaac Gym benchmark and RL baselines for bimanual dexterity.</p>
+        <div class="links">
+          <a href="overview/bidexhands.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2206.08686" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2206.08686" target="_blank" rel="noopener">PDF</a>
+          <a href="https://github.com/PKU-MARL/DexterousHands" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/asymdex.html"><img src="overview_assets/asymdex.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">WCBM @ RSS 2025 (Spotlight); arXiv 2411.13020 (Nov 2024)</span><span class="badge lab">STAR Lab, Georgia Institute of Technology</span><span class="badge m">RL</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span><span class="badge m">sim-to-real</span></div>
+        <h3>AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity</h3>
+        <p class="desc">Demonstration-free RL for bimanual dexterity that exploits hand asymmetry (facilitating vs. dominant hand) and relative hand-to-hand coordinates.</p>
+        <div class="links">
+          <a href="overview/asymdex.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2411.13020" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2411.13020" target="_blank" rel="noopener">PDF</a>
+          <a href="https://sites.google.com/view/asymdex-2025/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dynamic_handover.html"><img src="overview_assets/dynamic_handover.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CoRL 2023</span><span class="badge lab">UC San Diego and Peking University (Xiaolong Wang group)</span><span class="badge m">RL</span><span class="badge m">multi-agent-RL</span><span class="badge m">sim-to-real</span><span class="badge m">bimanual</span></div>
+        <h3>Dynamic Handover: Throw and Catch with Bimanual Hands</h3>
+        <p class="desc">Two multi-finger hands learn to throw and catch objects in mid-air via multi-agent RL trained in simulation and transferred to real robots.</p>
+        <div class="links">
+          <a href="overview/dynamic_handover.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2309.05655" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2309.05655" target="_blank" rel="noopener">PDF</a>
+          <a href="https://binghao-huang.github.io/dynamic_handover/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+  <section class="sec"><h2>③ Bimanual Policies &amp; Benchmarks</h2><p class="sub">Two-arm / two-hand coordination — transfer, functional retargeting, benchmarks and posture-aware policies.</p>
+  <div class="grid">
+    <div class="card">
+      <a class="thumb" href="overview/diverse_bimanual_human.html"><img src="overview_assets/diverse_bimanual_human.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2024</span><span class="badge lab">Peking University</span><span class="badge m">imitation</span><span class="badge m">human-demos</span><span class="badge m">bimanual</span></div>
+        <h3>Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations (BiDexHD)</h3>
+        <p class="desc">A three-phase framework that turns human bimanual datasets into many learned dexterous skills.</p>
+        <div class="links">
+          <a href="overview/diverse_bimanual_human.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2410.02477" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2410.02477" target="_blank" rel="noopener">PDF</a>
+          <a href="https://sites.google.com/view/bidexhd" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/manidp.html"><img src="overview_assets/manidp.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">IROS 2025</span><span class="badge lab">CUHK / Idiap</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span><span class="badge m">imitation</span></div>
+        <h3>ManiDP: Manipulability-Aware Diffusion Policy for Posture-Dependent Bimanual Manipulation</h3>
+        <p class="desc">A diffusion policy that optimizes dual-arm posture/manipulability for posture-dependent tasks.</p>
+        <div class="links">
+          <a href="overview/manidp.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2510.23016" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2510.23016" target="_blank" rel="noopener">PDF</a>
+          <a class="disabled">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/maniptrans.html"><img src="overview_assets/maniptrans.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CVPR 2025</span><span class="badge lab">BIGAI (State Key Laboratory of General Artificial Intelligence), Tsinghua University, Peking University</span><span class="badge m">RL</span><span class="badge m">imitation-learning</span><span class="badge m">sim-to-real</span><span class="badge m">bimanual</span></div>
+        <h3>ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning</h3>
+        <p class="desc">A two-stage residual-learning pipeline that transfers human bimanual hand-object motions to dexterous robot hands in simulation, decoupling motion imitation from physical interaction.</p>
+        <div class="links">
+          <a href="overview/maniptrans.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2503.21860" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2503.21860" target="_blank" rel="noopener">PDF</a>
+          <a href="https://maniptrans.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dexmachina.html"><img src="overview_assets/dexmachina.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICML 2026 (arXiv 2505.24853, May 2025)</span><span class="badge lab">Stanford University, NVIDIA</span><span class="badge m">RL</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span><span class="badge m">human-video</span></div>
+        <h3>DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation</h3>
+        <p class="desc">Curriculum-based functional retargeting that learns bimanual dexterous policies to track object states from human hand-object demonstrations via decaying-strength virtual object controllers.</p>
+        <div class="links">
+          <a href="overview/dexmachina.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2505.24853" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2505.24853" target="_blank" rel="noopener">PDF</a>
+          <a href="https://project-dexmachina.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/anybimanual.html"><img src="overview_assets/anybimanual.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICCV 2025</span><span class="badge lab">Tsinghua University (Tsinghua Shenzhen International Graduate School) &amp; Nanyang Technological University</span><span class="badge m">imitation-learning</span><span class="badge m">manipulation</span><span class="badge m">bimanual</span><span class="badge m">sim-to-real</span></div>
+        <h3>AnyBimanual: Transferring Unimanual Policy for General Bimanual Manipulation</h3>
+        <p class="desc">A plug-and-play framework that transfers pretrained unimanual policies into general bimanual manipulation policies with few bimanual demonstrations.</p>
+        <div class="links">
+          <a href="overview/anybimanual.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2412.06779" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2412.06779" target="_blank" rel="noopener">PDF</a>
+          <a href="https://anybimanual.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/peract2.html"><img src="overview_assets/peract2.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">arXiv 2407.00278 (cs.RO), 2024</span><span class="badge lab">University of Washington, Karlsruhe Institute of Technology (KIT), NVIDIA</span><span class="badge m">imitation-learning</span><span class="badge m">behavior-cloning</span><span class="badge m">language-conditioned</span><span class="badge m">bimanual</span></div>
+        <h3>PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks</h3>
+        <p class="desc">A simulated bimanual manipulation benchmark extending RLBench, plus PerAct2, a language-conditioned behavioral cloning agent that controls two 6-DoF arms with a shared PerceiverIO backbone.</p>
+        <div class="links">
+          <a href="overview/peract2.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2407.00278" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2407.00278" target="_blank" rel="noopener">PDF</a>
+          <a href="http://bimanual.github.io" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/voxact_b.html"><img src="overview_assets/voxact_b.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CoRL 2024</span><span class="badge lab">University of Southern California (USC), Department of Computer Science</span><span class="badge m">voxel</span><span class="badge m">VLA</span><span class="badge m">bimanual</span><span class="badge m">imitation-learning</span></div>
+        <h3>VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation</h3>
+        <p class="desc">A language-conditioned, voxel-based bimanual policy that uses VLMs to crop high-resolution voxel grids and learns separate acting and stabilizing arms.</p>
+        <div class="links">
+          <a href="overview/voxact_b.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2407.04152" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2407.04152" target="_blank" rel="noopener">PDF</a>
+          <a href="https://voxact-b.github.io" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+  <section class="sec"><h2>④ Dexterous Grasping</h2><p class="sub">Generalizable multi-fingered grasping — generative, RL, language-guided, and at dataset scale.</p>
+  <div class="grid">
+    <div class="card">
+      <a class="thumb" href="overview/dexgraspvla.html"><img src="overview_assets/dexgraspvla.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2025</span><span class="badge lab">Peking University</span><span class="badge m">VLA</span><span class="badge m">hierarchical</span><span class="badge m">grasping</span></div>
+        <h3>DexGraspVLA: A Vision-Language-Action Framework Towards General Dexterous Grasping</h3>
+        <p class="desc">Hierarchical dexterous grasping: a VLM planner over a diffusion controller, generalizing zero-shot.</p>
+        <div class="links">
+          <a href="overview/dexgraspvla.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2502.20900" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2502.20900" target="_blank" rel="noopener">PDF</a>
+          <a href="https://dexgraspvla.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dexgraspnet2.html"><img src="overview_assets/dexgraspnet2.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CoRL 2024</span><span class="badge lab">PKU / Galbot</span><span class="badge m">grasping</span><span class="badge m">generative</span><span class="badge m">sim-to-real</span></div>
+        <h3>DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes</h3>
+        <p class="desc">A massive synthetic cluttered-scene grasp dataset plus a generative model; 90.7% real-world success.</p>
+        <div class="links">
+          <a href="overview/dexgraspnet2.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2410.23004" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2410.23004" target="_blank" rel="noopener">PDF</a>
+          <a href="https://pku-epic.github.io/DexGraspNet2.0/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/unidexgrasppp.html"><img src="overview_assets/unidexgrasppp.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICCV 2023</span><span class="badge lab">PKU / academic</span><span class="badge m">RL</span><span class="badge m">grasping</span><span class="badge m">generalist-specialist</span></div>
+        <h3>UniDexGrasp++: Improving Dexterous Grasping via Geometry-aware Curriculum and Generalist-Specialist Learning</h3>
+        <p class="desc">A single universal dexterous grasping policy from point clouds, generalizing to thousands of objects.</p>
+        <div class="links">
+          <a href="overview/unidexgrasppp.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2304.00464" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2304.00464" target="_blank" rel="noopener">PDF</a>
+          <a href="https://pku-epic.github.io/UniDexGrasp++/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/anydexgrasp.html"><img src="overview_assets/anydexgrasp.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICLR 2025</span><span class="badge lab">Shanghai Jiao Tong University (Cewu Lu group)</span><span class="badge m">dexterous</span><span class="badge m">grasping</span><span class="badge m">self-supervised</span><span class="badge m">real-world</span></div>
+        <h3>AnyDexGrasp: General Dexterous Grasping for Different Hands with Human-level Learning Efficiency</h3>
+        <p class="desc">Learn general dexterous grasping for any robotic hand from only hundreds of real-world trials, by decoupling hand-agnostic geometry from hand-specific grasp decisions.</p>
+        <div class="links">
+          <a href="overview/anydexgrasp.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2502.16420" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2502.16420" target="_blank" rel="noopener">PDF</a>
+          <a href="https://graspnet.net/anydexgrasp/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dexgrasp_anything.html"><img src="overview_assets/dexgrasp_anything.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CVPR 2025 (Highlight)</span><span class="badge lab">ShanghaiTech University (4DVLab) — Yiming Zhong, Qi Jiang, Jingyi Yu, Yuexin Ma</span><span class="badge m">diffusion</span><span class="badge m">grasping</span><span class="badge m">dexterous</span><span class="badge m">dataset</span></div>
+        <h3>DexGrasp Anything: Towards Universal Robotic Dexterous Grasping with Physics Awareness</h3>
+        <p class="desc">A physics-aware diffusion model that generates dexterous Shadow-hand grasps for arbitrary objects, plus the largest public dexterous-grasp dataset.</p>
+        <div class="links">
+          <a href="overview/dexgrasp_anything.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2503.08257" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2503.08257" target="_blank" rel="noopener">PDF</a>
+          <a href="https://dexgraspanything.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/robustdexgrasp.html"><img src="overview_assets/robustdexgrasp.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">CoRL 2025 (Spotlight)</span><span class="badge lab">ETH Zurich, HKUST (Guangzhou), HKUST (Hong Kong)</span><span class="badge m">RL</span><span class="badge m">sim-to-real</span><span class="badge m">Allegro</span><span class="badge m">grasping</span></div>
+        <h3>RobustDexGrasp: Robust Dexterous Grasping of General Objects from Single-view Perception</h3>
+        <p class="desc">Zero-shot dynamic dexterous grasping of general unseen objects from single-view perception, robust to disturbances.</p>
+        <div class="links">
+          <a href="overview/robustdexgrasp.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2504.05287" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2504.05287" target="_blank" rel="noopener">PDF</a>
+          <a href="https://zdchan.github.io/Robust_DexGrasp/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/dexvlg.html"><img src="overview_assets/dexvlg.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICCV 2025 (Spotlight)</span><span class="badge lab">BAAI, Galbot, Tsinghua University, Peking University, CASIA, Shanghai Jiao Tong University, EIT</span><span class="badge m">VLA</span><span class="badge m">diffusion</span><span class="badge m">grasping</span><span class="badge m">dexterous</span></div>
+        <h3>DexVLG: Dexterous Vision-Language-Grasp Model at Scale</h3>
+        <p class="desc">A vision-language-grasp model that predicts language-aligned dexterous grasp poses from single-view RGBD, trained on a 170M-pose synthetic dataset.</p>
+        <div class="links">
+          <a href="overview/dexvlg.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2507.02747" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2507.02747" target="_blank" rel="noopener">PDF</a>
+          <a href="https://jiaweihe.com/dexvlg" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/hug.html"><img src="overview_assets/hug.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">arXiv 2026</span><span class="badge lab">New York University (with Tsinghua University and University of Michigan)</span><span class="badge m">flow-matching</span><span class="badge m">human-data</span><span class="badge m">MANO-retargeting</span><span class="badge m">dexterous-grasping</span></div>
+        <h3>HUG: Human Universal Grasping</h3>
+        <p class="desc">A flow-matching model trained purely on egocentric human grasps that predicts MANO hand poses from a single RGB-D image and retargets zero-shot to multiple robot hands.</p>
+        <div class="links">
+          <a href="overview/hug.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2606.17054" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2606.17054" target="_blank" rel="noopener">PDF</a>
+          <a href="https://grasping.io" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+  <section class="sec"><h2>⑤ Data Generation, Teleop &amp; Human Demos</h2><p class="sub">Scaling data: automated generation, low-cost teleoperation, and egocentric / human-video learning.</p>
+  <div class="grid">
+    <div class="card">
+      <a class="thumb" href="overview/dexmimicgen.html"><img src="overview_assets/dexmimicgen.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICRA 2025</span><span class="badge lab">NVIDIA / UT-Austin</span><span class="badge m">imitation</span><span class="badge m">data-generation</span><span class="badge m">bimanual</span></div>
+        <h3>DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning</h3>
+        <p class="desc">Synthesizes large bimanual-dexterous demonstration datasets from a handful of human demos.</p>
+        <div class="links">
+          <a href="overview/dexmimicgen.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2410.24185" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2410.24185" target="_blank" rel="noopener">PDF</a>
+          <a href="https://dexmimicgen.github.io/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/hato.html"><img src="overview_assets/hato.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">2024</span><span class="badge lab">UC San Diego</span><span class="badge m">imitation</span><span class="badge m">visuotactile</span><span class="badge m">teleoperation</span></div>
+        <h3>Learning Visuotactile Skills with Two Multifingered Hands (HATO)</h3>
+        <p class="desc">A low-cost open bimanual multifingered teleop+learning system using two touch-sensing hands.</p>
+        <div class="links">
+          <a href="overview/hato.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2404.16823" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2404.16823" target="_blank" rel="noopener">PDF</a>
+          <a href="https://toruowo.github.io/hato/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/lbm_multitask.html"><img src="overview_assets/lbm_multitask.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">Science Robotics 2025</span><span class="badge lab">Toyota Research Institute</span><span class="badge m">diffusion</span><span class="badge m">multitask</span><span class="badge m">LBM</span></div>
+        <h3>A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation</h3>
+        <p class="desc">A rigorous study of whether pretrained multitask diffusion policies (LBMs) actually help.</p>
+        <div class="links">
+          <a href="overview/lbm_multitask.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2507.05331" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2507.05331" target="_blank" rel="noopener">PDF</a>
+          <a href="https://toyotaresearchinstitute.github.io/lbm1/" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/humanoidgen.html"><img src="overview_assets/humanoidgen.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">NeurIPS 2025</span><span class="badge lab">TeleAI (China Telecom) / Fudan University</span><span class="badge m">data-generation</span><span class="badge m">LLM-reasoning</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span></div>
+        <h3>HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning</h3>
+        <p class="desc">Automated LLM-driven task creation and demonstration collection for bimanual dexterous-hand humanoids, using spatial annotations and MCTS-enhanced reasoning to scale synthetic training data.</p>
+        <div class="links">
+          <a href="overview/humanoidgen.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2507.00833" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2507.00833" target="_blank" rel="noopener">PDF</a>
+          <a href="https://openhumanoidgen.github.io" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/egodex.html"><img src="overview_assets/egodex.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">ICLR 2026</span><span class="badge lab">Apple</span><span class="badge m">imitation-learning</span><span class="badge m">human-video</span><span class="badge m">dataset</span><span class="badge m">diffusion</span></div>
+        <h3>EgoDex: Learning Dexterous Manipulation from Large-Scale Egocentric Video</h3>
+        <p class="desc">The largest and most diverse dataset of dexterous human manipulation to date, collected from egocentric Apple Vision Pro video with paired 3D hand tracking.</p>
+        <div class="links">
+          <a href="overview/egodex.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2505.11709" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2505.11709" target="_blank" rel="noopener">PDF</a>
+          <a href="https://github.com/apple/ml-egodex" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <a class="thumb" href="overview/bunny_visionpro.html"><img src="overview_assets/bunny_visionpro.png" alt="" loading="lazy"></a>
+      <div class="body">
+        <div class="badges"><span class="badge">arXiv (2407.03162, July 2024)</span><span class="badge lab">UC San Diego (Xiaolong Wang) &amp; University of Hong Kong (Xiaojuan Qi)</span><span class="badge m">teleoperation</span><span class="badge m">imitation-learning</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span></div>
+        <h3>Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning</h3>
+        <p class="desc">Apple Vision Pro-based real-time bimanual dexterous teleoperation with low-cost haptic feedback and built-in safety for collecting imitation-learning demonstrations.</p>
+        <div class="links">
+          <a href="overview/bunny_visionpro.html">📄 Summary</a>
+          <a href="https://arxiv.org/abs/2407.03162" target="_blank" rel="noopener">arXiv</a>
+          <a class="pdf" href="https://arxiv.org/pdf/2407.03162" target="_blank" rel="noopener">PDF</a>
+          <a href="https://dingry.github.io/projects/bunny_visionpro.html" target="_blank" rel="noopener">Project</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+</main></body></html>

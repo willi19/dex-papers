@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ManiDP: Manipulability-Aware Diffusion Policy for Posture-Dependent Bimanual Manipulation · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>ManiDP: Manipulability-Aware Diffusion Policy for Posture-Dependent Bimanual Manipulation</h1>
+ <div class="badges"><span class="badge">IROS 2025</span><span class="badge lab">CUHK / Idiap</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span><span class="badge m">imitation</span></div>
+ <img class="fig" src="../overview_assets/manidp.png" alt="teaser figure">
+ <div class="report"><p class="lead">ManiDP (IROS 2025, arXiv 2510.23016) is an imitation-learning method that augments a conditional diffusion policy with awareness of robot manipulability for posture-dependent bimanual (dual-arm) manipulation. The core observation is that standard diffusion policies imitate end-effector trajectories but ignore the dual-arm configuration/posture needed to actually exert the right forces and motions for a task. ManiDP extracts bimanual manipulability ellipsoids from expert demonstrations, encodes these posture features with a Riemannian probabilistic model defined on the SPD (symmetric positive definite) manifold, and uses them to guide the diffusion sampling so generated trajectories not only look plausible but also place the arms in task-compatible postures. Authors: Zhuo Li, Junjia Liu, Dianxi Li, Tao Teng, Miao Li, Sylvain Calinon, Darwin Caldwell, Fei Chen.</p><p>Manipulability ellipsoid (ME): a posture-dependent measure of how well a robot configuration can generate motion/force in given directions. ManiDP defines two bimanual variants: Bimanual Absolute Manipulability (BAM) for symmetric tasks where both arms act as one unit, and Bimanual Relative Manipulability (BRM) for asymmetric tasks built from relative Jacobians between the arms. SPD-manifold geometry: bimanual manipulability ellipsoids are 3x3 symmetric positive definite matrices, which do not live in a flat Euclidean space but on the cone-shaped S++ (SPD) manifold. ManiDP respects this geometry — ellipsoids interpolate along geodesics on the manifold rather than straight Euclidean lines, avoiding distortion. Riemannian probabilistic model: posture features are encoded with an SPD Gaussian Mixture Model (SPD-GMM) and SPD Gaussian Mixture Regression (SPD-GMR), using Riemannian operations — logarithmic map (Log), exponential map (Exp), and parallel transport — to project SPD points into tangent spaces, do the statistics there, and map back. Manipulability-guided diffusion: the desired manipulability profile conditions a diffusion policy via classifier-style guidance. A cost G = ||Log_{Bt}(B_hat_t)||_F^2 measures the SPD geodesic distance between the policy&#x27;s current and the expert&#x27;s target ellipsoids, and its gradient steers the denoising step (mean shifted by lambda * Sigma * g) toward task-compatible postures. The method separates &#x27;plausible trajectory generation&#x27; (what standard diffusion policy does) from &#x27;dual-arm posture optimization&#x27; (the manipulability term), letting it simultaneously imitate motion and satisfy posture-dependent task requirements.</p><p>Introduces a manipulability-aware conditional diffusion policy that extracts bimanual manipulability from demonstrations and injects it as Riemannian-encoded guidance, achieving a reported 39.33% increase in average manipulation success rate over baselines. Reported real-robot Manipulation Success Rate (MSR): ManiDP 85.00% overall vs. 56.33% for Diffusion Policy (DP) and 53.33% for ACT. Introduces a Task Compatibility Index (TCI), normalized to [0,1], measuring alignment of dual-arm postures with task requirements; ManiDP averages 0.92 +/- 0.03 vs. 0.53 +/- 0.04 for DP (about a 0.45 improvement in task compatibility). On Manipulability Reproduction Accuracy (MRA), the SPD-manifold model strongly outperforms a Euclidean classical GMM-GMR — e.g. 0.91 +/- 0.01 vs. 0.58 +/- 0.02 (Plate Wiping) and 0.93 +/- 0.04 vs. 0.65 +/- 0.03 (Towel Hanging) — validating the SPD-manifold formulation over Euclidean processing. Defines BAM and BRM formulations to handle both symmetric (arms as a unified entity) and asymmetric (relative-Jacobian) bimanual tasks within one framework. Validated on six real-world bimanual tasks against ACT, original Diffusion Policy, and a Euclidean GMM-GMR baseline.</p><p>ManiDP is demonstrated on six real-world dual-arm tasks: Plate Wiping, Plug Removal, and Charger Plugging (asymmetric), plus Water Pouring, Box Lifting, and Towel Hanging (symmetric). In these demos it generates bimanual motion sequences while steering the two arms into postures with the right manipulability for each task, outperforming ACT, Diffusion Policy, and a Euclidean GMM-GMR baseline on success rate and posture/task-compatibility metrics.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2510.23016" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2510.23016" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a class="disabled">Project</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

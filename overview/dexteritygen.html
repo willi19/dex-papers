@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DexterityGen: Foundation Controller for Unprecedented Dexterity · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>DexterityGen: Foundation Controller for Unprecedented Dexterity</h1>
+ <div class="badges"><span class="badge">RSS 2025</span><span class="badge lab">UC Berkeley (BAIR) and Meta FAIR</span><span class="badge m">RL</span><span class="badge m">teleoperation</span><span class="badge m">dexterous</span><span class="badge m">generative</span></div>
+ <img class="fig" src="../overview_assets/dexteritygen.png" alt="teaser figure">
+ <div class="report"><p class="lead">DexterityGen (DexGen) is a foundation controller for robotic dexterous manipulation that combines reinforcement learning with human teleoperation. It uses RL to pretrain a large-scale, multi-task dataset of dexterous motion primitives such as in-hand rotation and translation. A generative model is then trained on this dataset to translate coarse, potentially unsafe motion commands from an external source (a human teleoperator or another policy) into safe, fine-grained actions. This separation lets RL handle low-level motion primitives while humans provide high-level coarse commands for complex, long-horizon tasks.</p><p>Hybrid RL + teleoperation design: RL learns low-level dexterous motion primitives, while humans supply coarse high-level motion commands for long-horizon tasks. RL pretraining of large-scale multi-task dexterous primitives (e.g., in-hand rotation and translation) builds a reusable motion dataset. A generative model learned from that dataset acts as the foundation controller, mapping unsafe/coarse commands to safe, fine actions. Functions as a general-purpose controller that realizes input dexterous manipulation commands across diverse tasks. Greatly improves manipulation stability, reducing dropped objects during teleoperated dexterous control. Enables grasp transitions (e.g., pinch to power grasp) and complex tool use as composable behaviors.</p><p>Introduces DexGen, a foundation controller that translates coarse, unsafe motion commands into safe, fine-grained dexterous actions. Improves manipulation stability by 10-100x, measured as the duration of holding objects, across diverse tasks. Demonstrates unprecedented dexterous tool use for the first time, including pen, syringe, and screwdriver. Shows diverse object reorientation across objects of varying sizes and properties. Demonstrates assembly tasks and grasp transitions (pinch to power grasp) via the unified controller. Pretrains the controller on a large-scale multi-task dexterous manipulation dataset of RL-learned motion primitives.</p><p>It enables a multi-fingered robot hand to perform stable, high-precision dexterous manipulation -- object reorientation, assembly, and tool use with a pen, syringe, and screwdriver -- by correcting coarse human teleoperation or policy commands into safe fine motions.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2502.04307" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2502.04307" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://zhaohengyin.github.io/dexteritygen/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

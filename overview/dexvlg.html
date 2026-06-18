@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DexVLG: Dexterous Vision-Language-Grasp Model at Scale · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>DexVLG: Dexterous Vision-Language-Grasp Model at Scale</h1>
+ <div class="badges"><span class="badge">ICCV 2025 (Spotlight)</span><span class="badge lab">BAAI, Galbot, Tsinghua University, Peking University, CASIA, Shanghai Jiao Tong University, EIT</span><span class="badge m">VLA</span><span class="badge m">diffusion</span><span class="badge m">grasping</span><span class="badge m">dexterous</span></div>
+ <img class="fig" src="../overview_assets/dexvlg.png" alt="teaser figure">
+ <div class="report"><p class="lead">DexVLG is a large vision-language-grasp model for dexterous grasp pose prediction aligned with language instructions using single-view RGBD input. It is trained on DexGraspNet 3.0, a new synthetic dataset of 170 million dexterous grasp poses mapped to semantic object parts across 174,000 objects, each paired with detailed part-level captions. The model couples a vision-language model (VLM) with a flow-matching-based pose head to generate instruction-conditioned grasps on tabletop objects. It achieves over 76% zero-shot execution success in simulation and is validated on real-world objects.</p><p>Pairs a VLM with a flow-matching-based pose head to produce part-aware, language-conditioned dexterous grasp poses from single-view RGBD. Introduces DexGraspNet 3.0: a synthetic dataset of 170M grasp poses over 174k objects (sourced from Objaverse), each annotated with part-level captions. Dataset is split into wrap and pinch grasp modalities (103M grasps / 169k objects for wrap; 67M grasps / 139k objects for pinch). Uses an LP-based Differentiable Force Closure (DFC) optimization to synthesize more natural, stable grasps versus equal-magnitude contact-force assumptions. Employs part-aligned initialization (lid-like, disk-like, L-shaped, shaft-like categories) to guide grasp synthesis on object parts. Flow-matching denoising for pose generation outperforms standard diffusion (DDPM/DDIM) baselines.</p><p>DexGraspNet 3.0: 170M dexterous grasp poses across 174k objects with part-level captions (103M wrap / 67M pinch grasps). DexVLG model achieving over 76% zero-shot execution success rate in simulation and state-of-the-art part-grasp accuracy. Wrap-grasp success rates of 87.7% on LVIS-Seen, 79.1% on unseen objects, and 76.3% on SamPart3D. Demonstrated grasp quality with low penetration (1.75mm wrap / 1.42mm pinch) and Q1 stability of 0.085 (wrap) / 0.067 (pinch). Validated with successful real-world grasping demonstrations on physical objects. Showed flow-matching pose head outperforms diffusion-based alternatives for instruction-aligned dexterous grasp prediction.</p><p>Given single-view RGBD and a language instruction, DexVLG predicts a dexterous grasp pose on the specified semantic part of a tabletop object and executes it, achieving over 76% zero-shot success.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2507.02747" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2507.02747" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://jiaweihe.com/dexvlg" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

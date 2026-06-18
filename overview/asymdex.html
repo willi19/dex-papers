@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity</h1>
+ <div class="badges"><span class="badge">WCBM @ RSS 2025 (Spotlight); arXiv 2411.13020 (Nov 2024)</span><span class="badge lab">STAR Lab, Georgia Institute of Technology</span><span class="badge m">RL</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span><span class="badge m">sim-to-real</span></div>
+ <img class="fig" src="../overview_assets/asymdex.png" alt="teaser figure">
+ <div class="report"><p class="lead">AsymDex (Asymmetric Dexterity) is a simple reinforcement learning framework for learning a broad class of bimanual skills with multi-fingered hands, without relying on human demonstrations. It builds on two insights inspired by human handedness: one hand acts as a &#x27;facilitating&#x27; hand that repositions and reorients an object while the other acts as a &#x27;dominant&#x27; hand that performs the fine manipulation. It defines observation and action spaces in relative coordinates (a frame attached to the object held by the facilitating hand), which captures hand-to-hand coordination directly. The framework integrates with grasp learning to form a full two-phase pipeline (grasp acquisition followed by interaction). It is evaluated on seven asymmetric bimanual tasks (four simulated, three real-world) using dual ShadowHands.</p><p>Asymmetry: assign complementary roles to each hand — a facilitating hand restricted to base motion (no finger control) and a fully-controlled dominant hand — mirroring human handedness. Relative coordinates: transform states and actions into a frame attached to the object held by the facilitating hand, enabling time-independent responsive coordination. Dimensionality reduction from these two ideas: observation space cut from 176 to 88 dims and action space from 52 to 26 dims. Two-phase decomposition: a grasp-acquisition phase integrated with a downstream interaction/coordination phase rather than one monolithic policy. Demonstration-free: learns purely via RL with no teleoperation or expert trajectories. Ablations show both asymmetry and relative motion are needed; relative coordinates give the larger individual gain but the combination is essential.</p><p>First RL-based approach for asymmetric bimanual dexterity with multi-fingered hands that requires no demonstrations. Interaction-phase success rates substantially beat baselines: Block-in-cup 77.01% (vs 4.29% monolithic), Switch 67.00% (vs 5.63%), Bottle-cap 83.01% (vs 61.25%); Stack 92.33% (vs 25.17% monolithic, comparable to 94.43% rel-only). Full grasp+coordination pipeline (2-stage AsymDex) reaches Block-in-cup 79.38% (vs 3.21% 1-stage and 15.05% 2-stage monolithic) and Bottle-cap 87.26% (vs 16.80% and 64.07%). Evaluated across seven asymmetric bimanual tasks: four simulated (block-in-cup, stack cups, bottle-cap removal, switch) and three real-world (block-in-cup, pour, twist-lid) on dual 30-DoF ShadowHands. Improved sample efficiency as well as final success rate relative to monolithic and single-insight (asymmetry-only / relative-only) baselines.</p><p>Trains RL policies that let a two-handed multi-fingered robot perform coordinated bimanual manipulation tasks — placing a block in a cup, pouring/stacking, removing a bottle cap, and activating a switch — by having one hand stabilize an object while the other manipulates it, transferring to real-world ShadowHands.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2411.13020" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2411.13020" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://sites.google.com/view/asymdex-2025/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

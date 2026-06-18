@@ -371,5 +371,197 @@ window.PAPERS = [
     project: "https://ivl.cs.brown.edu/research/manus.html",
     venue: "CVPR 2024",
     tags: ["Brown", "mocap", "grasping", "gaussian-splatting", "capture"]
+  },
+
+  // ===== Landscape overview: bimanual & dexterous multi-task (arXiv-only, no local PDF) =====
+  {
+    title: "ALOHA Unleashed: A Simple Recipe for Robot Dexterity",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/aloha_unleashed.html",
+    arxiv: "https://arxiv.org/abs/2410.13126",
+    project: "https://aloha-unleashed.github.io/",
+    venue: "CoRL 2024",
+    tags: ["DeepMind", "imitation-learning", "diffusion", "bimanual", "dexterous", "scaling"]
+  },
+  {
+    title: "DexterityGen: Foundation Controller for Unprecedented Dexterity",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/dexteritygen.html",
+    arxiv: "https://arxiv.org/abs/2502.04307",
+    project: "https://zhaohengyin.github.io/dexteritygen/",
+    venue: "RSS 2025",
+    tags: ["Berkeley", "RL", "sim-to-real", "dexterous", "tool-use", "teleoperation"]
+  },
+  {
+    title: "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/mimic_one.html",
+    arxiv: "https://arxiv.org/abs/2506.11916",
+    project: "https://mimicrobotics.github.io/mimic-one/",
+    venue: "arXiv 2506.11916 (June 2025)",
+    tags: ["diffusion", "imitation-learning", "dexterous", "teleoperation"]
+  },
+  {
+    title: "Towards a Generalizable Bimanual Foundation Policy via Flow-based Video Prediction",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/bimanual_flow_video.html",
+    arxiv: "https://arxiv.org/abs/2505.24156",
+    project: null,
+    venue: "arXiv preprint (2505.24156, May 2025)",
+    tags: ["diffusion", "bimanual", "video-prediction", "imitation-learning"]
+  },
+  {
+    title: "Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/bunny_visionpro.html",
+    arxiv: "https://arxiv.org/abs/2407.03162",
+    project: "https://dingry.github.io/projects/bunny_visionpro.html",
+    venue: "arXiv (2407.03162, July 2024)",
+    tags: ["UCSD", "teleoperation", "bimanual", "dexterous", "imitation-learning"]
+  },
+  {
+    title: "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/maniptrans.html",
+    arxiv: "https://arxiv.org/abs/2503.21860",
+    project: "https://maniptrans.github.io/",
+    venue: "CVPR 2025",
+    tags: ["RL", "bimanual", "dexterous", "sim-to-real", "retargeting"]
+  },
+  {
+    title: "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/dexmachina.html",
+    arxiv: "https://arxiv.org/abs/2505.24853",
+    project: "https://project-dexmachina.github.io/",
+    venue: "ICML 2026 (arXiv 2505.24853, May 2025)",
+    tags: ["Stanford", "NVIDIA", "RL", "bimanual", "dexterous", "retargeting"]
+  },
+  {
+    title: "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/asymdex.html",
+    arxiv: "https://arxiv.org/abs/2411.13020",
+    project: "https://sites.google.com/view/asymdex-2025/",
+    venue: "WCBM @ RSS 2025 (Spotlight); arXiv 2411.13020 (Nov 2024)",
+    tags: ["RL", "bimanual", "dexterous"]
+  },
+  {
+    title: "Dynamic Handover: Throw and Catch with Bimanual Hands",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/dynamic_handover.html",
+    arxiv: "https://arxiv.org/abs/2309.05655",
+    project: "https://binghao-huang.github.io/dynamic_handover/",
+    venue: "CoRL 2023",
+    tags: ["UCSD", "RL", "bimanual", "dexterous", "sim-to-real"]
+  },
+  {
+    title: "HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/humanoidgen.html",
+    arxiv: "https://arxiv.org/abs/2507.00833",
+    project: "https://openhumanoidgen.github.io",
+    venue: "NeurIPS 2025",
+    tags: ["data-collection", "bimanual", "dexterous", "LLM", "dataset"]
+  },
+  {
+    title: "AnyBimanual: Transferring Unimanual Policy for General Bimanual Manipulation",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/anybimanual.html",
+    arxiv: "https://arxiv.org/abs/2412.06779",
+    project: "https://anybimanual.github.io/",
+    venue: "ICCV 2025",
+    tags: ["bimanual", "imitation-learning", "manipulation"]
+  },
+  {
+    title: "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/peract2.html",
+    arxiv: "https://arxiv.org/abs/2407.00278",
+    project: "http://bimanual.github.io",
+    venue: "arXiv 2407.00278 (cs.RO), 2024",
+    tags: ["bimanual", "benchmark", "imitation-learning"]
+  },
+  {
+    title: "VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/voxact_b.html",
+    arxiv: "https://arxiv.org/abs/2407.04152",
+    project: "https://voxact-b.github.io",
+    venue: "CoRL 2024",
+    tags: ["USC", "bimanual", "imitation-learning", "VLA"]
+  },
+  {
+    title: "AnyDexGrasp: General Dexterous Grasping for Different Hands with Human-level Learning Efficiency",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/anydexgrasp.html",
+    arxiv: "https://arxiv.org/abs/2502.16420",
+    project: "https://graspnet.net/anydexgrasp/",
+    venue: "ICLR 2025",
+    tags: ["RL", "grasping", "dexterous", "real-world"]
+  },
+  {
+    title: "DexGrasp Anything: Towards Universal Robotic Dexterous Grasping with Physics Awareness",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/dexgrasp_anything.html",
+    arxiv: "https://arxiv.org/abs/2503.08257",
+    project: "https://dexgraspanything.github.io/",
+    venue: "CVPR 2025 (Highlight)",
+    tags: ["diffusion", "grasping", "dexterous"]
+  },
+  {
+    title: "RobustDexGrasp: Robust Dexterous Grasping of General Objects from Single-view Perception",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/robustdexgrasp.html",
+    arxiv: "https://arxiv.org/abs/2504.05287",
+    project: "https://zdchan.github.io/Robust_DexGrasp/",
+    venue: "CoRL 2025 (Spotlight)",
+    tags: ["RL", "grasping", "dexterous", "sim-to-real"]
+  },
+  {
+    title: "DexVLG: Dexterous Vision-Language-Grasp Model at Scale",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/dexvlg.html",
+    arxiv: "https://arxiv.org/abs/2507.02747",
+    project: "https://jiaweihe.com/dexvlg",
+    venue: "ICCV 2025 (Spotlight)",
+    tags: ["VLA", "grasping", "dexterous", "diffusion", "dataset"]
+  },
+  {
+    title: "EgoDex: Learning Dexterous Manipulation from Large-Scale Egocentric Video",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/egodex.html",
+    arxiv: "https://arxiv.org/abs/2505.11709",
+    project: "https://github.com/apple/ml-egodex",
+    venue: "ICLR 2026",
+    tags: ["Apple", "dataset", "dexterous", "human-video", "imitation-learning"]
+  },
+  {
+    title: "HUG: Human Universal Grasping",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/hug.html",
+    arxiv: "https://arxiv.org/abs/2606.17054",
+    project: "https://grasping.io",
+    venue: "arXiv 2026",
+    tags: ["NYU", "grasping", "dexterous", "flow-matching", "human-video", "retargeting"]
   }
 ];

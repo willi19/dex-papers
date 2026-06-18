@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations (BiDexHD) · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations (BiDexHD)</h1>
+ <div class="badges"><span class="badge">2024</span><span class="badge lab">Peking University</span><span class="badge m">imitation</span><span class="badge m">human-demos</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/diverse_bimanual_human.png" alt="teaser figure">
+ <div class="report"><p class="lead">BiDexHD (&quot;Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations&quot;, arXiv 2410.02477) is a framework for efficiently learning many bimanual dexterous manipulation skills from abundant human demonstrations rather than from per-task hand-engineered rewards. It addresses the high-dimensional action space and task complexity of two-hand dexterous control, and the limited task diversity of existing benchmarks, by automatically constructing tasks from existing bimanual human-object datasets and solving them with a single unified pipeline. It couples teacher-student policy learning with a general two-stage reward function shared across tasks, so that scalable multi-task learning becomes feasible. The work targets progress toward universal/general-purpose bimanual dexterous manipulation, demonstrating both strong training-task performance and competitive zero-shot generalization to unseen tasks.</p><p>Unifies automatic task construction from existing bimanual human-object datasets (TACO) so numerous tasks can be set up without per-task manual design. Uses a general two-stage reward function shared across tasks with common behaviors: a first alignment stage (approaching, lifting, and bonus rewards to align the simulation with the demonstration) and a second tracking stage (exponential reward for precise trajectory following), avoiding intricately tuned per-task rewards. Teacher-student learning: teachers learn state-based multi-task policies (trained with Independent PPO / IPPO), and the student distills them via DAgger into a vision-based policy conditioned on point clouds and future object positions. Embodiment is two dexterous hands (LEAP Hand) on two robotic arms, simulated in IsaacGym, learning to use tools to manipulate target objects. Tasks are auto-constructed from human demonstrations and grouped by shared behavior so a single reward/pipeline scales across the whole task set. Designed for zero-shot generalization: policies are evaluated on held-out unseen tasks, not just the trained ones.</p><p>Introduces BiDexHD, a unified framework that converts human-demonstration datasets into trainable tasks and solves all of them with shared teacher-student learning and a single two-stage reward, removing per-task manual reward engineering. Evaluates on the TACO dataset spanning 141 auto-constructed tasks across 6 categories, using an 80%/20% train/test split. Achieves a 74.59% task fulfillment (tracking) rate on trained tasks. Achieves a 51.07% task fulfillment rate on unseen tasks, demonstrating competitive zero-shot generalization. Demonstrates scalable multi-task RL for bimanual dexterous skills without narrowly tailored rewards, positioning the work as a step toward universal bimanual dexterous manipulation. Distills state-based multi-task policies into a deployable vision-based policy (point clouds + future object positions) via DAgger.</p><p>It learns 141 bimanual dexterous tool-use tasks (across 6 TACO categories such as pouring, emptying/dusting, and tool-strike/screwing manipulations) auto-constructed from human demonstrations, using two LEAP-hand-equipped arms in IsaacGym. The project page (https://sites.google.com/view/bidexhd) shows video demos of these TACO tasks (e.g., pouring with a cup/teapot, emptying a bowl, dusting with a brush, hammering, screwdriving) as well as additional ARCTIC-dataset demos (mixer, capsule machine, box flipping, ketchup lifting).</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2410.02477" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2410.02477" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://sites.google.com/view/bidexhd" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

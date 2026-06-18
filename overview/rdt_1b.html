@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation</h1>
+ <div class="badges"><span class="badge">ICLR 2025</span><span class="badge lab">Tsinghua (THU-ML)</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span><span class="badge m">foundation</span></div>
+ <img class="fig" src="../overview_assets/rdt_1b.png" alt="teaser figure">
+ <div class="report"><p class="lead">RDT-1B is a 1.2-billion-parameter diffusion-based foundation model for bimanual robotic manipulation, built on a scalable Robotics Diffusion Transformer (RDT) architecture. It targets the two central challenges of bimanual control: the multi-modal action distributions that arise from coordinating two arms, and the scarcity of bimanual training data. To overcome data scarcity it introduces a Physically Interpretable Unified Action Space that lets a single model pre-train across heterogeneous robots and then transfer to a specific bimanual platform. It is presented by its authors as the largest diffusion-based foundation model for robotic manipulation to date.</p><p>Uses a diffusion model rather than regression to represent the action distribution, which captures the multi-modal, nonlinear behavior inherent to coordinating two arms. Introduces a Physically Interpretable Unified Action Space so heterogeneous robots can be pooled for pre-training and the model can transfer across different robot embodiments. Scales a Diffusion Transformer with three key modifications: QKNorm &amp; RMSNorm to prevent numerical instability, an MLP decoder (replacing linear projection) to capture nonlinear dynamics, and Alternating Condition Injection (ACI) for cross-attention over image and text tokens. Freezes pre-trained encoders for conditioning: SigLIP as the image-text-aligned vision encoder and T5-XXL as the language encoder. Two-stage recipe: pre-train on a large multi-robot collection, then fine-tune on a self-collected multi-task bimanual dataset. Uses DPM-Solver++ to accelerate sampling (reducing diffusion steps, e.g. 100 to 55), enabling real-time inference.</p><p>Pre-trained on the largest multi-robot collection reported, comprising 46 datasets, 1M+ trajectories, and 21TB of data. Fine-tuned on a self-created multi-task bimanual dataset of 6K+ trajectories spanning 300+ tasks, 100+ objects, and 15+ rooms, collected on an ALOHA dual-arm robot. At 1.2B parameters, claimed as the largest diffusion-based foundation model for robotic manipulation. Reports a 56% improvement in success rates across a wide spectrum of challenging tasks over prior methods; e.g., Pour Water (unseen) 62.5% vs ACT 37.5%/Octo 12.5%/OpenVLA 0%, Wash Cup (unseen) 50% vs 0% for all baselines, Instruction Following 87.5% vs OpenVLA 50%, and Fold Shorts (1-shot) 68% vs Octo 4%. Demonstrates few-shot learning of new skills from just 1 to 5 demonstrations and zero-shot generalization to unseen objects and scenes. Achieves real-time inference of 6 action chunks/sec, corresponding to an average of 381 actions/sec.</p><p>On an ALOHA dual-arm robot it performs dexterous bimanual tasks such as precise joystick manipulation, pouring water to a commanded level (e.g. 1/3 or 2/3 full), washing cups, and folding shorts, while generalizing to unseen objects and new rooms and following natural-language instructions. The project page shows inference videos covering dexterity, unseen-object and scene generalization, instruction following, few-shot skill acquisition (1-5 demos), and repeated successful executions.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2410.07864" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2410.07864" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://rdt-robotics.github.io/rdt-robotics/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

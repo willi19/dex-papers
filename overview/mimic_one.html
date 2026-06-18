@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity</h1>
+ <div class="badges"><span class="badge">arXiv 2506.11916 (June 2025)</span><span class="badge lab">mimic robotics &amp; ETH Zurich (ETH AI Center, Soft Robotics Lab, Institute of Neuroinformatics)</span><span class="badge m">diffusion</span><span class="badge m">imitation-learning</span><span class="badge m">teleoperation</span><span class="badge m">dexterous</span></div>
+ <img class="fig" src="../overview_assets/mimic_one.png" alt="teaser figure">
+ <div class="report"><p class="lead">mimic-one is an end-to-end recipe for learning real-world control of a highly dexterous humanoid robotic hand. It pairs a newly designed 16-DoF tendon-driven hand (soft contact skin, wide-angle wrist cameras) mounted on a Franka Emika Panda arm with a diffusion-based visuomotor policy. Demonstrations are collected via a scalable teleoperation pipeline using both glove-based and Apple Vision Pro VR interfaces. The work emphasizes sample efficiency, smooth fine-motor action inference, and a data-collection protocol designed to surface emergent self-correcting behaviors.</p><p>UNet Diffusion Policy with CLIP ViT-B/16 image encoders and linear projections for proprioception. Action representation mixes relative-frame Cartesian end-effector targets (6D rotation) with absolute hand joint angles. Long action chunks of 48 timesteps (~3.2s at 15 Hz) with a 2-step observation horizon and 16-step DDIM sampling. Data-collection protocol uses systematic variation, targeted curation, and deliberate self-correction trajectories. Novel 16-DoF tendon-driven hand with soft skin and wrist cameras, biomechanically inspired. Dual teleoperation interfaces (glove + Apple Vision Pro hand/wrist tracking) for scalable demonstration capture.</p><p>Diffusion-policy recipe reaching up to 93.3% out-of-distribution success (Bread Pick on full dataset). Emergent self-correcting behaviors yielding up to +33.3% performance boost (e.g. Bottle Sort). Demonstrated scaling trends, e.g. Bread Pick rising from 22.5% at 20% data to 93.3% at 100% data. Dataset of ~5,442 episodes across three task families (bread pick, bottle sort, battery insertion), filtered to successful subsets. Novel 16-DoF tendon-driven dexterous hand with soft contact skin and wide-angle wrist cameras. Scalable glove + Apple Vision Pro teleoperation system and curated data-collection protocol.</p><p>Trains a diffusion policy that autonomously performs dexterous real-world tasks (bread roll pick-and-place, bottle sorting/insertion, precise battery insertion) on a 16-DoF humanoid hand, generalizing to out-of-distribution conditions and self-correcting mid-task.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2506.11916" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2506.11916" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://mimicrobotics.github.io/mimic-one/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

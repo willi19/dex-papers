@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GR00T N1: An Open Foundation Model for Generalist Humanoid Robots · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>GR00T N1: An Open Foundation Model for Generalist Humanoid Robots</h1>
+ <div class="badges"><span class="badge">2025</span><span class="badge lab">NVIDIA</span><span class="badge m">VLA</span><span class="badge m">foundation</span><span class="badge m">dual-system</span></div>
+ <img class="fig" src="../overview_assets/groot_n1.png" alt="teaser figure">
+ <div class="report"><p class="lead">GR00T N1 is an open Vision-Language-Action (VLA) foundation model for generalist humanoid robots, released by NVIDIA (arXiv:2503.14734, March 2025). It uses a dual-system, compositional architecture: a vision-language module (System 2) built on the NVIDIA Eagle-2 VLM that interprets the scene and language instructions, paired with a diffusion-transformer module (System 1) that generates fluid, real-time motor actions via flow matching. The two modules are tightly coupled and trained jointly end-to-end. The model is trained on a heterogeneous &#x27;data pyramid&#x27; mixing real-robot trajectories, human videos, and synthetically generated data, and supports multiple embodiments (single-arm, bimanual, and humanoid) within a single set of weights. NVIDIA publicly releases the GR00T-N1-2B checkpoint (~2.2B parameters) along with training datasets and simulation benchmarks.</p><p>Dual-system compositional VLA: System 2 is a vision-language reasoning module (NVIDIA Eagle-2 VLM, 224x224 images, 64 image tokens/frame, running ~10Hz on an L40), and System 1 is a diffusion transformer that produces action chunks (H=16 timesteps) using flow-matching with K=4 denoising steps, sampling 16 actions in ~63.9ms on an L40 (bf16); the design uses the 12th (middle) LLM layer rather than the final layer for faster inference and higher policy success. Data pyramid training strategy that organizes heterogeneous data by quantity and embodiment-specificity: web/human egocentric video at the base, synthetic (simulation and neural-generated) data in the middle, and real humanoid robot trajectories at the peak. Latent-action learning via a VQ-VAE that extracts a unified, embodiment-agnostic latent action space from consecutive frames, enabling action-free human video to be used as pseudo-labeled training data across 8 distinct embodiments; Inverse Dynamics Models (IDM) generate pseudo-actions for video-generated trajectories. Neural-trajectory data augmentation: fine-tuned video generation models expand the 88 hours of real Fourier GR-1 data roughly 10x to 827 hours (~300k neural trajectories), generated using ~105k L40 GPU hours on 3,600 GPUs. Cross-embodiment generalist policy: a single model with embodiment-specific state/action encoder-decoder MLPs handles single-arm, bimanual, and humanoid robots; deployed on the Fourier GR-1 humanoid for language-conditioned bimanual manipulation with high data efficiency. Large-scale synthetic data generation: DexMimicGen produced 780,000 simulation trajectories (~6,500 hours of data) in just 11 hours, supplementing real-robot data.</p><p>Outperforms state-of-the-art imitation-learning baselines on simulation benchmarks: RoboCasa Kitchen (24 tasks) 32.1% vs Diffusion Policy 25.6% / BC-Transformer 26.3%; DexMimicGen cross-embodiment (9 tasks) 66.5% vs 56.1% / 53.9%; GR-1 Tabletop (24 tasks) 50.0% vs 32.7% / 16.1% (&gt;17% gain). Strong real-world results on the Fourier GR-1 humanoid: 76.8% average success with full data (vs Diffusion Policy 46.4%, +30.4%) and 42.6% with only 10% of data (vs 10.2%, +32.4%), demonstrating high data efficiency. Per-category full-data breakdown: Pick-and-Place 82.0%, Articulated 70.9%, Industrial 70.0%, Coordination 82.5%. Pre-training generalization on held-out behaviors: 76.6% (11.5/15) on a left-to-right handover task and 73.3% (11/15) on novel-object placement. Neural-trajectory co-training measurably improves performance: RoboCasa gains of +4.2%, +8.8%, +6.8% at 30/100/300 demonstrations, and +5.8% on average across 8 real-world tasks. Public open release of the GR00T-N1-2B checkpoint (~2.2B parameters), curated training datasets, and simulation benchmarks for the community. Built on a large training corpus and infrastructure: 88 hours of teleoperated GR-1 data (20Hz, VIVE + Xsens Metagloves), 140,000 AgiBot-Alpha trajectories, Open X-Embodiment data, and 7 human-video datasets; GR00T-N1-2B pretraining used ~50,000 H100 GPU hours on up to 1,024 GPUs.</p><p>GR00T N1 performs language-conditioned bimanual manipulation on the Fourier GR-1 humanoid, including pick-and-place, articulated-object manipulation, industrial/tool tasks, multi-agent coordination, and left-to-right object handovers, plus tabletop tasks across simulated benchmarks (RoboCasa, DexMimicGen, GR-1). It generalizes to novel objects and unseen task variations while running motor commands in real time.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2503.14734" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://research.nvidia.com/labs/lpr/publication/gr00tn1_2025/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

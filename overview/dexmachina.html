@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation</h1>
+ <div class="badges"><span class="badge">ICML 2026 (arXiv 2505.24853, May 2025)</span><span class="badge lab">Stanford University, NVIDIA</span><span class="badge m">RL</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span><span class="badge m">human-video</span></div>
+ <img class="fig" src="../overview_assets/dexmachina.png" alt="teaser figure">
+ <div class="report"><p class="lead">DexMachina tackles &#x27;functional retargeting&#x27;: learning dexterous manipulation policies that track object states from human hand-object demonstrations, rather than mimicking hand joints directly. It targets long-horizon, bimanual tasks with articulated objects, which are hard due to large action spaces, spatiotemporal discontinuities, and the embodiment gap between human and robot hands. The core idea is a curriculum that uses virtual object controllers whose strength decays over training: the object is first driven automatically toward its target states so the policy can gradually take over under motion and contact guidance. The authors also release a simulation benchmark of articulated-object tasks and multiple robot hands for functional hardware comparison.</p><p>Functional retargeting: learn to reproduce object trajectories/states from human demonstrations instead of directly copying human hand poses, sidestepping the embodiment gap. Virtual object controllers with decaying strength: external controllers initially drive the object toward its target states, then weaken so the policy must take over. Curriculum-based RL that provides motion and contact guidance, easing learning on long-horizon bimanual articulated-object tasks. Demonstrations sourced from the ARCTIC dataset of human hand-object interactions with articulated objects. A simulation benchmark with curated hand assets and articulated objects enabling functional comparison across hardware designs. Finding that degrees of freedom matters more than hand size for manipulation performance.</p><p>A novel curriculum-based RL algorithm for functional retargeting using decaying-strength virtual object controllers. A simulation benchmark with 5 articulated objects (from ARCTIC) and 6 open-source dexterous hands (Inspire, Allegro, XHand, Schunk, Ability, DexRobot/DexHand), spanning 7 demonstration clips of long- and short-horizon motions. State-of-the-art results: consistently best performance across all hands and tasks on long-horizon demos, and roughly 70 to 90 percent success on short-horizon tasks (AUC-ADD metric). Significant improvement over baselines including kinematic retargeting (insufficient), an ObjDex task-reward reimplementation, task+auxiliary rewards without curriculum, and a ManipTrans-style curriculum (training instability). Demonstration that hand degrees of freedom is more important than hand size for functional performance, enabling functional comparison of hardware designs.</p><p>Given human hand-object demonstrations of bimanual articulated-object tasks, DexMachina trains robot-hand policies that reproduce the demonstrated object motion. It works across multiple robot hand designs and serves as a benchmark for comparing dexterous hardware.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2505.24853" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2505.24853" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://project-dexmachina.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

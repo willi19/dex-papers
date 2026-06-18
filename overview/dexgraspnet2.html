@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes</h1>
+ <div class="badges"><span class="badge">CoRL 2024</span><span class="badge lab">PKU / Galbot</span><span class="badge m">grasping</span><span class="badge m">generative</span><span class="badge m">sim-to-real</span></div>
+ <img class="fig" src="../overview_assets/dexgraspnet2.png" alt="teaser figure">
+ <div class="report"><p class="lead">DexGraspNet 2.0 (CoRL 2024, PKU EPIC Lab; Zhang, Liu, Li, Yu, Geng, Ding, Chen, Wang) is a large-scale benchmark and a learning method for generative dexterous grasping in cluttered scenes. It introduces a synthetic dataset of 1,319 objects, 8,270 scenes, and 427 million grasps generated in simulation for the 16-DOF LEAP Hand (and parallel grippers). On top of this data it proposes a two-stage policy that proposes graspable seed points and then generates 6-DOF wrist poses with a diffusion model conditioned on local geometry. The system transfers zero-shot from simulation to the real world via test-time depth restoration, reaching 90.7% real-world dexterous grasping success in cluttered scenes.</p><p>Condition grasp generation on LOCAL point-wise geometry rather than global scene features: an ablation conditioning on global features alone collapses to 16.8%/10.9%/4.8% (dense/random/loose) vs the local-feature model&#x27;s 90.6%/83.7%/73.2%. Two-stage pipeline: (1) Seed Point Proposal — a ResUNet14 (MinkowskiEngine) predicts per-point graspness and object segmentation and extracts local features; (2) Grasp Pose Generation conditioned on those local features. Decompose the high-DOF grasp into a multi-modal wrist pose (translation+rotation as a 12D Euclidean vector, projected to SE(3) via SVD) modeled by a conditional DDPM, plus single-mode finger joint angles predicted by deterministic regression. Build the dataset with two complementary grasp-synthesis optimizers — GWS-based (24.19% per-object success) and force-closure-based (7.91%) — yielding ~1.9M stable grasps per object (190M total) then filtering to ~56K collision-free grasps per scene. Bridge the sim-to-real depth gap with an off-the-shelf test-time depth-restoration step on single-view real depth point clouds, requiring no real-world fine-tuning. Exploit the dexterous hand&#x27;s envelopment capability to grasp larger objects more effectively than parallel grippers.</p><p>A large-scale synthetic cluttered-scene grasping dataset: 1,319 objects, 8,270 scenes, and 427 million dexterous grasps (from ~190M stable per-object grasps). A local-geometry-conditioned generative grasping method that outperforms all baselines in simulation: 90.6%/83.7%/73.2% (dense/random/loose) vs ISAGrasp 63.4%/60.7%/51.4%, GraspTTA 62.5%/54.1%/42.8%, and HGC-Net 46.0%/37.8%/26.7%. Zero-shot sim-to-real transfer achieving a 90.7% real-world dexterous grasping success rate (LEAP Hand) and 92.5% with a parallel gripper, across six iteratively cleared cluttered test scenes. Test-time depth restoration that lifts mixed-object-scene performance from 86.4% to 90.7% (and is unnecessary for purely diffuse scenes, 94.1% either way). Efficient deployment: full inference (seed proposal + grasp generation) runs in under 0.5 s on an NVIDIA RTX 4090, with depth restoration adding only ~0.2 s. Public release of paper, code, and dataset.</p><p>Given a single-view depth point cloud of a cluttered tabletop scene, it proposes graspable regions and generates diverse dexterous (LEAP Hand) or parallel-gripper grasp poses, then executes them to clear the clutter. The project page shows synthetic training scenes with generated grasps and eight qualitative real-world execution sequences of dexterous grasping in cluttered scenes.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2410.23004" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2410.23004" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://pku-epic.github.io/DexGraspNet2.0/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

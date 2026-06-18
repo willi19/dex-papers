@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sim-to-Real Reinforcement Learning for Vision-Based Dexterous Manipulation on Humanoids · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Sim-to-Real Reinforcement Learning for Vision-Based Dexterous Manipulation on Humanoids</h1>
+ <div class="badges"><span class="badge">CoRL 2025</span><span class="badge lab">UC Berkeley</span><span class="badge m">RL</span><span class="badge m">sim-to-real</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/simreal_humanoid.png" alt="teaser figure">
+ <div class="report"><p class="lead">A practical sim-to-real reinforcement learning recipe (paper by Toru Lin, Kartik Sachdev, Linxi Fan, Jitendra Malik, and Yuke Zhu of UC Berkeley / NVIDIA / UT Austin, arXiv:2502.20396) that trains a multi-fingered humanoid robot to perform vision-based, contact-rich dexterous manipulation. It targets the open problem of extending sim-to-real RL — which has mostly succeeded only in simpler state-based or single-hand setups — to vision-based bimanual tasks. The method is trained entirely in simulation (NVIDIA Isaac Gym) on a Fourier GR1 humanoid with dual multi-fingered hands and deployed zero-shot to the real robot, without human demonstrations or imitation-learning data collection. The authors argue this shows vision-based dexterous manipulation via sim-to-real RL is not only viable but scalable and broadly applicable.</p><p>Automated real-to-sim tuning module that searches the parameter space to find optimal simulator-physics and robot-model constants in under four minutes, closing the sim-to-real gap automatically rather than by hand. A generalized, contact-and-object-goal reward formulation using contact-based keypoint markers plus object goal states, avoiding hand-engineered task-specific reward shaping. A divide-and-conquer policy distillation framework plus sample-efficient learning via task-aware hand-pose initialization (under 30 seconds of teleoperation per task). A hybrid object representation strategy that mixes low-dimensional 3D object position (sparse) with high-dimensional depth imagery (dense), each with modality-specific data augmentation. Observations fuse a third-view camera, an egocentric camera, and robot proprioception; domain randomization spans 11+ physical parameters (friction, mass, external forces, PD gains).</p><p>Demonstrates a sim-to-real RL recipe on three challenging dexterous tasks — grasp-and-reach, box lift, and bimanual handover — with real-world average success rates of 62.3% (grasp-and-reach), 80% (box lift), and 52.5% (bimanual handover) across all objects, 10 trials per test object. Validates the automated real-to-sim tuning: the lowest-MSE autotuned robot model achieved 8/10 grasp and 7/10 reach success versus 0/10 for the highest-MSE parameters (Table I). Shows the hybrid object representation matters: mixing sparse 3D position with dense depth reached 10/10 pickup success on grasp-and-lift tasks, versus 0/10–2/10 for depth-only across most tasks (Table III). Achieves the automated real-to-sim parameter search in under four minutes, and bootstraps policies with under 30 seconds of teleoperation per task for hand-pose initialization. Generalizes to unseen objects varying in shape, size, material, and mass, and exhibits robustness to external perturbations plus emergent failure-recovery behaviors such as regrasping after object drops — all without human demonstrations.</p><p>The trained policies let a bimanual multi-fingered humanoid grasp-and-reach toward target objects, lift a box with two-handed coordination, and hand an object from one hand to the other (bimanual handover). Project-page demo videos show these tasks plus generalization to unseen objects, robustness to force disturbances, and adaptive grasp variation and regrasping recovery from the same policy.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2502.20396" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2502.20396" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://toruowo.github.io/recipe/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

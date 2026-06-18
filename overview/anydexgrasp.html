@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnyDexGrasp: General Dexterous Grasping for Different Hands with Human-level Learning Efficiency · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>AnyDexGrasp: General Dexterous Grasping for Different Hands with Human-level Learning Efficiency</h1>
+ <div class="badges"><span class="badge">ICLR 2025</span><span class="badge lab">Shanghai Jiao Tong University (Cewu Lu group)</span><span class="badge m">dexterous</span><span class="badge m">grasping</span><span class="badge m">self-supervised</span><span class="badge m">real-world</span></div>
+ <img class="fig" src="../overview_assets/anydexgrasp.png" alt="teaser figure">
+ <div class="report"><p class="lead">AnyDexGrasp is a framework for learning dexterous grasping across different multi-fingered robotic hands with very low data requirements. It splits grasping into two stages: a universal, hand-agnostic model maps scene geometry to intermediate contact-centric grasp representations (CGRs), and a separate hand-specific decision model is then trained per hand through real-world trial and error. This decoupling lets the system reach high success rates after only hundreds of grasp attempts on 40 training objects, rather than the millions of labeled grasps typical of prior methods. The authors frame this efficiency as comparable to human infant learning. It is validated on three structurally different hands (DH-3, Allegro, Inspire) in cluttered scenes with 150+ novel objects.</p><p>Two-stage decomposition: a hand-agnostic universal model produces contact-centric grasp representations (CGRs), separating scene geometry from hand-specific control. The universal CGR model is trained once on large-scale offline data and reused across all hands, so only the lightweight per-hand decision model needs real-world data. Hand-specific grasp decision models are learned via real-world trial and error, scoring/selecting grasps to fit each hand&#x27;s kinematics. Generalizes across very different hand morphologies: DH-3 (3-finger underactuated, 4 DoF), Allegro (4-finger fully actuated, 16 DoF), and Inspire (5-finger underactuated, 12 DoF). Human-level learning efficiency: high performance from only hundreds of attempts on 40 objects, contrasted with human infants reaching 61.9% success at 8 months.</p><p>Achieves 75-95% grasp success across three different robotic hands in real-world cluttered scenes with over 150 novel objects. Improves to 80-98% success when training on more objects. Reaches this with only hundreds of grasp attempts on 40 training objects, versus millions of labels in prior approaches. Demonstrates a single hand-agnostic CGR model transferable to three structurally distinct hands (DH-3, Allegro, Inspire). Provides a public project page with categorized real-robot demos and an open-source code release.</p><p>Given a depth/point-cloud observation of a cluttered scene, it predicts contact-centric grasp candidates and selects a hand-specific dexterous grasp to execute on the chosen robotic hand, generalizing to unseen objects.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2502.16420" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2502.16420" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://graspnet.net/anydexgrasp/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

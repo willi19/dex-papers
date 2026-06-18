@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini Robotics: Bringing AI into the Physical World · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Gemini Robotics: Bringing AI into the Physical World</h1>
+ <div class="badges"><span class="badge">2025</span><span class="badge lab">Google DeepMind</span><span class="badge m">VLA</span><span class="badge m">generalist</span><span class="badge m">reasoning</span></div>
+ <img class="fig" src="../overview_assets/gemini_robotics.png" alt="teaser figure">
+ <div class="report"><p class="lead">Gemini Robotics is a family of AI models from the Google DeepMind Gemini Robotics Team (arXiv:2503.20020, March 2025), built on the Gemini 2.0 foundation, that brings multimodal foundation-model capabilities into physical robot control. It comprises two models: Gemini Robotics-ER (Embodied Reasoning), a vision-language model that extends Gemini&#x27;s multimodal reasoning with enhanced spatial and temporal understanding, and Gemini Robotics, a vision-language-action (VLA) model that directly outputs robot actions for dexterous manipulation. The VLA model uses a cloud-hosted distilled backbone (latency optimized to ~160ms) plus an onboard local action decoder, achieving ~250ms end-to-end latency and an effective 50Hz control frequency. The work is positioned as a substantial step toward general-purpose robots that can act safely and competently in the physical world.</p><p>Two-tier model family: Gemini Robotics-ER provides embodied reasoning (2D detection, pointing, trajectory and grasp prediction, 3D bounding boxes, multi-view correspondence), while Gemini Robotics is a VLA model that emits robot actions directly; both are built on Gemini 2.0. Embodied reasoning enables robot control without action-trained weights: zero-shot control via code generation against robot APIs, and few-shot control via in-context learning over tokenized example trajectories. The VLA architecture splits computation between a cloud-hosted distilled backbone (~160ms) and an onboard local action decoder, yielding ~250ms end-to-end latency and a 50Hz effective control rate for smooth, reactive movements. Training uses thousands of hours of expert teleoperation demonstrations collected on ALOHA 2 robots over roughly 12 months, combined with diverse multimodal data (web documents, code, video, and QA data) inherited from Gemini. Specialization pathways extend the base model: long-horizon dexterous fine-tuning (about 2000-5000 episodes per task), reasoning-enhanced variants via trajectory re-labeling, few-shot adaptation from limited demonstrations, and transfer to new robot embodiments. The team introduces ERQA, a 400-question open-source benchmark for embodied reasoning covering spatial reasoning, trajectory reasoning, action reasoning, state estimation, pointing, multi-view reasoning, and task reasoning.</p><p>On the ERQA embodied-reasoning benchmark, Gemini 2.0 Pro Experimental reaches 48.3% (no chain-of-thought) and 54.8% (with CoT), and Gemini 2.0 Flash 46.3%, outperforming GPT-4o (47.0%) and Claude 3.5 Sonnet (35.5%). Gemini Robotics-ER leads on 2D pointing benchmarks: Paco-LVIS 71.3% (vs Molmo 47.1%), Pixmo-Point 49.5% (vs Molmo 12.5%), Where2Place 45.0%; and on 3D detection (SUN-RGBD AP@15) reaches 48.3%, beating specialized baselines ImVoxelNet (43.7%) and Implicit3D (24.1%). For control via reasoning alone, Gemini Robotics-ER achieves 53% average zero-shot success on ALOHA 2 simulation (50 trials) vs 27% for Gemini 2.0 Flash, and 65% success in both sim and real-world with few-shot in-context learning (10 demonstrations). On long-horizon dexterous tasks (20 trials), lunch-box packing reaches 100% success; the model also performs origami-fox folding and a spelling board game (67% accuracy on unseen hand-drawn sketches). Fast adaptation with at most 100 demonstrations yields over 70% success on 7 of 8 new tasks, with 2 tasks reaching 100%; the blog states the model can learn new tasks from as few as 100 demonstrations. Cross-embodiment transfer to a bi-arm Franka platform reaches 63% average success on in-distribution tasks and runs on the Apollo humanoid; the blog claims Gemini Robotics more than doubles performance on a comprehensive generalization benchmark versus competing VLAs and gives 2x-3x end-to-end success over base Gemini 2.0.</p><p>In figures and project-page videos, the robots (ALOHA 2 bi-arm, a bi-arm Franka platform, and the Apollo humanoid) perform dexterous, multi-step manipulation such as folding an origami fox, packing a lunch-box/snacks into Ziploc bags, playing a spelling board game and a card game, and adding food to a salad with tongs or a spoon, as well as short tasks like opening an eyeglasses case, pouring, and wrapping a headphone wire. The demos emphasize reactive behavior, including continuous environmental monitoring and dynamic re-planning when objects slip or the scene changes mid-task, and generalization across visual, instruction (including multilingual and typo&#x27;d prompts), and action variations.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2503.20020" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2503.20020" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

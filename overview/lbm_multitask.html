@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation</h1>
+ <div class="badges"><span class="badge">Science Robotics 2025</span><span class="badge lab">Toyota Research Institute</span><span class="badge m">diffusion</span><span class="badge m">multitask</span><span class="badge m">LBM</span></div>
+ <img class="fig" src="../overview_assets/lbm_multitask.png" alt="teaser figure">
+ <div class="report"><p class="lead">&quot;A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation&quot; is a Toyota Research Institute (TRI LBM Team) study, published as arXiv:2507.05331 and in Science Robotics (2026), that rigorously evaluates Large Behavior Models (LBMs) for multitask robot manipulation. LBMs here are diffusion-transformer policies that extend the Diffusion Policy paradigm and are pretrained on a large corpus of simulated and real-world robot data. The paper&#x27;s central concern is methodological: it asks whether multitask pretraining actually helps over single-task baselines, and builds a statistically rigorous evaluation pipeline to answer that with confidence rather than anecdote. Its headline conclusion is that multitask pretraining makes policies more successful and robust and lets new tasks be taught with a fraction of the data, with performance improving predictably as pretraining scale and diversity grow.</p><p>Treat LBM evaluation as a statistics problem: use blind, randomized A/B-style trials with randomized policy ordering, sequential hypothesis testing for binary success outcomes, and Compact Letter Display (CLD) to establish statistical significance versus single-task baselines. The LBM is a diffusion-transformer policy: a Diffusion Transformer (DiT, 8 layers, 768 embedding dim) denoising head paired with multimodal ViT-based vision-language encoders (CLIP ViT-B/16 image backbone), consuming wrist/scene cameras, robot proprioception, and language instructions. Outputs are short action chunks: the model predicts 16 timesteps of 20-dimensional actions per inference. Pretrain broadly, then finetune: a single multitask-pretrained model is finetuned to new, unseen tasks, and is compared against from-scratch single-task baselines to isolate the value of pretraining. Benefits of pretraining appear at smaller-than-expected scales (hundreds of hours) and improve smoothly with more data, with no sharp discontinuities or emergent jumps observed. The authors caution about measurement limits: with only ~50 real-world rollouts per task, confidence-interval width is roughly 20-30% absolute success rate, so small effects are hard to detect reliably.</p><p>A rigorous evaluation pipeline run at scale: over 4,200 rollouts across 29 distinct tasks, including roughly 1,800 real-world trials, using blind A/B testing and sequential hypothesis testing. Quantified evaluation protocol: 200 simulation rollouts per task per policy and 50 real-world rollouts per task per policy per condition. Demonstrated data efficiency: finetuning from an LBM requires markedly less data than training from scratch (reported as needing less than ~30% of the from-scratch data, i.e. about 3-5x less data) to reach comparable performance on challenging unseen tasks. Trained LBMs on a large mixed corpus of ~1,700 hours of robot demonstrations (1,695 hours: 545 hours TRI-Ramen plus 1,150 hours OXE-Ramen) spanning over 500 internally collected tasks. Showed performance scales predictably with pretraining data scale and diversity, with smooth (not discontinuous) improvements and benefits emerging at hundreds of hours. Released LBM Eval, a TRI simulation benchmark of 49 tasks for measuring Large Behavior Model policy performance.</p><p>The LBMs perform diverse, long-horizon real-world bimanual dexterous manipulation tasks, including demonstrations such as coring and cutting an apple, installing a bike rotor, and setting up a breakfast table. Tasks are specified via language instructions plus camera and proprioception inputs, and the system is evaluated on both held-out simulation tasks and previously unseen real-world behaviors.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2507.05331" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2507.05331" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://toyotaresearchinstitute.github.io/lbm1/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DexGraspVLA: A Vision-Language-Action Framework Towards General Dexterous Grasping · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>DexGraspVLA: A Vision-Language-Action Framework Towards General Dexterous Grasping</h1>
+ <div class="badges"><span class="badge">2025</span><span class="badge lab">Peking University</span><span class="badge m">VLA</span><span class="badge m">hierarchical</span><span class="badge m">grasping</span></div>
+ <img class="fig" src="../overview_assets/dexgraspvla.png" alt="teaser figure">
+ <div class="report"><p class="lead">DexGraspVLA is a hierarchical Vision-Language-Action framework for language-guided, general-purpose dexterous grasping. It pairs a pre-trained vision-language model acting as a high-level planner with a diffusion-based low-level action controller. The core insight is to iteratively transform diverse language and visual inputs into domain-invariant representations using foundation models, which alleviates domain shift so that imitation learning becomes effective and generalizes. It targets robust grasping of diverse objects across arbitrary, cluttered, unseen scenarios rather than the restrictive single-object or limited-environment settings of prior work.</p><p>Hierarchical VLA design: a pre-trained vision-language model serves as the high-level planner, while a learned diffusion-based controller produces low-level actions. Generalization comes from iteratively mapping varied language/visual inputs into domain-invariant representations via foundation models, reducing domain shift so imitation learning transfers. Low-level controller stacks foundation models: segmentation (SAM and Cutie), vision encoders (DINOv2 plus a trainable ViT), MLP projectors, and a Diffusion Transformer for action prediction. Trained purely via imitation learning on a small set of human-speed demonstrations, yet generalizes zero-shot to thousands of unseen cluttered scenes. Empirical analysis confirms consistent internal model behavior across environmental variations (lighting, background), validating the domain-invariance design. Framework extends beyond standard grasping to nonprehensile grasping, demonstrating broader generality.</p><p>Achieves a 90+% dexterous grasping success rate under thousands of challenging unseen cluttered scenes in zero-shot settings. Controller trained on only 2,094 successful grasping episodes collected at human motion speeds, totaling roughly two hours of demonstration data. First method to simultaneously demonstrate free-form long-horizon prompt execution, robustness to adversarial objects and human disturbance, and failure recovery. Validates design with empirical analysis showing consistency of internal model behavior across environmental variations (lighting and background changes). Extends the approach to nonprehensile grasping, further proving generality of the framework.</p><p>Given a language prompt and visual input, it grasps diverse objects in cluttered, unseen scenes, handling lighting/background changes, small and industrial items, re-grasping, human interference, and long-horizon multi-step tasks. Project-page demo videos show dexterous grasping in unseen cluttered scenes, robustness to human disturbance, failure recovery, long-horizon prompt execution, nonprehensile grasping, and human-robot interaction.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2502.20900" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2502.20900" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://dexgraspvla.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

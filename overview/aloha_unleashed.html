@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALOHA Unleashed: A Simple Recipe for Robot Dexterity · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>ALOHA Unleashed: A Simple Recipe for Robot Dexterity</h1>
+ <div class="badges"><span class="badge">CoRL 2024</span><span class="badge lab">Google DeepMind</span><span class="badge m">imitation-learning</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span><span class="badge m">teleoperation</span></div>
+ <img class="fig" src="../overview_assets/aloha_unleashed.png" alt="teaser figure">
+ <div class="report"><p class="lead">ALOHA Unleashed is an imitation-learning recipe for dexterous bimanual manipulation on the ALOHA 2 platform. It pairs a scalable human teleoperation pipeline for collecting large amounts of demonstration data with an expressive Transformer encoder-decoder policy trained with a diffusion loss. The work asks how far pure imitation learning can be pushed on highly dexterous, contact-rich tasks. It is evaluated on 5 challenging real-world tasks and 3 simulated tasks, outperforming prior state-of-the-art baselines.</p><p>A simple recipe: scale up human teleoperation data collection on ALOHA 2, then train an expressive diffusion-based policy on it. Transformer encoder-decoder architecture (217M parameters: 85M encoder, 55M decoder) with a diffusion action head, using a ResNet50 backbone over four 480x640 RGB camera views. Action chunking: the policy outputs 50-step action chunks (~1 second of control) over 14 DOF (12 joint positions + 2 gripper values). Diffusion Policy provides the expressiveness needed to model multimodal, high-precision bimanual behaviors that simpler regression policies struggle with. Demonstrates that imitation learning alone, given enough data and a capable model, can solve tasks like knot-tying and self-repair without RL or task-specific engineering.</p><p>Collected 26,000+ teleoperated demonstration episodes across 10 robots over 8 months for the real-world tasks. Shirt hanging: 8,658 demos, 75% success (easy) / 70% (messy initialization). Shoelace tying: 5,133 demos, 70% success (easy) / 40% (messy). Robot finger replacement: 5,247 demos, 75% success; gear insertion: 4,005 demos, 95% (1 gear) / 75% (2 gears) / 40% (3 gears). Random kitchen stacking: 3,198 demos, 95% (bowl only) / 65% (bowl+cup) / 25% (bowl+cup+fork). Trained for 2M steps on 64 TPUv5e chips with ~0.043s inference per decision; validated on 3 simulated tasks (single/double peg insertion, mug-on-plate) beating prior baselines.</p><p>It runs autonomous policies on 5 dexterous real-world bimanual tasks: hanging a shirt on a hanger, tying shoelaces, replacing a worn robot finger, inserting gears onto pegs, and stacking randomly initialized kitchen items. Demo videos for all real and simulated tasks are shown on the project page.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2410.13126" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2410.13126" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://aloha-unleashed.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

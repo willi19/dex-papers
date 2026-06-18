@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RobustDexGrasp: Robust Dexterous Grasping of General Objects from Single-view Perception · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>RobustDexGrasp: Robust Dexterous Grasping of General Objects from Single-view Perception</h1>
+ <div class="badges"><span class="badge">CoRL 2025 (Spotlight)</span><span class="badge lab">ETH Zurich, HKUST (Guangzhou), HKUST (Hong Kong)</span><span class="badge m">RL</span><span class="badge m">sim-to-real</span><span class="badge m">Allegro</span><span class="badge m">grasping</span></div>
+ <img class="fig" src="../overview_assets/robustdexgrasp.png" alt="teaser figure">
+ <div class="report"><p class="lead">A reinforcement-learning framework for dexterous grasping of a wide range of unseen objects using single-view visual input from a UR5 arm with an Allegro hand and a RealSense D435i camera. It introduces a hand-centric object shape representation based on dynamic distance vectors between finger joints and the object surface, which emphasizes interaction-relevant local geometry and improves generalization. A privileged teacher policy (with ground-truth visual-tactile perception, contacts and impulses) is distilled into a student policy that observes only an initial single-view point cloud and noisy joint angles. The student performs dynamic, adaptive grasping motions that respond to observation noise, actuator inaccuracies, and external disturbances.</p><p>Hand-centric object shape representation using dynamic distance vectors between finger joints and the object surface, focusing on interaction-relevant local shape. Privileged teacher policy trained with real-time visual-tactile perception including ground-truth contacts and impulses. Distillation to a student policy that uses only initial single-view object point clouds and noisy joint angles. Mixed curriculum learning: begins with imitation learning to transfer the teacher&#x27;s grasping skill, then transitions to RL for adaptive, disturbance-robust motions. Dynamic RL-based control enables zero-shot adaptation to environmental variations and external forces. Trained on only 35 objects in simulation yet generalizes to 500+ real objects of varying shape, weight, and material.</p><p>97.0% grasp success rate across 247,786 simulated Objaverse objects. 94.6% success rate on 512 real-world unseen daily objects. Outperforms the DexGraspNet baseline in real-world grasping without disturbances: 92.0% vs. 60.7%. Robust to object movement: 87.3% success with &lt;3cm object displacement. Robust to external forces: 84.0% success with 2.5N force applied during grasping. Demonstrates zero-shot downstream applications: cluttered-scene grasping, chess playing with a VLM planner, grasping moving objects, and task-driven manipulation.</p><p>Given a single-view point cloud of an unseen object, it produces dynamic dexterous grasps with an Allegro hand that adapt in real time to perception noise, actuator error, and external disturbances. It generalizes from 35 training objects to hundreds of real-world objects and supports downstream tasks like cluttered grasping and VLM-planned manipulation.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2504.05287" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2504.05287" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://zdchan.github.io/Robust_DexGrasp/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

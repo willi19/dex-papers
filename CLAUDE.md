@@ -87,6 +87,34 @@ Tags are flat strings; a paper carries 4–8. Drawn from these axes (reuse exact
 - PDF buttons open the local file; arXiv/Project open online. A link rendered
   disabled means that field was `null`.
 
+## Overview / summary pages (`overview.html` + `overview/`)
+
+A landscape survey of papers, separate from the main browser:
+
+- `overview.html` — grouped card grid (figure + tagline + links), with a
+  **📄 Summary** button per card → its per-paper page, plus a button linking
+  back and forth with `index.html`.
+- `overview/<key>.html` — one **report-style** summary page per paper.
+- `overview_assets/<key>.png` — the paper's teaser figure. **Git-ignored**
+  (`.gitignore`) — kept local only (copyright; do not upload). Reproducible
+  anytime by re-rendering, so missing on a fresh clone is expected.
+
+**HARD RULES for these pages:**
+
+1. **Summaries are report-style, never one effortless sentence.** Each
+   `overview/<key>.html` must answer, in depth: *what is this paper about? what
+   are the key ideas and contributions? what does it do?* Structure it as a
+   "What it is" paragraph + "Key ideas" + "Contributions & results" lists.
+2. **Ground every summary in the real sources** — read the PDF's figures and,
+   when a project page exists, watch/utilize its videos & demos. Don't write
+   from vague memory. Only state numbers/claims found in the sources; never
+   fabricate results (same spirit as the no-fake-URL rule).
+3. **Figures = the paper's own teaser / Figure 1**, cropped tightly and rendered
+   at **200 DPI** (use `pdftoppm` + a saturation-based crop; teaser photos are
+   colorful, body text is black/white). Do NOT use a blurry full-page downscale —
+   the key-idea figure must be legible. The teaser may sit on a later page for
+   long tech reports; find it, don't default to page 1.
+
 ## Notes
 
 - `references.bib` is a convenience export, not used by the browser. Keep it in

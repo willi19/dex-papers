@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning Visuotactile Skills with Two Multifingered Hands (HATO) · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>Learning Visuotactile Skills with Two Multifingered Hands (HATO)</h1>
+ <div class="badges"><span class="badge">2024</span><span class="badge lab">UC San Diego</span><span class="badge m">imitation</span><span class="badge m">visuotactile</span><span class="badge m">teleoperation</span></div>
+ <img class="fig" src="../overview_assets/hato.png" alt="teaser figure">
+ <div class="report"><p class="lead">HATO (&quot;Learning Visuotactile Skills with Two Multifingered Hands&quot;, arXiv 2404.16823, by Toru Lin, Yu Zhang, Qiyang Li, Haozhi Qi, Brent Yi, Sergey Levine, and Jitendra Malik) is a bimanual, multifingered robot manipulation system that learns dexterous skills from human visuotactile demonstrations. It pairs a low-cost teleoperation rig with two touch-sensing prosthetic hands (PSYONIC Ability Hands) mounted on UR5e arms to collect data and train imitation-learning policies. The work targets the two bottlenecks the authors identify: the absence of affordable teleoperation systems for dual-arm multifingered setups, and the scarcity of multifingered hardware with integrated touch sensing. It then studies how dataset size, sensing modality (touch vs. vision), and visual preprocessing affect performance on long-horizon, high-precision tasks.</p><p>Repurpose off-the-shelf, low-cost electronics and commercial prosthetic hands (PSYONIC Ability Hands, with built-in touch sensors) on UR5e arms to build an affordable bimanual multifingered teleoperation system rather than custom dexterous hardware. Provide an end-to-end software stack covering multimodal (visuotactile) data collection, scalable policy learning, and policy deployment. Learn closed-loop visuotactile manipulation policies via a denoising diffusion probabilistic model (DDPM) trained from human teleoperated demonstrations. Use both vision and tactile sensing as policy inputs, and ablate each modality to measure its contribution to task success. Empirically characterize how many demonstrations are needed before performance saturates, and whether added inputs like depth help. Argue that two multifingered hands enable long-horizon, high-precision tasks that are hard for parallel-jaw grippers, which suffer from slipping objects and unstable grasps.</p><p>Introduce HATO, a low-cost hands-arms teleoperation system using off-the-shelf electronics, two touch-sensing PSYONIC Ability prosthetic hands, and UR5e arms, plus open software/code/datasets for multimodal data collection, policy learning, and deployment. Evaluate on four bimanual tasks with DDPM diffusion policies, reporting 10/10 success on Slippery Handover, 10/10 on Tower Block Stacking, 10/10 on Wine Pouring, and 5/10 (50%) on Steak Serving. Collect per-task demonstration datasets of 100 demos (~6 s each) for Handover, 100 demos (~20 s each) for Block Stacking, 300 demos (~25 s each) for Wine Pouring, and 300 demos (~40 s each) for Steak Serving. Show tactile sensing is critical: removing touch dropped Steak Serving to 0/10 and dropped Block Stacking under rare initializations to 4/10, even though the no-touch model had comparable prediction error (0.08 vs. 0.07 for the full-sensor model). Characterize data efficiency: performance saturates around 75 demonstrations for Block Stacking, ~200 for Wine Pouring, and ~100 for Steak Serving. Find that vision is likewise essential (removing it gave 0/10 on both Block Stacking rare-init and Steak Serving) while extra depth information does not markedly improve learning; deployment uses 100 diffusion steps at training and 15 at inference.</p><p>Two multifingered hands autonomously perform four real-world tasks: a slippery object handover between hands, stacking tower blocks, uncapping/pouring wine between a bottle and cup, and using a spatula to serve a steak from a pan to a plate. The project page additionally shows teleoperated demos such as playing the video game Hollow Knight with a joystick and extracting a tea bag from liquid, illustrating fine multifingered, touch-dependent dexterity.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2404.16823" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2404.16823" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://toruowo.github.io/hato/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning</h1>
+ <div class="badges"><span class="badge">CVPR 2025</span><span class="badge lab">BIGAI (State Key Laboratory of General Artificial Intelligence), Tsinghua University, Peking University</span><span class="badge m">RL</span><span class="badge m">imitation-learning</span><span class="badge m">sim-to-real</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/maniptrans.png" alt="teaser figure">
+ <div class="report"><p class="lead">ManipTrans is a method for efficiently transferring human bimanual manipulation skills to dexterous robotic hands in physics simulation. It first pre-trains a generalist trajectory imitator that mimics human hand motion, then fine-tunes a task-specific residual module under physics-based interaction constraints. This decoupling of motion imitation from physical effects enables fast, accurate execution of complex bimanual tasks. The approach is used to retarget multiple hand-object datasets into a new robot dataset, DexManipNet.</p><p>Two-stage design: a generalist hand-trajectory imitator is pre-trained to follow human hand motion, then a per-task residual module is fine-tuned on top of it. The residual module corrects for physical interaction effects (contact, object dynamics) rather than re-learning motion from scratch, improving sample efficiency. Decouples pure motion imitation from interaction/contact handling, so the same imitator backbone generalizes across tasks and embodiments. Generalizes across multiple robot hands of differing morphology and DoF (Inspire 12-DoF, Shadow 22-DoF, articulated MANO 22-DoF, Allegro 16-DoF). Used to build DexManipNet, a large-scale physically-consistent robot manipulation dataset including previously unexplored bimanual tasks such as pen capping and bottle unscrewing. Demonstrated with real-world deployment using custom hardware (90-degree flange with direct dexterous-hand mounting).</p><p>Introduces ManipTrans, a two-stage residual-learning method for transferring human bimanual skills to dexterous robot hands in simulation. Releases DexManipNet: 3.3K episodes / 1.34 million frames across 61 tasks and 1.2K objects, ~600 of them complex bimanual sequences. Achieves 58.1% (single-hand) / 39.5% (bimanual) success rate, outperforming RL-Only (34.3% / 12.1%) and Retarget+Residual (47.8% / 13.9%) baselines. Reports low tracking error: 8.60 degrees object rotation error, 0.49 cm object translation error, 2.15 cm mean per-joint position error, and 1.36 cm mean per-fingertip position error. Trains a single-hand task in ~15 minutes versus QuasiSim&#x27;s ~40 hours, a large efficiency gain. Validates the learned policies on real hardware and on multiple robot hand embodiments (Inspire, Shadow, MANO, Allegro).</p><p>Given human bimanual hand-object motion data, it produces physically valid dexterous robot-hand policies that reproduce the manipulation in simulation and on real hardware, enabling complex bimanual tasks like pen capping and bottle unscrewing.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2503.21860" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2503.21860" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://maniptrans.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>

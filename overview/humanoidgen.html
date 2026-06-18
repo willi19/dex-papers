@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning · summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:850px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:22px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
+ .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .links a.disabled{opacity:.3;pointer-events:none;}
+ .note{color:var(--muted);font-size:12px;margin-top:26px;}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../overview.html">← Back to overview</a></div>
+ <h1>HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning</h1>
+ <div class="badges"><span class="badge">NeurIPS 2025</span><span class="badge lab">TeleAI (China Telecom) / Fudan University</span><span class="badge m">data-generation</span><span class="badge m">LLM-reasoning</span><span class="badge m">diffusion</span><span class="badge m">bimanual</span></div>
+ <img class="fig" src="../overview_assets/humanoidgen.png" alt="teaser figure">
+ <div class="report"><p class="lead">HumanoidGen is an automated simulation framework for scene generation, demonstration collection, and data generalization for bimanual humanoid robots equipped with dual arms and dexterous hands. It composes atomic dexterous operations and uses an LLM to reason over spatial annotations of assets and hands, generating relational constraints on arm movements to plan tasks while avoiding collisions. For long-horizon tasks with insufficient annotation, it augments LLM reasoning with a Monte Carlo Tree Search variant via a Segment-Truncate-Combine-Resume mechanism. The output is high-quality demonstration data across diverse scenarios that can be used to train manipulation policies.</p><p>Spatial annotation of both assets and dexterous hands provides the grounding an LLM needs to plan dexterous bimanual operations. Tasks are built from reusable atomic dexterous operations, with the LLM generating relational action constraints between the two arms plus collision avoidance. Automated task decomposition turns high-level goals into constraint-based motion plans, enabling autonomous demonstration collection in simulation. A Monte Carlo Tree Search variant (Segment-Truncate-Combine-Resume) enhances LLM reasoning for long-horizon tasks where single-pass planning fails. Scenes are scaled (room-level scaling drawing on RoboCasa assets) to diversify scenarios and test generalization. The generated dataset is used to train 2D and 3D diffusion policies, whose performance scales with demonstration count.</p><p>HGen-Bench benchmark of 20 diverse bimanual dexterous manipulation tasks spanning single-arm, bimanual, long-horizon, and articulated-object challenges. Spatial annotation + LLM constraint-generation framework producing relational action constraints with collision avoidance for dual-arm dexterous planning. MCTS-enhanced LLM reasoning (Segment-Truncate-Combine-Resume); e.g., Blocks Stack Hard rises from 18.3% to 98.3% success with MCTS (N=12), Pyramid Stack from 13.3% to 90.0%. Demonstration data of 100 samples per task (about 2,000 demonstrations across the benchmark) plus over 120 diverse scaled scenes. Evidence that diffusion policies scale with generated data: DP3 on Open Box Hard improves 95.6% (20 demos) to 98.3% (100 demos); 2D DP on Open Box Hard rises 11.1% to 100%. Public release of dataset and models on Hugging Face and code on GitHub (TeleHuman/HumanoidGen).</p><p>Automatically creates bimanual dexterous manipulation tasks and collects scalable, high-quality demonstration data in simulation, which is then used to train 2D and 3D diffusion policies that improve as the generated dataset grows.</p></div>
+ <div class="links">
+  <a href="https://arxiv.org/abs/2507.00833" target="_blank" rel="noopener">arXiv abstract</a>
+  <a class="pdf" href="https://arxiv.org/pdf/2507.00833" target="_blank" rel="noopener">arXiv PDF ↗</a>
+  <a href="https://openhumanoidgen.github.io" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+ </div>
+ <p class="note">Figure is the paper's own teaser, rendered from the PDF for personal study; the PDF is not
+ hosted here (button links to arXiv) and demo videos live on the linked project page, not here. Summary is
+ my paraphrase from the abstract, full text and project page — see the paper for specifics. Credit: the
+ original authors.</p>
+</div></body></html>
