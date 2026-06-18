@@ -563,5 +563,15 @@ window.PAPERS = [
     project: "https://grasping.io",
     venue: "arXiv 2026",
     tags: ["NYU", "grasping", "dexterous", "flow-matching", "human-video", "retargeting"]
+  },
+  {
+    title: "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/enpire.html",
+    arxiv: null,
+    project: "https://research.nvidia.com/labs/gear/enpire/",
+    venue: "2026",
+    tags: ["NVIDIA", "self-improving", "agentic", "RL", "bimanual", "dexterous", "real-world"]
   }
 ];
