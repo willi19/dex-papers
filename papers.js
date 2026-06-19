@@ -573,5 +573,15 @@ window.PAPERS = [
     project: "https://research.nvidia.com/labs/gear/enpire/",
     venue: "2026",
     tags: ["NVIDIA", "self-improving", "agentic", "RL", "bimanual", "dexterous", "real-world"]
+  },
+  {
+    title: "SAM 3: Segment Anything with Concepts",
+    collection: "Perception",
+    file: null,
+    summary: "overview/sam3.html",
+    arxiv: "https://arxiv.org/abs/2511.16719",
+    project: "https://ai.meta.com/sam3",
+    venue: "arXiv 2025 (Nov 2025; v2 Mar 2026)",
+    tags: ["Meta", "segmentation", "foundation", "open-vocabulary", "video", "perception"]
   }
 ];
