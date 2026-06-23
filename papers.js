@@ -583,5 +583,116 @@ window.PAPERS = [
     project: "https://ai.meta.com/sam3",
     venue: "arXiv 2025 (Nov 2025; v2 Mar 2026)",
     tags: ["Meta", "segmentation", "foundation", "open-vocabulary", "video", "perception"]
+  },
+
+  // ===== Grasp Synthesis (Sammy Christen et al. — hand-object interaction, dexterous grasping) =====
+  // PDFs are NOT in this repo (kept local only). Links: arXiv / project page.
+  {
+    title: "D-Grasp: Physically Plausible Dynamic Grasp Synthesis for Hand-Object Interactions",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2112.03028",
+    project: "https://eth-ait.github.io/d-grasp/",
+    venue: "CVPR 2022",
+    tags: ["ETH-Zurich", "RL", "grasp-synthesis", "hand-object", "grasping", "dexterous"]
+  },
+  {
+    title: "GraspXL: Generating Grasping Motions for Diverse Objects at Scale",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2403.19649",
+    project: "https://eth-ait.github.io/graspxl/",
+    venue: "ECCV 2024",
+    tags: ["ETH-Zurich", "RL", "grasp-synthesis", "grasping", "dexterous", "scaling"]
+  },
+  {
+    title: "Learning Human-to-Robot Handovers from Point Clouds",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2303.17592",
+    project: "https://handover-sim2real.github.io/",
+    venue: "CVPR 2023",
+    tags: ["ETH-Zurich", "NVIDIA", "RL", "sim-to-real", "handover", "grasping"]
+  },
+  {
+    title: "ArtiGrasp: Physically Plausible Synthesis of Bi-Manual Dexterous Grasping and Articulation",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2309.03891",
+    project: "https://eth-ait.github.io/artigrasp/",
+    venue: "3DV 2024",
+    tags: ["ETH-Zurich", "RL", "grasp-synthesis", "bimanual", "dexterous", "hand-object"]
+  },
+  {
+    title: "Physically Plausible Full-Body Hand-Object Interaction Synthesis",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2309.07907",
+    project: "https://eth-ait.github.io/phys-fullbody-grasp/",
+    venue: "3DV 2024",
+    tags: ["ETH-Zurich", "RL", "grasp-synthesis", "hand-object", "manipulation"]
+  },
+  {
+    title: "DiffH2O: Diffusion-Based Synthesis of Hand-Object Interactions from Textual Descriptions",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2403.17827",
+    project: "https://diffh2o.github.io/",
+    venue: "SIGGRAPH Asia 2024",
+    tags: ["ETH-Zurich", "diffusion", "grasp-synthesis", "hand-object", "dexterous"]
+  },
+  {
+    title: "Omnigrasp: Grasping Diverse Objects with Simulated Humanoids",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2407.11385",
+    project: "https://www.zhengyiluo.com/Omnigrasp-Site/",
+    venue: "NeurIPS 2024",
+    tags: ["NVIDIA", "RL", "grasp-synthesis", "grasping", "humanoid", "scaling"]
+  },
+  {
+    title: "SynH2R: Synthesizing Hand-Object Motions for Learning Human-to-Robot Handovers",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2311.05599",
+    project: "https://eth-ait.github.io/synthetic-handovers/",
+    venue: "ICRA 2024",
+    tags: ["ETH-Zurich", "NVIDIA", "grasp-synthesis", "handover", "sim-to-real", "scaling"]
+  },
+  {
+    title: "FunGrasp: Functional Grasping for Diverse Dexterous Hands",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2411.16755",
+    project: "https://hly-123.github.io/FunGrasp/",
+    venue: "RA-L 2025",
+    tags: ["ETH-Zurich", "RL", "sim-to-real", "grasping", "dexterous", "one-shot", "real-world"]
+  },
+  {
+    title: "RobustDexGrasp: Robust Dexterous Grasping of General Objects",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2504.05287",
+    project: "https://zdchan.github.io/Robust_DexGrasp/",
+    venue: "CoRL 2025",
+    tags: ["ETH-Zurich", "RL", "sim-to-real", "grasping", "dexterous", "real-world"]
+  },
+  {
+    title: "LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: null,
+    project: "https://github.com/jojo23333/LatetHOI",
+    venue: "CVPR 2025",
+    tags: ["ETH-Zurich", "diffusion", "grasp-synthesis", "hand-object", "grasping"]
+  },
+  {
+    title: "Demonstration-Guided Deep Reinforcement Learning of Control Policies for Dexterous Human-Robot Interaction",
+    collection: "Grasp Synthesis",
+    file: null,
+    arxiv: "https://arxiv.org/abs/1906.11695",
+    project: "https://ait.ethz.ch/drl-handshake",
+    venue: "ICRA 2019",
+    tags: ["ETH-Zurich", "RL", "imitation-learning", "Shadow", "dexterous", "mocap"]
   }
 ];

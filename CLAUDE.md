@@ -23,7 +23,10 @@ dex_papers/
 ## How to add a paper (the main task here)
 
 1. Put the PDF in the right place: reading-list papers at repo root, AutoDex
-   related work under `related_works/<folder>/`.
+   related work under `related_works/<folder>/`. **PDFs are git-ignored
+   (`*.pdf`) — kept LOCAL only (copyright; the repo is public).** Set `file` to
+   the local path if you have the PDF (the browser's PDF button works locally),
+   else `null`. New papers are typically added link-only (`file: null`).
 2. Add ONE entry to `window.PAPERS` in `papers.js`. Required fields:
    ```js
    {
@@ -119,5 +122,6 @@ A landscape survey of papers, separate from the main browser:
 
 - `references.bib` is a convenience export, not used by the browser. Keep it in
   sync only if asked.
-- Repo is currently **private**. To make public:
-  `gh repo edit willi19/dex-papers --visibility public --accept-visibility-change-warning`
+- Repo is **public**. PDFs are git-ignored (`*.pdf`) and kept local only — do not
+  commit copyrighted PDFs. (Note: PDFs committed before the public switch remain
+  in git history.)

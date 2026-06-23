@@ -2,6 +2,10 @@
 
 contact-rich / multi-finger 손 작업 (병뚜껑, 재배치, 도구 사용 등). 대형 랩·기업 위주.
 
+> **참고:** PDF는 저작권 때문에 이 repo(public)에 포함하지 않습니다 — 로컬에만 보관합니다.
+> 로컬에서는 `index.html`의 PDF 버튼이 동작하지만, 새로 clone한 환경에서는 비활성화됩니다.
+> 아래 표의 파일명은 로컬 PDF 경로 기준입니다. 온라인 링크는 `papers.js`의 arXiv / project URL을 참고하세요.
+
 ## 핵심 논문
 
 | PDF | 랩/기업 | 방법론 | 하드웨어 | 대표 task | venue |
