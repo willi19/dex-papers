@@ -32,6 +32,12 @@
   .chip.on .n { color: #dce6ff; }
   .chip.coll { background: #20303f; }
   .chip.coll.on { background: var(--accent2); border-color: var(--accent2); }
+  .zonetoggle { cursor: pointer; user-select: none; display: inline-flex; align-items: center; gap: 6px; }
+  .zonetoggle:hover { color: var(--text); }
+  .zonetoggle .caret { font-size: 9px; transition: transform .15s; display: inline-block; }
+  .zonetoggle.open .caret { transform: rotate(90deg); }
+  .zonetoggle .zonesummary { text-transform: none; letter-spacing: 0; color: var(--accent); }
+  #filterZone.collapsed { display: none; }
   .catheads { display: flex; flex-wrap: wrap; gap: 6px; }
   .cathead { display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
     user-select: none; padding: 4px 11px; border-radius: 8px; background: var(--panel2);
@@ -95,10 +101,13 @@
     <a href="overview.html" style="float:right;font-size:12.5px;font-weight:400;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--accent)">📄 Landscape overview →</a>
   </h1>
   <input class="search" id="search" type="search" placeholder="Search title or tag…" autocomplete="off">
-  <div class="barlabel">Collections</div>
-  <div class="chips" id="collbar"></div>
-  <div class="barlabel">Filters <span style="text-transform:none">(click a category to expand · AND across categories, OR within)</span></div>
-  <div id="filters"></div>
+  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">Filters &amp; collections</span> <span class="zonesummary" id="zoneSummary"></span></div>
+  <div id="filterZone">
+    <div class="barlabel">Collections</div>
+    <div class="chips" id="collbar"></div>
+    <div class="barlabel">Filters <span style="text-transform:none">(click a category to expand · AND across categories, OR within)</span></div>
+    <div id="filters"></div>
+  </div>
   <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
 </header>
 <main id="grid"></main>
@@ -123,6 +132,15 @@
   const filters = document.getElementById("filters");
   const collbar = document.getElementById("collbar");
   const countEl = document.getElementById("count");
+  const zoneToggle = document.getElementById("zoneToggle");
+  const filterZone = document.getElementById("filterZone");
+  const zoneSummary = document.getElementById("zoneSummary");
+  let zoneOpen = true;
+  function applyZone() {
+    filterZone.classList.toggle("collapsed", !zoneOpen);
+    zoneToggle.classList.toggle("open", zoneOpen);
+  }
+  zoneToggle.onclick = () => { zoneOpen = !zoneOpen; applyZone(); };
 
   // build href for local PDF: encode each path segment (handles spaces, "?")
   const pdfHref = (f) => f.split("/").map(encodeURIComponent).join("/");
@@ -187,7 +205,7 @@
     CAT_ORDER.forEach(cat => {
       const tags = catTags[cat]; if (!tags || !tags.length) return;
       const actN = tags.filter(t => activeTags.has(t)).length;
-      const open = openCats.has(cat) || actN > 0;
+      const open = openCats.has(cat);
       const head = document.createElement("div");
       head.className = "cathead" + (open ? " open" : "");
       head.innerHTML = '<span class="caret">▶</span>' + cat +
@@ -245,6 +263,8 @@
 
   function render() {
     renderBars();
+    const nActive = activeTags.size + activeColls.size;
+    zoneSummary.textContent = nActive ? "· " + nActive + " active" : "";
     const list = P.filter(match);
     countEl.textContent = "· " + list.length + " / " + P.length;
     grid.innerHTML = "";
@@ -307,6 +327,7 @@
     if (e.key === "Escape" && pdfModal.classList.contains("open")) closePdf();
   });
 
+  applyZone();
   render();
 </script>
 </body>
