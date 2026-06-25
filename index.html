@@ -32,6 +32,21 @@
   .chip.on .n { color: #dce6ff; }
   .chip.coll { background: #20303f; }
   .chip.coll.on { background: var(--accent2); border-color: var(--accent2); }
+  .catheads { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cathead { display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    user-select: none; padding: 4px 11px; border-radius: 8px; background: var(--panel2);
+    border: 1px solid var(--border); color: var(--text); font-size: 12px; }
+  .cathead:hover { border-color: var(--accent); }
+  .cathead.open { border-color: var(--accent); background: #20262f; }
+  .cathead .caret { color: var(--muted); font-size: 9px; transition: transform .15s; display: inline-block; }
+  .cathead.open .caret { transform: rotate(90deg); }
+  .cathead .cn { color: var(--muted); }
+  .cathead .actN { background: var(--chipOn); color: #fff; border-radius: 999px;
+    padding: 0 6px; font-size: 11px; }
+  .catpanel { margin-top: 8px; padding: 8px 10px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 8px; }
+  .catpanel .lbl { color: var(--muted); font-size: 11px; text-transform: uppercase;
+    letter-spacing: .04em; margin-bottom: 6px; }
   .clear { cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: 12px;
     background: transparent; border: 1px dashed var(--border); color: var(--muted); }
   .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
@@ -82,8 +97,8 @@
   <input class="search" id="search" type="search" placeholder="Search title or tag…" autocomplete="off">
   <div class="barlabel">Collections</div>
   <div class="chips" id="collbar"></div>
-  <div class="barlabel">Tags <span style="text-transform:none">(click to filter — AND)</span></div>
-  <div class="chips" id="tagbar"></div>
+  <div class="barlabel">Filters <span style="text-transform:none">(click a category to expand · AND across categories, OR within)</span></div>
+  <div id="filters"></div>
   <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
 </header>
 <main id="grid"></main>
@@ -105,21 +120,56 @@
   let query = "";
 
   const grid = document.getElementById("grid");
-  const tagbar = document.getElementById("tagbar");
+  const filters = document.getElementById("filters");
   const collbar = document.getElementById("collbar");
   const countEl = document.getElementById("count");
 
   // build href for local PDF: encode each path segment (handles spaces, "?")
   const pdfHref = (f) => f.split("/").map(encodeURIComponent).join("/");
 
+  // ---- tag taxonomy: group flat tags into categories for a drill-down filter UI ----
+  const TAXONOMY = {
+    "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","Stanford","TUM","UCSD","USC","UT-Austin","ETH-Zurich"],
+    "Method": ["RL","imitation-learning","sim-to-real","teleoperation","self-supervised","reset-free","reset","TAMP","VLA","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","multi-task","sample-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting"],
+    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","data-collection","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","humanoid"],
+    "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","video-prediction","video-planning","visuomotor","mocap","capture","human-video"],
+    "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw"],
+    "Type": ["survey","system","benchmark","analysis","dataset"]
+  };
+  const CAT_ORDER = ["Lab / Org","Year","Topic","Method","Perception","Hardware","Type"];
+  const TAGCAT = {};
+  Object.entries(TAXONOMY).forEach(([c,ts]) => ts.forEach(t => TAGCAT[t] = c));
+  const catOf = (t) => t.indexOf("year:") === 0 ? "Year" : (TAGCAT[t] || "Other");
+
+  // derive the primary 4-digit year from a venue string
+  const yearOf = (p) => { const m = (p.venue||"").match(/(19|20)\d{2}/g); return m ? m[0] : null; };
+  P.forEach(p => p._year = yearOf(p));
+
   // counts
-  const tagCounts = {}, collCounts = {};
+  const tagCounts = {}, collCounts = {}, yearCounts = {};
   P.forEach(p => {
     (p.tags || []).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1);
     collCounts[p.collection] = (collCounts[p.collection]||0)+1;
+    if (p._year) { const k = "year:"+p._year; yearCounts[k] = (yearCounts[k]||0)+1; }
   });
-  const allTags = Object.keys(tagCounts).sort((a,b)=> tagCounts[b]-tagCounts[a] || a.localeCompare(b));
+  Object.assign(tagCounts, yearCounts);
   const allColls = Object.keys(collCounts).sort();
+
+  // tags per category (year newest-first; others by count desc)
+  const catTags = {};
+  CAT_ORDER.forEach(c => {
+    catTags[c] = c === "Year"
+      ? Object.keys(yearCounts).sort((a,b) => b.localeCompare(a))
+      : Object.keys(tagCounts).filter(t => catOf(t) === c)
+          .sort((a,b) => tagCounts[b]-tagCounts[a] || a.localeCompare(b));
+  });
+  const placed = new Set([].concat(...CAT_ORDER.map(c => catTags[c])));
+  const otherTags = Object.keys(tagCounts).filter(t => t.indexOf("year:") !== 0 && !placed.has(t))
+    .sort((a,b) => tagCounts[b]-tagCounts[a] || a.localeCompare(b));
+  if (otherTags.length) { catTags["Other"] = otherTags; CAT_ORDER.push("Other"); }
+
+  const openCats = new Set();   // expanded category panels
+  const chipLabel = (t) => t.indexOf("year:") === 0 ? t.slice(5) : t;
 
   function renderBars() {
     collbar.innerHTML = "";
@@ -130,21 +180,57 @@
       el.onclick = () => { activeColls.has(c) ? activeColls.delete(c) : activeColls.add(c); render(); };
       collbar.appendChild(el);
     });
-    tagbar.innerHTML = "";
-    allTags.forEach(t => {
-      const el = document.createElement("span");
-      el.className = "chip" + (activeTags.has(t) ? " on" : "");
-      el.innerHTML = t + ' <span class="n">' + tagCounts[t] + '</span>';
-      el.onclick = () => toggleTag(t);
-      tagbar.appendChild(el);
+    filters.innerHTML = "";
+    const heads = document.createElement("div");
+    heads.className = "catheads";
+    filters.appendChild(heads);
+    CAT_ORDER.forEach(cat => {
+      const tags = catTags[cat]; if (!tags || !tags.length) return;
+      const actN = tags.filter(t => activeTags.has(t)).length;
+      const open = openCats.has(cat) || actN > 0;
+      const head = document.createElement("div");
+      head.className = "cathead" + (open ? " open" : "");
+      head.innerHTML = '<span class="caret">▶</span>' + cat +
+        ' <span class="cn">(' + tags.length + ')</span>' +
+        (actN ? ' <span class="actN">' + actN + '</span>' : '');
+      head.onclick = () => { openCats.has(cat) ? openCats.delete(cat) : openCats.add(cat); render(); };
+      heads.appendChild(head);
+      if (open) {
+        const panel = document.createElement("div");
+        panel.className = "catpanel";
+        const lbl = document.createElement("div");
+        lbl.className = "lbl"; lbl.textContent = cat;
+        panel.appendChild(lbl);
+        const chips = document.createElement("div");
+        chips.className = "chips";
+        tags.forEach(t => {
+          const el = document.createElement("span");
+          el.className = "chip" + (activeTags.has(t) ? " on" : "");
+          el.innerHTML = chipLabel(t) + ' <span class="n">' + tagCounts[t] + '</span>';
+          el.onclick = () => toggleTag(t);
+          chips.appendChild(el);
+        });
+        panel.appendChild(chips);
+        filters.appendChild(panel);
+      }
     });
   }
 
   function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
 
   function match(p) {
-    for (const t of activeTags) if (!(p.tags||[]).includes(t)) return false;
     if (activeColls.size && !activeColls.has(p.collection)) return false;
+    // AND across categories, OR within a category
+    const groups = {};
+    for (const t of activeTags) { const c = catOf(t); (groups[c] = groups[c] || []).push(t); }
+    for (const c in groups) {
+      let ok = false;
+      for (const t of groups[c]) {
+        if (c === "Year") { if (t === "year:"+(p._year||"")) { ok = true; break; } }
+        else if ((p.tags||[]).includes(t)) { ok = true; break; }
+      }
+      if (!ok) return false;
+    }
     if (query) {
       const hay = (p.title + " " + (p.tags||[]).join(" ") + " " + (p.venue||"")).toLowerCase();
       if (!hay.includes(query)) return false;

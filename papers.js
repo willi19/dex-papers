@@ -13,6 +13,7 @@ window.PAPERS = [
   },
   {
     title: "Visual Dexterity: In-hand Reorientation of Novel and Complex Object Shapes",
+    image: "https://taochenshh.github.io/projects/files/visual_dexterity/teaser.png",
     collection: "Dex Manipulation",
     file: "2023_MIT_VisualDexterity_SciRobotics.pdf",
     arxiv: "https://arxiv.org/abs/2211.11744",
@@ -31,6 +32,7 @@ window.PAPERS = [
   },
   {
     title: "Sequential Dexterity: Chaining Dexterous Policies for Long-Horizon Manipulation",
+    image: "https://sequential-dexterity.github.io/assets/images/method_v8.png",
     collection: "Dex Manipulation",
     file: "2023_Stanford_SequentialDexterity.pdf",
     arxiv: "https://arxiv.org/abs/2309.00987",
@@ -40,6 +42,7 @@ window.PAPERS = [
   },
   {
     title: "Bimanual Dexterity for Complex Tasks (Bidex)",
+    image: "https://bidex-teleop.github.io/resources/operator_tabletop_1.gif",
     collection: "Dex Manipulation",
     file: "2024_CMU_Bidex.pdf",
     arxiv: "https://arxiv.org/abs/2411.13677",
@@ -114,6 +117,7 @@ window.PAPERS = [
   },
   {
     title: "AutoRT: Embodied Foundation Models for Large Scale Orchestration of Robotic Agents",
+    image: "https://auto-rt.github.io/static/images/AutoRT_viz.gif",
     collection: "Related: autonomous",
     file: "related_works/autonomous/AutoRT_2024.pdf",
     arxiv: "https://arxiv.org/abs/2401.12963",
@@ -132,6 +136,7 @@ window.PAPERS = [
   },
   {
     title: "Data Scaling Laws in Imitation Learning for Robotic Manipulation",
+    image: "https://data-scaling-laws.github.io/media/images/title-1.jpg",
     collection: "Related: autonomous",
     file: "related_works/autonomous/DataScalingLaws_Lin2024.pdf",
     arxiv: "https://arxiv.org/abs/2410.18647",
@@ -141,6 +146,7 @@ window.PAPERS = [
   },
   {
     title: "DexScale: Automating Data Scaling for Sim2Real Generalizable Robot Control",
+    image: "https://edem-ai.github.io/dexscale.github.io/static/images/dexsim-flowchart.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/DexScale.pdf",
     arxiv: null,
@@ -150,6 +156,7 @@ window.PAPERS = [
   },
   {
     title: "The Ingredients of Real-World Robotic Reinforcement Learning",
+    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUCbaot-sy9YPyd2Xe1c_-W2N-VMJ2U05hGei2nnOfazz5mK5dE0uEbPDe66u2B2o1oWCojlFPdsYJpeFZQEB90JgNRbp1vMTcgpvkMr6kl02n-py1YIyA1RG7GYKMdKDV8RvRzwtzXD0DI5b8J6IDaAS2w1L3bkF04Os5CSsrjYnOyFf-aBG7EMGCK0UcPlWD7MC0l-RkVGws0_0PI=w1280",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Ingredients_RealWorldRL_Zhu2020.pdf",
     arxiv: "https://arxiv.org/abs/2004.12570",
@@ -177,6 +184,7 @@ window.PAPERS = [
   },
   {
     title: "MT-Opt: Continuous Multi-Task Robotic RL at Scale",
+    image: "https://karolhausman.github.io/mt-opt/img/arm-farm.gif",
     collection: "Related: autonomous",
     file: "related_works/autonomous/MT-Opt_Kalashnikov2021.pdf",
     arxiv: "https://arxiv.org/abs/2104.08212",
@@ -186,6 +194,7 @@ window.PAPERS = [
   },
   {
     title: "Reset-Free Reinforcement Learning via Multi-Task Learning (MTRF)",
+    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUC_m8UaEQj0SlOlnvu1xq1cabgiO6_p3Fv4jH6EtnvD1W1t5MdiHe9e28Li4n5YN_r-Zc91H95u_3FjqIBjkWs2Wt5T6szDdLH_aA7lgpzb4BJs9xp99G1kv83U_Yn7Bewc-7UZ-Aed9w-jR97plF954ic8Q2HLzwIq7vCULatGz1J8B_IqzrNGkXetxGUVM_G9vS3YzSTE3wLaBkkaMXsDBZlvT2AEDieHAPXMgPw=w1280",
     collection: "Related: autonomous",
     file: "related_works/autonomous/MTRF_Gupta2021.pdf",
     arxiv: "https://arxiv.org/abs/2104.11203",
@@ -195,6 +204,7 @@ window.PAPERS = [
   },
   {
     title: "OPTIMUS: Imitating Task and Motion Planning with Visuomotor Transformers",
+    image: "https://mihdalal.github.io/optimus/resources/optimus/main.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/OPTIMUS_Dalal2023.pdf",
     arxiv: "https://arxiv.org/abs/2305.16309",
@@ -222,6 +232,7 @@ window.PAPERS = [
   },
   {
     title: "Real2Render2Real: Scaling Robot Data Without Dynamics Simulation or Robot Hardware",
+    image: "https://real2render2real.com/data/r2r2r_fig_no_bg.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Real2Render2Real_Yu2025.pdf",
     arxiv: "https://arxiv.org/abs/2505.09601",
@@ -231,6 +242,7 @@ window.PAPERS = [
   },
   {
     title: "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation",
+    image: "https://lh3.googleusercontent.com/NNgVjChgbgUVdjInUJKoYl34zgtafd8P0PbtqIYuccyzcoqg62EZWk2XDpSu7ntT82Adp-9P909yHQvriBiopMD8aOQCxG7eVQV-p4phDzh_Q1me=w1440-h810-n-nu",
     collection: "Related: autonomous",
     file: "related_works/autonomous/robocat.pdf",
     arxiv: "https://arxiv.org/abs/2306.11706",
@@ -240,6 +252,7 @@ window.PAPERS = [
   },
   {
     title: "Sample Efficient Grasp Learning Using Equivariant Models",
+    image: "https://zxp-s-works.github.io/equivariant_grasp_site/images/ASR.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/sample_efficient.pdf",
     arxiv: "https://arxiv.org/abs/2202.09468",
@@ -258,6 +271,7 @@ window.PAPERS = [
   },
   {
     title: "Robot Learning on the Job: Human-in-the-Loop Autonomy During Deployment (Sirius)",
+    image: "https://ut-austin-rpl.github.io/sirius/src/result_22.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Sirius_Liu2022.pdf",
     arxiv: "https://arxiv.org/abs/2211.08416",
@@ -267,6 +281,7 @@ window.PAPERS = [
   },
   {
     title: "So You Think You Can Scale Up Autonomous Robot Data Collection?",
+    image: "https://autonomous-data-collection.github.io/static/images/expectations-reality.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/So You Think You Can Scale Up Autonomous Robot Data Collection?.pdf",
     arxiv: "https://arxiv.org/abs/2411.01813",
@@ -287,6 +302,7 @@ window.PAPERS = [
   // ===== AutoDex related works: dexterous =====
   {
     title: "Being-H0: Vision-Language-Action Pretraining from Large-Scale Human Videos",
+    image: "https://beingbeyond.github.io/Being-H0/assets/image/being-h0.webp",
     collection: "Related: dexterous",
     file: "related_works/dexterous/being_h0_2507.15597.pdf",
     arxiv: "https://arxiv.org/abs/2507.15597",
@@ -296,6 +312,7 @@ window.PAPERS = [
   },
   {
     title: "Large Video Planner Enables Generalizable Robot Control",
+    image: "https://boyuan.space/large-video-planner/static/images/thumbnail.jpg",
     collection: "Related: dexterous",
     file: "related_works/dexterous/large_video_planner_2512.15840.pdf",
     arxiv: "https://arxiv.org/abs/2512.15840",
@@ -307,6 +324,7 @@ window.PAPERS = [
   // ===== AutoDex related works: real =====
   {
     title: "RealDex: Towards Human-like Grasping for Robotic Dexterous Hand",
+    image: "https://4dvlab.github.io/RealDex_page/static/images/teaser.png",
     collection: "Related: real",
     file: "related_works/real/realdex.pdf",
     arxiv: "https://arxiv.org/abs/2402.13853",
@@ -318,6 +336,7 @@ window.PAPERS = [
   // ===== AutoDex related works: data collection systems =====
   {
     title: "DexCap: Scalable Portable Mocap Data Collection for Dexterous Manipulation",
+    image: "https://dex-cap.github.io/assets/HIL_method.png",
     collection: "Related: system",
     file: "related_works/system/DexCap_Wang2024.pdf",
     arxiv: "https://arxiv.org/abs/2403.07788",
@@ -327,6 +346,7 @@ window.PAPERS = [
   },
   {
     title: "DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset",
+    image: "https://droid-dataset.github.io/figures/droid_setup.png",
     collection: "Related: system",
     file: "related_works/system/DROID_Khazatsky2024.pdf",
     arxiv: "https://arxiv.org/abs/2403.12945",
@@ -336,6 +356,7 @@ window.PAPERS = [
   },
   {
     title: "Mobile ALOHA: Bimanual Mobile Manipulation with Low-Cost Whole-Body Teleoperation",
+    image: "https://mobile-aloha.github.io/static/images/preview.gif",
     collection: "Related: system",
     file: "related_works/system/MobileALOHA_Fu2024.pdf",
     arxiv: "https://arxiv.org/abs/2401.02117",
@@ -345,6 +366,7 @@ window.PAPERS = [
   },
   {
     title: "RH20T: A Comprehensive Robotic Dataset for Learning Diverse Skills in One-Shot",
+    image: "https://rh20t.github.io/static/images/teleop0.png",
     collection: "Related: system",
     file: "related_works/system/RH20T_Fang2023.pdf",
     arxiv: "https://arxiv.org/abs/2307.00595",
@@ -354,6 +376,7 @@ window.PAPERS = [
   },
   {
     title: "RoboTurk: A Crowdsourcing Platform for Robotic Skill Learning through Imitation",
+    image: "https://roboturk.stanford.edu/assets/img/roboturk_2018.png",
     collection: "Related: system",
     file: "related_works/system/RoboTurk_Mandlekar2018.pdf",
     arxiv: "https://arxiv.org/abs/1811.02790",
@@ -365,6 +388,7 @@ window.PAPERS = [
   // ===== AutoDex related works: misc =====
   {
     title: "MANUS: Markerless Grasp Capture using Articulated 3D Gaussians",
+    image: "https://ivl.cs.brown.edu/assets/images/projects/manus/teaser.png",
     collection: "Related: misc",
     file: "related_works/manus.pdf",
     arxiv: "https://arxiv.org/abs/2312.02137",
@@ -386,6 +410,7 @@ window.PAPERS = [
   },
   {
     title: "DexterityGen: Foundation Controller for Unprecedented Dexterity",
+    image: "https://zhaohengyin.github.io/dexteritygen/images/idea.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/dexteritygen.html",
@@ -416,6 +441,7 @@ window.PAPERS = [
   },
   {
     title: "Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning",
+    image: "https://dingry.github.io/projects/static/images/bunny_image.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/bunny_visionpro.html",
@@ -426,6 +452,7 @@ window.PAPERS = [
   },
   {
     title: "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning",
+    image: "https://maniptrans.github.io/pipeline.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/maniptrans.html",
@@ -436,6 +463,7 @@ window.PAPERS = [
   },
   {
     title: "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation",
+    image: "https://project-dexmachina.github.io/dexmachina-teaser-website.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/dexmachina.html",
@@ -466,6 +494,7 @@ window.PAPERS = [
   },
   {
     title: "HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning",
+    image: "https://openhumanoidgen.github.io/static/images/database.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/humanoidgen.html",
@@ -476,6 +505,7 @@ window.PAPERS = [
   },
   {
     title: "AnyBimanual: Transferring Unimanual Policy for General Bimanual Manipulation",
+    image: "https://anybimanual.github.io/resources/method/pipeline.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/anybimanual.html",
@@ -486,6 +516,7 @@ window.PAPERS = [
   },
   {
     title: "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks",
+    image: "https://bimanual.github.io/media/figures/system_architecture.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/peract2.html",
@@ -496,6 +527,7 @@ window.PAPERS = [
   },
   {
     title: "VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation",
+    image: "https://voxact-b.github.io/static/images/figure1_v08.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/voxact_b.html",
@@ -506,6 +538,7 @@ window.PAPERS = [
   },
   {
     title: "AnyDexGrasp: General Dexterous Grasping for Different Hands with Human-level Learning Efficiency",
+    image: "https://graspnet.net/anydexgrasp/assets/images/model.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/anydexgrasp.html",
@@ -516,6 +549,7 @@ window.PAPERS = [
   },
   {
     title: "DexGrasp Anything: Towards Universal Robotic Dexterous Grasping with Physics Awareness",
+    image: "https://dexgraspanything.github.io/static/images/image1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/dexgrasp_anything.html",
@@ -537,6 +571,7 @@ window.PAPERS = [
   },
   {
     title: "DexVLG: Dexterous Vision-Language-Grasp Model at Scale",
+    image: "https://jiaweihe.com/static/image/dexvlg.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/dexvlg.html",
@@ -557,6 +592,7 @@ window.PAPERS = [
   },
   {
     title: "HUG: Human Universal Grasping",
+    image: "https://grasping.io/static/images/teaser.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/hug.html",
@@ -567,6 +603,7 @@ window.PAPERS = [
   },
   {
     title: "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World",
+    image: "https://research.nvidia.com/labs/gear/enpire/robot_farm.min.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/enpire.html",
@@ -577,6 +614,7 @@ window.PAPERS = [
   },
   {
     title: "SAM 3: Segment Anything with Concepts",
+    image: "https://raw.githubusercontent.com/facebookresearch/sam3/main/assets/model_diagram.png",
     collection: "Perception",
     file: null,
     summary: "overview/sam3.html",
@@ -678,6 +716,7 @@ window.PAPERS = [
   },
   {
     title: "RobustDexGrasp: Robust Dexterous Grasping of General Objects",
+    image: "https://zdchan.github.io/Robust_DexGrasp/objects.png",
     collection: "Grasp Synthesis",
     file: null,
     arxiv: "https://arxiv.org/abs/2504.05287",
