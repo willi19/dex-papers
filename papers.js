@@ -1465,5 +1465,113 @@ window.PAPERS = [
     arxiv: "https://arxiv.org/abs/2502.20018", project: null, venue: "RA-L 2025",
     desc: "Contact-guided multi-keypoint affordance constrains functional grasp posture from human-grasp images via large vision models.",
     tags: ["grasping", "dexterous", "affordance"]
+  },
+
+  // ===== Compliance / force / impedance control (compliant contact-rich manipulation) =====
+  // Some are industrial (peg-in-hole/assembly) rather than dexterous-hand; flagged in tags.
+  {
+    title: "Adaptive Compliance Policy: Learning Approximate Compliance for Diffusion Guided Control",
+    collection: "Compliance Control", file: null, cites: 67,
+    arxiv: "https://arxiv.org/abs/2410.09309", project: null, venue: "ICRA 2025",
+    desc: "Diffusion visuomotor policy predicting spatially/temporally varying compliance from human demos; >50% gain over fixed-compliance baselines.",
+    tags: ["diffusion", "compliance", "contact-rich", "imitation-learning", "manipulation"]
+  },
+  {
+    title: "Object-Level Impedance Control for Dexterous In-Hand Manipulation",
+    collection: "Compliance Control", file: null, cites: 52,
+    arxiv: null, project: null, venue: "RA-L 2020",
+    desc: "Model-based compliant 6-DOF object-level impedance control on a torque-controlled multi-finger hand (DLR). No arXiv preprint exists.",
+    tags: ["compliance", "impedance", "dexterous", "in-hand-reorientation", "manipulation"]
+  },
+  {
+    title: "DexForce: Extracting Force-informed Actions from Kinesthetic Demonstrations for Dexterous Manipulation",
+    collection: "Compliance Control", file: null, cites: 41,
+    arxiv: "https://arxiv.org/abs/2501.10356", project: null, venue: "RA-L 2025",
+    desc: "Per-fingertip 6-axis force/torque sensing turns kinesthetic demos into force-informed actions; 76% vs ~0% without force on a multi-finger hand.",
+    tags: ["compliance", "force-control", "dexterous", "imitation-learning", "tactile"]
+  },
+  {
+    title: "Learning Variable Compliance Control From a Few Demonstrations for Bimanual Robot with Haptic Feedback Teleoperation System",
+    collection: "Compliance Control", file: null, cites: 31,
+    arxiv: "https://arxiv.org/abs/2406.14990", project: null, venue: "IROS 2024",
+    desc: "Learns variable compliance from a few haptic-teleoperation demos for bimanual contact-rich tasks.",
+    tags: ["compliance", "contact-rich", "bimanual", "teleoperation", "imitation-learning"]
+  },
+  {
+    title: "DA-VIL: Adaptive Dual-Arm Manipulation with Reinforcement Learning and Variable Impedance Control",
+    collection: "Compliance Control", file: null, cites: 13,
+    arxiv: "https://arxiv.org/abs/2410.19712", project: null, venue: "ICRA 2025",
+    desc: "RL plus gradient-based gain optimization to modulate dual-arm impedance for stable manipulation of varied objects.",
+    tags: ["RL", "impedance", "compliance", "bimanual", "manipulation"]
+  },
+  {
+    title: "Admittance Visuomotor Policy Learning for General-Purpose Contact-Rich Manipulations",
+    collection: "Compliance Control", file: null, cites: 10,
+    arxiv: "https://arxiv.org/abs/2409.14440", project: null, venue: "IEEE T-IE 2025",
+    desc: "Learns admittance-control visuomotor policies for general-purpose contact-rich manipulation.",
+    tags: ["compliance", "admittance", "contact-rich", "imitation-learning", "manipulation"]
+  },
+  {
+    title: "Tactile-Conditioned Diffusion Policy for Force-Aware Robotic Manipulation",
+    collection: "Compliance Control", file: null, cites: 9,
+    arxiv: "https://arxiv.org/abs/2510.13324", project: null, venue: "arXiv 2025",
+    desc: "Tactile-conditioned diffusion policy applying appropriate grasp forces for fragile/deformable contact-rich manipulation.",
+    tags: ["diffusion", "compliance", "force-control", "tactile", "manipulation"]
+  },
+  {
+    title: "Diffusion-Based Impedance Learning for Contact-Rich Manipulation Tasks",
+    collection: "Compliance Control", file: null, cites: 2,
+    arxiv: "https://arxiv.org/abs/2509.19696", project: null, venue: "arXiv 2025",
+    desc: "Diffusion model learning variable-impedance/stiffness profiles for contact-rich manipulation.",
+    tags: ["diffusion", "impedance", "compliance", "contact-rich", "manipulation"]
+  },
+  {
+    title: "Variable Compliance Control for Robotic Peg-in-Hole Assembly: A Deep Reinforcement Learning Approach",
+    collection: "Compliance Control", file: null, cites: 189,
+    arxiv: "https://arxiv.org/abs/2008.10224", project: null, venue: "Applied Sciences 2020",
+    desc: "Deep RL learns variable compliance (stiffness) for peg-in-hole; a classic industrial contact-rich assembly compliance baseline.",
+    tags: ["RL", "compliance", "contact-rich", "industrial", "manipulation"]
+  },
+  {
+    title: "Learning Variable Impedance Control via Inverse Reinforcement Learning for Force-Related Tasks",
+    collection: "Compliance Control", file: null, cites: 117,
+    arxiv: "https://arxiv.org/abs/2102.06838", project: null, venue: "RA-L 2021",
+    desc: "Inverse RL recovers a variable-impedance policy and reward from demos; peg-in-hole and cup-on-plate on a FANUC arm.",
+    tags: ["impedance", "compliance", "contact-rich", "industrial", "imitation-learning"]
+  },
+  {
+    title: "FORGE: Force-Guided Exploration for Robust Contact-Rich Manipulation under Uncertainty",
+    collection: "Compliance Control", file: null, cites: 35,
+    arxiv: "https://arxiv.org/abs/2408.04587", project: null, venue: "RA-L 2025",
+    desc: "Force-threshold plus dynamics randomization for sim-to-real force-aware insertion/assembly conditioned on max allowable force.",
+    tags: ["force-control", "compliance", "contact-rich", "industrial", "sim-to-real"]
+  },
+  {
+    title: "Variable Impedance Skill Learning for Contact-Rich Manipulation",
+    collection: "Compliance Control", file: null, cites: 31,
+    arxiv: null, project: null, venue: "RA-L 2022",
+    desc: "Skill-based RL with a variable-impedance Cartesian action space from suboptimal demos; peg-in-hole on Franka. No arXiv preprint exists.",
+    tags: ["RL", "impedance", "compliance", "contact-rich", "industrial"]
+  },
+  {
+    title: "SRL-VIC: A Variable Stiffness-Based Safe Reinforcement Learning for Contact-Rich Robotic Tasks",
+    collection: "Compliance Control", file: null, cites: 27,
+    arxiv: "https://arxiv.org/abs/2406.13744", project: null, venue: "RA-L 2024",
+    desc: "Safe RL modulating stiffness via a safety critic plus recovery policy for compliant contact-rich tasks; sim-to-real.",
+    tags: ["RL", "compliance", "impedance", "contact-rich", "sim-to-real"]
+  },
+  {
+    title: "RMPs for Safe Impedance Control in Contact-Rich Manipulation",
+    collection: "Compliance Control", file: null, cites: 17,
+    arxiv: "https://arxiv.org/abs/2109.12103", project: null, venue: "ICRA 2022",
+    desc: "Combines Riemannian Motion Policies with variable-impedance operational-space control for safer reusable contact-rich behavior (Brown).",
+    tags: ["Brown", "impedance", "compliance", "contact-rich", "manipulation"]
+  },
+  {
+    title: "Learning Compliant Stiffness by Impedance Control-Aware Task Segmentation and Multi-objective Bayesian Optimization with Priors",
+    collection: "Compliance Control", file: null, cites: 8,
+    arxiv: "https://arxiv.org/abs/2307.15345", project: null, venue: "IROS 2023",
+    desc: "Learns compliant stiffness profiles via task-segmented multi-objective Bayesian optimization for contact-rich tasks.",
+    tags: ["impedance", "compliance", "contact-rich", "industrial", "manipulation"]
   }
 ];
