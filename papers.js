@@ -1172,5 +1172,14 @@ window.PAPERS = [
     project: null,
     venue: "Advances in Artificial Life (ECAL) 1995",
     tags: ["sim-to-real", "reality-gap", "evolutionary-robotics", "analysis"]
+  },
+  {
+    title: "Sim-to-Real Transfer of Robotic Control with Dynamics Randomization",
+    collection: "Related: misc",
+    file: null,
+    arxiv: "https://arxiv.org/abs/1710.06537",
+    project: null,
+    venue: "ICRA 2018",
+    tags: ["sim-to-real", "domain-randomization", "RL", "manipulation"]
   }
 ];
