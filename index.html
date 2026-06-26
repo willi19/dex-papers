@@ -56,15 +56,28 @@
   .clear { cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: 12px;
     background: transparent; border: 1px dashed var(--border); color: var(--muted); }
   .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-  main { padding: 16px 20px 60px; display: grid; gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
-  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
-    padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
-  .card h2 { margin: 0; font-size: 14.5px; line-height: 1.35; }
-  .teaser-wrap { display: block; margin: -12px -14px 2px; overflow: hidden;
-    border-radius: 10px 10px 0 0; background: #0d1117; max-height: 180px; }
-  .teaser { display: block; width: 100%; height: auto; max-height: 180px;
-    object-fit: cover; object-position: center; }
+  main { padding: 16px 20px 60px; display: block; max-width: 1120px; }
+  /* compact expandable table rows */
+  .rowwrap { margin-bottom: 5px; }
+  .prow { display: flex; align-items: center; gap: 10px; padding: 7px 11px;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--panel); cursor: pointer; }
+  .prow:hover { border-color: var(--accent); }
+  .prow.open { border-color: var(--accent); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .prow .caret { color: var(--muted); font-size: 9px; width: 9px; flex-shrink: 0;
+    transition: transform .15s; display: inline-block; }
+  .prow.open .caret { transform: rotate(90deg); }
+  .prow .pt { flex: 1; font-size: 13.5px; font-weight: 500; line-height: 1.3; }
+  .prow .pmeta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .prow .pcites { font-size: 11px; padding: 2px 7px; border-radius: 6px; background: var(--panel2);
+    border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .prow .pcoll { font-size: 11px; color: var(--accent); white-space: nowrap; }
+  .pdetail { padding: 12px 14px; border: 1px solid var(--accent); border-top: none;
+    border-radius: 0 0 8px 8px; background: var(--panel2); display: flex; gap: 14px; align-items: flex-start; }
+  .pdetail .pimg { width: 260px; flex-shrink: 0; }
+  .pdetail .pimg img { width: 100%; height: auto; border-radius: 8px; display: block; background: #0d1117; }
+  .pdetail .pbody { flex: 1; display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+  .pdetail .pdesc { font-size: 13px; color: var(--text); line-height: 1.5; }
+  @media (max-width: 620px) { .pdetail { flex-direction: column; } .pdetail .pimg { width: 100%; max-width: 360px; } }
   .badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   .badge { font-size: 11px; padding: 2px 7px; border-radius: 6px; background: var(--panel2);
     color: var(--muted); border: 1px solid var(--border); }
@@ -147,9 +160,9 @@
 
   // ---- tag taxonomy: group flat tags into categories for a drill-down filter UI ----
   const TAXONOMY = {
-    "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","Stanford","TUM","UCSD","USC","UT-Austin","ETH-Zurich"],
+    "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","PKU","Stanford","TUM","UCSD","USC","UT-Austin","ETH-Zurich"],
     "Method": ["RL","imitation-learning","sim-to-real","teleoperation","self-supervised","reset-free","reset","TAMP","VLA","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","multi-task","sample-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting"],
-    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","data-collection","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","humanoid"],
+    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","data-collection","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","humanoid","affordance","cross-embodiment","tactile"],
     "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","video-prediction","video-planning","visuomotor","mocap","capture","human-video"],
     "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw"],
     "Type": ["survey","system","benchmark","analysis","dataset"]
@@ -270,34 +283,53 @@
     grid.innerHTML = "";
     if (!list.length) { grid.innerHTML = '<div class="empty">No papers match.</div>'; return; }
     list.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "card";
+      const wrap = document.createElement("div");
+      wrap.className = "rowwrap";
+      const row = document.createElement("div");
+      row.className = "prow";
+      row.innerHTML =
+        '<span class="caret">▶</span>' +
+        '<span class="pt">'+p.title+'</span>' +
+        (p.venue ? '<span class="pmeta">'+p.venue+'</span>' : '') +
+        (p.cites != null ? '<span class="pcites">'+p.cites+' cit</span>' : '') +
+        '<span class="pcoll">'+p.collection+'</span>';
+
+      const detail = document.createElement("div");
+      detail.className = "pdetail";
+      detail.hidden = true;
       const tags = (p.tags||[]).map(t =>
         '<span class="ctag'+(activeTags.has(t)?' on':'')+'" data-tag="'+t+'">'+t+'</span>').join("");
-      card.innerHTML =
-        (p.image ? '<a class="teaser-wrap"'+(p.project?' href="'+p.project+'" target="_blank" rel="noopener"':'')+'>' +
-                     '<img class="teaser" loading="lazy" src="'+p.image+'" alt="" ' +
-                     'onerror="this.parentNode.style.display=\'none\'"></a>' : '') +
-        '<div class="badges"><span class="badge coll">'+p.collection+'</span>' +
-          (p.venue ? '<span class="badge">'+p.venue+'</span>' : '') + '</div>' +
-        '<h2>'+p.title+'</h2>' +
-        '<div class="ctags">'+tags+'</div>' +
-        '<div class="links">' +
-          (p.summary ? '<a href="'+p.summary+'">📄 Summary</a>' : '') +
-          (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>'
-                  : '<a class="pdf disabled">PDF</a>') +
-          linkEl("arXiv", p.arxiv, "") +
-          linkEl("Project", p.project, "") +
+      detail.innerHTML =
+        (p.image ? '<div class="pimg"><img loading="lazy" src="'+p.image+'" alt="" ' +
+                     'onerror="this.parentNode.remove()"></div>' : '') +
+        '<div class="pbody">' +
+          (p.desc ? '<div class="pdesc">'+p.desc+'</div>' : '') +
+          '<div class="ctags">'+tags+'</div>' +
+          '<div class="links">' +
+            (p.summary ? '<a href="'+p.summary+'">📄 Summary</a>' : '') +
+            (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>'
+                    : '<a class="pdf disabled">PDF</a>') +
+            linkEl("arXiv", p.arxiv, "") +
+            linkEl("Project", p.project, "") +
+          '</div>' +
         '</div>';
-      card.querySelectorAll(".ctag").forEach(e =>
+
+      row.onclick = () => {
+        const willOpen = detail.hidden;
+        detail.hidden = !willOpen;
+        row.classList.toggle("open", willOpen);
+      };
+      detail.querySelectorAll(".ctag").forEach(e =>
         e.onclick = () => toggleTag(e.dataset.tag));
-      card.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
+      detail.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
         a.onclick = (e) => {
           if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let new-tab work
           e.preventDefault();
           openPdf(a.getAttribute("href"), p.title);
         });
-      grid.appendChild(card);
+      wrap.appendChild(row);
+      wrap.appendChild(detail);
+      grid.appendChild(wrap);
     });
   }
 

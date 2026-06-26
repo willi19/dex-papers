@@ -752,5 +752,500 @@ window.PAPERS = [
     project: "https://ait.ethz.ch/drl-handshake",
     venue: "ICRA 2019",
     tags: ["ETH-Zurich", "RL", "imitation-learning", "Shadow", "dexterous", "mocap"]
+  },
+
+  // ===== Dexterous grasping: traced from RobustDexGrasp / PKU-EPIC related-works chains =====
+  // Link-only (no local PDF). `cites` = Semantic Scholar count, point-in-time ~2026-06 (runs
+  // lower than Google Scholar). `desc` = one-line summary. No citation threshold applied.
+
+  // --- Datasets / benchmarks ---
+  {
+    title: "DexYCB: A Benchmark for Capturing Hand Grasping of Objects",
+    collection: "Grasp Synthesis", file: null, cites: 441,
+    arxiv: "https://arxiv.org/abs/2104.04631", project: "https://dex-ycb.github.io/", venue: "CVPR 2021",
+    desc: "NVIDIA benchmark: 582K RGB-D frames of 10 subjects grasping 20 YCB objects with full 3D hand+object pose.",
+    tags: ["NVIDIA", "dataset", "grasping", "hand-object", "mocap"]
+  },
+  {
+    title: "OakInk: A Large-scale Knowledge Repository for Understanding Hand-Object Interaction",
+    collection: "Grasp Synthesis", file: null, cites: 177,
+    arxiv: "https://arxiv.org/abs/2203.15709", project: "https://oakink.net/", venue: "CVPR 2022",
+    desc: "Real captures plus synthesized grasps with object-affordance knowledge for hand-object interaction.",
+    tags: ["dataset", "grasping", "hand-object", "affordance"]
+  },
+  {
+    title: "OakInk2: A Dataset of Bimanual Hands-Object Manipulation in Complex Task Completion",
+    collection: "Grasp Synthesis", file: null, cites: 81,
+    arxiv: "https://arxiv.org/abs/2403.19417", project: "https://oakink.net/v2/", venue: "CVPR 2024",
+    desc: "Bimanual hand-object manipulation across affordance / primitive / task levels for complex daily tasks.",
+    tags: ["dataset", "bimanual", "hand-object", "manipulation"]
+  },
+  {
+    title: "GRAB: A Dataset of Whole-Body Human Grasping of Objects",
+    collection: "Grasp Synthesis", file: null, cites: 542,
+    arxiv: "https://arxiv.org/abs/2008.11200", project: "https://grab.is.tue.mpg.de/", venue: "ECCV 2020",
+    desc: "Whole-body SMPL-X grasping sequences (10 subjects x 51 objects); standard hand-object grasp reference.",
+    tags: ["dataset", "grasping", "hand-object", "humanoid", "mocap"]
+  },
+  {
+    title: "AffordPose: A Large-scale Dataset of Hand-Object Interactions with Affordance-driven Hand Pose",
+    collection: "Grasp Synthesis", file: null, cites: 99,
+    arxiv: "https://arxiv.org/abs/2309.08942", project: "https://affordpose.github.io/", venue: "ICCV 2023",
+    desc: "26.7K affordance-labeled hand-object interactions over 641 objects, 8 affordance types.",
+    tags: ["dataset", "grasping", "hand-object", "affordance"]
+  },
+  {
+    title: "Get a Grip: Multi-Finger Grasp Evaluation at Scale Enables Robust Sim-to-Real Transfer",
+    collection: "Grasp Synthesis", file: null, cites: 16,
+    arxiv: "https://arxiv.org/abs/2410.23701", project: "https://sites.google.com/view/get-a-grip-dataset", venue: "CoRL 2024",
+    desc: "Learns a discriminative grasp-evaluation model; releases 3.5M grasps on 4.3K objects with RGB/point clouds/NeRFs.",
+    tags: ["dataset", "grasping", "dexterous", "sim-to-real"]
+  },
+  {
+    title: "DexH2R: A Benchmark for Dynamic Dexterous Grasping in Human-to-Robot Handover",
+    collection: "Grasp Synthesis", file: null, cites: 7,
+    arxiv: "https://arxiv.org/abs/2506.23152", project: "https://dexh2r.github.io/", venue: "ICCV 2025",
+    desc: "First real human-to-robot dexterous handover dataset plus a DynamicGrasp baseline.",
+    tags: ["dataset", "benchmark", "handover", "dexterous", "grasping"]
+  },
+
+  // --- Generative / optimization grasp synthesis ---
+  {
+    title: "DexGraspNet: A Large-Scale Robotic Dexterous Grasp Dataset for General Objects Based on Simulation",
+    collection: "Grasp Synthesis", file: null, cites: 238,
+    arxiv: "https://arxiv.org/abs/2210.02697", project: "https://pku-epic.github.io/DexGraspNet/", venue: "ICRA 2023",
+    desc: "1.32M sim-validated dexterous grasps over 5,355 objects via an accelerated differentiable force-closure estimator.",
+    tags: ["PKU", "dataset", "grasp-synthesis", "grasping", "dexterous", "sim-to-real"]
+  },
+  {
+    title: "GenDexGrasp: Generalizable Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 118,
+    arxiv: "https://arxiv.org/abs/2210.00722", project: "https://sites.google.com/view/gendexgrasp", venue: "ICRA 2023",
+    desc: "Hand-agnostic grasping that transfers across robot hands via contact-map matching (MultiDex dataset).",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "retargeting"]
+  },
+  {
+    title: "Hand-Object Contact Consistency Reasoning for Human Grasps Generation (GraspTTA)",
+    collection: "Grasp Synthesis", file: null, cites: 247,
+    arxiv: "https://arxiv.org/abs/2104.03304", project: "https://hwjiang1510.github.io/GraspTTA/", venue: "ICCV 2021",
+    desc: "Generates grasps enforcing hand-object contact consistency, with test-time adaptation for unseen objects.",
+    tags: ["grasp-synthesis", "hand-object", "grasping"]
+  },
+  {
+    title: "Synthesizing Diverse and Physically Stable Grasps with Arbitrary Hand Structures using Differentiable Force Closure Estimator",
+    collection: "Grasp Synthesis", file: null, cites: 166,
+    arxiv: "https://arxiv.org/abs/2104.09194", project: null, venue: "RA-L 2021",
+    desc: "Fast differentiable force-closure estimator synthesizing diverse, stable grasps for arbitrary hand structures, training-free.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Deep Differentiable Grasp Planner for High-DOF Grippers",
+    collection: "Grasp Synthesis", file: null, cites: 104,
+    arxiv: "https://arxiv.org/abs/2002.01530", project: null, venue: "RSS 2020",
+    desc: "End-to-end differentiable grasp planner for high-DoF hands using a differentiable generalized Q1 metric.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Grasp'D: Differentiable Contact-rich Grasp Synthesis for Multi-fingered Hands",
+    collection: "Grasp Synthesis", file: null, cites: 101,
+    arxiv: "https://arxiv.org/abs/2208.12250", project: "https://graspd-eccv22.github.io/", venue: "ECCV 2022",
+    desc: "Gradient-based grasp synthesis through a differentiable contact simulator, producing dense-contact multi-finger grasps.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Fast-Grasp'D: Dexterous Multi-finger Grasp Generation Through Differentiable Simulation",
+    collection: "Grasp Synthesis", file: null, cites: 65,
+    arxiv: "https://arxiv.org/abs/2306.08132", project: null, venue: "ICRA 2023",
+    desc: "Faster differentiable-simulation grasp generator; used to synthesize the Grasp'D-1M dataset.",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "dataset"]
+  },
+  {
+    title: "DDGC: Generative Deep Dexterous Grasping in Clutter",
+    collection: "Grasp Synthesis", file: null, cites: 86,
+    arxiv: "https://arxiv.org/abs/2103.04783", project: "https://irobotics.aalto.fi/ddgc/", venue: "RA-L 2021",
+    desc: "Fast generative coarse-to-fine collision-free multi-finger grasp sampler in clutter from a single RGB-D image.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "DexDiffuser: Generating Dexterous Grasps with Diffusion Models",
+    collection: "Grasp Synthesis", file: null, cites: 82,
+    arxiv: "https://arxiv.org/abs/2402.02989", project: "https://yulihn.github.io/DexDiffuser_page/", venue: "RA-L 2024",
+    desc: "Diffusion sampler plus evaluator that generates, scores, and refines multi-finger grasps on partial point clouds.",
+    tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Grasp as You Say: Language-guided Dexterous Grasp Generation (DexGYS)",
+    collection: "Grasp Synthesis", file: null, cites: 67,
+    arxiv: "https://arxiv.org/abs/2405.19291", project: "https://isee-laboratory.github.io/DexGYS/", venue: "NeurIPS 2024",
+    desc: "Language-guided dexterous grasping with the DexGYSNet dataset and a diffusion-plus-transformer framework.",
+    tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous", "LLM", "dataset"]
+  },
+  {
+    title: "Dexterous Grasp Transformer (DGTR)",
+    collection: "Grasp Synthesis", file: null, cites: 29,
+    arxiv: "https://arxiv.org/abs/2404.18135", project: "https://isee-laboratory.github.io/dgtr/", venue: "CVPR 2024",
+    desc: "Set-prediction transformer generating diverse grasps from an object point cloud in one forward pass.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "UGG: Unified Generative Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 13,
+    arxiv: "https://arxiv.org/abs/2311.16917", project: "https://jiaxin-lu.github.io/ugg/", venue: "ECCV 2024",
+    desc: "All-transformer diffusion model jointly generating dexterous grasps and objects on DexGraspNet, with a discriminator.",
+    tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "SemGrasp: Semantic Grasp Generation via Language Aligned Discretization",
+    collection: "Grasp Synthesis", file: null, cites: 43,
+    arxiv: "https://arxiv.org/abs/2404.03590", project: "https://kailinli.github.io/SemGrasp/", venue: "ECCV 2024",
+    desc: "Aligns grasp space with language via discrete tokens and an MLLM to generate language-conditioned grasps (CapGrasp).",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "LLM", "dataset"]
+  },
+  {
+    title: "Contact2Grasp: 3D Grasp Synthesis via Hand-Object Contact Constraint",
+    collection: "Grasp Synthesis", file: null, cites: 38,
+    arxiv: "https://arxiv.org/abs/2210.09245", project: null, venue: "IJCAI 2023",
+    desc: "Two-stage synthesis: samples contact maps, then maps contact to pose with penetration-aware optimization.",
+    tags: ["grasp-synthesis", "hand-object", "grasping"]
+  },
+  {
+    title: "Multi-FinGAN: Generative Coarse-To-Fine Sampling of Multi-Finger Grasps",
+    collection: "Grasp Synthesis", file: null, cites: 64,
+    arxiv: "https://arxiv.org/abs/2012.09696", project: "https://github.com/aalto-intelligent-robotics/Multi-FinGAN", venue: "ICRA 2021",
+    desc: "Fast generative coarse-to-fine multi-finger grasp generation from a single RGB-D image.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "UniGrasp: Learning a Unified Model to Grasp with Multifingered Robotic Hands",
+    collection: "Grasp Synthesis", file: null, cites: 141,
+    arxiv: "https://arxiv.org/abs/1910.10900", project: "https://github.com/stanford-iprl-lab/UniGrasp", venue: "RA-L 2020",
+    desc: "Predicts force-closure contact points generalizing across 2/3/multi-finger hands, including unseen grippers.",
+    tags: ["Stanford", "grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "GanHand: Predicting Human Grasp Affordances in Multi-Object Scenes",
+    collection: "Grasp Synthesis", file: null, cites: 213,
+    arxiv: null, project: "https://enriccorona.github.io/ganhand/", venue: "CVPR 2020",
+    desc: "Predicts 51-DoF MANO grasps from a single RGB image; introduces the YCB-Affordance dataset.",
+    tags: ["grasp-synthesis", "hand-object", "grasping", "dataset"]
+  },
+  {
+    title: "Grasping Field: Learning Implicit Representations for Human Grasps",
+    collection: "Grasp Synthesis", file: null, cites: 297,
+    arxiv: "https://arxiv.org/abs/2008.04451", project: "https://github.com/korrawe/grasping_field", venue: "3DV 2020",
+    desc: "Implicit signed-distance-field representation plus generative MANO grasp synthesis from object point clouds.",
+    tags: ["grasp-synthesis", "hand-object", "grasping"]
+  },
+  {
+    title: "EfficientGrasp: A Unified Data-Efficient Learning to Grasp Method for Multi-Fingered Robot Hands",
+    collection: "Grasp Synthesis", file: null, cites: 25,
+    arxiv: "https://arxiv.org/abs/2206.15159", project: null, venue: "RA-L 2022",
+    desc: "Gripper-model-independent multi-finger grasp synthesis using a gripper-workspace feature.",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "sample-efficient"]
+  },
+  {
+    title: "DexGrasp-Diffusion: Diffusion-based Unified Functional Grasp Synthesis for Multi-Dexterous Robotic Hands",
+    collection: "Grasp Synthesis", file: null, cites: 22,
+    arxiv: "https://arxiv.org/abs/2407.09899", project: null, venue: "arXiv 2024",
+    desc: "Diffusion generator for multiple hands plus a discriminator filtering physically/functionally valid grasps.",
+    tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Task-Oriented Dexterous Hand Pose Synthesis Using Differentiable Grasp Wrench Boundary Estimator (TaskDexGrasp)",
+    collection: "Grasp Synthesis", file: null, cites: 12,
+    arxiv: "https://arxiv.org/abs/2309.13586", project: "https://pku-epic.github.io/TaskDexGrasp/", venue: "IROS 2024",
+    desc: "Optimization-based task-oriented dexterous grasp synthesis via a differentiable grasp-wrench-boundary estimator.",
+    tags: ["PKU", "grasp-synthesis", "grasping", "dexterous", "tool-use"]
+  },
+  {
+    title: "FRoGGeR: Fast Robust Grasp Generation via the Min-Weight Metric",
+    collection: "Grasp Synthesis", file: null, cites: 26,
+    arxiv: "https://arxiv.org/abs/2302.13687", project: "https://alberthli.github.io/frogger/", venue: "IROS 2023",
+    desc: "Sub-second collision-free robust dexterous grasp synthesis via a differentiable min-weight grasp metric.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Dexonomy: Synthesizing All Dexterous Grasp Types in a Grasp Taxonomy",
+    collection: "Grasp Synthesis", file: null, cites: 27,
+    arxiv: "https://arxiv.org/abs/2504.18829", project: "https://pku-epic.github.io/Dexonomy/", venue: "RSS 2025",
+    desc: "Template-based synthesis of 9.5M grasps over 31 GRASP-taxonomy types with a type-conditional generator.",
+    tags: ["PKU", "grasp-synthesis", "grasping", "dexterous", "dataset"]
+  },
+  {
+    title: "AffordDexGrasp: Open-set Language-guided Dexterous Grasp with Generalizable-Instructive Affordance",
+    collection: "Grasp Synthesis", file: null, cites: 30,
+    arxiv: "https://arxiv.org/abs/2503.07360", project: "https://isee-laboratory.github.io/AffordDexGrasp/", venue: "ICCV 2025",
+    desc: "Affordance flow matching plus grasp flow matching for open-set language-guided dexterous grasping.",
+    tags: ["flow-matching", "grasp-synthesis", "grasping", "dexterous", "affordance"]
+  },
+  {
+    title: "G-DexGrasp: Generalizable Dexterous Grasping Synthesis via Part-Aware Prior Retrieval and Prior-Assisted Generation",
+    collection: "Grasp Synthesis", file: null, cites: 8,
+    arxiv: "https://arxiv.org/abs/2503.19457", project: null, venue: "CVPR 2025",
+    desc: "Retrieves fine-grained contact-part/affordance priors to generalize grasp synthesis to unseen categories.",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "affordance"]
+  },
+  {
+    title: "GraspQP: Differentiable Optimization of Force Closure for Diverse and Robust Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 9,
+    arxiv: "https://arxiv.org/abs/2508.15002", project: "https://graspqp.github.io/", venue: "CoRL 2025",
+    desc: "Differentiable force-closure energy via a QP, synthesizing diverse precision and power grasps (ETH Zurich).",
+    tags: ["ETH-Zurich", "grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "Grasping a Handful: Sequential Multi-Object Dexterous Grasp Generation",
+    collection: "Grasp Synthesis", file: null, cites: 6,
+    arxiv: "https://arxiv.org/abs/2503.22370", project: null, venue: "RA-L 2025",
+    desc: "SeqGrasp algorithm plus a diffusion generator for grasping multiple objects sequentially using partial DoF.",
+    tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "PartDexTOG: Generating Dexterous Task-Oriented Grasping via Language-driven Part Analysis",
+    collection: "Grasp Synthesis", file: null, cites: 2,
+    arxiv: "https://arxiv.org/abs/2505.12294", project: null, venue: "arXiv 2025",
+    desc: "LLM generates category/part-level grasp descriptions; a part-conditional diffusion model synthesizes task-oriented grasps.",
+    tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous", "LLM"]
+  },
+  {
+    title: "Lightning Grasp: High Performance Procedural Grasp Synthesis with Contact Fields",
+    collection: "Grasp Synthesis", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2511.07418", project: null, venue: "arXiv 2025",
+    desc: "Procedural grasp synthesis with a Contact Field data structure achieving orders-of-magnitude speedups.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+  {
+    title: "DexGANGrasp: Dexterous Generative Adversarial Grasping Synthesis for Task-Oriented Manipulation",
+    collection: "Grasp Synthesis", file: null, cites: 13,
+    arxiv: "https://arxiv.org/abs/2407.17348", project: "https://david-s-martinez.github.io/DexGANGrasp.io/", venue: "Humanoids 2024",
+    desc: "cGAN generator plus evaluator for real-time single-view dexterous grasps, with MLLM affordance grounding.",
+    tags: ["grasp-synthesis", "grasping", "dexterous"]
+  },
+
+  // --- RL / sim-to-real grasping policies & cross-embodiment ---
+  {
+    title: "UniDexGrasp: Universal Robotic Dexterous Grasping via Learning Diverse Proposal Generation and Goal-Conditioned Policy",
+    collection: "Grasp Synthesis", file: null, cites: 214,
+    arxiv: "https://arxiv.org/abs/2303.00938", project: "https://pku-epic.github.io/UniDexGrasp/", venue: "CVPR 2023",
+    desc: "Two-stage universal grasping: a diverse grasp-proposal generator plus a goal-conditioned RL policy from point clouds.",
+    tags: ["PKU", "RL", "grasping", "dexterous", "sim-to-real"]
+  },
+  {
+    title: "UniDexGrasp++: Improving Dexterous Grasping Policy Learning via Geometry-aware Curriculum and Iterative Generalist-Specialist Learning",
+    collection: "Grasp Synthesis", file: null, cites: 169,
+    arxiv: "https://arxiv.org/abs/2304.00464", project: "https://pku-epic.github.io/UniDexGrasp++/", venue: "ICCV 2023",
+    desc: "Object-agnostic universal grasping via geometry-aware curriculum and iterative generalist-specialist learning.",
+    tags: ["PKU", "RL", "grasping", "dexterous"]
+  },
+  {
+    title: "DexPoint: Generalizable Point Cloud Reinforcement Learning for Sim-to-Real Dexterous Manipulation",
+    collection: "Grasp Synthesis", file: null, cites: 132,
+    arxiv: "https://arxiv.org/abs/2211.09423", project: "https://yzqin.github.io/dexpoint/", venue: "CoRL 2022",
+    desc: "Point-cloud RL for sim-to-real dexterous grasping with imagined-hand point clouds and contact rewards (Allegro).",
+    tags: ["UCSD", "RL", "sim-to-real", "grasping", "dexterous"]
+  },
+  {
+    title: "Learning Robust Real-World Dexterous Grasping Policies via Implicit Shape Augmentation (ISAGrasp)",
+    collection: "Grasp Synthesis", file: null, cites: 41,
+    arxiv: "https://arxiv.org/abs/2210.13638", project: "https://sites.google.com/view/implicitaugmentation/home", venue: "CoRL 2022",
+    desc: "Deforms human grasp demos via an implicit generative model into a large synthetic set, training a robust Allegro policy.",
+    tags: ["imitation-learning", "grasping", "dexterous", "augmentation", "real-world"]
+  },
+  {
+    title: "DexTransfer: Real World Multi-fingered Dexterous Grasping with Minimal Human Demonstrations",
+    collection: "Grasp Synthesis", file: null, cites: 42,
+    arxiv: "https://arxiv.org/abs/2209.14284", project: null, venue: "arXiv 2022",
+    desc: "Learns a point-cloud Allegro grasping policy from a small mocap demo set augmented with domain randomization.",
+    tags: ["imitation-learning", "grasping", "dexterous", "real-world"]
+  },
+  {
+    title: "DextrAH-G: Pixels-to-Action Dexterous Arm-Hand Grasping with Geometric Fabrics",
+    collection: "Grasp Synthesis", file: null, cites: 56,
+    arxiv: "https://arxiv.org/abs/2407.02274", project: "https://sites.google.com/view/dextrah-g", venue: "CoRL 2024",
+    desc: "Depth-based 23-DoF arm-hand grasping policy: RL + geometric fabrics + teacher-student distillation, 87% real success.",
+    tags: ["NVIDIA", "RL", "sim-to-real", "grasping", "dexterous"]
+  },
+  {
+    title: "DextrAH-RGB: Visuomotor Policies to Grasp Anything with Dexterous Hands",
+    collection: "Grasp Synthesis", file: null, cites: 54,
+    arxiv: "https://arxiv.org/abs/2412.01791", project: "https://dextrah-rgb.github.io/", venue: "arXiv 2024",
+    desc: "End-to-end RGB-to-action dexterous arm-hand grasping, distilled in sim with photorealistic rendering for sim-to-real.",
+    tags: ["NVIDIA", "RL", "sim-to-real", "grasping", "dexterous"]
+  },
+  {
+    title: "DexGraspVLA: A Vision-Language-Action Framework Towards General Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 106,
+    arxiv: "https://arxiv.org/abs/2502.20900", project: "https://dexgraspvla.github.io/", venue: "AAAI 2026",
+    desc: "Hierarchical VLA: a pretrained VLM planner plus a diffusion controller, 90%+ in unseen cluttered scenes.",
+    tags: ["VLA", "diffusion", "grasping", "dexterous"]
+  },
+  {
+    title: "Dex1B: Learning with 1B Demonstrations for Dexterous Manipulation",
+    collection: "Grasp Synthesis", file: null, cites: 29,
+    arxiv: "https://arxiv.org/abs/2506.17198", project: "https://jianglongye.com/dex1b/", venue: "RSS 2025",
+    desc: "Generative pipeline producing a 1-billion-demo dataset for grasping and articulation across Shadow/Inspire/Ability hands.",
+    tags: ["UCSD", "grasp-synthesis", "grasping", "dexterous", "dataset", "scaling"]
+  },
+  {
+    title: "UniGraspTransformer: Simplified Policy Distillation for Scalable Dexterous Robotic Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 20,
+    arxiv: "https://arxiv.org/abs/2412.02699", project: null, venue: "CVPR 2025",
+    desc: "Distills thousands of per-object RL grasp trajectories into a single transformer policy, beating UniDexGrasp++.",
+    tags: ["RL", "grasping", "dexterous", "scaling"]
+  },
+  {
+    title: "Efficient Residual Learning with Mixture-of-Experts for Universal Dexterous Grasping (ResDex)",
+    collection: "Grasp Synthesis", file: null, cites: 16,
+    arxiv: "https://arxiv.org/abs/2410.02475", project: null, venue: "ICLR 2025",
+    desc: "Geometry-unaware base policies combined via a residual MoE hyper-policy; 88.8% on DexGraspNet in 12 GPU-hours.",
+    tags: ["RL", "grasping", "dexterous"]
+  },
+  {
+    title: "D(R,O) Grasp: A Unified Representation of Robot and Object Interaction for Cross-Embodiment Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 54,
+    arxiv: "https://arxiv.org/abs/2410.01702", project: "https://nus-lins-lab.github.io/drograspweb/", venue: "ICRA 2025",
+    desc: "Predicts kinematically valid grasps across hands/objects in under 1s; 87.5% sim, 89% real (LeapHand).",
+    tags: ["grasping", "dexterous", "cross-embodiment"]
+  },
+  {
+    title: "Cross-Embodiment Dexterous Grasping with Reinforcement Learning (CrossDex)",
+    collection: "Grasp Synthesis", file: null, cites: 30,
+    arxiv: "https://arxiv.org/abs/2410.02479", project: "https://sites.google.com/view/crossdex", venue: "ICLR 2025",
+    desc: "Eigengrasp-based universal action space; one vision policy reaches 80% on YCB across 4 hands, zero-shot to 2 unseen.",
+    tags: ["RL", "grasping", "dexterous", "cross-embodiment"]
+  },
+  {
+    title: "DemoGrasp: Universal Dexterous Grasping from a Single Demonstration",
+    collection: "Grasp Synthesis", file: null, cites: 9,
+    arxiv: "https://arxiv.org/abs/2509.22149", project: null, venue: "CoRL 2025",
+    desc: "Edits one demo trajectory via single-step-MDP RL; 95% on DexGraspNet (Shadow), 84.6% across embodiments.",
+    tags: ["RL", "grasping", "dexterous", "one-shot"]
+  },
+  {
+    title: "T(R,O) Grasp: Efficient Graph Diffusion of Robot-Object Spatial Transformation for Cross-Embodiment Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 4,
+    arxiv: "https://arxiv.org/abs/2510.12724", project: null, venue: "arXiv 2025",
+    desc: "Graph diffusion over robot-object transformations; 94.83% success at 0.21s inference for closed-loop grasping.",
+    tags: ["diffusion", "grasping", "dexterous", "cross-embodiment"]
+  },
+  {
+    title: "CEDex: Cross-Embodiment Dexterous Grasp Generation at Scale from Human-like Contact Representations",
+    collection: "Grasp Synthesis", file: null, cites: 9,
+    arxiv: "https://arxiv.org/abs/2509.24661", project: null, venue: "ICRA 2026",
+    desc: "Aligns robot kinematics to generated human-like contact representations for scalable cross-embodiment grasp synthesis.",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "cross-embodiment"]
+  },
+  {
+    title: "GeoMatch++: Morphology Conditioned Geometry Matching for Multi-Embodiment Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 3,
+    arxiv: "https://arxiv.org/abs/2412.18998", project: null, venue: "CoRL 2024 Workshop",
+    desc: "Morphology-conditioned geometry matching; +9.64% grasp success on out-of-domain end-effectors.",
+    tags: ["grasping", "dexterous", "cross-embodiment"]
+  },
+  {
+    title: "OmniDexGrasp: Generalizable Dexterous Grasping via Foundation Model and Force Feedback",
+    collection: "Grasp Synthesis", file: null, cites: 5,
+    arxiv: "https://arxiv.org/abs/2510.23119", project: "https://isee-laboratory.github.io/OmniDexGrasp/", venue: "arXiv 2025",
+    desc: "Generates human grasp images via foundation models, transfers to robot actions, with force-aware execution.",
+    tags: ["foundation-model", "grasping", "dexterous"]
+  },
+  {
+    title: "From Power to Precision: Learning Fine-grained Dexterity for Multi-fingered Robotic Hands",
+    collection: "Grasp Synthesis", file: null, cites: 7,
+    arxiv: "https://arxiv.org/abs/2511.13710", project: "https://jianglongye.com/power-to-precision/", venue: "arXiv 2025",
+    desc: "Co-design of control and hand hardware for power and precision grasps; 82.5% zero-shot sim-to-real precision grasping.",
+    tags: ["UCSD", "RL", "sim-to-real", "grasping", "dexterous"]
+  },
+  {
+    title: "DexTouch: Learning to Seek and Manipulate Objects with Tactile Dexterity",
+    collection: "Grasp Synthesis", file: null, cites: 15,
+    arxiv: "https://arxiv.org/abs/2401.12496", project: null, venue: "RA-L 2024",
+    desc: "Vision-free tactile-only system (UR5e + Allegro, 16 FSR sensors) that locates and grasps objects in the dark.",
+    tags: ["RL", "grasping", "dexterous", "tactile"]
+  },
+
+  // --- Functional / affordance / human-prior grasping ---
+  {
+    title: "Dexterous Functional Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 64,
+    arxiv: "https://arxiv.org/abs/2312.02975", project: "https://dexfunc.github.io/", venue: "CoRL 2023",
+    desc: "Functional grasping in the wild using DINO-feature affordances plus an eigengrasp-action-space RL policy (CMU).",
+    tags: ["CMU", "RL", "grasping", "dexterous", "tool-use", "real-world"]
+  },
+  {
+    title: "Dexterous Functional Pre-Grasp Manipulation with Diffusion Policy (UniDexFPM)",
+    collection: "Grasp Synthesis", file: null, cites: 7,
+    arxiv: "https://arxiv.org/abs/2403.12421", project: "https://unidexfpm.github.io/", venue: "ICRA 2025",
+    desc: "Teacher-student MoE plus diffusion policy that reorients objects into functional goal poses; 72.6% across 1,400+ objects.",
+    tags: ["diffusion", "grasping", "dexterous", "tool-use"]
+  },
+  {
+    title: "Learning Dexterous Grasping with Object-Centric Visual Affordances (GRAFF)",
+    collection: "Grasp Synthesis", file: null, cites: 169,
+    arxiv: "https://arxiv.org/abs/2009.01439", project: "https://github.com/priyankamandikal/graff", venue: "ICRA 2021",
+    desc: "Embeds an object-centric visual-affordance model inside deep RL so a 30-DoF hand grasps human-preferred regions.",
+    tags: ["RL", "grasping", "dexterous", "affordance"]
+  },
+  {
+    title: "DexVIP: Learning Dexterous Grasping with Human Hand Pose Priors from Video",
+    collection: "Grasp Synthesis", file: null, cites: 136,
+    arxiv: "https://arxiv.org/abs/2202.00164", project: "https://vision.cs.utexas.edu/projects/dexvip-dexterous-grasp-pose-prior/", venue: "CoRL 2021",
+    desc: "Curates grasp frames from in-the-wild human videos as a hand-pose prior reward for deep-RL grasping, no teleop.",
+    tags: ["UT-Austin", "RL", "grasping", "dexterous", "human-video"]
+  },
+  {
+    title: "Learning Generalizable Dexterous Manipulation from Human Grasp Affordance (ILAD)",
+    collection: "Grasp Synthesis", file: null, cites: 91,
+    arxiv: "https://arxiv.org/abs/2204.02320", project: "https://kristery.github.io/ILAD/", venue: "CoRL 2022",
+    desc: "Generates category-level demos from a human grasp-affordance model; imitation + geometric objective generalizes to novel objects.",
+    tags: ["imitation-learning", "grasping", "dexterous", "affordance"]
+  },
+  {
+    title: "Learning Continuous Grasping Function with a Dexterous Hand from Human Demonstrations (CGF)",
+    collection: "Grasp Synthesis", file: null, cites: 76,
+    arxiv: "https://arxiv.org/abs/2207.05053", project: "https://jianglongye.com/cgf/", venue: "IROS 2023",
+    desc: "CVAE-based implicit continuous grasping function over time from human-object trajectories; transfers to a real Allegro hand.",
+    tags: ["UCSD", "imitation-learning", "grasping", "dexterous", "human-video"]
+  },
+  {
+    title: "GraspGF: Learning Score-based Grasping Primitive for Human-assisting Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 36,
+    arxiv: "https://arxiv.org/abs/2309.06038", project: "https://sites.google.com/view/graspgf", venue: "NeurIPS 2023",
+    desc: "Combines a score-based grasping-gradient field ('how') with a history-conditional RL residual ('when') for human-assisting grasping.",
+    tags: ["diffusion", "grasping", "dexterous", "handover"]
+  },
+  {
+    title: "Toward Human-Like Grasp: Dexterous Grasping via Semantic Representation of Object-Hand",
+    collection: "Grasp Synthesis", file: null, cites: 70,
+    arxiv: null, project: null, venue: "ICCV 2021",
+    desc: "Object-hand semantic representation segments functional areas to guide human-like functional dexterous grasps.",
+    tags: ["grasp-synthesis", "hand-object", "grasping", "affordance"]
+  },
+  {
+    title: "FunctionalGrasp: Learning Functional Grasp for Robots via Semantic Hand-Object Representation",
+    collection: "Grasp Synthesis", file: null, cites: 28,
+    arxiv: null, project: null, venue: "RA-L 2023",
+    desc: "Learns functional grasps via a semantic hand-object representation transferring human functional grasp intent to robots.",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "affordance"]
+  },
+  {
+    title: "GeoMatch: Geometry Matching for Multi-Embodiment Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 25,
+    arxiv: "https://arxiv.org/abs/2312.03864", project: "https://geo-match.github.io/", venue: "CoRL 2023",
+    desc: "Cross-embodiment grasping via per-vertex geometry matching between hand and object.",
+    tags: ["grasping", "dexterous", "cross-embodiment"]
+  },
+  {
+    title: "Generalized Anthropomorphic Functional Grasping with Minimal Demonstrations",
+    collection: "Grasp Synthesis", file: null, cites: 13,
+    arxiv: "https://arxiv.org/abs/2303.17808", project: null, venue: "arXiv 2023",
+    desc: "Synthesizes anthropomorphic functional grasps for novel objects from only a few demonstrations.",
+    tags: ["grasp-synthesis", "grasping", "dexterous", "one-shot"]
+  },
+  {
+    title: "Multi-Keypoint Affordance Representation for Functional Dexterous Grasping",
+    collection: "Grasp Synthesis", file: null, cites: 3,
+    arxiv: "https://arxiv.org/abs/2502.20018", project: null, venue: "RA-L 2025",
+    desc: "Contact-guided multi-keypoint affordance constrains functional grasp posture from human-grasp images via large vision models.",
+    tags: ["grasping", "dexterous", "affordance"]
   }
 ];
