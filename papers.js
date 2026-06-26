@@ -570,6 +570,26 @@ window.PAPERS = [
     tags: ["ETH-Zurich", "RL", "grasping", "dexterous", "sim-to-real"]
   },
   {
+    title: "DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    image: "https://raw.githubusercontent.com/PKU-EPIC/DexGraspNet2/main/figure/teaser.png",
+    arxiv: "https://arxiv.org/abs/2410.23004",
+    project: "https://github.com/PKU-EPIC/DexGraspNet2",
+    venue: "CoRL 2024",
+    tags: ["PKU", "diffusion", "grasping", "dexterous", "sim-to-real", "dataset", "scaling"]
+  },
+  {
+    title: "BODex: Scalable and Efficient Robotic Dexterous Grasp Synthesis Using Bilevel Optimization",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    image: "https://pku-epic.github.io/BODex/images/teaser.png",
+    arxiv: "https://arxiv.org/abs/2412.16490",
+    project: "https://pku-epic.github.io/BODex/",
+    venue: "ICRA 2025",
+    tags: ["PKU", "grasp-synthesis", "grasping", "dexterous", "sim-to-real", "dataset"]
+  },
+  {
     title: "DexVLG: Dexterous Vision-Language-Grasp Model at Scale",
     image: "https://jiaweihe.com/static/image/dexvlg.png",
     collection: "Landscape: bimanual-dex",
