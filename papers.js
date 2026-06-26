@@ -77,6 +77,184 @@ window.PAPERS = [
     venue: "ICRA 2019",
     tags: ["Berkeley", "RL", "real-world", "valve", "door", "Allegro", "manipulation"]
   },
+
+  // ----- Dexterous manipulation (in-hand reorientation, tactile, learning-from-human, contact-rich) -----
+  // Snowballed from RobustDexGrasp/DexGraspNet2 references. Link-only; cites = Semantic Scholar.
+  {
+    title: "A System for General In-Hand Object Re-Orientation",
+    collection: "Dex Manipulation", file: null, cites: 312,
+    arxiv: "https://arxiv.org/abs/2111.03043", project: null, venue: "CoRL 2021",
+    desc: "RL system reorienting 2,000+ objects in-hand (facing up or down) via a gravity curriculum and a vision-based student policy.",
+    tags: ["MIT", "RL", "sim-to-real", "in-hand-reorientation", "manipulation"]
+  },
+  {
+    title: "In-Hand Object Rotation via Rapid Motor Adaptation",
+    collection: "Dex Manipulation", file: null, cites: 184,
+    arxiv: "https://arxiv.org/abs/2210.04887", project: null, venue: "CoRL 2022",
+    desc: "Learns continuous z-axis in-hand rotation over diverse objects via rapid motor adaptation, transferring to a real hand from proprioception.",
+    tags: ["Berkeley", "RL", "sim-to-real", "in-hand-reorientation", "manipulation"]
+  },
+  {
+    title: "General In-Hand Object Rotation with Vision and Touch",
+    collection: "Dex Manipulation", file: null, cites: 167,
+    arxiv: "https://arxiv.org/abs/2309.09979", project: null, venue: "CoRL 2023",
+    desc: "Rotates objects about a chosen axis using fused vision and touch, distilled from a privileged sim teacher to a real multi-finger hand.",
+    tags: ["RL", "sim-to-real", "in-hand-reorientation", "tactile", "manipulation"]
+  },
+  {
+    title: "Rotating without Seeing: Towards In-hand Dexterity through Touch",
+    collection: "Dex Manipulation", file: null, cites: 149,
+    arxiv: "https://arxiv.org/abs/2303.10880", project: null, venue: "RSS 2023",
+    desc: "Touch-only in-hand rotation with dense binary tactile sensing over the hand, trained in sim and transferred to novel objects.",
+    tags: ["UCSD", "RL", "sim-to-real", "in-hand-reorientation", "tactile"]
+  },
+  {
+    title: "AnyRotate: Gravity-Invariant In-Hand Object Rotation with Sim-to-Real Touch",
+    collection: "Dex Manipulation", file: null, cites: 55,
+    arxiv: "https://arxiv.org/abs/2405.07391", project: null, venue: "CoRL 2024",
+    desc: "Gravity-invariant multi-axis in-hand rotation using dense rich tactile sensing, sim-to-real across arbitrary rotation axes.",
+    tags: ["RL", "sim-to-real", "in-hand-reorientation", "tactile"]
+  },
+  {
+    title: "DexMV: Imitation Learning for Dexterous Manipulation from Human Videos",
+    collection: "Dex Manipulation", file: null, cites: 309,
+    arxiv: "https://arxiv.org/abs/2108.05877", project: null, venue: "ECCV 2022",
+    desc: "Extracts hand-object motion from human videos and retargets it to imitation-learn dexterous manipulation policies (relocate, pour, place).",
+    tags: ["UCSD", "imitation-learning", "human-video", "dexterous", "manipulation"]
+  },
+  {
+    title: "From One Hand to Multiple Hands: Imitation Learning for Dexterous Manipulation from Single-Camera Teleoperation",
+    collection: "Dex Manipulation", file: null, cites: 154,
+    arxiv: "https://arxiv.org/abs/2204.12490", project: null, venue: "RA-L 2022",
+    desc: "Single-camera teleoperation to collect demos and imitation-learn dexterous manipulation, transferring across hand embodiments.",
+    tags: ["UCSD", "imitation-learning", "teleoperation", "dexterous", "manipulation"]
+  },
+  {
+    title: "VideoDex: Learning Dexterity from Internet Videos",
+    collection: "Dex Manipulation", file: null, cites: 151,
+    arxiv: "https://arxiv.org/abs/2212.04498", project: null, venue: "CoRL 2022",
+    desc: "Leverages human internet videos as visual and action priors to learn dexterous manipulation on a real robot hand.",
+    tags: ["CMU", "imitation-learning", "human-video", "dexterous", "manipulation"]
+  },
+  {
+    title: "Dexterous Imitation Made Easy: A Learning-Based Framework for Efficient Dexterous Manipulation",
+    collection: "Dex Manipulation", file: null, cites: 144,
+    arxiv: "https://arxiv.org/abs/2203.13251", project: null, venue: "ICRA 2023",
+    desc: "Low-cost nearest-neighbor imitation framework (DIME) learning dexterous manipulation from a handful of teleoperated demos.",
+    tags: ["NYU", "imitation-learning", "teleoperation", "dexterous", "manipulation"]
+  },
+  {
+    title: "State-Only Imitation Learning for Dexterous Manipulation",
+    collection: "Dex Manipulation", file: null, cites: 144,
+    arxiv: "https://arxiv.org/abs/2004.04650", project: null, venue: "IROS 2021",
+    desc: "Imitation learning for dexterous manipulation from state-only demonstrations (no expert actions) via learned inverse dynamics.",
+    tags: ["Berkeley", "imitation-learning", "dexterous", "manipulation"]
+  },
+  {
+    title: "Robotic Telekinesis: Learning a Robotic Hand Imitator by Watching Humans on Youtube",
+    collection: "Dex Manipulation", file: null, cites: 143,
+    arxiv: "https://arxiv.org/abs/2202.10448", project: null, venue: "RSS 2022",
+    desc: "Learns a human-to-robot hand-arm retargeting from internet videos enabling low-cost real-time teleoperation of a dexterous hand.",
+    tags: ["CMU", "imitation-learning", "human-video", "teleoperation", "dexterous"]
+  },
+  {
+    title: "Object-Centric Dexterous Manipulation from Human Motion Data",
+    collection: "Dex Manipulation", file: null, cites: 66,
+    arxiv: "https://arxiv.org/abs/2411.04005", project: null, venue: "CoRL 2024",
+    desc: "Learns dexterous manipulation from human motion-capture data via an object-centric representation, transferring to a real hand.",
+    tags: ["imitation-learning", "human-video", "dexterous", "manipulation"]
+  },
+  {
+    title: "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning",
+    collection: "Dex Manipulation", file: null, cites: 194,
+    arxiv: "https://arxiv.org/abs/2206.08686", project: null, venue: "NeurIPS 2022",
+    desc: "Bi-DexHands benchmark of 20 bimanual dexterous tasks with massively parallel RL baselines spanning human developmental skills.",
+    tags: ["RL", "bimanual", "dexterous", "benchmark", "manipulation"]
+  },
+  {
+    title: "DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning",
+    collection: "Dex Manipulation", file: null, cites: 146,
+    arxiv: "https://arxiv.org/abs/2410.24185", project: null, venue: "ICRA 2025",
+    desc: "Automatically generates large bimanual dexterous demonstration datasets from a few human demos for scalable imitation learning.",
+    tags: ["NVIDIA", "imitation-learning", "bimanual", "dexterous", "data-collection"]
+  },
+  {
+    title: "DexPBT: Scaling up Dexterous Manipulation for Hand-Arm Systems with Population Based Training",
+    collection: "Dex Manipulation", file: null, cites: 40,
+    arxiv: "https://arxiv.org/abs/2305.12127", project: null, venue: "RSS 2023",
+    desc: "Scales dexterous hand-arm manipulation in sim via population-based training, solving regrasping, throwing, and reorientation.",
+    tags: ["NVIDIA", "RL", "dexterous", "scaling", "manipulation"]
+  },
+  {
+    title: "Learning Visuotactile Skills with Two Multifingered Hands",
+    collection: "Dex Manipulation", file: null, cites: 131,
+    arxiv: "https://arxiv.org/abs/2404.16823", project: null, venue: "arXiv 2024",
+    desc: "Bimanual visuotactile teleoperation system and policies learning contact-rich skills with two multifingered hands.",
+    tags: ["bimanual", "tactile", "dexterous", "imitation-learning", "manipulation"]
+  },
+  {
+    title: "Dexterity from Touch: Self-Supervised Pre-Training of Tactile Representations with Robotic Play",
+    collection: "Dex Manipulation", file: null, cites: 100,
+    arxiv: "https://arxiv.org/abs/2303.12076", project: null, venue: "CoRL 2023",
+    desc: "Self-supervised pre-training of tactile representations from robotic play (T-Dex) for downstream dexterous manipulation.",
+    tags: ["NYU", "self-supervised", "tactile", "dexterous", "manipulation"]
+  },
+  {
+    title: "See to Touch: Learning Tactile Dexterity through Visual Incentives",
+    collection: "Dex Manipulation", file: null, cites: 57,
+    arxiv: "https://arxiv.org/abs/2309.12300", project: null, venue: "ICRA 2024",
+    desc: "Uses visual rewards to optimize tactile-based dexterous policies (TAVI), improving contact-rich manipulation on a real hand.",
+    tags: ["NYU", "RL", "tactile", "dexterous", "manipulation"]
+  },
+  {
+    title: "Global Planning for Contact-Rich Manipulation via Local Smoothing of Quasi-dynamic Contact Models",
+    collection: "Dex Manipulation", file: null, cites: 171,
+    arxiv: "https://arxiv.org/abs/2206.10787", project: null, venue: "T-RO 2022",
+    desc: "RRT-style global planner for contact-rich manipulation using local smoothing of quasi-dynamic contact dynamics.",
+    tags: ["MIT", "TAMP", "contact-rich", "manipulation"]
+  },
+  {
+    title: "Learning Dexterous Manipulation from Exemplar Object Trajectories and Pre-Grasps",
+    collection: "Dex Manipulation", file: null, cites: 61,
+    arxiv: "https://arxiv.org/abs/2209.11221", project: null, venue: "ICRA 2023",
+    desc: "Generates dexterous manipulation via pre-grasps and exemplar object trajectories (PGDM), cutting exploration burden for RL.",
+    tags: ["RL", "dexterous", "manipulation"]
+  },
+  {
+    title: "Sampling-based Exploration for Reinforcement Learning of Dexterous Manipulation",
+    collection: "Dex Manipulation", file: null, cites: 46,
+    arxiv: "https://arxiv.org/abs/2303.03486", project: null, venue: "RSS 2023",
+    desc: "Sampling-based exploration that bootstraps RL for hard dexterous manipulation with sparse contacts and long horizons.",
+    tags: ["RL", "dexterous", "manipulation"]
+  },
+  {
+    title: "Dextrous Tactile In-Hand Manipulation Using a Modular Reinforcement Learning Architecture",
+    collection: "Dex Manipulation", file: null, cites: 45,
+    arxiv: "https://arxiv.org/abs/2303.04705", project: null, venue: "ICRA 2023",
+    desc: "Modular RL architecture for tactile in-hand manipulation, decoupling control sub-problems for robust sim-to-real.",
+    tags: ["RL", "tactile", "in-hand-reorientation", "dexterous"]
+  },
+  {
+    title: "Enhancing Dexterity in Robotic Manipulation via Hierarchical Contact Exploration",
+    collection: "Dex Manipulation", file: null, cites: 42,
+    arxiv: "https://arxiv.org/abs/2307.00383", project: null, venue: "RA-L 2023",
+    desc: "Hierarchical contact-mode exploration with trajectory optimization for multi-finger dexterous manipulation.",
+    tags: ["RL", "contact-rich", "dexterous", "manipulation"]
+  },
+  {
+    title: "Dexterous Manipulation from Images: Autonomous Real-World RL via Substep Guidance",
+    collection: "Dex Manipulation", file: null, cites: 33,
+    arxiv: "https://arxiv.org/abs/2212.09902", project: null, venue: "ICRA 2023",
+    desc: "Autonomous real-world RL learning image-based dexterous manipulation via human-provided substep guidance and resets.",
+    tags: ["Berkeley", "RL", "real-world", "dexterous", "manipulation"]
+  },
+  {
+    title: "Solving Challenging Dexterous Manipulation Tasks With Trajectory Optimisation and Reinforcement Learning",
+    collection: "Dex Manipulation", file: null, cites: 32,
+    arxiv: "https://arxiv.org/abs/2009.05104", project: null, venue: "ICML 2021",
+    desc: "Combines trajectory optimization with RL to solve challenging high-DoF dexterous manipulation tasks in simulation.",
+    tags: ["RL", "dexterous", "manipulation"]
+  },
   {
     title: "Dexterous Manipulation through Imitation Learning: A Survey",
     collection: "Survey",
