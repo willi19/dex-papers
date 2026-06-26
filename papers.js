@@ -567,7 +567,7 @@ window.PAPERS = [
     arxiv: "https://arxiv.org/abs/2504.05287",
     project: "https://zdchan.github.io/Robust_DexGrasp/",
     venue: "CoRL 2025 (Spotlight)",
-    tags: ["RL", "grasping", "dexterous", "sim-to-real"]
+    tags: ["ETH-Zurich", "RL", "grasping", "dexterous", "sim-to-real"]
   },
   {
     title: "DexVLG: Dexterous Vision-Language-Grasp Model at Scale",
@@ -713,16 +713,6 @@ window.PAPERS = [
     project: "https://hly-123.github.io/FunGrasp/",
     venue: "RA-L 2025",
     tags: ["ETH-Zurich", "RL", "sim-to-real", "grasping", "dexterous", "one-shot", "real-world"]
-  },
-  {
-    title: "RobustDexGrasp: Robust Dexterous Grasping of General Objects",
-    image: "https://zdchan.github.io/Robust_DexGrasp/objects.png",
-    collection: "Grasp Synthesis",
-    file: null,
-    arxiv: "https://arxiv.org/abs/2504.05287",
-    project: "https://zdchan.github.io/Robust_DexGrasp/",
-    venue: "CoRL 2025",
-    tags: ["ETH-Zurich", "RL", "sim-to-real", "grasping", "dexterous", "real-world"]
   },
   {
     title: "LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion",
