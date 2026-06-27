@@ -1573,5 +1573,84 @@ window.PAPERS = [
     arxiv: "https://arxiv.org/abs/2307.15345", project: null, venue: "IROS 2023",
     desc: "Learns compliant stiffness profiles via task-segmented multi-objective Bayesian optimization for contact-rich tasks.",
     tags: ["impedance", "compliance", "contact-rich", "industrial", "manipulation"]
+  },
+
+  // ===== Merged from the parallel snowball branch (remote-only papers) =====
+  {
+    title: "Holo-Dex: Teaching Dexterity with Immersive Mixed Reality",
+    collection: "Dex Manipulation", file: null, cites: 102,
+    arxiv: "https://arxiv.org/abs/2210.06463", project: null, venue: "ICRA 2023",
+    desc: "Mixed-reality headset for immersive real-time teleoperation of a dexterous hand to collect demos and learn manipulation via nearest-neighbor imitation.",
+    tags: ["dexterous", "manipulation", "teleoperation", "imitation-learning"]
+  },
+  {
+    title: "DexArt: Benchmarking Generalizable Dexterous Manipulation with Articulated Objects",
+    collection: "Dex Manipulation", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2305.05706", project: null, venue: "CVPR 2023",
+    desc: "Benchmark and 3D point-cloud RL method for a multi-finger hand manipulating diverse articulated objects with generalization.",
+    tags: ["dexterous", "manipulation", "RL", "benchmark", "articulation", "point-cloud"]
+  },
+  {
+    title: "RoboPianist: Dexterous Piano Playing with Deep Reinforcement Learning",
+    collection: "Dex Manipulation", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2304.04150", project: null, venue: "CoRL 2023",
+    desc: "Benchmark where simulated anthropomorphic hands learn to play 150 piano pieces, stressing high-precision bimanual finger coordination.",
+    tags: ["dexterous", "manipulation", "bimanual", "RL", "benchmark"]
+  },
+  {
+    title: "Robot Synesthesia: In-Hand Manipulation with Visuotactile Sensing",
+    collection: "Dex Manipulation", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2312.01853", project: null, venue: "ICRA 2024",
+    desc: "Point-cloud visuotactile representation fusing vision and touch for RL-based in-hand object rotation with sim-to-real transfer.",
+    tags: ["manipulation", "in-hand-reorientation", "tactile", "RL", "sim-to-real", "point-cloud"]
+  },
+  {
+    title: "Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation",
+    collection: "Compliance Control", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2503.02881", project: null, venue: "RSS 2025",
+    desc: "Slow latent diffusion policy plus a fast tactile/force-reactive refiner for compliant contact-rich manipulation, with AR tactile-feedback teleop.",
+    tags: ["manipulation", "tactile", "force-control", "compliance", "contact-rich", "diffusion"]
+  },
+  {
+    title: "ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation",
+    collection: "Compliance Control", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2410.07554", project: null, venue: "ICRA 2025",
+    desc: "Force-centric imitation with a handheld force-motion capture system, learning force-conditioned policies for tasks like vegetable peeling.",
+    tags: ["manipulation", "tactile", "force-control", "contact-rich", "imitation-learning"]
+  },
+  {
+    title: "ForceVLA: Enhancing VLA Models with a Force-aware MoE for Contact-rich Manipulation",
+    collection: "Compliance Control", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2505.22159", project: null, venue: "arXiv 2025",
+    desc: "Adds a force-aware mixture-of-experts module to a vision-language-action model so policies adapt to contact forces.",
+    tags: ["manipulation", "force-control", "contact-rich", "VLA"]
+  },
+  {
+    title: "MimicTouch: Leveraging Multi-modal Human Tactile Demonstrations for Contact-rich Manipulation",
+    collection: "Compliance Control", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2310.16917", project: null, venue: "CoRL 2024",
+    desc: "Learns contact-rich/compliant policies from multimodal human tactile (force) demonstrations, transferring touch-guided control to the robot.",
+    tags: ["manipulation", "tactile", "force-control", "compliance", "contact-rich", "imitation-learning"]
+  },
+  {
+    title: "Learning Force Control for Legged Manipulation",
+    collection: "Compliance Control", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2405.01402", project: null, venue: "ICRA 2024",
+    desc: "RL that directly learns end-effector force control (not just position) for contact-rich manipulation, shown on a legged manipulator.",
+    tags: ["manipulation", "force-control", "contact-rich", "RL"]
+  },
+  {
+    title: "Sim-to-Real Transfer of Robotic Control with Dynamics Randomization",
+    collection: "Related: misc", file: null, cites: 1706,
+    arxiv: "https://arxiv.org/abs/1710.06537", project: null, venue: "ICRA 2018",
+    desc: "Trains policies over randomized dynamics in sim to transfer to real robots without real-world data; foundational sim-to-real reference.",
+    tags: ["sim-to-real", "domain-randomization", "RL", "manipulation"]
+  },
+  {
+    title: "Noise and the Reality Gap: The Use of Simulation in Evolutionary Robotics",
+    collection: "Related: misc", file: null, cites: null,
+    arxiv: null, project: null, venue: "ECAL 1995",
+    desc: "Classic analysis of the simulation-reality gap and the role of noise in transferring evolved controllers to real robots.",
+    tags: ["sim-to-real", "reality-gap", "evolutionary-robotics", "analysis"]
   }
 ];
