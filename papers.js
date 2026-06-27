@@ -70,6 +70,7 @@ window.PAPERS = [
   },
   {
     title: "Dexterous Manipulation with Deep RL: Efficient, General, and Low-Cost",
+    image: "https://bair.berkeley.edu/static/blog/dex_manip/teaser.gif",
     collection: "Dex Manipulation",
     file: "2019_Berkeley_DexterousManipDeepRL.pdf",
     arxiv: "https://arxiv.org/abs/1810.06045",
@@ -82,6 +83,7 @@ window.PAPERS = [
   // Snowballed from RobustDexGrasp/DexGraspNet2 references. Link-only; cites = Semantic Scholar.
   {
     title: "A System for General In-Hand Object Re-Orientation",
+    image: "https://taochenshh.github.io/projects/files/in_hand_reorientation/teaser.png",
     collection: "Dex Manipulation", file: null, cites: 312,
     arxiv: "https://arxiv.org/abs/2111.03043", project: null, venue: "CoRL 2021",
     desc: "RL system reorienting 2,000+ objects in-hand (facing up or down) via a gravity curriculum and a vision-based student policy.",
@@ -89,6 +91,7 @@ window.PAPERS = [
   },
   {
     title: "In-Hand Object Rotation via Rapid Motor Adaptation",
+    image: "https://haozhi.io/hora/figs/method.png",
     collection: "Dex Manipulation", file: null, cites: 184,
     arxiv: "https://arxiv.org/abs/2210.04887", project: null, venue: "CoRL 2022",
     desc: "Learns continuous z-axis in-hand rotation over diverse objects via rapid motor adaptation, transferring to a real hand from proprioception.",
@@ -96,6 +99,7 @@ window.PAPERS = [
   },
   {
     title: "General In-Hand Object Rotation with Vision and Touch",
+    image: "https://haozhi.io/rotateit/res/figs/vision.png",
     collection: "Dex Manipulation", file: null, cites: 167,
     arxiv: "https://arxiv.org/abs/2309.09979", project: null, venue: "CoRL 2023",
     desc: "Rotates objects about a chosen axis using fused vision and touch, distilled from a privileged sim teacher to a real multi-finger hand.",
@@ -103,6 +107,7 @@ window.PAPERS = [
   },
   {
     title: "Rotating without Seeing: Towards In-hand Dexterity through Touch",
+    image: "https://touchdexterity.github.io/static/images/teaser.png",
     collection: "Dex Manipulation", file: null, cites: 149,
     arxiv: "https://arxiv.org/abs/2303.10880", project: null, venue: "RSS 2023",
     desc: "Touch-only in-hand rotation with dense binary tactile sensing over the hand, trained in sim and transferred to novel objects.",
@@ -110,6 +115,7 @@ window.PAPERS = [
   },
   {
     title: "AnyRotate: Gravity-Invariant In-Hand Object Rotation with Sim-to-Real Touch",
+    image: "https://maxyang27896.github.io/anyrotate/static/images/system.png",
     collection: "Dex Manipulation", file: null, cites: 55,
     arxiv: "https://arxiv.org/abs/2405.07391", project: null, venue: "CoRL 2024",
     desc: "Gravity-invariant multi-axis in-hand rotation using dense rich tactile sensing, sim-to-real across arbitrary rotation axes.",
@@ -117,6 +123,7 @@ window.PAPERS = [
   },
   {
     title: "DexMV: Imitation Learning for Dexterous Manipulation from Human Videos",
+    image: "https://yzqin.github.io/dexmv/figure/thumbnail.png",
     collection: "Dex Manipulation", file: null, cites: 309,
     arxiv: "https://arxiv.org/abs/2108.05877", project: null, venue: "ECCV 2022",
     desc: "Extracts hand-object motion from human videos and retargets it to imitation-learn dexterous manipulation policies (relocate, pour, place).",
@@ -131,6 +138,7 @@ window.PAPERS = [
   },
   {
     title: "VideoDex: Learning Dexterity from Internet Videos",
+    image: "https://video-dex.github.io/resources/method.png",
     collection: "Dex Manipulation", file: null, cites: 151,
     arxiv: "https://arxiv.org/abs/2212.04498", project: null, venue: "CoRL 2022",
     desc: "Leverages human internet videos as visual and action priors to learn dexterous manipulation on a real robot hand.",
@@ -138,6 +146,7 @@ window.PAPERS = [
   },
   {
     title: "Dexterous Imitation Made Easy: A Learning-Based Framework for Efficient Dexterous Manipulation",
+    image: "https://nyu-robot-learning.github.io/dime/figs/intro.png",
     collection: "Dex Manipulation", file: null, cites: 144,
     arxiv: "https://arxiv.org/abs/2203.13251", project: null, venue: "ICRA 2023",
     desc: "Low-cost nearest-neighbor imitation framework (DIME) learning dexterous manipulation from a handful of teleoperated demos.",
@@ -152,6 +161,7 @@ window.PAPERS = [
   },
   {
     title: "Robotic Telekinesis: Learning a Robotic Hand Imitator by Watching Humans on Youtube",
+    image: "https://robotic-telekinesis.github.io/static/images/Tasks_Expert.png",
     collection: "Dex Manipulation", file: null, cites: 143,
     arxiv: "https://arxiv.org/abs/2202.10448", project: null, venue: "RSS 2022",
     desc: "Learns a human-to-robot hand-arm retargeting from internet videos enabling low-cost real-time teleoperation of a dexterous hand.",
@@ -159,6 +169,7 @@ window.PAPERS = [
   },
   {
     title: "Object-Centric Dexterous Manipulation from Human Motion Data",
+    image: "https://cypypccpy.github.io/obj-dex.github.io/assets/images/workspace.jpg",
     collection: "Dex Manipulation", file: null, cites: 66,
     arxiv: "https://arxiv.org/abs/2411.04005", project: null, venue: "CoRL 2024",
     desc: "Learns dexterous manipulation from human motion-capture data via an object-centric representation, transferring to a real hand.",
@@ -166,6 +177,7 @@ window.PAPERS = [
   },
   {
     title: "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning",
+    image: "https://pku-marl.github.io/DexterousHands/assets/images/coverv3.jpg",
     collection: "Dex Manipulation", file: null, cites: 194,
     arxiv: "https://arxiv.org/abs/2206.08686", project: null, venue: "NeurIPS 2022",
     desc: "Bi-DexHands benchmark of 20 bimanual dexterous tasks with massively parallel RL baselines spanning human developmental skills.",
@@ -173,6 +185,7 @@ window.PAPERS = [
   },
   {
     title: "DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning",
+    image: "https://dexmimicgen.github.io/resources/pipeline.jpg",
     collection: "Dex Manipulation", file: null, cites: 146,
     arxiv: "https://arxiv.org/abs/2410.24185", project: null, venue: "ICRA 2025",
     desc: "Automatically generates large bimanual dexterous demonstration datasets from a few human demos for scalable imitation learning.",
@@ -187,6 +200,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Visuotactile Skills with Two Multifingered Hands",
+    image: "https://toruowo.github.io/hato/figures/overview.png",
     collection: "Dex Manipulation", file: null, cites: 131,
     arxiv: "https://arxiv.org/abs/2404.16823", project: null, venue: "arXiv 2024",
     desc: "Bimanual visuotactile teleoperation system and policies learning contact-rich skills with two multifingered hands.",
@@ -194,6 +208,7 @@ window.PAPERS = [
   },
   {
     title: "Dexterity from Touch: Self-Supervised Pre-Training of Tactile Representations with Robotic Play",
+    image: "https://tactile-dexterity.github.io/mfiles/tdex_algo.png",
     collection: "Dex Manipulation", file: null, cites: 100,
     arxiv: "https://arxiv.org/abs/2303.12076", project: null, venue: "CoRL 2023",
     desc: "Self-supervised pre-training of tactile representations from robotic play (T-Dex) for downstream dexterous manipulation.",
@@ -208,6 +223,7 @@ window.PAPERS = [
   },
   {
     title: "Global Planning for Contact-Rich Manipulation via Local Smoothing of Quasi-dynamic Contact Models",
+    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUDk04mEi_llFYOOj7jR05JEl1_vVtxh7SMaHWAsDIUP1sGXc8-wyABQcaG_ZQdKpX5wehhOxjIlBJmhpm4A9f1B5G2hGISDxPMadj2x7LdKbNy7naCdcQzNR1_tKxkxOy_idLpRYzKejFLFw5inxJG22sZEXIK80R9cj1ssCKa8Hl11Ossfse9ipdSowyN7HiIlrzhgIkpMJCkVWYZDs9YCvS9q9sBsZbKicC8yy58=w1280",
     collection: "Dex Manipulation", file: null, cites: 171,
     arxiv: "https://arxiv.org/abs/2206.10787", project: null, venue: "T-RO 2022",
     desc: "RRT-style global planner for contact-rich manipulation using local smoothing of quasi-dynamic contact dynamics.",
@@ -236,6 +252,7 @@ window.PAPERS = [
   },
   {
     title: "Enhancing Dexterity in Robotic Manipulation via Hierarchical Contact Exploration",
+    image: "https://xianyicheng.github.io/HiDex-Website/static/images/overview.jpg",
     collection: "Dex Manipulation", file: null, cites: 42,
     arxiv: "https://arxiv.org/abs/2307.00383", project: null, venue: "RA-L 2023",
     desc: "Hierarchical contact-mode exploration with trajectory optimization for multi-finger dexterous manipulation.",
@@ -243,6 +260,7 @@ window.PAPERS = [
   },
   {
     title: "Dexterous Manipulation from Images: Autonomous Real-World RL via Substep Guidance",
+    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUD3eUDf7zi8o_OHCAu68qkfVl0pfxHcShFr2jBXxa2Bl05pHh-d1V3_BYM18NHLaN43Pp08z2hmvQ_27KD2diRdggkJP0hyD50oax5wKiibG8K-_MK1b-vEI7icSRulERzxdxS3iwC_oeJpzR54dZ3qzDizr8MGraXbNG3D9DSpdCIrKf4YsLIHGxsjQE3EvBCC1RcMdc4ApuL_C5T-4XjJhAUZpJ5vt84yvjXF=w1280",
     collection: "Dex Manipulation", file: null, cites: 33,
     arxiv: "https://arxiv.org/abs/2212.09902", project: null, venue: "ICRA 2023",
     desc: "Autonomous real-world RL learning image-based dexterous manipulation via human-provided substep guidance and resets.",
@@ -250,6 +268,7 @@ window.PAPERS = [
   },
   {
     title: "Solving Challenging Dexterous Manipulation Tasks With Trajectory Optimisation and Reinforcement Learning",
+    image: "https://dexterous-manipulation.github.io/images/handblock_res.png",
     collection: "Dex Manipulation", file: null, cites: 32,
     arxiv: "https://arxiv.org/abs/2009.05104", project: null, venue: "ICML 2021",
     desc: "Combines trajectory optimization with RL to solve challenging high-DoF dexterous manipulation tasks in simulation.",
@@ -1471,6 +1490,7 @@ window.PAPERS = [
   // Some are industrial (peg-in-hole/assembly) rather than dexterous-hand; flagged in tags.
   {
     title: "Adaptive Compliance Policy: Learning Approximate Compliance for Diffusion Guided Control",
+    image: "https://adaptive-compliance.github.io/images/paper_thumbnail.jpg",
     collection: "Compliance Control", file: null, cites: 67,
     arxiv: "https://arxiv.org/abs/2410.09309", project: null, venue: "ICRA 2025",
     desc: "Diffusion visuomotor policy predicting spatially/temporally varying compliance from human demos; >50% gain over fixed-compliance baselines.",
@@ -1492,6 +1512,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Variable Compliance Control From a Few Demonstrations for Bimanual Robot with Haptic Feedback Teleoperation System",
+    image: "https://omron-sinicx.github.io/CompACT/assets/overview.png",
     collection: "Compliance Control", file: null, cites: 31,
     arxiv: "https://arxiv.org/abs/2406.14990", project: null, venue: "IROS 2024",
     desc: "Learns variable compliance from a few haptic-teleoperation demos for bimanual contact-rich tasks.",
@@ -1499,6 +1520,7 @@ window.PAPERS = [
   },
   {
     title: "DA-VIL: Adaptive Dual-Arm Manipulation with Reinforcement Learning and Variable Impedance Control",
+    image: "https://dualarmvil.github.io/Dual-Arm-VIL/static/pipeline8.svg",
     collection: "Compliance Control", file: null, cites: 13,
     arxiv: "https://arxiv.org/abs/2410.19712", project: null, venue: "ICRA 2025",
     desc: "RL plus gradient-based gain optimization to modulate dual-arm impedance for stable manipulation of varied objects.",
@@ -1506,6 +1528,7 @@ window.PAPERS = [
   },
   {
     title: "Admittance Visuomotor Policy Learning for General-Purpose Contact-Rich Manipulations",
+    image: "https://ryanjiao.github.io/AdmitDiffPolicy/static/images/general_fig.png",
     collection: "Compliance Control", file: null, cites: 10,
     arxiv: "https://arxiv.org/abs/2409.14440", project: null, venue: "IEEE T-IE 2025",
     desc: "Learns admittance-control visuomotor policies for general-purpose contact-rich manipulation.",
@@ -1513,6 +1536,7 @@ window.PAPERS = [
   },
   {
     title: "Tactile-Conditioned Diffusion Policy for Force-Aware Robotic Manipulation",
+    image: "https://tactile-farm.github.io/assets/gifs/plant_insertion.gif",
     collection: "Compliance Control", file: null, cites: 9,
     arxiv: "https://arxiv.org/abs/2510.13324", project: null, venue: "arXiv 2025",
     desc: "Tactile-conditioned diffusion policy applying appropriate grasp forces for fragile/deformable contact-rich manipulation.",
@@ -1541,6 +1565,7 @@ window.PAPERS = [
   },
   {
     title: "FORGE: Force-Guided Exploration for Robust Contact-Rich Manipulation under Uncertainty",
+    image: "https://noseworm.github.io/forge/static/images/forge_overview.png",
     collection: "Compliance Control", file: null, cites: 35,
     arxiv: "https://arxiv.org/abs/2408.04587", project: null, venue: "RA-L 2025",
     desc: "Force-threshold plus dynamics randomization for sim-to-real force-aware insertion/assembly conditioned on max allowable force.",
@@ -1578,6 +1603,7 @@ window.PAPERS = [
   // ===== Merged from the parallel snowball branch (remote-only papers) =====
   {
     title: "Holo-Dex: Teaching Dexterity with Immersive Mixed Reality",
+    image: "https://holo-dex.github.io/mfiles/Intro.png",
     collection: "Dex Manipulation", file: null, cites: 102,
     arxiv: "https://arxiv.org/abs/2210.06463", project: null, venue: "ICRA 2023",
     desc: "Mixed-reality headset for immersive real-time teleoperation of a dexterous hand to collect demos and learn manipulation via nearest-neighbor imitation.",
@@ -1585,6 +1611,7 @@ window.PAPERS = [
   },
   {
     title: "DexArt: Benchmarking Generalizable Dexterous Manipulation with Articulated Objects",
+    image: "https://www.chenbao.tech/dexart/static/images/pipeline.png",
     collection: "Dex Manipulation", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2305.05706", project: null, venue: "CVPR 2023",
     desc: "Benchmark and 3D point-cloud RL method for a multi-finger hand manipulating diverse articulated objects with generalization.",
@@ -1592,6 +1619,7 @@ window.PAPERS = [
   },
   {
     title: "RoboPianist: Dexterous Piano Playing with Deep Reinforcement Learning",
+    image: "https://kzakka.com/robopianist/assets/environment.png",
     collection: "Dex Manipulation", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2304.04150", project: null, venue: "CoRL 2023",
     desc: "Benchmark where simulated anthropomorphic hands learn to play 150 piano pieces, stressing high-precision bimanual finger coordination.",
@@ -1606,6 +1634,7 @@ window.PAPERS = [
   },
   {
     title: "Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation",
+    image: "https://reactive-diffusion-policy.github.io/static/images/overview.png",
     collection: "Compliance Control", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2503.02881", project: null, venue: "RSS 2025",
     desc: "Slow latent diffusion policy plus a fast tactile/force-reactive refiner for compliant contact-rich manipulation, with AR tactile-feedback teleop.",
@@ -1613,6 +1642,7 @@ window.PAPERS = [
   },
   {
     title: "ForceMimic: Force-Centric Imitation Learning with Force-Motion Capture System for Contact-Rich Manipulation",
+    image: "https://forcemimic.github.io/static/images/teaser.png",
     collection: "Compliance Control", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2410.07554", project: null, venue: "ICRA 2025",
     desc: "Force-centric imitation with a handheld force-motion capture system, learning force-conditioned policies for tasks like vegetable peeling.",
@@ -1620,6 +1650,7 @@ window.PAPERS = [
   },
   {
     title: "ForceVLA: Enhancing VLA Models with a Force-aware MoE for Contact-rich Manipulation",
+    image: "https://arxiv.org/html/2505.22159v1/extracted/6484354/figures/teaser.jpg",
     collection: "Compliance Control", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2505.22159", project: null, venue: "arXiv 2025",
     desc: "Adds a force-aware mixture-of-experts module to a vision-language-action model so policies adapt to contact forces.",
@@ -1627,6 +1658,7 @@ window.PAPERS = [
   },
   {
     title: "MimicTouch: Leveraging Multi-modal Human Tactile Demonstrations for Contact-rich Manipulation",
+    image: "https://arxiv.org/html/2310.16917v4/x1.png",
     collection: "Compliance Control", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2310.16917", project: null, venue: "CoRL 2024",
     desc: "Learns contact-rich/compliant policies from multimodal human tactile (force) demonstrations, transferring touch-guided control to the robot.",
