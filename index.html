@@ -72,10 +72,8 @@
   .row-meta { margin-top: 2px; color: var(--muted); font-size: 10.5px; }
   .row-area { display: inline-block; padding: 2px 7px; border: 1px solid #314765;
     border-radius: 5px; background: rgba(63,130,190,.07); color: var(--accent); font-size: 10px; }
-  .row-idea { min-width: 0; color: #c5cad3; font-size: 11.5px; line-height: 1.4; }
-  .row-idea ul { margin: 0; padding-left: 15px; }
-  .row-idea li::marker { color: #66758a; }
-  .row-idea li + li { margin-top: 2px; }
+  .row-idea { min-width: 0; color: #c5cad3; font-size: 11.5px; line-height: 1.4;
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
   .row-links { display: flex; flex-wrap: wrap; gap: 4px; }
   .row-links a, .teaser-toggle { padding: 3px 7px; border: 1px solid var(--border); border-radius: 5px;
     color: var(--muted); font-size: 10.5px; text-decoration: none; white-space: nowrap; }
@@ -135,7 +133,7 @@
 </header>
 <section class="library-title">
   <h2>Choose a paper</h2>
-  <p>Scan each paper's core idea in two bullets and open its teaser only when needed.</p>
+  <p>Scan one paper per row and open its teaser only when you need it.</p>
 </section>
 <main id="grid"></main>
 
@@ -383,11 +381,6 @@
     return true;
   }
 
-  function ideaBullets(text) {
-    const points = text.split(/(?<=[.!?])\s+(?=[A-Z0-9])/).filter(Boolean).slice(0, 2);
-    return '<ul>' + points.map(point => '<li>' + point + '</li>').join("") + '</ul>';
-  }
-
   function render() {
     renderBars();
     const nActive = activeTags.size + activeGroups.size;
@@ -406,7 +399,7 @@
         '<div class="paper-row"><div class="row-title"><strong>'+p.title+'</strong>' +
           (p.venue ? '<div class="row-meta">'+p.venue+'</div>' : '') + '</div>' +
         '<span class="row-area">'+GROUP_LABELS[p._group]+'</span>' +
-        '<div class="row-idea">'+ideaBullets(idea)+'</div>' +
+        '<div class="row-idea">'+idea+'</div>' +
         '<div class="row-links">' +
           (p.summary ? '<a href="'+p.summary+'">Summary</a>' : '') +
           (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>' : '') +

@@ -13,7 +13,25 @@
  .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
  .badge.lab{color:var(--accent);} .badge.m{color:#cdb6ff;}
  .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 22px;}
- .report p{font-size:15px;margin:0 0 15px;} .report p.lead{font-size:15.5px;}
+ .report{display:flex;flex-direction:column;gap:12px;}
+ .report h2{font-size:13px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);margin:0 0 8px;}
+ .report p{margin:0;}
+ .report ul,.report ol{margin:0;padding-left:19px;}
+ .report li+li{margin-top:6px;}
+ .summary{padding:15px 17px;border:1px solid #385a82;border-radius:10px;background:#172131;}
+ .summary .label{display:block;color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+ .summary p{font-size:16px;line-height:1.5;}
+ .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+ .block{padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel);}
+ .block li{color:#c9ced8;}
+ .steps{list-style:none;counter-reset:step;padding:0!important;}
+ .steps li{position:relative;padding-left:33px;min-height:25px;}
+ .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:22px;height:22px;
+   display:grid;place-items:center;border-radius:50%;background:#263b57;color:var(--accent);font-size:11px;font-weight:700;}
+ .takeaway{border-color:#365744;background:#17251e;}
+ .takeaway h2{color:#78d6a8;}
+ .muted{color:var(--muted);}
+ @media(max-width:650px){.summary-grid{grid-template-columns:1fr;}}
  .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
  .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
  .links a.pdf{background:#2a1f12;} .links a:hover{border-color:var(--accent);color:var(--accent);}
@@ -24,7 +42,69 @@
  <h1>DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation</h1>
  <div class="badges"><span class="badge">ICML 2026 (arXiv 2505.24853, May 2025)</span><span class="badge lab">Stanford University, NVIDIA</span><span class="badge m">RL</span><span class="badge m">bimanual</span><span class="badge m">dexterous</span><span class="badge m">human-video</span></div>
  <img class="fig" src="../overview_assets/dexmachina.png" alt="teaser figure">
- <div class="report"><p class="lead">DexMachina tackles &#x27;functional retargeting&#x27;: learning dexterous manipulation policies that track object states from human hand-object demonstrations, rather than mimicking hand joints directly. It targets long-horizon, bimanual tasks with articulated objects, which are hard due to large action spaces, spatiotemporal discontinuities, and the embodiment gap between human and robot hands. The core idea is a curriculum that uses virtual object controllers whose strength decays over training: the object is first driven automatically toward its target states so the policy can gradually take over under motion and contact guidance. The authors also release a simulation benchmark of articulated-object tasks and multiple robot hands for functional hardware comparison.</p><p>Functional retargeting: learn to reproduce object trajectories/states from human demonstrations instead of directly copying human hand poses, sidestepping the embodiment gap. Virtual object controllers with decaying strength: external controllers initially drive the object toward its target states, then weaken so the policy must take over. Curriculum-based RL that provides motion and contact guidance, easing learning on long-horizon bimanual articulated-object tasks. Demonstrations sourced from the ARCTIC dataset of human hand-object interactions with articulated objects. A simulation benchmark with curated hand assets and articulated objects enabling functional comparison across hardware designs. Finding that degrees of freedom matters more than hand size for manipulation performance.</p><p>A novel curriculum-based RL algorithm for functional retargeting using decaying-strength virtual object controllers. A simulation benchmark with 5 articulated objects (from ARCTIC) and 6 open-source dexterous hands (Inspire, Allegro, XHand, Schunk, Ability, DexRobot/DexHand), spanning 7 demonstration clips of long- and short-horizon motions. State-of-the-art results: consistently best performance across all hands and tasks on long-horizon demos, and roughly 70 to 90 percent success on short-horizon tasks (AUC-ADD metric). Significant improvement over baselines including kinematic retargeting (insufficient), an ObjDex task-reward reimplementation, task+auxiliary rewards without curriculum, and a ManipTrans-style curriculum (training instability). Demonstration that hand degrees of freedom is more important than hand size for functional performance, enabling functional comparison of hardware designs.</p><p>Given human hand-object demonstrations of bimanual articulated-object tasks, DexMachina trains robot-hand policies that reproduce the demonstrated object motion. It works across multiple robot hand designs and serves as a benchmark for comparing dexterous hardware.</p></div>
+ <div class="report">
+  <section class="summary">
+   <span class="label">TL;DR</span>
+   <p>DexMachina uses a temporary virtual controller to move the object along a human demonstration, then gradually removes that help until the robot hands perform the task on their own.</p>
+  </section>
+
+  <div class="summary-grid">
+   <section class="block">
+    <h2>Problem</h2>
+    <ul>
+     <li>Input: one tracked human hand–object demonstration.</li>
+     <li>Goal: reproduce the object's pose and articulation trajectory.</li>
+     <li>Target regime: long-horizon, bimanual, articulated-object tasks.</li>
+    </ul>
+   </section>
+   <section class="block">
+    <h2>Why prior approaches fail</h2>
+    <ul>
+     <li>Kinematic retargeting copies hand motion but does not guarantee functional contact.</li>
+     <li>Object-state reward says what to achieve, but gives weak exploration guidance.</li>
+     <li>Long contact sequences fail early, so the policy rarely observes later subtasks.</li>
+    </ul>
+   </section>
+  </div>
+
+  <section class="block">
+   <h2>Training recipe</h2>
+   <ol class="steps">
+    <li>Retarget the human motion to obtain reference wrist motion, hand keypoints, and approximate contacts.</li>
+    <li>Train PPO with object tracking, motion imitation, joint-reference, and contact rewards.</li>
+    <li>Use virtual spring-damper controllers to keep the object on the demonstrated trajectory.</li>
+    <li>Decay controller strength once the policy's rewards are stable; the learned policy takes over the physics.</li>
+   </ol>
+  </section>
+
+  <div class="summary-grid">
+   <section class="block">
+    <h2>What is actually new</h2>
+    <ul>
+     <li>The curriculum relaxes <em>object dynamics</em>, not just reward thresholds or simulator parameters.</li>
+     <li>The target is object function, so robot motion may differ from the human strategy.</li>
+     <li>The same setup evaluates algorithms and hand hardware without hand-specific method changes.</li>
+    </ul>
+   </section>
+   <section class="block">
+    <h2>Evidence</h2>
+    <ul>
+     <li>6 dexterous hands, 5 articulated objects, and 7 ARCTIC demonstrations.</li>
+     <li>Largest gains appear on long-horizon tasks where task and auxiliary rewards alone fail.</li>
+     <li>Kinematic replay may look correct while barely manipulating the object.</li>
+    </ul>
+   </section>
+  </div>
+
+  <section class="block takeaway">
+   <h2>Takeaway</h2>
+   <ul>
+    <li><strong>The distinctive ingredient is the decaying object controller.</strong> PPO and the reward terms are mostly familiar.</li>
+    <li>DexMachina turns one human trajectory into a task-specific RL curriculum and a functional test for different hand designs.</li>
+    <li class="muted">Scope: state-based policies trained and evaluated in simulation; this is not one generalist policy shared across every task and hand.</li>
+   </ul>
+  </section>
+ </div>
  <div class="links">
   <a href="https://arxiv.org/abs/2505.24853" target="_blank" rel="noopener">arXiv abstract</a>
   <a class="pdf" href="https://arxiv.org/pdf/2505.24853" target="_blank" rel="noopener">arXiv PDF ↗</a>
