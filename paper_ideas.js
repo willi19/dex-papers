@@ -74,13 +74,24 @@ window.PAPER_IDEAS = {
   "FunGrasp: Functional Grasping for Diverse Dexterous Hands": "Extracts the intended functional grasp from a single RGB-D image of a human, retargets it across robot hands, and uses the pose to guide an RL controller. Privileged learning and sim-to-real techniques preserve task-specific grasps on unseen objects instead of collapsing to generic power grasps.",
   "LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion": "Decouples high-level temporal motion from fine spatial hand-object contact using latent diffusion coupled to a grasp VAE. The regularized grasp latent ties motion to object geometry and improves single- and bimanual generation on object categories unseen during training.",
   "Demonstration-Guided Deep Reinforcement Learning of Control Policies for Dexterous Human-Robot Interaction": "Uses one parameterized multi-objective reward for handshakes, claps, and finger touches, with its weights inferred from human-human motion capture. Demonstrations shape what natural interaction looks like while RL handles the robot's arm-hand dynamics and contact.",
-  "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "Freezes a grasp policy trained to imitate human hand motion, then learns a PPO residual that adapts it to object geometry while avoiding semantically inappropriate contact regions. A privileged teacher is distilled with DAgger into a point-cloud student."
+  "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "Freezes a grasp policy trained to imitate human hand motion, then learns a PPO residual that adapts it to object geometry while avoiding semantically inappropriate contact regions. A privileged teacher is distilled with DAgger into a point-cloud student.",
+  "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation": "Predicts future hand–object trajectories from human HOI data, retargets the hand motion, and uses the predicted object motion as a dense PPO reward. The unusual part is not PPO or contact shaping: object-state tracking replaces separate lift, rotate, and articulate rewards across tasks.",
+  "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation": "Learns continuous latent actions from both action-free video and labeled robot data, then generates 16-step latent plans with diffusion. Language-guided attention filters irrelevant motion, while absolute episode-time encoding distinguishes visually similar phases of a long task.",
+  "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment": "Retargets human fingertips to form a primary robot trajectory, then limits RL to a residual that repairs hand–object contact near a thumb-guided pre-grasp. A separate object-relative wrist planner preserves the demonstrated manipulation after grasping.",
+  "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "Uses an intent classifier’s per-joint gradients to reduce diffusion noise on the fingers that matter for hold-versus-use semantics while preserving diversity elsewhere. SDF-guided refinement then repairs hand–object geometry; it generates MANO grasps rather than robot control policies."
 };
 
 // Summary pages can be attached without editing the main paper database.
 window.PAPER_SUMMARIES = {
-  "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "overview/afforddex.html"
+  "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "overview/afforddex.html",
+  "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation": "overview/paper.html?id=object-centric-motion-priors",
+  "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation": "overview/paper.html?id=latentvla",
+  "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment": "overview/paper.html?id=pkda",
+  "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "overview/paper.html?id=sns-grasp"
 };
 (window.PAPERS || []).forEach(p => {
-  if (window.PAPER_SUMMARIES[p.title]) p.summary = window.PAPER_SUMMARIES[p.title];
+  if (!window.PAPER_SUMMARIES[p.title]) return;
+  p.summary = window.PAPER_SUMMARIES[p.title];
+  const genericId = p.summary.match(/^overview\/paper\.html\?id=([^&]+)$/);
+  if (genericId) p.image = "overview_assets/" + genericId[1] + ".png";
 });
