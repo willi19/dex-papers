@@ -96,6 +96,11 @@
   .library-title { max-width: 1120px; padding: 24px 20px 0; }
   .library-title h2 { margin: 0; font-size: 17px; }
   .library-title p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+  .grouphead { display: flex; align-items: baseline; gap: 8px; margin: 25px 0 8px;
+    padding-bottom: 7px; border-bottom: 1px solid var(--border); }
+  .grouphead:first-child { margin-top: 5px; }
+  .grouphead h3 { margin: 0; font-size: 14px; }
+  .grouphead span { color: var(--muted); font-size: 11px; }
   /* compact expandable table rows */
   .rowwrap { margin-bottom: 5px; }
   .prow { display: flex; align-items: center; gap: 10px; padding: 7px 11px;
@@ -177,10 +182,10 @@
       <a href="overview.html">카드형 overview →</a>
     </span>
   </h1>
-  <input class="search" id="search" type="search" placeholder="제목·방법·하드웨어 검색…" autocomplete="off">
-  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">Filters &amp; collections</span> <span class="zonesummary" id="zoneSummary"></span></div>
+  <input class="search" id="search" type="search" placeholder="제목·요약·방법·하드웨어 검색…" autocomplete="off">
+  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">Research groups &amp; filters</span> <span class="zonesummary" id="zoneSummary"></span></div>
   <div id="filterZone">
-    <div class="barlabel">Collections</div>
+    <div class="barlabel">Research groups <span style="text-transform:none">(primary contribution)</span></div>
     <div class="chips" id="collbar"></div>
     <div class="barlabel">Filters <span style="text-transform:none">(click a category to expand · AND across categories, OR within)</span></div>
     <div id="filters"></div>
@@ -241,8 +246,59 @@
 <script>
   const P = window.PAPERS || [];
   const activeTags = new Set();
-  const activeColls = new Set();
+  const activeGroups = new Set();
   let query = "";
+  const GROUP_ORDER = [
+    "RL & Control",
+    "Imitation & Demonstration Learning",
+    "Foundation / Generalist Policies",
+    "Grasping & Motion Generation",
+    "Data / Teleoperation / Task Generation",
+    "Benchmarks / Perception / Infrastructure"
+  ];
+  const GROUP_DESCRIPTIONS = {
+    "RL & Control": "reward-driven exploration, curriculum, control",
+    "Imitation & Demonstration Learning": "BC, DAgger, diffusion/flow policies, retargeting",
+    "Foundation / Generalist Policies": "VLA, pretrained behavior models, cross-task controllers",
+    "Grasping & Motion Generation": "grasp synthesis, grasp policies, physically plausible motion",
+    "Data / Teleoperation / Task Generation": "datasets, teleoperation, augmentation, autonomous collection",
+    "Benchmarks / Perception / Infrastructure": "evaluation, sensing, planning, surveys, systems"
+  };
+  const GROUP_OVERRIDES = {
+    "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning": "Benchmarks / Perception / Infrastructure",
+    "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks": "Benchmarks / Perception / Infrastructure",
+    "DexH2R: A Benchmark for Dynamic Dexterous Grasping in Human-to-Robot Handover": "Benchmarks / Perception / Infrastructure",
+    "DexterityGen: Foundation Controller for Unprecedented Dexterity": "Foundation / Generalist Policies",
+    "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity": "Foundation / Generalist Policies",
+    "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation": "Foundation / Generalist Policies",
+    "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning": "RL & Control",
+    "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation": "RL & Control",
+    "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity": "RL & Control",
+    "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World": "RL & Control"
+  };
+  function researchGroupOf(p) {
+    if (GROUP_OVERRIDES[p.title]) return GROUP_OVERRIDES[p.title];
+    const tags = p.tags || [];
+    const lowerTitle = p.title.toLowerCase();
+    const has = (...values) => values.some(v => tags.includes(v));
+    const hasPart = value => tags.some(t => t.toLowerCase().includes(value));
+
+    if (has("survey", "benchmark", "analysis", "perception", "segmentation", "TAMP"))
+      return "Benchmarks / Perception / Infrastructure";
+    if (has("dataset", "teleoperation", "crowdsourcing", "mocap", "capture") ||
+        (has("data-collection") && !has("RL")))
+      return "Data / Teleoperation / Task Generation";
+    if (hasPart("grasp") || lowerTitle.includes("grasp"))
+      return "Grasping & Motion Generation";
+    if (has("VLA", "foundation", "foundation-model", "generalist", "pretraining") ||
+        /foundation (model|policy|controller)|generalist|large behavior model/.test(lowerTitle))
+      return "Foundation / Generalist Policies";
+    if (has("RL"))
+      return "RL & Control";
+    if (has("imitation-learning", "diffusion", "flow-matching", "one-shot", "human-video"))
+      return "Imitation & Demonstration Learning";
+    return "Benchmarks / Perception / Infrastructure";
+  }
   const READING_NOTES = {
     "Learning Dexterous In-Hand Manipulation": {
       baseline: "Goal-progress reward, success/drop signal, recurrent policy",
@@ -306,9 +362,9 @@
   // ---- tag taxonomy: group flat tags into categories for a drill-down filter UI ----
   const TAXONOMY = {
     "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","PKU","Stanford","TUM","UCSD","USC","UT-Austin","ETH-Zurich"],
-    "Method": ["RL","imitation-learning","sim-to-real","teleoperation","self-supervised","reset-free","reset","TAMP","VLA","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","multi-task","sample-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting","compliance","impedance","admittance","force-control"],
-    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","data-collection","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","humanoid","affordance","cross-embodiment","tactile","industrial"],
-    "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","video-prediction","video-planning","visuomotor","mocap","capture","human-video"],
+    "Method": ["RL","imitation-learning","sim-to-real","teleoperation","self-supervised","reset-free","reset","TAMP","VLA","VLM","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","data-augmentation","multi-task","multi-agent","sample-efficient","data-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting","human-to-robot","compliance","impedance","admittance","force-control","force-feedback","model-based","MPC","optimization","planning","differentiable-simulation","fine-tuning","transformer","energy-based","compositional"],
+    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","contact","non-prehensile","dynamic","whole-body","coordination","data-collection","data-generation","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","functional-grasp","humanoid","affordance","cross-embodiment","tactile","haptic","industrial","generalization","open-source"],
+    "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","vision","RGB-D","point-cloud","video-prediction","video-planning","visuomotor","mocap","capture","human-video","human-motion","pose-estimation","implicit-representation","language-grounding","geometry","part-aware","object-centric"],
     "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw"],
     "Type": ["survey","system","benchmark","analysis","dataset"]
   };
@@ -319,17 +375,20 @@
 
   // derive the primary 4-digit year from a venue string
   const yearOf = (p) => { const m = (p.venue||"").match(/(19|20)\d{2}/g); return m ? m[0] : null; };
-  P.forEach(p => p._year = yearOf(p));
+  P.forEach(p => {
+    p._year = yearOf(p);
+    p._group = researchGroupOf(p);
+  });
 
   // counts
-  const tagCounts = {}, collCounts = {}, yearCounts = {};
+  const tagCounts = {}, groupCounts = {}, yearCounts = {};
   P.forEach(p => {
     (p.tags || []).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1);
-    collCounts[p.collection] = (collCounts[p.collection]||0)+1;
+    groupCounts[p._group] = (groupCounts[p._group]||0)+1;
     if (p._year) { const k = "year:"+p._year; yearCounts[k] = (yearCounts[k]||0)+1; }
   });
   Object.assign(tagCounts, yearCounts);
-  const allColls = Object.keys(collCounts).sort();
+  const allGroups = GROUP_ORDER.filter(g => groupCounts[g]);
 
   // tags per category (year newest-first; others by count desc)
   const catTags = {};
@@ -349,11 +408,11 @@
 
   function renderBars() {
     collbar.innerHTML = "";
-    allColls.forEach(c => {
+    allGroups.forEach(c => {
       const el = document.createElement("span");
-      el.className = "chip coll" + (activeColls.has(c) ? " on" : "");
-      el.innerHTML = c + ' <span class="n">' + collCounts[c] + '</span>';
-      el.onclick = () => { activeColls.has(c) ? activeColls.delete(c) : activeColls.add(c); render(); };
+      el.className = "chip coll" + (activeGroups.has(c) ? " on" : "");
+      el.innerHTML = c + ' <span class="n">' + groupCounts[c] + '</span>';
+      el.onclick = () => { activeGroups.has(c) ? activeGroups.delete(c) : activeGroups.add(c); render(); };
       collbar.appendChild(el);
     });
     filters.innerHTML = "";
@@ -395,7 +454,7 @@
   function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
 
   function match(p) {
-    if (activeColls.size && !activeColls.has(p.collection)) return false;
+    if (activeGroups.size && !activeGroups.has(p._group)) return false;
     // AND across categories, OR within a category
     const groups = {};
     for (const t of activeTags) { const c = catOf(t); (groups[c] = groups[c] || []).push(t); }
@@ -408,7 +467,8 @@
       if (!ok) return false;
     }
     if (query) {
-      const hay = (p.title + " " + (p.tags||[]).join(" ") + " " + (p.venue||"")).toLowerCase();
+      const hay = (p.title + " " + (p.desc||"") + " " + p._group + " " +
+        (p.tags||[]).join(" ") + " " + (p.venue||"") + " " + (p.collection||"")).toLowerCase();
       if (!hay.includes(query)) return false;
     }
     return true;
@@ -421,13 +481,21 @@
 
   function render() {
     renderBars();
-    const nActive = activeTags.size + activeColls.size;
+    const nActive = activeTags.size + activeGroups.size;
     zoneSummary.textContent = nActive ? "· " + nActive + " active" : "";
     const list = P.filter(match);
     countEl.textContent = "· " + list.length + " / " + P.length;
     grid.innerHTML = "";
     if (!list.length) { grid.innerHTML = '<div class="empty">No papers match.</div>'; return; }
-    list.forEach(p => {
+    GROUP_ORDER.forEach(group => {
+      const groupedPapers = list.filter(p => p._group === group);
+      if (!groupedPapers.length) return;
+      const groupHead = document.createElement("div");
+      groupHead.className = "grouphead";
+      groupHead.innerHTML = '<h3>'+group+'</h3><span>'+groupedPapers.length+
+        ' · '+GROUP_DESCRIPTIONS[group]+'</span>';
+      grid.appendChild(groupHead);
+      groupedPapers.forEach(p => {
       const wrap = document.createElement("div");
       wrap.className = "rowwrap";
       const row = document.createElement("div");
@@ -437,7 +505,7 @@
         '<span class="pt">'+p.title+'</span>' +
         (p.venue ? '<span class="pmeta">'+p.venue+'</span>' : '') +
         (p.cites != null ? '<span class="pcites">'+p.cites+' cit</span>' : '') +
-        '<span class="pcoll">'+p.collection+'</span>';
+        '<span class="pcoll">'+p._group+'</span>';
 
       const detail = document.createElement("div");
       detail.className = "pdetail";
@@ -480,6 +548,7 @@
       wrap.appendChild(row);
       wrap.appendChild(detail);
       grid.appendChild(wrap);
+      });
     });
   }
 
@@ -487,7 +556,7 @@
     query = e.target.value.trim().toLowerCase(); render();
   });
   document.getElementById("clear").onclick = () => {
-    activeTags.clear(); activeColls.clear(); query = "";
+    activeTags.clear(); activeGroups.clear(); query = "";
     document.getElementById("search").value = ""; render();
   };
 
