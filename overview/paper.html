@@ -73,6 +73,11 @@
       html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+esc(p.tldr)+"</p></section>";
       html += '<div class="grid">'+block("Problem",list(p.problem))+block("Output",list(p.output))+"</div>";
       html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");
+      if (p.methodDetails) {
+        html += block("Method details",p.methodDetails.map(x =>
+          "<h3>"+esc(x.name)+'</h3><p>'+esc(x.text)+"</p>"
+        ).join(""));
+      }
 
       const eqs = p.equations.map((eq,i) =>
         "<h3>"+(i+1)+" · "+esc(eq.name)+'</h3><pre class="eq">'+esc(eq.formula)+'</pre><p class="meaning"><strong>Meaning:</strong> '+esc(eq.meaning)+"</p>"

@@ -24,7 +24,19 @@ window.DETAILED_PAPER_SUMMARIES = {
       {name:"Trajectory-guided RL",text:"Train a PPO policy to follow both the retargeted robot motion and the predicted object motion while establishing stable contact."},
       {name:"Deployment",text:"Use system identification and domain randomization for zero-shot sim-to-real; rerun retargeting and RL for a new hand embodiment."}
     ],
+    methodDetails: [
+      {name:"Predictor representation",text:"A hand state is a MANO pose; an object state is translation plus quaternion in a frame centered at the object’s initial geometry. For articulated objects, the moving part is represented relative to the base. A 100-point object cloud is encoded by PointNet and concatenated with the pose history."},
+      {name:"Predictor architecture",text:"A six-layer GPT-2 predicts the next hand–object state from a 10-step history, then feeds its own prediction back autoregressively until the dataset sequence horizon is reached. One model covers DexYCB and bimanual ARCTIC; DexYCB inputs are zero-padded to the shared dimensionality."},
+      {name:"From a robot scene to a human-style state",text:"At inference, robot fingertips and joints are treated as a semantic subset of the 21 MANO joints. The authors replace FrankMocap’s 2D reprojection objective with 3D alignment to robot forward-kinematics joints, while adapting MANO shape to robot link lengths. FoundationPose supplies the object’s 6D pose."},
+      {name:"Policy interface",text:"The PPO state contains robot joint positions and the object’s 6D pose. The action contains delta end-effector pose and delta hand-joint positions; inverse kinematics converts the arm target to joint commands."},
+      {name:"Training and transfer",text:"Policies train for one million steps in 1,024 parallel SAPIEN environments. System identification tunes PID and force limits; domain randomization perturbs observation noise, friction, object scale, and mass before zero-shot hardware deployment."}
+    ],
     equations: [
+      {
+        name:"Autoregressive motion prediction",
+        formula:"L_motion = Σₜ₌₁^Ω [ α‖s_t^h − ŝ_t^h‖₂ + β‖s_t^o − ŝ_t^o‖₂ ]\nα = 1,  β = 2,  history length n = 10",
+        meaning:"Supervise human-hand and object-state prediction jointly. The object term gets twice the weight because object dimensions occupy a smaller fraction of the combined state."
+      },
       {
         name:"Hand-motion retargeting",
         formula:"L_retarget(q_t) = Σᵢ₌₁⁵ ‖xᵢᵗ − fᵢ(q_t)‖₂ + β‖q_t − q_{t−1}‖₂\nsubject to q_lower ≤ q_t ≤ q_upper",
@@ -111,6 +123,13 @@ window.DETAILED_PAPER_SUMMARIES = {
       {name:"LADT",text:"Freeze TA-LAM and train a diffusion Transformer to generate 16 future latent actions conditioned on recent observations, language, proprioception, and latent history."},
       {name:"Target adaptation",text:"Freeze the latent representation and action decoder; fine-tune only the high-level LADT planner on target-platform demonstrations."}
     ],
+    methodDetails: [
+      {name:"Data split and role",text:"D_pretrain contains more than 2.5 million sequences from 52 sources: unlabeled human video, labeled multi-embodiment RDT-1B trajectories, simulation, and roughly 0.5 million real demonstrations from AgiBot World Beta plus LatentVLA-Dexterous. D_finetune is a separate 1,600-hour collection for eight target tasks."},
+      {name:"Policy interface",text:"Each labeled trajectory provides multi-view RGB observations, a 14D bimanual proprioceptive state, a language instruction, and a 14D bimanual action. TA-LAM compresses a five-frame history into one 512D latent action."},
+      {name:"TA-LAM internals",text:"A frozen SigLIP image/text pair creates an instruction-conditioned attention mask. A Transformer inverse-dynamics model encodes the masked visual history, language, state, absolute episode time, and relative position. A forward-dynamics head predicts the next observation; a small MLP action decoder grounds the latent on robot-only labels."},
+      {name:"LADT planning",text:"With TA-LAM frozen, LADT denoises a horizon of 16 future latent actions. Its context includes the recent observation history, current proprioception, language, and previously inferred latent actions, so the plan is generated as a coherent chunk rather than one code at a time."},
+      {name:"Fine-tuning boundary",text:"Target-platform adaptation updates LADT while keeping the inverse-dynamics representation and action decoder frozen. The decoded 16-action sequence is trained against expert action chunks, preserving the broad latent learned during pretraining."}
+    ],
     equations: [
       {
         name:"Task-focused visual attention",
@@ -191,6 +210,14 @@ window.DETAILED_PAPER_SUMMARIES = {
       {name:"Trajectory Proposer",text:"Retarget human fingertips in world coordinates to robot joint angles; palm orientation is only an auxiliary constraint."},
       {name:"ContactAdapt Optimizer",text:"Start from a thumb-guided pre-grasp, locally restrict wrist exploration, and learn a residual action that turns the kinematic proposal into a stable grasp."},
       {name:"Wrist Trajectory Planner",text:"After grasping, preserve the hand–object transform and derive the robot wrist trajectory from the demonstrated object trajectory."}
+    ],
+    methodDetails: [
+      {name:"Perception outputs",text:"For every video frame, the perceptor extracts an 18D human-hand state—five 3D fingertips plus 3D palm orientation—a 6D object pose, two to five fingertip contact points, and an object mesh. Contacts are fingertip–surface distances below 5 cm."},
+      {name:"Two perception modes",text:"When an object model is known, HFL-Net estimates hand and object trajectories. For raw RGB without a model, HOLD jointly reconstructs hand and object geometry; convex decomposition repairs the reconstructed mesh for collision checks."},
+      {name:"Primary trajectory",text:"Nonlinear optimization matches robot fingertips directly in the world frame, rather than matching fingertip-to-wrist vectors that amplify hand-size differences. Palm geodesic error and temporal joint smoothing are secondary terms. Inverse dynamics converts the resulting joint sequence to A_primary."},
+      {name:"RL initialization",text:"The starting state is the last collision-free frame at which the thumb is closest to its demonstrated contact. The shared object goal is the first demonstrated pose displaced 0.1 m from the start, turning different tasks’ initial phase into a common pick-up problem."},
+      {name:"Action-space rescaling",text:"The first six action dimensions control wrist translation and rotation; the remaining dimensions control fingers. Only the wrist is compressed to a local neighborhood around the pre-grasp configuration, leaving fingers free to explore contact."},
+      {name:"Reward activation",text:"Approach reward pulls fingertips toward extracted contacts. Grasp reward activates only when every fingertip is within 6 cm and combines physical contact with cosine similarity to retargeted joints. Lift reward activates after the thumb and one more finger contact the object."}
     ],
     equations: [
       {
@@ -278,6 +305,13 @@ window.DETAILED_PAPER_SUMMARIES = {
       {name:"Exploratory denoising",text:"Run standard isotropic diffusion once to obtain a candidate used by the frozen intent recognizer."},
       {name:"SNS-Diff",text:"Restart from the same initial noise and attenuate each joint’s noise according to its intent criticality."},
       {name:"FGR",text:"Couple joint features to object vertices through SDF-guided cross-attention, then iteratively refine the mesh with ResKAN blocks."}
+    ],
+    methodDetails: [
+      {name:"Recognizer input",text:"The intent recognizer concatenates a 778-vertex MANO mesh with a 4,096-point object cloud and passes them through channel and spatial mixers. A 0.414M-parameter head predicts hold or use; the classifier is frozen before grasp generation."},
+      {name:"Two-pass sampling",text:"The model first denoises isotropic x_T to an exploratory grasp y_0. Gradients of the ground-truth intent loss with respect to each joint rotation are measured on y_0. Denoising then restarts from the same x_T with the per-joint SNS scale, isolating the effect of semantic noise modulation."},
+      {name:"SNS-Diff conditioning",text:"Diffusion time uses sinusoidal features, intent uses a trainable 16D lookup, and the object cloud uses a 4,096D basis-point-set representation. Each is projected to 256D and fused by three Semantic Calibration Transformer blocks before predicting MANO rotation and global translation."},
+      {name:"Geometry signal",text:"FGR converts the current MANO pose into 778 mesh vertices and computes one signed distance to the object per vertex. Joint parameters form 17 attention queries; per-vertex SDF features form keys and values, so joint updates depend on nearby object geometry rather than MANO’s fixed skinning alone."},
+      {name:"Iterative refinement",text:"Three ResKAN refinement steps concatenate the current pose, SDF values, and joint–vertex attention features, then update MANO parameters. Reconstruction and bidirectional contact losses train the refinement while retaining the semantic pose proposed by SNS-Diff."}
     ],
     equations: [
       {
