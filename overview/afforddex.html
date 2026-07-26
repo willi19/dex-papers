@@ -82,32 +82,75 @@
   <section class="block">
    <h2>Training pipeline</h2>
    <ol class="steps">
-    <li><strong>Human prior:</strong> learn natural robot-hand motion from roughly 2,200 right-hand sequences in OakInk2.</li>
-    <li><strong>Negative affordance:</strong> identify object regions that should not be touched, such as a knife blade.</li>
-    <li><strong>Residual teacher:</strong> freeze the human-motion policy and use PPO to learn object-specific corrections with privileged state.</li>
-    <li><strong>Vision student:</strong> distill the teacher with DAgger into a policy that does not observe ground-truth object state.</li>
+    <li><strong>Human prior:</strong> use PPO and trajectory-tracking rewards to imitate roughly 2,200 right-hand sequences from OakInk2. This is RL-based motion imitation, not plain behavior cloning.</li>
+    <li><strong>Negative affordance:</strong> preprocess each object into a 3D point set marking regions that should not be touched, such as a knife blade.</li>
+    <li><strong>Residual teacher:</strong> freeze the human-motion policy and train a second PPO policy that adds 24D object-specific corrections using privileged object state.</li>
+    <li><strong>Vision student:</strong> use DAgger to distill the combined teacher behavior into a policy that sees partial point clouds but not ground-truth object pose or velocity.</li>
    </ol>
+  </section>
+
+  <section class="block">
+   <h2>Method interface</h2>
+   <table>
+    <thead><tr><th>Module</th><th>Input</th><th>Output / supervision</th></tr></thead>
+    <tbody>
+     <tr><td>Human prior πᴴ</td><td>Robot state R, privileged object state O, object point cloud P</td><td>24 normalized actuator commands; PPO reward tracks MANO keypoints and penalizes actuator power</td></tr>
+     <tr><td>NAA preprocessing</td><td>Raw object mesh</td><td>Negative-affordance point cloud N; produced once per object</td></tr>
+     <tr><td>Residual teacher πᵀ</td><td>R, O, P, N</td><td>24D residual added element-wise to frozen πᴴ; PPO reward handles grasp, goal, success, and forbidden contact</td></tr>
+     <tr><td>Vision student πˢ</td><td>R, partial P from five RGB-D cameras, N</td><td>DAgger regression to the teacher action without privileged O</td></tr>
+    </tbody>
+   </table>
+  </section>
+
+  <section class="block">
+   <h2>Method details</h2>
+
+   <h3>Human-motion prior</h3>
+   <p>The reference is a complete human grasping trajectory rather than a terminal grasp pose. Robot and MANO hands are matched through corresponding keypoints. Base joints use a sharper distance decay (λ = 50) than middle joints (λ = 40), and a power penalty discourages both aggressive acceleration and braking. After this stage, πᴴ is frozen.</p>
+
+   <h3>Negative Affordance-aware Segmentation</h3>
+   <p>TexPainter first gives the raw mesh plausible texture, after which six cardinal views are rendered. GPT-4V names one non-touchable part. On every view, a 16 × 16 point grid prompts SAM; NMS with IoU 0.7 removes duplicate masks. Each remaining mask is turned into a visual prompt by blurring its exterior, and CLIP selects the candidate most similar to the negative-part description. The chosen 2D masks are projected back into a 3D point cloud.</p>
+
+   <h3>Residual policy</h3>
+   <p>The residual is not a new grasp policy trained from scratch. The frozen πᴴ supplies a human-like nominal action, and πᵀ changes only what is needed to approach the object, lift it to a goal, and keep fingertips outside N. Both base and residual actions operate on the Shadow Hand’s 6 global wrist DOFs and 18 active finger DOFs.</p>
+
+   <h3>Privileged-to-vision distillation</h3>
+   <p>The teacher has perfect object position, rotation, velocity, and complete geometry. The student instead receives a 1,024-point partial hand–object cloud reconstructed from five fixed RGB-D cameras. State policies use four-layer MLPs with widths 1024–1024–512–512; the student adds a PointNet+Transformer encoder.</p>
   </section>
 
   <section class="block">
    <h2>Key equations</h2>
 
    <h3>1 · Human-motion prior</h3>
-   <div class="eq">rᴴ = λ_finger rᴴ_finger + λ_smooth rᴴ_smooth
+   <div class="eq">rᴴ = 0.8 rᴴ_finger + 0.05 rᴴ_smooth
 
-rᴴ_finger = Σ_f w_f exp(−λ_f ‖j_robot,f − j_human,f‖²)</div>
-   <p class="vars"><strong>Meaning:</strong> match corresponding robot and MANO hand keypoints while discouraging high-power, jerky motion. This learns how a human-like grasp should move, but not yet how it should adapt to a particular object.</p>
+rᴴ_finger = Σ_f w_f exp(−λ_f ‖j_robot,f − j_human,f‖²)
+
+rᴴ_smooth = −w_smooth Σ_i |τ_t,i · q̇_t,i|</div>
+   <p class="vars"><strong>Meaning:</strong> match corresponding robot and MANO keypoints while penalizing instantaneous actuator power. This constrains πᴴ to natural trajectories but does not yet say which object region is functionally safe.</p>
 
    <h3>2 · Residual action</h3>
    <div class="eq">Δa_t = πᵀ(R_t, O_t, P_t, N_t)
 a_t  = πᴴ(R_t, O_t, P_t) + Δa_t</div>
-   <p class="vars"><strong>R</strong>: robot state · <strong>O</strong>: privileged object state · <strong>P</strong>: scene point cloud · <strong>N</strong>: negative-affordance point cloud. The frozen human prior proposes the coarse action; the teacher changes only what the object and contact constraints require.</p>
+   <p class="vars"><strong>R</strong>: robot state · <strong>O</strong>: privileged object pose and velocity · <strong>P</strong>: scene point cloud · <strong>N</strong>: negative-affordance point cloud. The frozen prior supplies the nominal action; the teacher supplies a correction.</p>
 
    <h3>3 · Teacher reward</h3>
    <div class="eq">rᵀ = −r_distance − r_goal + r_success − r_negative</div>
-   <p class="vars">The policy approaches and lifts the object while being penalized for moving toward forbidden regions. The unusual term is <strong>r_negative</strong>; the other grasp and goal terms are standard.</p>
+   <p class="vars">Conceptually, distance-to-object and distance-to-goal are costs, success is a sparse bonus, and forbidden contact is a cost. The unusual signal is <strong>r_negative</strong>; the other three are standard goal-conditioned grasp rewards.</p>
 
-   <h3>4 · Vision distillation</h3>
+   <h3>4 · Exact negative-affordance penalty</h3>
+   <div class="eq">r_negative = λ_n Σ_{f ∈ fingertips}
+  𝟙[min_{p_n ∈ N} ‖p_tip^f − p_n‖ &lt; α_n]
+
+α_n = 0.03 m,  λ_n = −10</div>
+   <p class="vars"><strong>Meaning:</strong> every fingertip entering within 3 cm of any forbidden point incurs a discrete penalty. This is not a smooth repulsive field and does not reason about palm or link contact.</p>
+
+   <h3>5 · Goal and success terms</h3>
+   <div class="eq">r_goal = λ_g ‖p_object − p_goal‖,  λ_g = −1
+r_success = λ_s 𝟙[‖p_object − p_goal‖ &lt; 0.05],  λ_s = 1</div>
+   <p class="vars"><strong>Meaning:</strong> move the object toward a fixed goal and add a success bonus inside a 5 cm radius. These terms provide lifting performance; negative affordance only changes where the hand is allowed to contact.</p>
+
+   <h3>6 · Vision distillation</h3>
    <div class="eq">πˢ = arg min_π  ‖πᵀ(Sᵀ_t) − π(Sˢ_t)‖
 
 Sᵀ_t = {R_t, O_t, P_t, N_t}
@@ -118,11 +161,11 @@ Sˢ_t = {R_t,      P_t, N_t}</div>
   <section class="block">
    <h2>How negative affordance is produced</h2>
    <ol>
-    <li>Apply plausible textures to the raw object mesh and render six fixed views.</li>
-    <li>Ask GPT-4V which semantic part should not be touched.</li>
-    <li>Use SAM to generate part-mask candidates.</li>
-    <li>Use CLIP to select the mask matching the forbidden-part description.</li>
-    <li>Project that mask back into a 3D point cloud used by the policy and reward.</li>
+    <li>Apply TexPainter to the raw mesh and render six fixed views.</li>
+    <li>Ask GPT-4V to name one object part that should not be touched.</li>
+    <li>Prompt SAM with 256 regularly spaced points per view, then remove overlapping proposals with NMS.</li>
+    <li>Blur everything outside each candidate mask and ask CLIP to rank the resulting visual prompts against the part description.</li>
+    <li>Project the best masks into a 3D negative-affordance point cloud used by both policy observation and reward.</li>
    </ol>
    <p class="vars" style="margin-top:9px">This is an offline preprocessing step, reported at about 160 seconds per object on an RTX 4090.</p>
   </section>
@@ -133,6 +176,16 @@ Sˢ_t = {R_t,      P_t, N_t}</div>
     <li><strong>Naturalness and function are decoupled:</strong> human demonstrations supply the motion manifold; RL supplies object-specific physical correction.</li>
     <li><strong>Affordance is expressed as a negative constraint:</strong> “do not touch this region” is easier to generalize than enumerating every valid functional grasp.</li>
     <li><strong>The semantic constraint enters control:</strong> the 3D negative region is an observation and a reward term, rather than only a grasp-ranking heuristic.</li>
+   </ul>
+  </section>
+
+  <section class="block">
+   <h2>Common machinery vs. paper-specific idea</h2>
+   <ul>
+    <li><strong>Common:</strong> PPO, distance-to-object reward, distance-to-goal reward, sparse success bonus, privileged teacher, PointNet-style point-cloud encoder, and DAgger distillation.</li>
+    <li><strong>Borrowed pattern:</strong> freezing a nominal policy and learning an additive residual is a standard way to limit RL exploration.</li>
+    <li><strong>Specific to AffordDex:</strong> the nominal policy is trained on full human grasp trajectories, while an automatically generated forbidden-region point cloud conditions and rewards the residual.</li>
+    <li><strong>Important non-claim:</strong> NAA does not infer the desired downstream task from language at run time; it assigns one offline “do not touch” region per object.</li>
    </ul>
   </section>
 
@@ -156,7 +209,8 @@ Sˢ_t = {R_t,      P_t, N_t}</div>
     <ul>
      <li>Isaac Gym, Shadow Hand, 4,096 parallel environments.</li>
      <li>Vision success: 87.0% seen objects, 82.8% unseen instances, 79.2% unseen categories.</li>
-     <li>Human-motion prior and NAA improve different axes in the ablation: pose naturalness and contact appropriateness.</li>
+     <li>State success: 89.2% / 87.7% / 85.2% over the same three UniDexGrasp splits.</li>
+     <li>Ablation separates the roles: HTI mostly raises human-likeness, NAA reduces forbidden contacts, and distillation recovers vision success.</li>
     </ul>
    </section>
    <section class="block">
@@ -164,8 +218,10 @@ Sˢ_t = {R_t,      P_t, N_t}</div>
     <ul>
      <li>“Affordance-aware” mainly means avoiding a negative region, not selecting grasps from a downstream language instruction.</li>
      <li>Six rendered views can miss concave or occluded functional parts.</li>
+     <li>The penalty checks fingertips within 3 cm of N; inappropriate palm or intermediate-link contact is not represented by that equation.</li>
      <li>Evaluation is simulation-centered; the paper does not report a real-robot benchmark.</li>
      <li>Human-likeness is scored by Gemini 2.5 Pro, so it is softer evidence than physical success.</li>
+     <li>The supplementary reward definitions already use negative coefficients while main-text Eq. (4) adds explicit minus signs. The intended costs are clear, but the printed sign convention is internally inconsistent.</li>
     </ul>
    </section>
   </div>
@@ -185,5 +241,5 @@ Sˢ_t = {R_t,      P_t, N_t}</div>
   <a href="https://afforddex.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
   <a href="https://ojs.aaai.org/index.php/AAAI/article/view/38313" target="_blank" rel="noopener">AAAI paper ↗</a>
  </div>
- <p class="note">Summary and equations are paraphrased from the official paper and project page. Symbols are simplified for quick reading; consult the paper for complete reward weights and implementation details.</p>
+ <p class="note">Method note based on arXiv v4, including the supplementary method and reward definitions. Symbols are simplified for quick reading; the sign-convention caveat above reflects the equations as printed in the paper.</p>
 </div></body></html>
