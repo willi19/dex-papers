@@ -89,9 +89,21 @@ window.PAPER_SUMMARIES = {
   "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment": "overview/paper.html?id=pkda",
   "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "overview/paper.html?id=sns-grasp"
 };
+
+// Metadata corrections discovered after the main database was assembled.
+window.PAPER_METADATA_OVERRIDES = {
+  "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity": {
+    venue: "CoRL 2025 Workshop · Spotlight"
+  }
+};
+
 (window.PAPERS || []).forEach(p => {
-  if (!window.PAPER_SUMMARIES[p.title]) return;
-  p.summary = window.PAPER_SUMMARIES[p.title];
-  const genericId = p.summary.match(/^overview\/paper\.html\?id=([^&]+)$/);
-  if (genericId) p.image = "overview_assets/" + genericId[1] + ".png";
+  if (window.PAPER_METADATA_OVERRIDES[p.title]) {
+    Object.assign(p, window.PAPER_METADATA_OVERRIDES[p.title]);
+  }
+  if (window.PAPER_SUMMARIES[p.title]) {
+    p.summary = window.PAPER_SUMMARIES[p.title];
+    const genericId = p.summary.match(/^overview\/paper\.html\?id=([^&]+)$/);
+    if (genericId) p.image = "overview_assets/" + genericId[1] + ".png";
+  }
 });
