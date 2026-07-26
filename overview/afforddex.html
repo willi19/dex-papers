@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AffordDex · paper summary</title>
+<style>
+ :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;--green:#78d6a8;}
+ *{box-sizing:border-box;}
+ body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+ .wrap{max-width:940px;margin:0 auto;padding:20px 22px 80px;}
+ .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text);}
+ h1{font-size:23px;line-height:1.3;margin:16px 0 8px;}
+ .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+ .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border);}
+ .badge.lab{color:var(--accent)} .badge.m{color:#cdb6ff}
+ .fig{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:6px 0 16px;}
+ .caption{color:var(--muted);font-size:11.5px;margin:-9px 2px 18px;}
+ .report{display:flex;flex-direction:column;gap:12px;}
+ .summary{padding:15px 17px;border:1px solid #385a82;border-radius:10px;background:#172131;}
+ .summary .label{display:block;color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+ .summary p{font-size:16px;line-height:1.5;margin:0;}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+ .block{padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel);}
+ .block h2{font-size:13px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);margin:0 0 8px;}
+ .block h3{font-size:13px;margin:14px 0 5px;color:var(--accent);}
+ .block p{margin:0;color:#c9ced8;}
+ .block ul,.block ol{margin:0;padding-left:19px;}
+ .block li+li{margin-top:6px;}
+ .steps{list-style:none;padding:0!important;counter-reset:step;}
+ .steps li{position:relative;padding-left:34px;min-height:26px;}
+ .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:23px;height:23px;
+   display:grid;place-items:center;border-radius:50%;background:#263b57;color:var(--accent);font-size:11px;font-weight:700;}
+ .eq{overflow-x:auto;margin:8px 0;padding:11px 13px;border-radius:8px;border:1px solid #343c49;background:#11151b;
+   color:#e8edf5;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+ .vars{color:var(--muted);font-size:12px;}
+ table{width:100%;border-collapse:collapse;font-size:12.5px;}
+ th,td{padding:8px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;}
+ th{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;}
+ tr:last-child td{border-bottom:0;}
+ .takeaway{border-color:#365744;background:#17251e;}
+ .takeaway h2{color:var(--green);}
+ .links{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px;}
+ .links a{font-size:13px;text-decoration:none;padding:7px 13px;border-radius:8px;border:1px solid var(--border);color:var(--text);background:var(--panel2);}
+ .links a:hover{border-color:var(--accent);color:var(--accent);}
+ .note{color:var(--muted);font-size:12px;margin-top:22px;}
+ @media(max-width:680px){.grid{grid-template-columns:1fr;} .wrap{padding-left:14px;padding-right:14px;}}
+</style></head><body><div class="wrap">
+ <div class="nav"><a href="../index.html">← Back to library</a></div>
+ <h1>Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors</h1>
+ <div class="badges">
+  <span class="badge">AAAI 2026</span><span class="badge lab">Wuhan University · DAMO Academy</span>
+  <span class="badge m">RL + IL</span><span class="badge m">dexterous grasping</span>
+  <span class="badge m">human motion prior</span><span class="badge m">affordance</span>
+ </div>
+ <img class="fig" src="../overview_assets/afforddex.png" alt="AffordDex pipeline">
+ <p class="caption">Official AffordDex pipeline: human-motion pretraining, negative-affordance extraction, residual RL, and teacher–student distillation.</p>
+
+ <div class="report">
+  <section class="summary">
+   <span class="label">TL;DR</span>
+   <p>AffordDex learns a dynamic grasp that is stable, looks human-like, and avoids functionally wrong contact regions—for example, holding a knife by its handle rather than its blade.</p>
+  </section>
+
+  <div class="grid">
+   <section class="block">
+    <h2>Problem</h2>
+    <ul>
+     <li>Standard grasp policies optimize lift success and geometric stability.</li>
+     <li>They can produce unnatural finger poses or grasp a semantically wrong part.</li>
+     <li>A useful grasp should also prepare the object for safe downstream manipulation.</li>
+    </ul>
+   </section>
+   <section class="block">
+    <h2>Output</h2>
+    <ul>
+     <li>A full Shadow Hand grasping trajectory, not only a static final pose.</li>
+     <li>The vision policy observes robot state, scene point cloud, and forbidden-contact points.</li>
+     <li>It approaches, closes the hand, and lifts the object to a target.</li>
+    </ul>
+   </section>
+  </div>
+
+  <section class="block">
+   <h2>Training pipeline</h2>
+   <ol class="steps">
+    <li><strong>Human prior:</strong> learn natural robot-hand motion from roughly 2,200 right-hand sequences in OakInk2.</li>
+    <li><strong>Negative affordance:</strong> identify object regions that should not be touched, such as a knife blade.</li>
+    <li><strong>Residual teacher:</strong> freeze the human-motion policy and use PPO to learn object-specific corrections with privileged state.</li>
+    <li><strong>Vision student:</strong> distill the teacher with DAgger into a policy that does not observe ground-truth object state.</li>
+   </ol>
+  </section>
+
+  <section class="block">
+   <h2>Key equations</h2>
+
+   <h3>1 · Human-motion prior</h3>
+   <div class="eq">rᴴ = λ_finger rᴴ_finger + λ_smooth rᴴ_smooth
+
+rᴴ_finger = Σ_f w_f exp(−λ_f ‖j_robot,f − j_human,f‖²)</div>
+   <p class="vars"><strong>Meaning:</strong> match corresponding robot and MANO hand keypoints while discouraging high-power, jerky motion. This learns how a human-like grasp should move, but not yet how it should adapt to a particular object.</p>
+
+   <h3>2 · Residual action</h3>
+   <div class="eq">Δa_t = πᵀ(R_t, O_t, P_t, N_t)
+a_t  = πᴴ(R_t, O_t, P_t) + Δa_t</div>
+   <p class="vars"><strong>R</strong>: robot state · <strong>O</strong>: privileged object state · <strong>P</strong>: scene point cloud · <strong>N</strong>: negative-affordance point cloud. The frozen human prior proposes the coarse action; the teacher changes only what the object and contact constraints require.</p>
+
+   <h3>3 · Teacher reward</h3>
+   <div class="eq">rᵀ = −r_distance − r_goal + r_success − r_negative</div>
+   <p class="vars">The policy approaches and lifts the object while being penalized for moving toward forbidden regions. The unusual term is <strong>r_negative</strong>; the other grasp and goal terms are standard.</p>
+
+   <h3>4 · Vision distillation</h3>
+   <div class="eq">πˢ = arg min_π  ‖πᵀ(Sᵀ_t) − π(Sˢ_t)‖
+
+Sᵀ_t = {R_t, O_t, P_t, N_t}
+Sˢ_t = {R_t,      P_t, N_t}</div>
+   <p class="vars">DAgger trains the student to reproduce the privileged teacher while removing ground-truth object pose from the deployed observation.</p>
+  </section>
+
+  <section class="block">
+   <h2>How negative affordance is produced</h2>
+   <ol>
+    <li>Apply plausible textures to the raw object mesh and render six fixed views.</li>
+    <li>Ask GPT-4V which semantic part should not be touched.</li>
+    <li>Use SAM to generate part-mask candidates.</li>
+    <li>Use CLIP to select the mask matching the forbidden-part description.</li>
+    <li>Project that mask back into a 3D point cloud used by the policy and reward.</li>
+   </ol>
+   <p class="vars" style="margin-top:9px">This is an offline preprocessing step, reported at about 160 seconds per object on an RTX 4090.</p>
+  </section>
+
+  <section class="block">
+   <h2>What is actually new</h2>
+   <ul>
+    <li><strong>Naturalness and function are decoupled:</strong> human demonstrations supply the motion manifold; RL supplies object-specific physical correction.</li>
+    <li><strong>Affordance is expressed as a negative constraint:</strong> “do not touch this region” is easier to generalize than enumerating every valid functional grasp.</li>
+    <li><strong>The semantic constraint enters control:</strong> the 3D negative region is an observation and a reward term, rather than only a grasp-ranking heuristic.</li>
+   </ul>
+  </section>
+
+  <section class="block">
+   <h2>Comparison</h2>
+   <table>
+    <thead><tr><th>Paper</th><th>Primary guidance</th><th>What the policy learns</th></tr></thead>
+    <tbody>
+     <tr><td>UniDexGrasp++</td><td>Geometry curriculum</td><td>Stable universal grasping</td></tr>
+     <tr><td>DexGrasp Anything</td><td>Physics-guided diffusion</td><td>Feasible static grasp poses</td></tr>
+     <tr><td>ManipTrans</td><td>Human motion + RL residual</td><td>Task-specific physical correction</td></tr>
+     <tr><td>DexMachina</td><td>Decaying object controller</td><td>Track a demonstrated articulated-object trajectory</td></tr>
+     <tr><td><strong>AffordDex</strong></td><td>Human motion + forbidden regions</td><td>Human-like, semantically safer dynamic grasps</td></tr>
+    </tbody>
+   </table>
+  </section>
+
+  <div class="grid">
+   <section class="block">
+    <h2>Reported evidence</h2>
+    <ul>
+     <li>Isaac Gym, Shadow Hand, 4,096 parallel environments.</li>
+     <li>Vision success: 87.0% seen objects, 82.8% unseen instances, 79.2% unseen categories.</li>
+     <li>Human-motion prior and NAA improve different axes in the ablation: pose naturalness and contact appropriateness.</li>
+    </ul>
+   </section>
+   <section class="block">
+    <h2>Limitations</h2>
+    <ul>
+     <li>“Affordance-aware” mainly means avoiding a negative region, not selecting grasps from a downstream language instruction.</li>
+     <li>Six rendered views can miss concave or occluded functional parts.</li>
+     <li>Evaluation is simulation-centered; the paper does not report a real-robot benchmark.</li>
+     <li>Human-likeness is scored by Gemini 2.5 Pro, so it is softer evidence than physical success.</li>
+    </ul>
+   </section>
+  </div>
+
+  <section class="block takeaway">
+   <h2>Takeaway</h2>
+   <ul>
+    <li><strong>Classification:</strong> grasping paper with an IL motion prior, PPO residual learning, and DAgger distillation—not a VLA.</li>
+    <li><strong>Distinctive idea:</strong> keep a human-like base policy fixed and learn only the residual needed to obey object geometry and semantic “do not touch” constraints.</li>
+   </ul>
+  </section>
+ </div>
+
+ <div class="links">
+  <a href="https://arxiv.org/abs/2508.08896" target="_blank" rel="noopener">arXiv abstract</a>
+  <a href="https://arxiv.org/pdf/2508.08896" target="_blank" rel="noopener">PDF ↗</a>
+  <a href="https://afforddex.github.io/" target="_blank" rel="noopener">Project &amp; videos ↗</a>
+  <a href="https://ojs.aaai.org/index.php/AAAI/article/view/38313" target="_blank" rel="noopener">AAAI paper ↗</a>
+ </div>
+ <p class="note">Summary and equations are paraphrased from the official paper and project page. Symbols are simplified for quick reading; consult the paper for complete reward weights and implementation details.</p>
+</div></body></html>

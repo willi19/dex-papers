@@ -73,5 +73,14 @@ window.PAPER_IDEAS = {
   "SynH2R: Synthesizing Hand-Object Motions for Learning Human-to-Robot Handovers": "Replaces expensive human mocap with a generator designed to produce handover-friendly human grasp and approach motions. Scaling synthetic humans and objects by roughly two orders of magnitude trains handover policies competitive with methods that rely on captured motion.",
   "FunGrasp: Functional Grasping for Diverse Dexterous Hands": "Extracts the intended functional grasp from a single RGB-D image of a human, retargets it across robot hands, and uses the pose to guide an RL controller. Privileged learning and sim-to-real techniques preserve task-specific grasps on unseen objects instead of collapsing to generic power grasps.",
   "LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion": "Decouples high-level temporal motion from fine spatial hand-object contact using latent diffusion coupled to a grasp VAE. The regularized grasp latent ties motion to object geometry and improves single- and bimanual generation on object categories unseen during training.",
-  "Demonstration-Guided Deep Reinforcement Learning of Control Policies for Dexterous Human-Robot Interaction": "Uses one parameterized multi-objective reward for handshakes, claps, and finger touches, with its weights inferred from human-human motion capture. Demonstrations shape what natural interaction looks like while RL handles the robot's arm-hand dynamics and contact."
+  "Demonstration-Guided Deep Reinforcement Learning of Control Policies for Dexterous Human-Robot Interaction": "Uses one parameterized multi-objective reward for handshakes, claps, and finger touches, with its weights inferred from human-human motion capture. Demonstrations shape what natural interaction looks like while RL handles the robot's arm-hand dynamics and contact.",
+  "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "Freezes a grasp policy trained to imitate human hand motion, then learns a PPO residual that adapts it to object geometry while avoiding semantically inappropriate contact regions. A privileged teacher is distilled with DAgger into a point-cloud student."
 };
+
+// Summary pages can be attached without editing the main paper database.
+window.PAPER_SUMMARIES = {
+  "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "overview/afforddex.html"
+};
+(window.PAPERS || []).forEach(p => {
+  if (window.PAPER_SUMMARIES[p.title]) p.summary = window.PAPER_SUMMARIES[p.title];
+});
