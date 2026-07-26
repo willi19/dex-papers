@@ -128,6 +128,16 @@
     text-transform: uppercase; letter-spacing: .045em; }
   .reading-note .novelty { border-color: #355c4a; background: rgba(43,138,91,.09); }
   .reading-note .novelty b { color: #77d5a7; }
+  .paper-insight { margin: 1px 0; padding: 10px 12px; border: 1px solid #35536f;
+    border-radius: 8px; background: rgba(63,130,190,.08); font-size: 12px; line-height: 1.55; }
+  .paper-insight > div + div { margin-top: 5px; }
+  .paper-insight b { display: inline-block; min-width: 92px; color: #8bbce8; }
+  .paper-insight .delta { color: #bce8cf; }
+  .paper-insight .delta b { color: #77d5a7; }
+  .paper-insight .basis { margin-top: 7px; color: var(--muted); font-size: 10px; }
+  .paper-insight.pending { background: var(--panel); border-color: var(--border); color: var(--muted); }
+  .paper-insight.pending b { color: var(--muted); }
+  .review-status { display: block; margin-top: 6px; font-size: 10px; color: #c4a35a; }
   @media (max-width: 760px) {
     .lensgrid { grid-template-columns: repeat(2,minmax(0,1fr)); }
     .reading-note { grid-template-columns: 1fr; }
@@ -229,7 +239,7 @@
 </section>
 <section class="library-title">
   <h2>전체 논문 라이브러리</h2>
-  <p>행을 펼치면 요약, 비교 관점, PDF와 프로젝트 링크를 볼 수 있다.</p>
+  <p id="reviewCoverage">행을 펼치면 문제, 핵심 아이디어, 기존 연구 대비 차이와 검토 수준을 볼 수 있다.</p>
 </section>
 <main id="grid"></main>
 
@@ -243,8 +253,10 @@
 </div>
 
 <script src="papers.js"></script>
+<script src="paper_insights.js"></script>
 <script>
   const P = window.PAPERS || [];
+  const INSIGHTS = window.PAPER_INSIGHTS || {};
   const activeTags = new Set();
   const activeGroups = new Set();
   let query = "";
@@ -379,6 +391,10 @@
     p._year = yearOf(p);
     p._group = researchGroupOf(p);
   });
+  const reviewedCount = P.filter(p =>
+    INSIGHTS[p.title] && !INSIGHTS[p.title].basis.includes("검토 전")).length;
+  document.getElementById("reviewCoverage").textContent =
+    "본문·상세 source 검토 " + reviewedCount + "편 · 나머지는 초록 기반으로 표시 · 각 행을 펼쳐 contribution 비교";
 
   // counts
   const tagCounts = {}, groupCounts = {}, yearCounts = {};
@@ -467,7 +483,9 @@
       if (!ok) return false;
     }
     if (query) {
-      const hay = (p.title + " " + (p.desc||"") + " " + p._group + " " +
+      const insight = INSIGHTS[p.title] || {};
+      const hay = (p.title + " " + (p.desc||"") + " " + (insight.problem||"") + " " +
+        (insight.idea||"") + " " + (insight.delta||"") + " " + p._group + " " +
         (p.tags||[]).join(" ") + " " + (p.venue||"") + " " + (p.collection||"")).toLowerCase();
       if (!hay.includes(query)) return false;
     }
@@ -513,11 +531,23 @@
       const tags = (p.tags||[]).map(t =>
         '<span class="ctag'+(activeTags.has(t)?' on':'')+'" data-tag="'+t+'">'+t+'</span>').join("");
       const reading = READING_NOTES[p.title];
+      const insight = INSIGHTS[p.title];
+      const insightHtml = insight
+        ? '<div class="paper-insight'+(insight.basis.includes("검토 전") ? ' pending' : '')+'">' +
+            '<div><b>문제</b>'+insight.problem+'</div>' +
+            '<div><b>핵심 아이디어</b>'+insight.idea+'</div>' +
+            '<div class="delta"><b>기존 대비 차이</b>'+insight.delta+'</div>' +
+            '<div class="basis">검토 근거 · '+insight.basis+'</div>' +
+          '</div>'
+        : p.desc
+          ? '<div class="paper-insight pending"><div><b>핵심 아이디어</b>'+p.desc+'</div>' +
+              '<span class="review-status">초록 기반 요약 · Introduction/Related Work 비교 검토 전</span></div>'
+          : '<div class="paper-insight pending">본문 검토 대기</div>';
       detail.innerHTML =
         (p.image ? '<div class="pimg"><img loading="lazy" src="'+p.image+'" alt="" ' +
                      'onerror="this.parentNode.remove()"></div>' : '') +
         '<div class="pbody">' +
-          (p.desc ? '<div class="pdesc">'+p.desc+'</div>' : '') +
+          insightHtml +
           (reading ? '<div class="reading-note">' +
             '<div><b>공통 기반</b>'+reading.baseline+'</div>' +
             '<div class="novelty"><b>실제 차별점</b>'+reading.novelty+'</div>' +
