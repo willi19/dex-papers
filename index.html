@@ -61,27 +61,23 @@
     border-radius: 7px; border: 1px solid var(--border); background: var(--panel2); color: var(--accent); }
   .toplinks a:hover { border-color: var(--accent); }
   main { padding: 12px 20px 60px; display: block; max-width: 1120px; }
-  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 9px; }
-  .paper-table { width: 100%; min-width: 850px; border-collapse: collapse; table-layout: fixed; }
-  .paper-table th { padding: 8px 10px; background: var(--panel2); color: var(--muted);
-    font-size: 10px; text-align: left; text-transform: uppercase; letter-spacing: .05em;
-    border-bottom: 1px solid var(--border); }
-  .paper-table td { padding: 10px; vertical-align: top; border-bottom: 1px solid var(--border); }
-  .paper-table tr:last-child td { border-bottom: 0; }
-  .paper-table tbody tr:hover { background: rgba(110,168,254,.05); }
-  .paper-table .col-paper { width: 29%; }
-  .paper-table .col-area { width: 12%; }
-  .paper-table .col-idea { width: 45%; }
-  .paper-table .col-links { width: 14%; }
-  .table-title { color: var(--text); font-size: 13px; font-weight: 650; line-height: 1.35; }
-  .table-meta { margin-top: 3px; color: var(--muted); font-size: 10.5px; }
-  .table-area { display: inline-block; padding: 2px 7px; border: 1px solid #314765;
+  .paper-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--border); border-radius: 9px; overflow: hidden; }
+  .paper-cell { min-width: 0; padding: 12px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); background: var(--panel); }
+  .paper-cell:nth-child(3n) { border-right: 0; }
+  .paper-cell:hover { background: var(--panel2); }
+  .cell-head { display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 8px; margin-bottom: 7px; }
+  .cell-title { color: var(--text); font-size: 13px; font-weight: 650; line-height: 1.35; }
+  .cell-meta { margin-top: 4px; color: var(--muted); font-size: 10.5px; }
+  .cell-area { flex-shrink: 0; display: inline-block; padding: 2px 7px; border: 1px solid #314765;
     border-radius: 5px; background: rgba(63,130,190,.07); color: var(--accent); font-size: 10px; }
-  .table-idea { color: #c5cad3; font-size: 11.5px; line-height: 1.45; }
-  .table-links { display: flex; flex-wrap: wrap; gap: 4px; }
-  .table-links a { padding: 2px 6px; border: 1px solid var(--border); border-radius: 5px;
+  .cell-idea { color: #c5cad3; font-size: 11.5px; line-height: 1.45; }
+  .cell-links { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+  .cell-links a { padding: 2px 6px; border: 1px solid var(--border); border-radius: 5px;
     color: var(--muted); font-size: 10.5px; text-decoration: none; white-space: nowrap; }
-  .table-links a:hover { color: var(--accent); border-color: var(--accent); }
+  .cell-links a:hover { color: var(--accent); border-color: var(--accent); }
   .library-title { max-width: 1120px; padding: 24px 20px 0; }
   .library-title h2 { margin: 0; font-size: 17px; }
   .library-title p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
@@ -90,6 +86,13 @@
     .toplinks { float: none; margin-top: 8px; }
     .library-title { padding-left: 12px; padding-right: 12px; }
     main { padding-left: 12px; padding-right: 12px; }
+    .paper-grid { grid-template-columns: 1fr; }
+    .paper-cell { border-right: 0; }
+  }
+  @media (min-width: 621px) and (max-width: 900px) {
+    .paper-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .paper-cell { border-right: 1px solid var(--border); }
+    .paper-cell:nth-child(2n) { border-right: 0; }
   }
   .empty { color: var(--muted); padding: 40px; text-align: center; grid-column: 1/-1; }
   .modal-bg { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.78);
@@ -125,7 +128,7 @@
 </header>
 <section class="library-title">
   <h2>Choose a paper</h2>
-  <p>Filter by research area and compare each paper's core idea and links in one table.</p>
+  <p>Filter the library and scan papers in a compact multi-column grid.</p>
 </section>
 <main id="grid"></main>
 
@@ -343,31 +346,30 @@
     const list = P.filter(match);
     countEl.textContent = "· " + list.length + " / " + P.length;
     if (!list.length) { grid.innerHTML = '<div class="empty">No papers match.</div>'; return; }
-    grid.innerHTML = '<div class="table-wrap"><table class="paper-table">' +
-      '<thead><tr><th class="col-paper">Paper</th><th class="col-area">Area</th>' +
-      '<th class="col-idea">Idea</th><th class="col-links">Links</th></tr></thead><tbody></tbody></table></div>';
-    const tbody = grid.querySelector("tbody");
+    grid.innerHTML = '<div class="paper-grid"></div>';
+    const paperGrid = grid.querySelector(".paper-grid");
     list.forEach(p => {
-      const tr = document.createElement("tr");
+      const cell = document.createElement("article");
+      cell.className = "paper-cell";
       const idea = IDEAS[p.title] || p.desc || "Summary pending.";
-      tr.innerHTML =
-        '<td><div class="table-title">'+p.title+'</div>' +
-          (p.venue ? '<div class="table-meta">'+p.venue+'</div>' : '') + '</td>' +
-        '<td><span class="table-area">'+GROUP_LABELS[p._group]+'</span></td>' +
-        '<td><div class="table-idea">'+idea+'</div></td>' +
-        '<td><div class="table-links">' +
+      cell.innerHTML =
+        '<div class="cell-head"><div><div class="cell-title">'+p.title+'</div>' +
+          (p.venue ? '<div class="cell-meta">'+p.venue+'</div>' : '') + '</div>' +
+          '<span class="cell-area">'+GROUP_LABELS[p._group]+'</span></div>' +
+        '<div class="cell-idea">'+idea+'</div>' +
+        '<div class="cell-links">' +
           (p.summary ? '<a href="'+p.summary+'">Summary</a>' : '') +
           (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>' : '') +
           (p.arxiv ? '<a href="'+p.arxiv+'" target="_blank" rel="noopener">arXiv</a>' : '') +
           (p.project ? '<a href="'+p.project+'" target="_blank" rel="noopener">Project</a>' : '') +
-        '</div></td>';
-      tr.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
+        '</div>';
+      cell.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
         a.onclick = (e) => {
           if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
           e.preventDefault();
           openPdf(a.getAttribute("href"), p.title);
         });
-      tbody.appendChild(tr);
+      paperGrid.appendChild(cell);
     });
   }
 
