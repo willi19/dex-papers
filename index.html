@@ -113,6 +113,9 @@
   .prow .caret { color: var(--muted); font-size: 9px; width: 9px; flex-shrink: 0;
     transition: transform .15s; display: inline-block; }
   .prow.open .caret { transform: rotate(90deg); }
+  .prow .pthumb { width: 76px; height: 48px; flex-shrink: 0; overflow: hidden;
+    border-radius: 6px; border: 1px solid var(--border); background: #0d1117; }
+  .prow .pthumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
   .prow .paper-copy { flex: 1; min-width: 0; }
   .prow .pt { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
   .prow .ppreview { display: block; margin-top: 3px; color: var(--muted); font-size: 11.5px;
@@ -161,6 +164,7 @@
     main { padding-left: 12px; padding-right: 12px; }
     .pdetail { flex-direction: column; }
     .pdetail .pimg { width: 100%; max-width: 360px; }
+    .prow .pthumb { width: 64px; height: 42px; }
     .prow .pcoll, .prow .pcites, .prow .pmeta { display: none; }
   }
   .badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
@@ -392,14 +396,38 @@
 
   // build href for local PDF: encode each path segment (handles spaces, "?")
   const pdfHref = (f) => f.split("/").map(encodeURIComponent).join("/");
+  const arxivIdOf = (p) => {
+    const m = (p.arxiv || "").match(/arxiv\.org\/abs\/([^?#]+)/);
+    return m ? m[1].replace(/v\d+$/, "") : null;
+  };
+  function teaserCandidates(p) {
+    const sources = [];
+    if (p.image) sources.push(p.image);
+    const id = arxivIdOf(p);
+    if (id) {
+      sources.push("https://arxiv.org/html/" + id + "/x1.png");
+      sources.push("https://arxiv.org/html/" + id + "/x1.svg");
+    }
+    return [...new Set(sources)];
+  }
+  function attachTeaser(img, sources) {
+    if (!img || !sources.length) return;
+    let index = 0;
+    img.src = sources[index];
+    img.onerror = () => {
+      index += 1;
+      if (index < sources.length) img.src = sources[index];
+      else img.parentNode.remove();
+    };
+  }
 
   // ---- tag taxonomy: group flat tags into categories for a drill-down filter UI ----
   const TAXONOMY = {
     "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","PKU","Stanford","TUM","UCSD","USC","UT-Austin","ETH-Zurich"],
-    "Method": ["RL","imitation-learning","sim-to-real","teleoperation","self-supervised","reset-free","reset","TAMP","VLA","VLM","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","data-augmentation","multi-task","multi-agent","sample-efficient","data-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting","human-to-robot","compliance","impedance","admittance","force-control","force-feedback","model-based","MPC","optimization","planning","differentiable-simulation","fine-tuning","transformer","energy-based","compositional"],
-    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","contact","non-prehensile","dynamic","whole-body","coordination","data-collection","data-generation","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","functional-grasp","humanoid","affordance","cross-embodiment","tactile","haptic","industrial","generalization","open-source"],
-    "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","vision","RGB-D","point-cloud","video-prediction","video-planning","visuomotor","mocap","capture","human-video","human-motion","pose-estimation","implicit-representation","language-grounding","geometry","part-aware","object-centric"],
-    "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw"],
+    "Method": ["RL","imitation-learning","sim-to-real","teleoperation","shared-autonomy","kinesthetic-teaching","self-supervised","reset-free","reset","TAMP","VLA","VLM","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","data-augmentation","multi-task","multi-agent","sample-efficient","data-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting","human-to-robot","compliance","impedance","admittance","force-control","force-feedback","model-based","world-model","MPC","optimization","planning","differentiable-simulation","fine-tuning","transformer","energy-based","compositional","representation-learning"],
+    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","contact","non-prehensile","dynamic","whole-body","coordination","data-collection","data-generation","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","functional-grasp","humanoid","affordance","cross-embodiment","tactile","haptic","industrial","generalization","open-source","deformable-object","articulated-object"],
+    "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","vision","RGB-D","point-cloud","video-prediction","video-generation","video-planning","visuomotor","mocap","capture","human-video","human-motion","pose-estimation","implicit-representation","language-grounding","geometry","part-aware","object-centric"],
+    "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw","hardware","tendon-driven","micro-vibration"],
     "Type": ["survey","system","benchmark","analysis","dataset"]
   };
   const CAT_ORDER = ["Lab / Org","Year","Topic","Method","Perception","Hardware","Type"];
@@ -536,8 +564,10 @@
       const insight = INSIGHTS[p.title];
       const preview = insight ? insight.delta : (p.desc || "요약 검토 대기");
       const reviewed = insight && !insight.basis.includes("검토 전");
+      const teaserSources = teaserCandidates(p);
       row.innerHTML =
         '<span class="caret">▶</span>' +
+        (teaserSources.length ? '<span class="pthumb"><img class="teaser" loading="lazy" alt=""></span>' : '') +
         '<span class="paper-copy"><span class="pt">'+p.title+'</span>' +
           '<span class="ppreview"><span class="why'+(reviewed ? '' : ' pending-label')+'">' +
             (reviewed ? '차별점' : '한줄')+'</span>'+preview+'</span></span>' +
@@ -563,8 +593,7 @@
               '<span class="review-status">초록 기반 요약 · Introduction/Related Work 비교 검토 전</span></div>'
           : '<div class="paper-insight pending">본문 검토 대기</div>';
       detail.innerHTML =
-        (p.image ? '<div class="pimg"><img loading="lazy" src="'+p.image+'" alt="" ' +
-                     'onerror="this.parentNode.remove()"></div>' : '') +
+        (teaserSources.length ? '<div class="pimg"><img class="teaser" loading="lazy" alt=""></div>' : '') +
         '<div class="pbody">' +
           insightHtml +
           (reading ? '<div class="reading-note">' +
@@ -580,9 +609,14 @@
             linkEl("Project", p.project, "") +
           '</div>' +
         '</div>';
+      attachTeaser(row.querySelector("img.teaser"), teaserSources);
 
       row.onclick = () => {
         const willOpen = detail.hidden;
+        if (willOpen && !detail.dataset.teaserLoaded) {
+          attachTeaser(detail.querySelector("img.teaser"), teaserSources);
+          detail.dataset.teaserLoaded = "1";
+        }
         detail.hidden = !willOpen;
         row.classList.toggle("open", willOpen);
       };
