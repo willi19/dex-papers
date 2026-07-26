@@ -79,7 +79,8 @@
   .prow .paper-copy { flex: 1; min-width: 0; }
   .prow .pt { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
   .prow .ppreview { display: block; margin-top: 3px; color: var(--muted); font-size: 11.5px;
-    line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; }
   .prow .ppreview .why { color: #77d5a7; margin-right: 5px; font-size: 10px; font-weight: 700; }
   .prow .ppreview .pending-label { color: #c4a35a; }
   .prow .pmeta { color: var(--muted); font-size: 12px; white-space: nowrap; }
@@ -166,8 +167,10 @@
 </div>
 
 <script src="papers.js"></script>
+<script src="paper_ideas.js"></script>
 <script>
   const P = window.PAPERS || [];
+  const IDEAS = window.PAPER_IDEAS || {};
   const activeTags = new Set();
   const activeGroups = new Set();
   let query = "";
@@ -379,7 +382,7 @@
       if (!ok) return false;
     }
     if (query) {
-      const hay = (p.title + " " + (p.desc||"") + " " + p._group + " " +
+      const hay = (p.title + " " + (IDEAS[p.title]||"") + " " + (p.desc||"") + " " + p._group + " " +
         (p.tags||[]).join(" ") + " " + (p.venue||"") + " " + (p.collection||"")).toLowerCase();
       if (!hay.includes(query)) return false;
     }
@@ -404,7 +407,7 @@
       wrap.className = "rowwrap";
       const row = document.createElement("div");
       row.className = "prow";
-      const preview = p.desc || "Open for paper links";
+      const preview = IDEAS[p.title] || p.desc || "Open for paper links";
       const teaserSources = teaserCandidates(p);
       row.innerHTML =
         '<span class="caret">▶</span>' +
@@ -423,7 +426,7 @@
       detail.innerHTML =
         (teaserSources.length ? '<div class="pimg"><img class="teaser" loading="lazy" alt=""></div>' : '') +
         '<div class="pbody">' +
-          (p.desc ? '<div class="pdesc">'+p.desc+'</div>' : '') +
+          ((IDEAS[p.title] || p.desc) ? '<div class="pdesc">'+(IDEAS[p.title] || p.desc)+'</div>' : '') +
           '<div class="ctags">'+tags+'</div>' +
           '<div class="links">' +
             (p.summary ? '<a href="'+p.summary+'">📄 Summary</a>' : '') +
