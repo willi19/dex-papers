@@ -60,46 +60,6 @@
   .toplinks a { font-size: 12px; font-weight: 400; text-decoration: none; padding: 5px 10px;
     border-radius: 7px; border: 1px solid var(--border); background: var(--panel2); color: var(--accent); }
   .toplinks a:hover { border-color: var(--accent); }
-  .guide { max-width: 1120px; padding: 28px 20px 10px; }
-  .map-guide { border: 1px solid var(--border); border-radius: 11px; background: var(--panel); }
-  .map-guide > summary { cursor: pointer; padding: 12px 16px; color: var(--text); font-weight: 650;
-    list-style: none; user-select: none; }
-  .map-guide > summary::-webkit-details-marker { display: none; }
-  .map-guide > summary::before { content: "▶"; display: inline-block; margin-right: 8px;
-    color: var(--muted); font-size: 9px; transition: transform .15s; }
-  .map-guide[open] > summary::before { transform: rotate(90deg); }
-  .map-guide-content { padding: 0 12px 12px; }
-  .guide-hero { padding: 22px 24px; border: 1px solid #33425a; border-radius: 13px;
-    background: linear-gradient(135deg, rgba(110,168,254,.12), rgba(110,168,254,.025)); }
-  .guide-kicker { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .09em;
-    text-transform: uppercase; }
-  .guide h2 { margin: 6px 0 8px; font-size: clamp(20px,3.2vw,29px); line-height: 1.3; }
-  .guide-hero > p { max-width: 830px; margin: 0; color: var(--muted); font-size: 14px; }
-  .lensgrid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 9px; margin-top: 16px; }
-  .lens { padding: 13px 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--panel); }
-  .lens strong { display: block; margin-bottom: 3px; font-size: 12.5px; }
-  .lens span { color: var(--muted); font-size: 11.5px; line-height: 1.45; }
-  .field-guide { margin-top: 14px; border: 1px solid var(--border); border-radius: 11px; background: var(--panel); }
-  .field-guide summary { cursor: pointer; padding: 13px 16px; color: var(--text); font-weight: 650;
-    list-style: none; user-select: none; }
-  .field-guide summary::-webkit-details-marker { display: none; }
-  .field-guide summary::before { content: "▶"; display: inline-block; margin-right: 8px;
-    color: var(--muted); font-size: 9px; transition: transform .15s; }
-  .field-guide[open] summary::before { transform: rotate(90deg); }
-  .guidebody { padding: 0 16px 16px; }
-  .recipe { overflow-x: auto; margin: 0 0 13px; padding: 12px 14px; border-radius: 8px;
-    background: #11151b; color: #d9e5f7; font: 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
-    white-space: nowrap; }
-  .guide-table { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
-  .guide-table table { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 12px; }
-  .guide-table th, .guide-table td { padding: 9px 10px; text-align: left; vertical-align: top;
-    border-bottom: 1px solid var(--border); }
-  .guide-table th { color: var(--muted); background: var(--panel2); font-size: 10.5px;
-    text-transform: uppercase; letter-spacing: .04em; }
-  .guide-table tr:last-child td { border-bottom: 0; }
-  .guide-table td:first-child { white-space: nowrap; font-weight: 650; }
-  .guide-table .focus td { background: rgba(43,138,91,.11); }
-  .guide-note { margin: 11px 0 0; color: var(--muted); font-size: 11.5px; }
   main { padding: 12px 20px 60px; display: block; max-width: 1120px; }
   .library-title { max-width: 1120px; padding: 24px 20px 0; }
   .library-title h2 { margin: 0; font-size: 17px; }
@@ -151,15 +111,11 @@
   .paper-insight.pending b { color: var(--muted); }
   .review-status { display: block; margin-top: 6px; font-size: 10px; color: #c4a35a; }
   @media (max-width: 760px) {
-    .lensgrid { grid-template-columns: repeat(2,minmax(0,1fr)); }
     .reading-note { grid-template-columns: 1fr; }
   }
   @media (max-width: 620px) {
     header { padding-left: 12px; padding-right: 12px; }
     .toplinks { float: none; margin-top: 8px; }
-    .guide { padding: 18px 12px 6px; }
-    .guide-hero { padding: 17px; }
-    .lensgrid { grid-template-columns: 1fr; }
     .library-title { padding-left: 12px; padding-right: 12px; }
     main { padding-left: 12px; padding-right: 12px; }
     .pdetail { flex-direction: column; }
@@ -201,7 +157,6 @@
 <header>
   <h1>dex-papers <span class="count" id="count"></span>
     <span class="toplinks">
-      <a href="#readingGuide">읽는 기준</a>
       <a href="overview.html">카드형 overview →</a>
     </span>
   </h1>
@@ -215,46 +170,6 @@
   </div>
   <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
 </header>
-<section class="guide">
-<details class="map-guide" id="readingGuide">
-  <summary>읽는 기준과 RL 비교표 펼치기</summary>
-  <div class="map-guide-content">
-  <div class="guide-hero">
-    <div class="guide-kicker">Research map · 논문을 비교해서 읽기</div>
-    <h2>방법 이름보다, 무엇을 새롭게 만들었는지 본다</h2>
-    <p>Dexterous manipulation 논문은 같은 PPO, 비슷한 reward, teacher–student 구조를 반복해서 사용한다.
-      이 페이지는 논문을 요약하는 데서 멈추지 않고, 공통 기반 위에서 각 연구가 실제로 바꾼 지점을 구분한다.</p>
-    <div class="lensgrid">
-      <div class="lens"><strong>① 시작점</strong><span>zero state, pre-grasp, retargeting, human demo 중 어디서 시작하는가?</span></div>
-      <div class="lens"><strong>② 탐색 축소</strong><span>residual action, relative coordinates, subtask, curriculum 중 무엇을 쓰는가?</span></div>
-      <div class="lens"><strong>③ 학습 신호</strong><span>goal·progress·contact·imitation reward 중 무엇이 공통이고 특별한가?</span></div>
-      <div class="lens"><strong>④ 배포 조건</strong><span>privileged state인가, vision student인가, 실제 하드웨어까지 검증했는가?</span></div>
-    </div>
-  </div>
-
-  <details class="field-guide">
-    <summary>Dexterous RL의 공통 레시피와 핵심 논문 비교</summary>
-    <div class="guidebody">
-      <div class="recipe">privileged-state PPO + PD position action + goal/progress + reach/contact + success − regularization + early termination</div>
-      <div class="guide-table">
-        <table>
-          <thead><tr><th>논문</th><th>공통 기반</th><th>실제 차별점</th></tr></thead>
-          <tbody>
-            <tr><td>Visual Dexterity</td><td>Pose goal, fingertip proximity, energy penalty</td><td>Table-contact penalty로 in-air behavior를 유도하고 depth student로 distill</td></tr>
-            <tr><td>Twisting Lids</td><td>Progress, contact, pose, action/work penalty</td><td>성공에 필요한 fingertip–bottle contact topology를 reference point로 직접 지정</td></tr>
-            <tr><td>Sequential Dexterity</td><td>Subtask별 shaped reward와 PPO</td><td>다음 policy의 feasibility를 현재 policy reward에 넣는 backward fine-tuning</td></tr>
-            <tr><td>ManipTrans</td><td>Motion/object/contact tracking</td><td>General imitation action과 task residual을 분리하고 gravity·friction curriculum 적용</td></tr>
-            <tr><td>AsymDex</td><td>Hand distance, task progress, success bonus</td><td>두 손의 역할 비대칭과 relative coordinates로 observation/action을 구조적으로 축소</td></tr>
-            <tr class="focus"><td>DexMachina</td><td>Object, keypoint, joint, contact tracking</td><td>Virtual object controller가 긴 궤적을 먼저 수행하고 도움을 점진적으로 policy에 handoff</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="guide-note">핵심: reward 항 하나보다 초기 상태, reference, action parameterization, curriculum이 실제 성능과 novelty를 더 자주 결정한다.</p>
-    </div>
-  </details>
-  </div>
-</details>
-</section>
 <section class="library-title">
   <h2>논문 고르기</h2>
   <p id="reviewCoverage">행을 펼치면 문제, 핵심 아이디어, 기존 연구 대비 차이와 검토 수준을 볼 수 있다.</p>
