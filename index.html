@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -93,26 +93,6 @@
   .pdetail .pimg img { width: 100%; height: auto; border-radius: 8px; display: block; background: #0d1117; }
   .pdetail .pbody { flex: 1; display: flex; flex-direction: column; gap: 9px; min-width: 0; }
   .pdetail .pdesc { font-size: 13px; color: var(--text); line-height: 1.5; }
-  .reading-note { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.35fr); gap: 7px; }
-  .reading-note > div { padding: 9px 10px; border: 1px solid var(--border); border-radius: 7px;
-    background: var(--panel); font-size: 12px; line-height: 1.45; }
-  .reading-note b { display: block; margin-bottom: 2px; color: var(--muted); font-size: 10px;
-    text-transform: uppercase; letter-spacing: .045em; }
-  .reading-note .novelty { border-color: #355c4a; background: rgba(43,138,91,.09); }
-  .reading-note .novelty b { color: #77d5a7; }
-  .paper-insight { margin: 1px 0; padding: 10px 12px; border: 1px solid #35536f;
-    border-radius: 8px; background: rgba(63,130,190,.08); font-size: 12px; line-height: 1.55; }
-  .paper-insight > div + div { margin-top: 5px; }
-  .paper-insight b { display: inline-block; min-width: 92px; color: #8bbce8; }
-  .paper-insight .delta { color: #bce8cf; }
-  .paper-insight .delta b { color: #77d5a7; }
-  .paper-insight .basis { margin-top: 7px; color: var(--muted); font-size: 10px; }
-  .paper-insight.pending { background: var(--panel); border-color: var(--border); color: var(--muted); }
-  .paper-insight.pending b { color: var(--muted); }
-  .review-status { display: block; margin-top: 6px; font-size: 10px; color: #c4a35a; }
-  @media (max-width: 760px) {
-    .reading-note { grid-template-columns: 1fr; }
-  }
   @media (max-width: 620px) {
     header { padding-left: 12px; padding-right: 12px; }
     .toplinks { float: none; margin-top: 8px; }
@@ -157,22 +137,22 @@
 <header>
   <h1>dex-papers <span class="count" id="count"></span>
     <span class="toplinks">
-      <a href="overview.html">카드형 overview →</a>
+      <a href="overview.html">Card overview →</a>
     </span>
   </h1>
-  <input class="search" id="search" type="search" placeholder="제목·요약·방법·하드웨어 검색…" autocomplete="off">
-  <div class="barlabel">어떤 계열을 볼지 먼저 선택</div>
+  <input class="search" id="search" type="search" placeholder="Search title, idea, method, or hardware…" autocomplete="off">
+  <div class="barlabel">Research area</div>
   <div class="chips" id="collbar"></div>
-  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">세부 필터</span> <span class="zonesummary" id="zoneSummary"></span></div>
+  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">More filters</span> <span class="zonesummary" id="zoneSummary"></span></div>
   <div id="filterZone">
-    <div class="barlabel">태그 필터 <span style="text-transform:none">(분류 간 AND · 같은 분류 안 OR)</span></div>
+    <div class="barlabel">Tags <span style="text-transform:none">(AND across categories · OR within)</span></div>
     <div id="filters"></div>
   </div>
   <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
 </header>
 <section class="library-title">
-  <h2>논문 고르기</h2>
-  <p id="reviewCoverage">행을 펼치면 문제, 핵심 아이디어, 기존 연구 대비 차이와 검토 수준을 볼 수 있다.</p>
+  <h2>Choose a paper</h2>
+  <p>Filter by research area, scan the one-line idea, then expand a paper for links and details.</p>
 </section>
 <main id="grid"></main>
 
@@ -186,10 +166,8 @@
 </div>
 
 <script src="papers.js"></script>
-<script src="paper_insights.js"></script>
 <script>
   const P = window.PAPERS || [];
-  const INSIGHTS = window.PAPER_INSIGHTS || {};
   const activeTags = new Set();
   const activeGroups = new Set();
   let query = "";
@@ -252,49 +230,6 @@
       return "Imitation & Demonstration Learning";
     return "Benchmarks / Perception / Infrastructure";
   }
-  const READING_NOTES = {
-    "Learning Dexterous In-Hand Manipulation": {
-      baseline: "Goal-progress reward, success/drop signal, recurrent policy",
-      novelty: "대규모 domain randomization과 memory를 이용해 dynamics를 online으로 추론하며 zero-shot sim-to-real."
-    },
-    "Solving Rubik's Cube with a Robot Hand": {
-      baseline: "Goal-state progress, success bonus, drop penalty",
-      novelty: "Automatic Domain Randomization과 planner가 제공하는 flip/face-rotation subgoal의 장기 실행."
-    },
-    "DeXtreme: Transfer of Agile In-hand Manipulation from Simulation to Reality": {
-      baseline: "Rotation/position goal, success bonus, action·velocity regularization",
-      novelty: "강한 ADR, LSTM, 저비용 Allegro setup을 결합한 재현 가능한 sim-to-real recipe."
-    },
-    "Visual Dexterity: In-hand Reorientation of Novel and Complex Object Shapes": {
-      baseline: "Orientation goal, fingertip proximity, energy·escape penalty",
-      novelty: "Table-contact를 벌점으로 만들어 in-air reorientation을 유도하고 state teacher를 depth student로 distill."
-    },
-    "Twisting Lids Off with Two Hands": {
-      baseline: "Twist progress, pose, contact, action·work penalty",
-      novelty: "Task 성공에 필요한 fingertip–bottle contact topology를 reference contact point로 직접 인코딩."
-    },
-    "Sequential Dexterity: Chaining Dexterous Policies for Long-Horizon Manipulation": {
-      baseline: "사람이 나눈 subtask와 각 단계의 shaped reward",
-      novelty: "다음 policy의 예상 성공 가능성을 현재 policy의 auxiliary reward로 사용하는 backward fine-tuning."
-    },
-    "DexterityGen: Foundation Controller for Unprecedented Dexterity": {
-      baseline: "Object/finger goal, action·torque·work, style reward",
-      novelty: "Nearby-grasp goal graph로 대규모 RL 행동 데이터를 만든 뒤 diffusion foundation controller로 distill."
-    },
-    "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning": {
-      baseline: "Wrist/finger imitation, object tracking, contact force",
-      novelty: "General hand-motion imitator와 task-specific residual을 분리하고 gravity·friction을 실제 값으로 복원."
-    },
-    "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation": {
-      baseline: "Object state, hand keypoint, joint, contact tracking reward",
-      novelty: "Virtual object controller가 긴 trajectory를 먼저 수행하고, reward가 안정되면 조작 책임을 policy에 handoff."
-    },
-    "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity": {
-      baseline: "Hand distance, task progress, success bonus, action penalty",
-      novelty: "Dominant/facilitating hand 역할과 relative state/action으로 탐색 차원을 절반 수준까지 구조적으로 축소."
-    }
-  };
-
   const grid = document.getElementById("grid");
   const filters = document.getElementById("filters");
   const collbar = document.getElementById("collbar");
@@ -356,11 +291,6 @@
     p._year = yearOf(p);
     p._group = researchGroupOf(p);
   });
-  const reviewedCount = P.filter(p =>
-    INSIGHTS[p.title] && !INSIGHTS[p.title].basis.includes("검토 전")).length;
-  document.getElementById("reviewCoverage").textContent =
-    "분류를 고른 뒤 차별점 한 줄을 훑어보세요. 행을 펼치면 상세 비교 · 본문 검토 " + reviewedCount + "편";
-
   // counts
   const tagCounts = {}, groupCounts = {}, yearCounts = {};
   P.forEach(p => {
@@ -449,9 +379,7 @@
       if (!ok) return false;
     }
     if (query) {
-      const insight = INSIGHTS[p.title] || {};
-      const hay = (p.title + " " + (p.desc||"") + " " + (insight.problem||"") + " " +
-        (insight.idea||"") + " " + (insight.delta||"") + " " + p._group + " " +
+      const hay = (p.title + " " + (p.desc||"") + " " + p._group + " " +
         (p.tags||[]).join(" ") + " " + (p.venue||"") + " " + (p.collection||"")).toLowerCase();
       if (!hay.includes(query)) return false;
     }
@@ -476,16 +404,13 @@
       wrap.className = "rowwrap";
       const row = document.createElement("div");
       row.className = "prow";
-      const insight = INSIGHTS[p.title];
-      const preview = insight ? insight.delta : (p.desc || "요약 검토 대기");
-      const reviewed = insight && !insight.basis.includes("검토 전");
+      const preview = p.desc || "Open for paper links";
       const teaserSources = teaserCandidates(p);
       row.innerHTML =
         '<span class="caret">▶</span>' +
         (teaserSources.length ? '<span class="pthumb"><img class="teaser" loading="lazy" alt=""></span>' : '') +
         '<span class="paper-copy"><span class="pt">'+p.title+'</span>' +
-          '<span class="ppreview"><span class="why'+(reviewed ? '' : ' pending-label')+'">' +
-            (reviewed ? '차별점' : '한줄')+'</span>'+preview+'</span></span>' +
+          '<span class="ppreview"><span class="why">Idea</span>'+preview+'</span></span>' +
         (p.venue ? '<span class="pmeta">'+p.venue+'</span>' : '') +
         (p.cites != null ? '<span class="pcites">'+p.cites+' cit</span>' : '') +
         '<span class="pcoll">'+GROUP_LABELS[p._group]+'</span>';
@@ -495,26 +420,10 @@
       detail.hidden = true;
       const tags = (p.tags||[]).map(t =>
         '<span class="ctag'+(activeTags.has(t)?' on':'')+'" data-tag="'+t+'">'+t+'</span>').join("");
-      const reading = READING_NOTES[p.title];
-      const insightHtml = insight
-        ? '<div class="paper-insight'+(insight.basis.includes("검토 전") ? ' pending' : '')+'">' +
-            '<div><b>문제</b>'+insight.problem+'</div>' +
-            '<div><b>핵심 아이디어</b>'+insight.idea+'</div>' +
-            '<div class="delta"><b>기존 대비 차이</b>'+insight.delta+'</div>' +
-            '<div class="basis">검토 근거 · '+insight.basis+'</div>' +
-          '</div>'
-        : p.desc
-          ? '<div class="paper-insight pending"><div><b>핵심 아이디어</b>'+p.desc+'</div>' +
-              '<span class="review-status">초록 기반 요약 · Introduction/Related Work 비교 검토 전</span></div>'
-          : '<div class="paper-insight pending">본문 검토 대기</div>';
       detail.innerHTML =
         (teaserSources.length ? '<div class="pimg"><img class="teaser" loading="lazy" alt=""></div>' : '') +
         '<div class="pbody">' +
-          insightHtml +
-          (reading ? '<div class="reading-note">' +
-            '<div><b>공통 기반</b>'+reading.baseline+'</div>' +
-            '<div class="novelty"><b>실제 차별점</b>'+reading.novelty+'</div>' +
-          '</div>' : '') +
+          (p.desc ? '<div class="pdesc">'+p.desc+'</div>' : '') +
           '<div class="ctags">'+tags+'</div>' +
           '<div class="links">' +
             (p.summary ? '<a href="'+p.summary+'">📄 Summary</a>' : '') +
