@@ -4,6 +4,7 @@ window.PAPERS = [
   // ===== Dexterous manipulation reading list (repo root) =====
   {
     title: "Twisting Lids Off with Two Hands",
+    image: "https://arxiv.org/html/2403.02338/x1.png",
     collection: "Dex Manipulation",
     file: "2024_Berkeley_TwistingLidsOffTwoHands.pdf",
     arxiv: "https://arxiv.org/abs/2403.02338",
@@ -23,6 +24,7 @@ window.PAPERS = [
   },
   {
     title: "DeXtreme: Transfer of Agile In-hand Manipulation from Simulation to Reality",
+    image: "https://arxiv.org/html/2210.13702/x1.png",
     collection: "Dex Manipulation",
     file: "2023_NVIDIA_DeXtreme.pdf",
     arxiv: "https://arxiv.org/abs/2210.13702",
@@ -52,6 +54,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Dexterous In-Hand Manipulation",
+    image: "https://images.ctfassets.net/kftzwdyauwt9/6f9a0083-bdec-4515-1a470d6af540/999fa3ead605af401cde65a45f7fd0c5/system-overview-diagram2x.png?w=3840&q=90&fm=webp",
     collection: "Dex Manipulation",
     file: "2020_OpenAI_LearningDexterousInHand.pdf",
     arxiv: "https://arxiv.org/abs/1808.00177",
@@ -61,6 +64,7 @@ window.PAPERS = [
   },
   {
     title: "Solving Rubik's Cube with a Robot Hand",
+    image: "https://ar5iv.labs.arxiv.org/html/1910.07113/assets/figures/overview.jpg",
     collection: "Dex Manipulation",
     file: "2019_OpenAI_RubiksCube.pdf",
     arxiv: "https://arxiv.org/abs/1910.07113",
@@ -99,7 +103,7 @@ window.PAPERS = [
   },
   {
     title: "General In-Hand Object Rotation with Vision and Touch",
-    image: "https://haozhi.io/rotateit/res/figs/vision.png",
+    image: "https://ar5iv.labs.arxiv.org/html/2309.09979/assets/x1.png",
     collection: "Dex Manipulation", file: null, cites: 167,
     arxiv: "https://arxiv.org/abs/2309.09979", project: null, venue: "CoRL 2023",
     desc: "Rotates objects about a chosen axis using fused vision and touch, distilled from a privileged sim teacher to a real multi-finger hand.",
@@ -115,7 +119,7 @@ window.PAPERS = [
   },
   {
     title: "AnyRotate: Gravity-Invariant In-Hand Object Rotation with Sim-to-Real Touch",
-    image: "https://maxyang27896.github.io/anyrotate/static/images/system.png",
+    image: "https://arxiv.org/html/2405.07391/x1.png",
     collection: "Dex Manipulation", file: null, cites: 55,
     arxiv: "https://arxiv.org/abs/2405.07391", project: null, venue: "CoRL 2024",
     desc: "Gravity-invariant multi-axis in-hand rotation using dense rich tactile sensing, sim-to-real across arbitrary rotation axes.",
@@ -123,7 +127,7 @@ window.PAPERS = [
   },
   {
     title: "DexMV: Imitation Learning for Dexterous Manipulation from Human Videos",
-    image: "https://yzqin.github.io/dexmv/figure/thumbnail.png",
+    image: "https://ar5iv.labs.arxiv.org/html/2108.05877/assets/x2.png",
     collection: "Dex Manipulation", file: null, cites: 309,
     arxiv: "https://arxiv.org/abs/2108.05877", project: null, venue: "ECCV 2022",
     desc: "Extracts hand-object motion from human videos and retargets it to imitation-learn dexterous manipulation policies (relocate, pour, place).",
@@ -131,6 +135,7 @@ window.PAPERS = [
   },
   {
     title: "From One Hand to Multiple Hands: Imitation Learning for Dexterous Manipulation from Single-Camera Teleoperation",
+    image: "https://ar5iv.labs.arxiv.org/html/2204.12490/assets/x2.png",
     collection: "Dex Manipulation", file: null, cites: 154,
     arxiv: "https://arxiv.org/abs/2204.12490", project: null, venue: "RA-L 2022",
     desc: "Single-camera teleoperation to collect demos and imitation-learn dexterous manipulation, transferring across hand embodiments.",
@@ -154,6 +159,7 @@ window.PAPERS = [
   },
   {
     title: "State-Only Imitation Learning for Dexterous Manipulation",
+    image: "https://ar5iv.labs.arxiv.org/html/2004.04650/assets/x2.png",
     collection: "Dex Manipulation", file: null, cites: 144,
     arxiv: "https://arxiv.org/abs/2004.04650", project: null, venue: "IROS 2021",
     desc: "Imitation learning for dexterous manipulation from state-only demonstrations (no expert actions) via learned inverse dynamics.",
@@ -177,7 +183,7 @@ window.PAPERS = [
   },
   {
     title: "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning",
-    image: "https://pku-marl.github.io/DexterousHands/assets/images/coverv3.jpg",
+    image: "https://ar5iv.labs.arxiv.org/html/2206.08686/assets/x2.png",
     collection: "Dex Manipulation", file: null, cites: 194,
     arxiv: "https://arxiv.org/abs/2206.08686", project: null, venue: "NeurIPS 2022",
     desc: "Bi-DexHands benchmark of 20 bimanual dexterous tasks with massively parallel RL baselines spanning human developmental skills.",
@@ -193,6 +199,7 @@ window.PAPERS = [
   },
   {
     title: "DexPBT: Scaling up Dexterous Manipulation for Hand-Arm Systems with Population Based Training",
+    image: "https://ar5iv.labs.arxiv.org/html/2305.12127/assets/x1.png",
     collection: "Dex Manipulation", file: null, cites: 40,
     arxiv: "https://arxiv.org/abs/2305.12127", project: null, venue: "RSS 2023",
     desc: "Scales dexterous hand-arm manipulation in sim via population-based training, solving regrasping, throwing, and reorientation.",
@@ -216,6 +223,7 @@ window.PAPERS = [
   },
   {
     title: "See to Touch: Learning Tactile Dexterity through Visual Incentives",
+    image: "https://ar5iv.labs.arxiv.org/html/2309.12300/assets/x1.png",
     collection: "Dex Manipulation", file: null, cites: 57,
     arxiv: "https://arxiv.org/abs/2309.12300", project: null, venue: "ICRA 2024",
     desc: "Uses visual rewards to optimize tactile-based dexterous policies (TAVI), improving contact-rich manipulation on a real hand.",
@@ -223,7 +231,7 @@ window.PAPERS = [
   },
   {
     title: "Global Planning for Contact-Rich Manipulation via Local Smoothing of Quasi-dynamic Contact Models",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUDk04mEi_llFYOOj7jR05JEl1_vVtxh7SMaHWAsDIUP1sGXc8-wyABQcaG_ZQdKpX5wehhOxjIlBJmhpm4A9f1B5G2hGISDxPMadj2x7LdKbNy7naCdcQzNR1_tKxkxOy_idLpRYzKejFLFw5inxJG22sZEXIK80R9cj1ssCKa8Hl11Ossfse9ipdSowyN7HiIlrzhgIkpMJCkVWYZDs9YCvS9q9sBsZbKicC8yy58=w1280",
+    image: "https://ar5iv.labs.arxiv.org/html/2206.10787/assets/Figures/banner5.png",
     collection: "Dex Manipulation", file: null, cites: 171,
     arxiv: "https://arxiv.org/abs/2206.10787", project: null, venue: "T-RO 2022",
     desc: "RRT-style global planner for contact-rich manipulation using local smoothing of quasi-dynamic contact dynamics.",
@@ -231,6 +239,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Dexterous Manipulation from Exemplar Object Trajectories and Pre-Grasps",
+    image: "https://ar5iv.labs.arxiv.org/html/2209.11221/assets/x1.png",
     collection: "Dex Manipulation", file: null, cites: 61,
     arxiv: "https://arxiv.org/abs/2209.11221", project: null, venue: "ICRA 2023",
     desc: "Generates dexterous manipulation via pre-grasps and exemplar object trajectories (PGDM), cutting exploration burden for RL.",
@@ -238,6 +247,7 @@ window.PAPERS = [
   },
   {
     title: "Sampling-based Exploration for Reinforcement Learning of Dexterous Manipulation",
+    image: "https://ar5iv.labs.arxiv.org/html/2303.03486/assets/x1.png",
     collection: "Dex Manipulation", file: null, cites: 46,
     arxiv: "https://arxiv.org/abs/2303.03486", project: null, venue: "RSS 2023",
     desc: "Sampling-based exploration that bootstraps RL for hard dexterous manipulation with sparse contacts and long horizons.",
@@ -245,6 +255,7 @@ window.PAPERS = [
   },
   {
     title: "Dextrous Tactile In-Hand Manipulation Using a Modular Reinforcement Learning Architecture",
+    image: "https://ar5iv.labs.arxiv.org/html/2303.04705/assets/figures/sequence.png",
     collection: "Dex Manipulation", file: null, cites: 45,
     arxiv: "https://arxiv.org/abs/2303.04705", project: null, venue: "ICRA 2023",
     desc: "Modular RL architecture for tactile in-hand manipulation, decoupling control sub-problems for robust sim-to-real.",
@@ -260,7 +271,7 @@ window.PAPERS = [
   },
   {
     title: "Dexterous Manipulation from Images: Autonomous Real-World RL via Substep Guidance",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUD3eUDf7zi8o_OHCAu68qkfVl0pfxHcShFr2jBXxa2Bl05pHh-d1V3_BYM18NHLaN43Pp08z2hmvQ_27KD2diRdggkJP0hyD50oax5wKiibG8K-_MK1b-vEI7icSRulERzxdxS3iwC_oeJpzR54dZ3qzDizr8MGraXbNG3D9DSpdCIrKf4YsLIHGxsjQE3EvBCC1RcMdc4ApuL_C5T-4XjJhAUZpJ5vt84yvjXF=w1280",
+    image: "https://ar5iv.labs.arxiv.org/html/2212.09902/assets/figures/platform_picture.png",
     collection: "Dex Manipulation", file: null, cites: 33,
     arxiv: "https://arxiv.org/abs/2212.09902", project: null, venue: "ICRA 2023",
     desc: "Autonomous real-world RL learning image-based dexterous manipulation via human-provided substep guidance and resets.",
@@ -268,7 +279,7 @@ window.PAPERS = [
   },
   {
     title: "Solving Challenging Dexterous Manipulation Tasks With Trajectory Optimisation and Reinforcement Learning",
-    image: "https://dexterous-manipulation.github.io/images/handblock_res.png",
+    image: "https://ar5iv.labs.arxiv.org/html/2009.05104/assets/handmanipulationenvs_horizontal.png",
     collection: "Dex Manipulation", file: null, cites: 32,
     arxiv: "https://arxiv.org/abs/2009.05104", project: null, venue: "ICML 2021",
     desc: "Combines trajectory optimization with RL to solve challenging high-DoF dexterous manipulation tasks in simulation.",
@@ -276,6 +287,7 @@ window.PAPERS = [
   },
   {
     title: "Dexterous Manipulation through Imitation Learning: A Survey",
+    image: "https://arxiv.org/html/2504.03515/figures/total_tree5.png",
     collection: "Survey",
     file: "SURVEY_2025_DexManip_ImitationLearning.pdf",
     arxiv: "https://arxiv.org/abs/2504.03515",
@@ -285,6 +297,7 @@ window.PAPERS = [
   },
   {
     title: "Interactive Imitation Learning for Dexterous Robotic Manipulation: A Survey",
+    image: "https://arxiv.org/html/2506.00098/x1.png",
     collection: "Survey",
     file: "SURVEY_2025_KIT_InteractiveIL_Dexterous.pdf",
     arxiv: "https://arxiv.org/abs/2506.00098",
@@ -305,6 +318,7 @@ window.PAPERS = [
   },
   {
     title: "Augmentation Enables One-Shot Generalization in LfD for Contact-Rich Manipulation",
+    image: "https://ar5iv.labs.arxiv.org/html/2210.07015/assets/img/Method/MethodVECE.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Augmentation_OneShot_Li2023.pdf",
     arxiv: "https://arxiv.org/abs/2210.07015",
@@ -324,6 +338,7 @@ window.PAPERS = [
   },
   {
     title: "Coarse-to-Fine Imitation Learning: Robot Manipulation from a Single Demonstration",
+    image: "https://ar5iv.labs.arxiv.org/html/2105.06411/assets/x2.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/CoarseToFine_Johns2021.pdf",
     arxiv: "https://arxiv.org/abs/2105.06411",
@@ -333,7 +348,7 @@ window.PAPERS = [
   },
   {
     title: "Data Scaling Laws in Imitation Learning for Robotic Manipulation",
-    image: "https://data-scaling-laws.github.io/media/images/title-1.jpg",
+    image: "https://arxiv.org/html/2410.18647v4/figures/images/4_tasks_with_arrow.jpg",
     collection: "Related: autonomous",
     file: "related_works/autonomous/DataScalingLaws_Lin2024.pdf",
     arxiv: "https://arxiv.org/abs/2410.18647",
@@ -353,7 +368,7 @@ window.PAPERS = [
   },
   {
     title: "The Ingredients of Real-World Robotic Reinforcement Learning",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUCbaot-sy9YPyd2Xe1c_-W2N-VMJ2U05hGei2nnOfazz5mK5dE0uEbPDe66u2B2o1oWCojlFPdsYJpeFZQEB90JgNRbp1vMTcgpvkMr6kl02n-py1YIyA1RG7GYKMdKDV8RvRzwtzXD0DI5b8J6IDaAS2w1L3bkF04Os5CSsrjYnOyFf-aBG7EMGCK0UcPlWD7MC0l-RkVGws0_0PI=w1280",
+    image: "https://ar5iv.labs.arxiv.org/html/2004.12570/assets/figures/teaser.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Ingredients_RealWorldRL_Zhu2020.pdf",
     arxiv: "https://arxiv.org/abs/2004.12570",
@@ -363,6 +378,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Hand-Eye Coordination for Robotic Grasping with Large-Scale Data Collection",
+    image: "https://ar5iv.labs.arxiv.org/html/1603.02199/assets/arm_farm.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Learning Hand-Eye Coordination for Robotic Grasping with Large-Scale Data Collection.pdf",
     arxiv: "https://arxiv.org/abs/1603.02199",
@@ -372,6 +388,7 @@ window.PAPERS = [
   },
   {
     title: "End-to-End Training of Deep Visuomotor Policies",
+    image: "https://ar5iv.labs.arxiv.org/html/1504.00702/assets/hanger_firstperson_close_step1.jpeg",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Levine2016_E2E_Visuomotor.pdf",
     arxiv: "https://arxiv.org/abs/1504.00702",
@@ -391,7 +408,7 @@ window.PAPERS = [
   },
   {
     title: "Reset-Free Reinforcement Learning via Multi-Task Learning (MTRF)",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUC_m8UaEQj0SlOlnvu1xq1cabgiO6_p3Fv4jH6EtnvD1W1t5MdiHe9e28Li4n5YN_r-Zc91H95u_3FjqIBjkWs2Wt5T6szDdLH_aA7lgpzb4BJs9xp99G1kv83U_Yn7Bewc-7UZ-Aed9w-jR97plF954ic8Q2HLzwIq7vCULatGz1J8B_IqzrNGkXetxGUVM_G9vS3YzSTE3wLaBkkaMXsDBZlvT2AEDieHAPXMgPw=w1280",
+    image: "https://ar5iv.labs.arxiv.org/html/2104.11203/assets/media/dexterous_ICRA_mainfig.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/MTRF_Gupta2021.pdf",
     arxiv: "https://arxiv.org/abs/2104.11203",
@@ -411,6 +428,7 @@ window.PAPERS = [
   },
   {
     title: "Supersizing Self-Supervision: Learning to Grasp from 50K Tries and 700 Robot Hours",
+    image: "https://ar5iv.labs.arxiv.org/html/1509.06825/assets/intro_fig.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/pinto.pdf",
     arxiv: "https://arxiv.org/abs/1509.06825",
@@ -420,6 +438,7 @@ window.PAPERS = [
   },
   {
     title: "QT-Opt: Scalable Deep RL for Vision-Based Robotic Manipulation",
+    image: "https://ar5iv.labs.arxiv.org/html/1806.10293/assets/images/data_collection_setup_small.jpg",
     collection: "Related: autonomous",
     file: "related_works/autonomous/QT-Opt.pdf",
     arxiv: "https://arxiv.org/abs/1806.10293",
@@ -429,7 +448,7 @@ window.PAPERS = [
   },
   {
     title: "Real2Render2Real: Scaling Robot Data Without Dynamics Simulation or Robot Hardware",
-    image: "https://real2render2real.com/data/r2r2r_fig_no_bg.png",
+    image: "https://arxiv.org/html/2505.09601/extracted/6437703/figures/assets/KindaBadR2R2RTeaser8.jpg",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Real2Render2Real_Yu2025.pdf",
     arxiv: "https://arxiv.org/abs/2505.09601",
@@ -459,6 +478,7 @@ window.PAPERS = [
   },
   {
     title: "Self-Improving Robots: End-to-End Autonomous Visuomotor RL (MEDAL++)",
+    image: "https://ar5iv.labs.arxiv.org/html/2303.01488/assets/images/intro_figure.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/SelfImproving_MEDALpp_Sharma2023.pdf",
     arxiv: "https://arxiv.org/abs/2303.01488",
@@ -468,7 +488,7 @@ window.PAPERS = [
   },
   {
     title: "Robot Learning on the Job: Human-in-the-Loop Autonomy During Deployment (Sirius)",
-    image: "https://ut-austin-rpl.github.io/sirius/src/result_22.png",
+    image: "https://arxiv.org/html/2211.08416/x1.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/Sirius_Liu2022.pdf",
     arxiv: "https://arxiv.org/abs/2211.08416",
@@ -478,7 +498,7 @@ window.PAPERS = [
   },
   {
     title: "So You Think You Can Scale Up Autonomous Robot Data Collection?",
-    image: "https://autonomous-data-collection.github.io/static/images/expectations-reality.png",
+    image: "https://arxiv.org/html/2411.01813/extracted/5975423/figures/env-progression.png",
     collection: "Related: autonomous",
     file: "related_works/autonomous/So You Think You Can Scale Up Autonomous Robot Data Collection?.pdf",
     arxiv: "https://arxiv.org/abs/2411.01813",
@@ -488,6 +508,7 @@ window.PAPERS = [
   },
   {
     title: "Working Backwards: Learning to Place by Picking",
+    image: "https://arxiv.org/html/2312.02352/extracted/6095687/figs/scan.jpeg",
     collection: "Related: autonomous",
     file: "related_works/autonomous/working_backward.pdf",
     arxiv: "https://arxiv.org/abs/2312.02352",
@@ -499,7 +520,7 @@ window.PAPERS = [
   // ===== AutoDex related works: dexterous =====
   {
     title: "Being-H0: Vision-Language-Action Pretraining from Large-Scale Human Videos",
-    image: "https://beingbeyond.github.io/Being-H0/assets/image/being-h0.webp",
+    image: "https://beingbeyond.github.io/Being-H0/assets/image/overview.webp",
     collection: "Related: dexterous",
     file: "related_works/dexterous/being_h0_2507.15597.pdf",
     arxiv: "https://arxiv.org/abs/2507.15597",
@@ -509,7 +530,7 @@ window.PAPERS = [
   },
   {
     title: "Large Video Planner Enables Generalizable Robot Control",
-    image: "https://boyuan.space/large-video-planner/static/images/thumbnail.jpg",
+    image: "https://arxiv.org/html/2512.15840v2/x1.png",
     collection: "Related: dexterous",
     file: "related_works/dexterous/large_video_planner_2512.15840.pdf",
     arxiv: "https://arxiv.org/abs/2512.15840",
@@ -597,6 +618,7 @@ window.PAPERS = [
   // ===== Landscape overview: bimanual & dexterous multi-task (arXiv-only, no local PDF) =====
   {
     title: "ALOHA Unleashed: A Simple Recipe for Robot Dexterity",
+    image: "https://arxiv.org/html/2410.13126/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/aloha_unleashed.html",
@@ -618,6 +640,7 @@ window.PAPERS = [
   },
   {
     title: "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity",
+    image: "https://arxiv.org/html/2506.11916/extracted/6539512/Fig1-overview.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/mimic_one.html",
@@ -628,6 +651,7 @@ window.PAPERS = [
   },
   {
     title: "Towards a Generalizable Bimanual Foundation Policy via Flow-based Video Prediction",
+    image: "https://arxiv.org/html/2505.24156/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/bimanual_flow_video.html",
@@ -638,7 +662,7 @@ window.PAPERS = [
   },
   {
     title: "Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning",
-    image: "https://dingry.github.io/projects/static/images/bunny_image.png",
+    image: "https://arxiv.org/html/2407.03162/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/bunny_visionpro.html",
@@ -671,6 +695,7 @@ window.PAPERS = [
   },
   {
     title: "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity",
+    image: "https://arxiv.org/html/2411.13020/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/asymdex.html",
@@ -681,6 +706,7 @@ window.PAPERS = [
   },
   {
     title: "Dynamic Handover: Throw and Catch with Bimanual Hands",
+    image: "https://ar5iv.labs.arxiv.org/html/2309.05655/assets/figure/pipeline.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/dynamic_handover.html",
@@ -691,7 +717,7 @@ window.PAPERS = [
   },
   {
     title: "HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning",
-    image: "https://openhumanoidgen.github.io/static/images/database.png",
+    image: "https://openhumanoidgen.github.io/static/images/method.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/humanoidgen.html",
@@ -746,7 +772,7 @@ window.PAPERS = [
   },
   {
     title: "DexGrasp Anything: Towards Universal Robotic Dexterous Grasping with Physics Awareness",
-    image: "https://dexgraspanything.github.io/static/images/image1.png",
+    image: "https://arxiv.org/html/2503.08257/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/dexgrasp_anything.html",
@@ -759,7 +785,7 @@ window.PAPERS = [
     title: "RobustDexGrasp: Robust Dexterous Grasping of General Objects from Single-view Perception",
     collection: "Landscape: bimanual-dex",
     file: null,
-    image: "https://zdchan.github.io/Robust_DexGrasp/objects.png",
+    image: "https://arxiv.org/html/2504.05287/sections/FIG/pipeline.png",
     summary: "overview/robustdexgrasp.html",
     arxiv: "https://arxiv.org/abs/2504.05287",
     project: "https://zdchan.github.io/Robust_DexGrasp/",
@@ -799,6 +825,7 @@ window.PAPERS = [
   },
   {
     title: "EgoDex: Learning Dexterous Manipulation from Large-Scale Egocentric Video",
+    image: "https://arxiv.org/html/2505.11709v3/figs/collage_edit.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/egodex.html",
@@ -857,7 +884,7 @@ window.PAPERS = [
     title: "GraspXL: Generating Grasping Motions for Diverse Objects at Scale",
     collection: "Grasp Synthesis",
     file: null,
-    image: "https://raw.githubusercontent.com/zdchan/graspxl/main/tease_more.jpg",
+    image: "https://arxiv.org/html/2403.19649/extracted/5727612/sections/fig/pipeline.png",
     arxiv: "https://arxiv.org/abs/2403.19649",
     project: "https://eth-ait.github.io/graspxl/",
     venue: "ECCV 2024",
@@ -875,6 +902,7 @@ window.PAPERS = [
   },
   {
     title: "ArtiGrasp: Physically Plausible Synthesis of Bi-Manual Dexterous Grasping and Articulation",
+    image: "https://arxiv.org/html/2309.03891/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     arxiv: "https://arxiv.org/abs/2309.03891",
@@ -904,6 +932,7 @@ window.PAPERS = [
   },
   {
     title: "Omnigrasp: Grasping Diverse Objects with Simulated Humanoids",
+    image: "https://arxiv.org/html/2407.11385/extracted/6450239/assets/graphics/archi.jpeg",
     collection: "Grasp Synthesis",
     file: null,
     arxiv: "https://arxiv.org/abs/2407.11385",
@@ -933,6 +962,7 @@ window.PAPERS = [
   },
   {
     title: "LatentHOI: On the Generalizable Hand Object Motion Generation with Latent Hand Diffusion",
+    image: "https://jojoml.github.io/latentHOI/static/images/pipeline.png",
     collection: "Grasp Synthesis",
     file: null,
     arxiv: null,
@@ -958,6 +988,7 @@ window.PAPERS = [
   // --- Datasets / benchmarks ---
   {
     title: "DexYCB: A Benchmark for Capturing Hand Grasping of Objects",
+    image: "https://ar5iv.labs.arxiv.org/html/2104.04631/assets/intro-20200908_144740-932122062010-color_000072.jpg",
     collection: "Grasp Synthesis", file: null, cites: 441,
     arxiv: "https://arxiv.org/abs/2104.04631", project: "https://dex-ycb.github.io/", venue: "CVPR 2021",
     desc: "NVIDIA benchmark: 582K RGB-D frames of 10 subjects grasping 20 YCB objects with full 3D hand+object pose.",
@@ -989,6 +1020,7 @@ window.PAPERS = [
   },
   {
     title: "AffordPose: A Large-scale Dataset of Hand-Object Interactions with Affordance-driven Hand Pose",
+    image: "https://ar5iv.labs.arxiv.org/html/2309.08942/assets/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 99,
     arxiv: "https://arxiv.org/abs/2309.08942", project: "https://affordpose.github.io/", venue: "ICCV 2023",
     desc: "26.7K affordance-labeled hand-object interactions over 641 objects, 8 affordance types.",
@@ -996,7 +1028,7 @@ window.PAPERS = [
   },
   {
     title: "Get a Grip: Multi-Finger Grasp Evaluation at Scale Enables Robust Sim-to-Real Transfer",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUC2EEs0B4lsVqAKy4yS5RuzlO3AEQe_nmDH2BcdqzKzHdGDL9lXbMdww0oVCD9-LD6UJMFS3zgylIPi_NO_5GHfr1eYU9uAgmTAh09Reuo3ezbshVT0wuQ55kVCb-LGuNGfztcUu_WgQ_r1LSEKqAbM_gG-E5bSmqLu8O4gxEt7KLy_-SRVh1rMCFcCOUj9ngSBkCH6TMmSVJyIId_moGPU5PEM2MPJTiiRYPN99rg=w1280",
+    image: "https://arxiv.org/html/2410.23701/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 16,
     arxiv: "https://arxiv.org/abs/2410.23701", project: "https://sites.google.com/view/get-a-grip-dataset", venue: "CoRL 2024",
     desc: "Learns a discriminative grasp-evaluation model; releases 3.5M grasps on 4.3K objects with RGB/point clouds/NeRFs.",
@@ -1022,7 +1054,7 @@ window.PAPERS = [
   },
   {
     title: "GenDexGrasp: Generalizable Dexterous Grasping",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUBaRpeBKlthBz8BFilSHlmpFRe7FOPmOdgdO9HLNr7K6bhqTFhq19q4-_YmVWDMU27TDsaDg4a8HJVbNNCDzqdtALCtOzJLLo9vfqyzfLt10qX35rcwKfvQPX9mUOcFKIHaVEtQiyxfNHHcPoeZg8tBsO_iVWgRpOvmhffltRQD3p7GYAbL4xXxX9_KoeM=w16383",
+    image: "https://raw.githubusercontent.com/tengyu-liu/GenDexGrasp/main/assets/figures/pipeline.png",
     collection: "Grasp Synthesis", file: null, cites: 118,
     arxiv: "https://arxiv.org/abs/2210.00722", project: "https://sites.google.com/view/gendexgrasp", venue: "ICRA 2023",
     desc: "Hand-agnostic grasping that transfers across robot hands via contact-map matching (MultiDex dataset).",
@@ -1038,6 +1070,7 @@ window.PAPERS = [
   },
   {
     title: "Synthesizing Diverse and Physically Stable Grasps with Arbitrary Hand Structures using Differentiable Force Closure Estimator",
+    image: "https://ar5iv.labs.arxiv.org/html/2104.09194/assets/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 166,
     arxiv: "https://arxiv.org/abs/2104.09194", project: null, venue: "RA-L 2021",
     desc: "Fast differentiable force-closure estimator synthesizing diverse, stable grasps for arbitrary hand structures, training-free.",
@@ -1045,6 +1078,7 @@ window.PAPERS = [
   },
   {
     title: "Deep Differentiable Grasp Planner for High-DOF Grippers",
+    image: "https://ar5iv.labs.arxiv.org/html/2002.01530/assets/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 104,
     arxiv: "https://arxiv.org/abs/2002.01530", project: null, venue: "RSS 2020",
     desc: "End-to-end differentiable grasp planner for high-DoF hands using a differentiable generalized Q1 metric.",
@@ -1060,6 +1094,7 @@ window.PAPERS = [
   },
   {
     title: "Fast-Grasp'D: Dexterous Multi-finger Grasp Generation Through Differentiable Simulation",
+    image: "https://ar5iv.labs.arxiv.org/html/2306.08132/assets/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 65,
     arxiv: "https://arxiv.org/abs/2306.08132", project: null, venue: "ICRA 2023",
     desc: "Faster differentiable-simulation grasp generator; used to synthesize the Grasp'D-1M dataset.",
@@ -1067,7 +1102,7 @@ window.PAPERS = [
   },
   {
     title: "DDGC: Generative Deep Dexterous Grasping in Clutter",
-    image: "https://irobotics.aalto.fi/wp-content/uploads/2020/06/unnamed.png",
+    image: "https://ar5iv.labs.arxiv.org/html/2103.04783/assets/figures/dataset/121_rgb_scene_cropped2.png",
     collection: "Grasp Synthesis", file: null, cites: 86,
     arxiv: "https://arxiv.org/abs/2103.04783", project: "https://irobotics.aalto.fi/ddgc/", venue: "RA-L 2021",
     desc: "Fast generative coarse-to-fine collision-free multi-finger grasp sampler in clutter from a single RGB-D image.",
@@ -1115,6 +1150,7 @@ window.PAPERS = [
   },
   {
     title: "Contact2Grasp: 3D Grasp Synthesis via Hand-Object Contact Constraint",
+    image: "https://ar5iv.labs.arxiv.org/html/2210.09245/assets/fig/new_figure1_1.jpg",
     collection: "Grasp Synthesis", file: null, cites: 38,
     arxiv: "https://arxiv.org/abs/2210.09245", project: null, venue: "IJCAI 2023",
     desc: "Two-stage synthesis: samples contact maps, then maps contact to pose with penetration-aware optimization.",
@@ -1130,6 +1166,7 @@ window.PAPERS = [
   },
   {
     title: "UniGrasp: Learning a Unified Model to Grasp with Multifingered Robotic Hands",
+    image: "https://ar5iv.labs.arxiv.org/html/1910.10900/assets/imgs/abstract_pipeline.png",
     collection: "Grasp Synthesis", file: null, cites: 141,
     arxiv: "https://arxiv.org/abs/1910.10900", project: "https://github.com/stanford-iprl-lab/UniGrasp", venue: "RA-L 2020",
     desc: "Predicts force-closure contact points generalizing across 2/3/multi-finger hands, including unseen grippers.",
@@ -1153,6 +1190,7 @@ window.PAPERS = [
   },
   {
     title: "EfficientGrasp: A Unified Data-Efficient Learning to Grasp Method for Multi-Fingered Robot Hands",
+    image: "https://ar5iv.labs.arxiv.org/html/2206.15159/assets/fig1_flowchart.png",
     collection: "Grasp Synthesis", file: null, cites: 25,
     arxiv: "https://arxiv.org/abs/2206.15159", project: null, venue: "RA-L 2022",
     desc: "Gripper-model-independent multi-finger grasp synthesis using a gripper-workspace feature.",
@@ -1160,6 +1198,7 @@ window.PAPERS = [
   },
   {
     title: "DexGrasp-Diffusion: Diffusion-based Unified Functional Grasp Synthesis for Multi-Dexterous Robotic Hands",
+    image: "https://arxiv.org/html/2407.09899/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 22,
     arxiv: "https://arxiv.org/abs/2407.09899", project: null, venue: "arXiv 2024",
     desc: "Diffusion generator for multiple hands plus a discriminator filtering physically/functionally valid grasps.",
@@ -1199,6 +1238,7 @@ window.PAPERS = [
   },
   {
     title: "G-DexGrasp: Generalizable Dexterous Grasping Synthesis via Part-Aware Prior Retrieval and Prior-Assisted Generation",
+    image: "https://arxiv.org/html/2503.19457/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 8,
     arxiv: "https://arxiv.org/abs/2503.19457", project: null, venue: "CVPR 2025",
     desc: "Retrieves fine-grained contact-part/affordance priors to generalize grasp synthesis to unseen categories.",
@@ -1214,6 +1254,7 @@ window.PAPERS = [
   },
   {
     title: "Grasping a Handful: Sequential Multi-Object Dexterous Grasp Generation",
+    image: "https://arxiv.org/html/2503.22370/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 6,
     arxiv: "https://arxiv.org/abs/2503.22370", project: null, venue: "RA-L 2025",
     desc: "SeqGrasp algorithm plus a diffusion generator for grasping multiple objects sequentially using partial DoF.",
@@ -1228,6 +1269,7 @@ window.PAPERS = [
   },
   {
     title: "Lightning Grasp: High Performance Procedural Grasp Synthesis with Contact Fields",
+    image: "https://arxiv.org/html/2511.07418/teaser_padded.png",
     collection: "Grasp Synthesis", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2511.07418", project: null, venue: "arXiv 2025",
     desc: "Procedural grasp synthesis with a Contact Field data structure achieving orders-of-magnitude speedups.",
@@ -1235,6 +1277,7 @@ window.PAPERS = [
   },
   {
     title: "DexGANGrasp: Dexterous Generative Adversarial Grasping Synthesis for Task-Oriented Manipulation",
+    image: "https://arxiv.org/html/2407.17348/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 13,
     arxiv: "https://arxiv.org/abs/2407.17348", project: "https://david-s-martinez.github.io/DexGANGrasp.io/", venue: "Humanoids 2024",
     desc: "cGAN generator plus evaluator for real-time single-view dexterous grasps, with MLLM affordance grounding.",
@@ -1260,6 +1303,7 @@ window.PAPERS = [
   },
   {
     title: "DexPoint: Generalizable Point Cloud Reinforcement Learning for Sim-to-Real Dexterous Manipulation",
+    image: "https://ar5iv.labs.arxiv.org/html/2211.09423/assets/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 132,
     arxiv: "https://arxiv.org/abs/2211.09423", project: "https://yzqin.github.io/dexpoint/", venue: "CoRL 2022",
     desc: "Point-cloud RL for sim-to-real dexterous grasping with imagined-hand point clouds and contact rewards (Allegro).",
@@ -1267,7 +1311,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Robust Real-World Dexterous Grasping Policies via Implicit Shape Augmentation (ISAGrasp)",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUD4vIZtTaTICP_xgq208tpnRCzs_mlGGbr0WWALXBaSr30WXyyNh-UoeOLf_nQ-rkxJRD1Dcn1k-8PtivjPxdzhFrj7UpEPpD9cDnz1Zsr9a4u-XOJpaQcGU9DYPfsgbt-nhq-ZwmnX8TfdT3bcbfnmhD9GIaPBdm8ih20vAfxZ0phwPy_89SXgGzsMRLw=w16383",
+    image: "https://ar5iv.labs.arxiv.org/html/2210.13638/assets/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 41,
     arxiv: "https://arxiv.org/abs/2210.13638", project: "https://sites.google.com/view/implicitaugmentation/home", venue: "CoRL 2022",
     desc: "Deforms human grasp demos via an implicit generative model into a large synthetic set, training a robust Allegro policy.",
@@ -1275,6 +1319,7 @@ window.PAPERS = [
   },
   {
     title: "DexTransfer: Real World Multi-fingered Dexterous Grasping with Minimal Human Demonstrations",
+    image: "https://ar5iv.labs.arxiv.org/html/2209.14284/assets/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 42,
     arxiv: "https://arxiv.org/abs/2209.14284", project: null, venue: "arXiv 2022",
     desc: "Learns a point-cloud Allegro grasping policy from a small mocap demo set augmented with domain randomization.",
@@ -1282,7 +1327,7 @@ window.PAPERS = [
   },
   {
     title: "DextrAH-G: Pixels-to-Action Dexterous Arm-Hand Grasping with Geometric Fabrics",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUDmxnpTk3rMiDDV7Hz7EbYZBTfHFFVphRGgv0QpdORT0iV2vXHvXDJa3iAN9h0sbLhd7lkegFtOGV8Azcuyj3vltna5a_i1B-0X3fVsO8ftm3-ugI8dnwg6g_aBJaqgmnGrYM_X25jLwkKuL8BPvQWdMqt2v4MM0kWQLf60Qe6ClQjHb_wZgCeDaHtG-N_ZVLGSfIqrPbMyvUm3BMFYnOwOzbwg3NogI6p-_Z2g=w1280",
+    image: "https://arxiv.org/html/2407.02274/extracted/5929291/figs/squirrel_cube_blanket_v5.png",
     collection: "Grasp Synthesis", file: null, cites: 56,
     arxiv: "https://arxiv.org/abs/2407.02274", project: "https://sites.google.com/view/dextrah-g", venue: "CoRL 2024",
     desc: "Depth-based 23-DoF arm-hand grasping policy: RL + geometric fabrics + teacher-student distillation, 87% real success.",
@@ -1314,6 +1359,7 @@ window.PAPERS = [
   },
   {
     title: "UniGraspTransformer: Simplified Policy Distillation for Scalable Dexterous Robotic Grasping",
+    image: "https://arxiv.org/html/2412.02699/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 20,
     arxiv: "https://arxiv.org/abs/2412.02699", project: null, venue: "CVPR 2025",
     desc: "Distills thousands of per-object RL grasp trajectories into a single transformer policy, beating UniDexGrasp++.",
@@ -1321,6 +1367,7 @@ window.PAPERS = [
   },
   {
     title: "Efficient Residual Learning with Mixture-of-Experts for Universal Dexterous Grasping (ResDex)",
+    image: "https://arxiv.org/html/2410.02475/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 16,
     arxiv: "https://arxiv.org/abs/2410.02475", project: null, venue: "ICLR 2025",
     desc: "Geometry-unaware base policies combined via a residual MoE hyper-policy; 88.8% on DexGraspNet in 12 GPU-hours.",
@@ -1336,7 +1383,7 @@ window.PAPERS = [
   },
   {
     title: "Cross-Embodiment Dexterous Grasping with Reinforcement Learning (CrossDex)",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUClYSc_bQaZ_D4VGzGCDk-eRyB3sar2KcSSho03hMlS1s11OONidedNna0EDwjb3RNK5hQM25-1xLnGVJOfmLhucY2ROFBsSnN-DL34uiugJPv8UKQ0dugXNPFCNS8aba7bJnE_iS-esX7XcN8Zxmsfh40CFD2-X8osNhtagozN7GpKMKxrRKpuKPKfAebHi1cZKgzGdzferQxXrIffh-qAflh6aeSJuZBGITom=w1280",
+    image: "https://arxiv.org/html/2410.02479/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 30,
     arxiv: "https://arxiv.org/abs/2410.02479", project: "https://sites.google.com/view/crossdex", venue: "ICLR 2025",
     desc: "Eigengrasp-based universal action space; one vision policy reaches 80% on YCB across 4 hands, zero-shot to 2 unseen.",
@@ -1344,6 +1391,7 @@ window.PAPERS = [
   },
   {
     title: "DemoGrasp: Universal Dexterous Grasping from a Single Demonstration",
+    image: "https://arxiv.org/html/2509.22149/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 9,
     arxiv: "https://arxiv.org/abs/2509.22149", project: null, venue: "CoRL 2025",
     desc: "Edits one demo trajectory via single-step-MDP RL; 95% on DexGraspNet (Shadow), 84.6% across embodiments.",
@@ -1351,6 +1399,7 @@ window.PAPERS = [
   },
   {
     title: "T(R,O) Grasp: Efficient Graph Diffusion of Robot-Object Spatial Transformation for Cross-Embodiment Dexterous Grasping",
+    image: "https://arxiv.org/html/2510.12724/fig/pipeline.png",
     collection: "Grasp Synthesis", file: null, cites: 4,
     arxiv: "https://arxiv.org/abs/2510.12724", project: null, venue: "arXiv 2025",
     desc: "Graph diffusion over robot-object transformations; 94.83% success at 0.21s inference for closed-loop grasping.",
@@ -1358,6 +1407,7 @@ window.PAPERS = [
   },
   {
     title: "CEDex: Cross-Embodiment Dexterous Grasp Generation at Scale from Human-like Contact Representations",
+    image: "https://arxiv.org/html/2509.24661/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 9,
     arxiv: "https://arxiv.org/abs/2509.24661", project: null, venue: "ICRA 2026",
     desc: "Aligns robot kinematics to generated human-like contact representations for scalable cross-embodiment grasp synthesis.",
@@ -1365,6 +1415,7 @@ window.PAPERS = [
   },
   {
     title: "GeoMatch++: Morphology Conditioned Geometry Matching for Multi-Embodiment Grasping",
+    image: "https://arxiv.org/html/2412.18998/extracted/6095434/architecture_final.png",
     collection: "Grasp Synthesis", file: null, cites: 3,
     arxiv: "https://arxiv.org/abs/2412.18998", project: null, venue: "CoRL 2024 Workshop",
     desc: "Morphology-conditioned geometry matching; +9.64% grasp success on out-of-domain end-effectors.",
@@ -1388,6 +1439,7 @@ window.PAPERS = [
   },
   {
     title: "DexTouch: Learning to Seek and Manipulate Objects with Tactile Dexterity",
+    image: "https://arxiv.org/html/2401.12496/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 15,
     arxiv: "https://arxiv.org/abs/2401.12496", project: null, venue: "RA-L 2024",
     desc: "Vision-free tactile-only system (UR5e + Allegro, 16 FSR sensors) that locates and grasps objects in the dark.",
@@ -1397,6 +1449,7 @@ window.PAPERS = [
   // --- Functional / affordance / human-prior grasping ---
   {
     title: "Dexterous Functional Grasping",
+    image: "https://arxiv.org/html/2312.02975/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 64,
     arxiv: "https://arxiv.org/abs/2312.02975", project: "https://dexfunc.github.io/", venue: "CoRL 2023",
     desc: "Functional grasping in the wild using DINO-feature affordances plus an eigengrasp-action-space RL policy (CMU).",
@@ -1412,7 +1465,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Dexterous Grasping with Object-Centric Visual Affordances (GRAFF)",
-    image: "https://raw.githubusercontent.com/priyankamandikal/graff/master/images/demo.gif",
+    image: "https://github.com/priyankamandikal/graff/raw/main/images/approach_overview.png",
     collection: "Grasp Synthesis", file: null, cites: 169,
     arxiv: "https://arxiv.org/abs/2009.01439", project: "https://github.com/priyankamandikal/graff", venue: "ICRA 2021",
     desc: "Embeds an object-centric visual-affordance model inside deep RL so a 30-DoF hand grasps human-preferred regions.",
@@ -1428,6 +1481,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Generalizable Dexterous Manipulation from Human Grasp Affordance (ILAD)",
+    image: "https://ar5iv.labs.arxiv.org/html/2204.02320/assets/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 91,
     arxiv: "https://arxiv.org/abs/2204.02320", project: "https://kristery.github.io/ILAD/", venue: "CoRL 2022",
     desc: "Generates category-level demos from a human grasp-affordance model; imitation + geometric objective generalizes to novel objects.",
@@ -1443,7 +1497,7 @@ window.PAPERS = [
   },
   {
     title: "GraspGF: Learning Score-based Grasping Primitive for Human-assisting Dexterous Grasping",
-    image: "https://lh3.googleusercontent.com/sitesv/AA5AbUARfn36MgZdCgYU51POFeC7VUYEzjbOmyETGf_-tq4o_nDjH7NOAndYuvPc4udJ3Tm1s7VSTq42pCdcQVVa_MygyNk9PjKvLHbWWIDnYhSZQx4zrBnObfOPh_1oXQJN6SWLrCT83J7agrFZu9yvF2SRo60eS470jgj1VGMZ_nnWFXQNP8xeCUtQw_VYg-UTVpGJ7Xesxdm05HrHf1a754jiJdJa3jQf63iinD9ZuQ4=w1280",
+    image: "https://arxiv.org/html/2309.06038/x1.png",
     collection: "Grasp Synthesis", file: null, cites: 36,
     arxiv: "https://arxiv.org/abs/2309.06038", project: "https://sites.google.com/view/graspgf", venue: "NeurIPS 2023",
     desc: "Combines a score-based grasping-gradient field ('how') with a history-conditional RL residual ('when') for human-assisting grasping.",
@@ -1473,6 +1527,7 @@ window.PAPERS = [
   },
   {
     title: "Generalized Anthropomorphic Functional Grasping with Minimal Demonstrations",
+    image: "https://ar5iv.labs.arxiv.org/html/2303.17808/assets/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 13,
     arxiv: "https://arxiv.org/abs/2303.17808", project: null, venue: "arXiv 2023",
     desc: "Synthesizes anthropomorphic functional grasps for novel objects from only a few demonstrations.",
@@ -1480,6 +1535,7 @@ window.PAPERS = [
   },
   {
     title: "Multi-Keypoint Affordance Representation for Functional Dexterous Grasping",
+    image: "https://arxiv.org/html/2502.20018/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 3,
     arxiv: "https://arxiv.org/abs/2502.20018", project: null, venue: "RA-L 2025",
     desc: "Contact-guided multi-keypoint affordance constrains functional grasp posture from human-grasp images via large vision models.",
@@ -1490,7 +1546,7 @@ window.PAPERS = [
   // Some are industrial (peg-in-hole/assembly) rather than dexterous-hand; flagged in tags.
   {
     title: "Adaptive Compliance Policy: Learning Approximate Compliance for Diffusion Guided Control",
-    image: "https://adaptive-compliance.github.io/images/paper_thumbnail.jpg",
+    image: "https://arxiv.org/html/2410.09309/x1.png",
     collection: "Compliance Control", file: null, cites: 67,
     arxiv: "https://arxiv.org/abs/2410.09309", project: null, venue: "ICRA 2025",
     desc: "Diffusion visuomotor policy predicting spatially/temporally varying compliance from human demos; >50% gain over fixed-compliance baselines.",
@@ -1505,6 +1561,7 @@ window.PAPERS = [
   },
   {
     title: "DexForce: Extracting Force-informed Actions from Kinesthetic Demonstrations for Dexterous Manipulation",
+    image: "https://arxiv.org/html/2501.10356/extracted/6313280/figures/teaser.jpg",
     collection: "Compliance Control", file: null, cites: 41,
     arxiv: "https://arxiv.org/abs/2501.10356", project: null, venue: "RA-L 2025",
     desc: "Per-fingertip 6-axis force/torque sensing turns kinesthetic demos into force-informed actions; 76% vs ~0% without force on a multi-finger hand.",
@@ -1520,7 +1577,7 @@ window.PAPERS = [
   },
   {
     title: "DA-VIL: Adaptive Dual-Arm Manipulation with Reinforcement Learning and Variable Impedance Control",
-    image: "https://dualarmvil.github.io/Dual-Arm-VIL/static/pipeline8.svg",
+    image: "https://arxiv.org/html/2410.19712/x1.png",
     collection: "Compliance Control", file: null, cites: 13,
     arxiv: "https://arxiv.org/abs/2410.19712", project: null, venue: "ICRA 2025",
     desc: "RL plus gradient-based gain optimization to modulate dual-arm impedance for stable manipulation of varied objects.",
@@ -1544,6 +1601,7 @@ window.PAPERS = [
   },
   {
     title: "Diffusion-Based Impedance Learning for Contact-Rich Manipulation Tasks",
+    image: "https://arxiv.org/html/2509.19696v3/x1.jpg",
     collection: "Compliance Control", file: null, cites: 2,
     arxiv: "https://arxiv.org/abs/2509.19696", project: null, venue: "arXiv 2025",
     desc: "Diffusion model learning variable-impedance/stiffness profiles for contact-rich manipulation.",
@@ -1551,6 +1609,7 @@ window.PAPERS = [
   },
   {
     title: "Variable Compliance Control for Robotic Peg-in-Hole Assembly: A Deep Reinforcement Learning Approach",
+    image: "https://ar5iv.labs.arxiv.org/html/2008.10224/assets/x2.png",
     collection: "Compliance Control", file: null, cites: 189,
     arxiv: "https://arxiv.org/abs/2008.10224", project: null, venue: "Applied Sciences 2020",
     desc: "Deep RL learns variable compliance (stiffness) for peg-in-hole; a classic industrial contact-rich assembly compliance baseline.",
@@ -1558,6 +1617,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Variable Impedance Control via Inverse Reinforcement Learning for Force-Related Tasks",
+    image: "https://ar5iv.labs.arxiv.org/html/2102.06838/assets/figures/teaching.png",
     collection: "Compliance Control", file: null, cites: 117,
     arxiv: "https://arxiv.org/abs/2102.06838", project: null, venue: "RA-L 2021",
     desc: "Inverse RL recovers a variable-impedance policy and reward from demos; peg-in-hole and cup-on-plate on a FANUC arm.",
@@ -1580,6 +1640,7 @@ window.PAPERS = [
   },
   {
     title: "SRL-VIC: A Variable Stiffness-Based Safe Reinforcement Learning for Contact-Rich Robotic Tasks",
+    image: "https://arxiv.org/html/2406.13744/x1.png",
     collection: "Compliance Control", file: null, cites: 27,
     arxiv: "https://arxiv.org/abs/2406.13744", project: null, venue: "RA-L 2024",
     desc: "Safe RL modulating stiffness via a safety critic plus recovery policy for compliant contact-rich tasks; sim-to-real.",
@@ -1587,6 +1648,7 @@ window.PAPERS = [
   },
   {
     title: "RMPs for Safe Impedance Control in Contact-Rich Manipulation",
+    image: "https://ar5iv.labs.arxiv.org/html/2109.12103/assets/figures/door_with_obstacles.png",
     collection: "Compliance Control", file: null, cites: 17,
     arxiv: "https://arxiv.org/abs/2109.12103", project: null, venue: "ICRA 2022",
     desc: "Combines Riemannian Motion Policies with variable-impedance operational-space control for safer reusable contact-rich behavior (Brown).",
@@ -1594,6 +1656,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Compliant Stiffness by Impedance Control-Aware Task Segmentation and Multi-objective Bayesian Optimization with Priors",
+    image: "https://ar5iv.labs.arxiv.org/html/2307.15345/assets/x1.png",
     collection: "Compliance Control", file: null, cites: 8,
     arxiv: "https://arxiv.org/abs/2307.15345", project: null, venue: "IROS 2023",
     desc: "Learns compliant stiffness profiles via task-segmented multi-objective Bayesian optimization for contact-rich tasks.",
@@ -1627,6 +1690,7 @@ window.PAPERS = [
   },
   {
     title: "Robot Synesthesia: In-Hand Manipulation with Visuotactile Sensing",
+    image: "https://arxiv.org/html/2312.01853/x1.png",
     collection: "Dex Manipulation", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2312.01853", project: null, venue: "ICRA 2024",
     desc: "Point-cloud visuotactile representation fusing vision and touch for RL-based in-hand object rotation with sim-to-real transfer.",
@@ -1666,6 +1730,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Force Control for Legged Manipulation",
+    image: "https://arxiv.org/html/2405.01402/extracted/5607066/Images/system_overview_unified.png",
     collection: "Compliance Control", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2405.01402", project: null, venue: "ICRA 2024",
     desc: "RL that directly learns end-effector force control (not just position) for contact-rich manipulation, shown on a legged manipulator.",
@@ -1673,6 +1738,7 @@ window.PAPERS = [
   },
   {
     title: "Sim-to-Real Transfer of Robotic Control with Dynamics Randomization",
+    image: "https://ar5iv.labs.arxiv.org/html/1710.06537/assets/figures/screenshot0.png",
     collection: "Related: misc", file: null, cites: 1706,
     arxiv: "https://arxiv.org/abs/1710.06537", project: null, venue: "ICRA 2018",
     desc: "Trains policies over randomized dynamics in sim to transfer to real robots without real-world data; foundational sim-to-real reference.",
