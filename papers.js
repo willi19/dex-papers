@@ -123,7 +123,7 @@ window.PAPERS = [
   },
   {
     title: "DexMV: Imitation Learning for Dexterous Manipulation from Human Videos",
-    image: "https://yzqin.github.io/dexmv/figure/thumbnail.png",
+    image: "https://ar5iv.labs.arxiv.org/html/2108.05877/assets/x1.png",
     collection: "Dex Manipulation", file: null, cites: 309,
     arxiv: "https://arxiv.org/abs/2108.05877", project: null, venue: "ECCV 2022",
     desc: "Extracts hand-object motion from human videos and retargets it to imitation-learn dexterous manipulation policies (relocate, pour, place).",
