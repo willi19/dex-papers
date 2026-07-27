@@ -243,6 +243,14 @@
       label + '</text></svg>';
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   }
+  const TEASER_PAGE_OVERRIDES = {
+    "A Scalable Platform for Robot Learning and Physical Skill Data Collection": "https://doi.org/10.1109/IROS58592.2024.10801516",
+    "Toward Human-Like Grasp: Dexterous Grasping via Semantic Representation of Object-Hand": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Toward_Human-Like_Grasp_Dexterous_Grasping_via_Semantic_Representation_of_Object-Hand_ICCV_2021_paper.html",
+    "FunctionalGrasp: Learning Functional Grasp for Robots via Semantic Hand-Object Representation": "https://doi.org/10.1109/LRA.2023.3264760",
+    "Object-Level Impedance Control for Dexterous In-Hand Manipulation": "https://elib.dlr.de/185789/",
+    "Variable Impedance Skill Learning for Contact-Rich Manipulation": "https://doi.org/10.1109/LRA.2022.3187276",
+    "Noise and the Reality Gap: The Use of Simulation in Evolutionary Robotics": "https://doi.org/10.1007/3-540-59496-5_337"
+  };
   function teaserSources(p) {
     const sources = [];
     const localSummary = (p.summary || "").match(/^overview\/([^/]+)\.html$/);
@@ -253,6 +261,13 @@
       const id = arxivId[1].replace(/v\d+$/, "");
       sources.push("https://arxiv.org/html/" + id + "/x1.png");
       sources.push("https://arxiv.org/html/" + id + "/x1.svg");
+    }
+    // Papers without arXiv HTML are mostly publisher-only proceedings.
+    // A project-page or publisher-page capture is preferable to a generic card,
+    // and often exposes the paper's hero figure or graphical abstract.
+    const sourcePage = p.project || p.paper || p.arxiv || TEASER_PAGE_OVERRIDES[p.title];
+    if (sourcePage && /^https?:\/\//.test(sourcePage)) {
+      sources.push("https://image.thum.io/get/width/1200/crop/675/noanimate/" + sourcePage);
     }
     sources.push(placeholderTeaser(p));
     return [...new Set(sources)];
