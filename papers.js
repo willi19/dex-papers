@@ -297,7 +297,7 @@ window.PAPERS = [
   },
   {
     title: "Interactive Imitation Learning for Dexterous Robotic Manipulation: A Survey",
-    image: "https://arxiv.org/html/2506.00098/x1.png",
+    image: "https://arxiv.org/html/2506.00098/x4.png",
     collection: "Survey",
     file: "SURVEY_2025_KIT_InteractiveIL_Dexterous.pdf",
     arxiv: "https://arxiv.org/abs/2506.00098",
@@ -806,7 +806,7 @@ window.PAPERS = [
     title: "BODex: Scalable and Efficient Robotic Dexterous Grasp Synthesis Using Bilevel Optimization",
     collection: "Landscape: bimanual-dex",
     file: null,
-    image: "https://pku-epic.github.io/BODex/images/teaser.png",
+    image: "https://arxiv.org/html/2412.16490/x1.png",
     arxiv: "https://arxiv.org/abs/2412.16490",
     project: "https://pku-epic.github.io/BODex/",
     venue: "ICRA 2025",
@@ -1656,7 +1656,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Compliant Stiffness by Impedance Control-Aware Task Segmentation and Multi-objective Bayesian Optimization with Priors",
-    image: "https://ar5iv.labs.arxiv.org/html/2307.15345/assets/x1.png",
+    image: "https://ar5iv.labs.arxiv.org/html/2307.15345/assets/x2.png",
     collection: "Compliance Control", file: null, cites: 8,
     arxiv: "https://arxiv.org/abs/2307.15345", project: null, venue: "IROS 2023",
     desc: "Learns compliant stiffness profiles via task-segmented multi-objective Bayesian optimization for contact-rich tasks.",
