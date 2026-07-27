@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>dex-papers · browser</title>
+<title>dex-papers · dexterous manipulation research map</title>
 <style>
   :root {
     --bg: #0f1115; --panel: #181b22; --panel2: #1f232c; --border: #2a2f3a;
@@ -12,7 +12,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--text);
-    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; }
   header { position: sticky; top: 0; z-index: 5; background: var(--bg);
     border-bottom: 1px solid var(--border); padding: 16px 20px 12px; }
   h1 { margin: 0 0 4px; font-size: 18px; }
@@ -56,43 +56,51 @@
   .clear { cursor: pointer; padding: 4px 10px; border-radius: 999px; font-size: 12px;
     background: transparent; border: 1px dashed var(--border); color: var(--muted); }
   .meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-  main { padding: 16px 20px 60px; display: block; max-width: 1120px; }
-  /* compact expandable table rows */
-  .rowwrap { margin-bottom: 5px; }
-  .prow { display: flex; align-items: center; gap: 10px; padding: 7px 11px;
-    border: 1px solid var(--border); border-radius: 8px; background: var(--panel); cursor: pointer; }
-  .prow:hover { border-color: var(--accent); }
-  .prow.open { border-color: var(--accent); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-  .prow .caret { color: var(--muted); font-size: 9px; width: 9px; flex-shrink: 0;
-    transition: transform .15s; display: inline-block; }
-  .prow.open .caret { transform: rotate(90deg); }
-  .prow .pt { flex: 1; font-size: 13.5px; font-weight: 500; line-height: 1.3; }
-  .prow .pmeta { color: var(--muted); font-size: 12px; white-space: nowrap; }
-  .prow .pcites { font-size: 11px; padding: 2px 7px; border-radius: 6px; background: var(--panel2);
-    border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
-  .prow .pcoll { font-size: 11px; color: var(--accent); white-space: nowrap; }
-  .pdetail { padding: 12px 14px; border: 1px solid var(--accent); border-top: none;
-    border-radius: 0 0 8px 8px; background: var(--panel2); display: flex; gap: 14px; align-items: flex-start; }
-  .pdetail .pimg { width: 260px; flex-shrink: 0; }
-  .pdetail .pimg img { width: 100%; height: auto; border-radius: 8px; display: block; background: #0d1117; }
-  .pdetail .pbody { flex: 1; display: flex; flex-direction: column; gap: 9px; min-width: 0; }
-  .pdetail .pdesc { font-size: 13px; color: var(--text); line-height: 1.5; }
-  @media (max-width: 620px) { .pdetail { flex-direction: column; } .pdetail .pimg { width: 100%; max-width: 360px; } }
-  .badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-  .badge { font-size: 11px; padding: 2px 7px; border-radius: 6px; background: var(--panel2);
-    color: var(--muted); border: 1px solid var(--border); }
-  .badge.coll { color: var(--accent); }
-  .links { display: flex; gap: 8px; flex-wrap: wrap; }
-  .links a { font-size: 12px; text-decoration: none; padding: 4px 9px; border-radius: 7px;
-    border: 1px solid var(--border); color: var(--text); background: var(--panel2); }
-  .links a:hover { border-color: var(--accent); color: var(--accent); }
-  .links a.pdf { background: #2a1f12; }
-  .links a.disabled { opacity: .3; pointer-events: none; }
-  .ctags { display: flex; gap: 5px; flex-wrap: wrap; }
-  .ctag { font-size: 11px; color: var(--muted); cursor: pointer; padding: 1px 6px;
-    border-radius: 5px; background: var(--chip); }
-  .ctag:hover { color: var(--accent); }
-  .ctag.on { background: var(--chipOn); color: #fff; }
+  .toplinks { float: right; display: flex; gap: 7px; }
+  .toplinks a { font-size: 12px; font-weight: 400; text-decoration: none; padding: 5px 10px;
+    border-radius: 7px; border: 1px solid var(--border); background: var(--panel2); color: var(--accent); }
+  .toplinks a:hover { border-color: var(--accent); }
+  main { padding: 12px 20px 60px; display: block; max-width: 1120px; }
+  .paper-list { border: 1px solid var(--border); border-radius: 9px; overflow: hidden; }
+  .paper-item { border-bottom: 1px solid var(--border); background: var(--panel); }
+  .paper-item:last-child { border-bottom: 0; }
+  .paper-row { display: grid; grid-template-columns: minmax(220px, 1.2fr) auto minmax(280px, 2fr) auto auto;
+    align-items: center; gap: 10px; padding: 9px 11px; }
+  .paper-row:hover { background: var(--panel2); }
+  .row-title { min-width: 0; }
+  .row-title strong { display: block; color: var(--text); font-size: 13px; line-height: 1.3; }
+  .row-meta { margin-top: 2px; color: var(--muted); font-size: 10.5px; }
+  .read-badge { display: inline-block; margin-left: 6px; padding: 0 5px; border: 1px solid #35664d;
+    border-radius: 999px; background: rgba(74,160,110,.1); color: #78d6a8; font-size: 9.5px; }
+  .row-area { display: inline-block; padding: 2px 7px; border: 1px solid #314765;
+    border-radius: 5px; background: rgba(63,130,190,.07); color: var(--accent); font-size: 10px; }
+  .row-idea { min-width: 0; color: #c5cad3; font-size: 11.5px; line-height: 1.4;
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .row-links { display: flex; flex-wrap: wrap; gap: 4px; }
+  .row-links a, .teaser-toggle { padding: 3px 7px; border: 1px solid var(--border); border-radius: 5px;
+    color: var(--muted); font-size: 10.5px; text-decoration: none; white-space: nowrap; }
+  .row-links a:hover, .teaser-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .teaser-toggle { cursor: pointer; background: var(--panel2); font-family: inherit; }
+  .teaser-toggle[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); }
+  .teaser-panel { padding: 0 11px 12px; background: var(--panel2); }
+  .teaser-panel[hidden] { display: none; }
+  .teaser-frame { display: block; max-width: 520px; aspect-ratio: 16 / 9; overflow: hidden;
+    border: 1px solid var(--border); border-radius: 7px; background: #11151c; }
+  .teaser-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .library-title { max-width: 1120px; padding: 24px 20px 0; }
+  .library-title h2 { margin: 0; font-size: 17px; }
+  .library-title p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+  @media (max-width: 620px) {
+    header { padding-left: 12px; padding-right: 12px; }
+    .toplinks { float: none; margin-top: 8px; }
+    .library-title { padding-left: 12px; padding-right: 12px; }
+    main { padding-left: 12px; padding-right: 12px; }
+    .paper-row { grid-template-columns: 1fr auto; }
+    .row-area { grid-column: 2; grid-row: 1; }
+    .row-idea { grid-column: 1 / -1; }
+    .row-links { grid-column: 1; }
+    .teaser-toggle { grid-column: 2; }
+  }
   .empty { color: var(--muted); padding: 40px; text-align: center; grid-column: 1/-1; }
   .modal-bg { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.78);
     display: none; flex-direction: column; }
@@ -111,18 +119,24 @@
 <body>
 <header>
   <h1>dex-papers <span class="count" id="count"></span>
-    <a href="overview.html" style="float:right;font-size:12.5px;font-weight:400;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--accent)">📄 Landscape overview →</a>
+    <span class="toplinks">
+      <a href="overview.html">Card overview →</a>
+    </span>
   </h1>
-  <input class="search" id="search" type="search" placeholder="Search title or tag…" autocomplete="off">
-  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">Filters &amp; collections</span> <span class="zonesummary" id="zoneSummary"></span></div>
+  <input class="search" id="search" type="search" placeholder="Search title, idea, method, or hardware…" autocomplete="off">
+  <div class="barlabel">Research area</div>
+  <div class="chips" id="collbar"></div>
+  <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">More filters</span> <span class="zonesummary" id="zoneSummary"></span></div>
   <div id="filterZone">
-    <div class="barlabel">Collections</div>
-    <div class="chips" id="collbar"></div>
-    <div class="barlabel">Filters <span style="text-transform:none">(click a category to expand · AND across categories, OR within)</span></div>
+    <div class="barlabel">Tags <span style="text-transform:none">(AND across categories · OR within)</span></div>
     <div id="filters"></div>
   </div>
   <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
 </header>
+<section class="library-title">
+  <h2>Choose a paper</h2>
+  <p>Scan one paper per row and open its teaser only when you need it.</p>
+</section>
 <main id="grid"></main>
 
 <div class="modal-bg" id="pdfModal">
@@ -135,12 +149,74 @@
 </div>
 
 <script src="papers.js"></script>
+<script src="paper_ideas.js"></script>
+<script src="paper_status.js"></script>
 <script>
   const P = window.PAPERS || [];
+  const IDEAS = window.PAPER_IDEAS || {};
+  const STATUS = window.PAPER_STATUS || {};
   const activeTags = new Set();
-  const activeColls = new Set();
+  const activeGroups = new Set();
   let query = "";
+  const GROUP_ORDER = [
+    "RL & Control",
+    "Imitation & Demonstration Learning",
+    "Foundation / Generalist Policies",
+    "Grasping & Motion Generation",
+    "Data / Teleoperation / Task Generation",
+    "Benchmarks / Perception / Infrastructure"
+  ];
+  const GROUP_DESCRIPTIONS = {
+    "RL & Control": "reward-driven exploration, curriculum, control",
+    "Imitation & Demonstration Learning": "BC, DAgger, diffusion/flow policies, retargeting",
+    "Foundation / Generalist Policies": "VLA, pretrained behavior models, cross-task controllers",
+    "Grasping & Motion Generation": "grasp synthesis, grasp policies, physically plausible motion",
+    "Data / Teleoperation / Task Generation": "datasets, teleoperation, augmentation, autonomous collection",
+    "Benchmarks / Perception / Infrastructure": "evaluation, sensing, planning, surveys, systems"
+  };
+  const GROUP_LABELS = {
+    "RL & Control": "RL",
+    "Imitation & Demonstration Learning": "IL",
+    "Foundation / Generalist Policies": "Foundation",
+    "Grasping & Motion Generation": "Grasp/Motion",
+    "Data / Teleoperation / Task Generation": "Data/Teleop",
+    "Benchmarks / Perception / Infrastructure": "Benchmark/Infra"
+  };
+  const GROUP_OVERRIDES = {
+    "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning": "Benchmarks / Perception / Infrastructure",
+    "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks": "Benchmarks / Perception / Infrastructure",
+    "DexH2R: A Benchmark for Dynamic Dexterous Grasping in Human-to-Robot Handover": "Benchmarks / Perception / Infrastructure",
+    "DexterityGen: Foundation Controller for Unprecedented Dexterity": "Foundation / Generalist Policies",
+    "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity": "Foundation / Generalist Policies",
+    "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation": "Foundation / Generalist Policies",
+    "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning": "RL & Control",
+    "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation": "RL & Control",
+    "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity": "RL & Control",
+    "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World": "RL & Control"
+  };
+  function researchGroupOf(p) {
+    if (GROUP_OVERRIDES[p.title]) return GROUP_OVERRIDES[p.title];
+    const tags = p.tags || [];
+    const lowerTitle = p.title.toLowerCase();
+    const has = (...values) => values.some(v => tags.includes(v));
+    const hasPart = value => tags.some(t => t.toLowerCase().includes(value));
 
+    if (has("survey", "benchmark", "analysis", "perception", "segmentation", "TAMP"))
+      return "Benchmarks / Perception / Infrastructure";
+    if (has("dataset", "teleoperation", "crowdsourcing", "mocap", "capture") ||
+        (has("data-collection") && !has("RL")))
+      return "Data / Teleoperation / Task Generation";
+    if (hasPart("grasp") || lowerTitle.includes("grasp"))
+      return "Grasping & Motion Generation";
+    if (has("VLA", "foundation", "foundation-model", "generalist", "pretraining") ||
+        /foundation (model|policy|controller)|generalist|large behavior model/.test(lowerTitle))
+      return "Foundation / Generalist Policies";
+    if (has("RL"))
+      return "RL & Control";
+    if (has("imitation-learning", "diffusion", "flow-matching", "one-shot", "human-video"))
+      return "Imitation & Demonstration Learning";
+    return "Benchmarks / Perception / Infrastructure";
+  }
   const grid = document.getElementById("grid");
   const filters = document.getElementById("filters");
   const collbar = document.getElementById("collbar");
@@ -148,7 +224,7 @@
   const zoneToggle = document.getElementById("zoneToggle");
   const filterZone = document.getElementById("filterZone");
   const zoneSummary = document.getElementById("zoneSummary");
-  let zoneOpen = true;
+  let zoneOpen = false;
   function applyZone() {
     filterZone.classList.toggle("collapsed", !zoneOpen);
     zoneToggle.classList.toggle("open", zoneOpen);
@@ -157,34 +233,98 @@
 
   // build href for local PDF: encode each path segment (handles spaces, "?")
   const pdfHref = (f) => f.split("/").map(encodeURIComponent).join("/");
+  function placeholderTeaser(p) {
+    const initials = p.title.split(/\s+/).filter(w => /^[A-Za-z0-9]/.test(w))
+      .slice(0, 3).map(w => w[0].toUpperCase()).join("") || "DEX";
+    const label = GROUP_LABELS[p._group] || "Paper";
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360">' +
+      '<defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#24364b"/>' +
+      '<stop offset="1" stop-color="#141b25"/></linearGradient></defs>' +
+      '<rect width="640" height="360" fill="url(#g)"/>' +
+      '<circle cx="560" cy="58" r="130" fill="#6ea8fe" opacity=".12"/>' +
+      '<text x="42" y="190" fill="#e6e8ee" font-family="Arial,sans-serif" font-size="78" font-weight="700">' +
+      initials + '</text><text x="44" y="244" fill="#8bbce8" font-family="Arial,sans-serif" font-size="28">' +
+      label + '</text></svg>';
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+  const TEASER_PAGE_OVERRIDES = {
+    "A Scalable Platform for Robot Learning and Physical Skill Data Collection": "https://doi.org/10.1109/IROS58592.2024.10801516",
+    "Toward Human-Like Grasp: Dexterous Grasping via Semantic Representation of Object-Hand": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Toward_Human-Like_Grasp_Dexterous_Grasping_via_Semantic_Representation_of_Object-Hand_ICCV_2021_paper.html",
+    "FunctionalGrasp: Learning Functional Grasp for Robots via Semantic Hand-Object Representation": "https://doi.org/10.1109/LRA.2023.3264760",
+    "Object-Level Impedance Control for Dexterous In-Hand Manipulation": "https://elib.dlr.de/185789/",
+    "Variable Impedance Skill Learning for Contact-Rich Manipulation": "https://doi.org/10.1109/LRA.2022.3187276",
+    "Noise and the Reality Gap: The Use of Simulation in Evolutionary Robotics": "https://doi.org/10.1007/3-540-59496-5_337"
+  };
+  function teaserSources(p) {
+    const sources = [];
+    const localSummary = (p.summary || "").match(/^overview\/([^/]+)\.html$/);
+    if (localSummary) sources.push("overview_assets/" + localSummary[1] + ".png");
+    if (p.image) sources.push(p.image);
+    const arxivId = (p.arxiv || "").match(/arxiv\.org\/abs\/([^?#]+)/);
+    if (arxivId) {
+      const id = arxivId[1].replace(/v\d+$/, "");
+      sources.push("https://arxiv.org/html/" + id + "/x1.png");
+      sources.push("https://arxiv.org/html/" + id + "/x1.svg");
+      sources.push("https://ar5iv.labs.arxiv.org/html/" + id + "/assets/x1.png");
+      sources.push("https://ar5iv.labs.arxiv.org/html/" + id + "/assets/x1.svg");
+    }
+    // Papers without arXiv HTML are mostly publisher-only proceedings.
+    // A project-page or publisher-page capture is preferable to a generic card,
+    // and often exposes the paper's hero figure or graphical abstract.
+    const sourcePage = p.project || p.paper || TEASER_PAGE_OVERRIDES[p.title];
+    if (sourcePage && /^https?:\/\//.test(sourcePage)) {
+      sources.push("https://image.thum.io/get/width/1200/crop/675/noanimate/" + sourcePage);
+    }
+    sources.push(placeholderTeaser(p));
+    return [...new Set(sources)];
+  }
+  function attachTeaser(img, sources) {
+    let index = 0;
+    img.onerror = () => {
+      index += 1;
+      if (index < sources.length) img.src = sources[index];
+    };
+    img.src = sources[index];
+  }
 
   // ---- tag taxonomy: group flat tags into categories for a drill-down filter UI ----
   const TAXONOMY = {
-    "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","PKU","Stanford","TUM","UCSD","USC","UT-Austin","ETH-Zurich"],
-    "Method": ["RL","imitation-learning","sim-to-real","teleoperation","self-supervised","reset-free","reset","TAMP","VLA","LLM","diffusion","equivariant","flow-matching","one-shot","self-improving","pretraining","augmentation","multi-task","sample-efficient","agentic","generalist","human-in-the-loop","interactive","retargeting","compliance","impedance","admittance","force-control"],
-    "Topic": ["manipulation","grasping","dexterous","bimanual","in-hand-reorientation","tool-use","long-horizon","contact-rich","data-collection","scaling","real-world","autonomous","crowdsourcing","deployment","bottle-cap","valve","door","placing","hand-object","handover","grasp-synthesis","humanoid","affordance","cross-embodiment","tactile","industrial"],
-    "Perception": ["perception","segmentation","foundation","foundation-model","open-vocabulary","gaussian-splatting","video","video-prediction","video-planning","visuomotor","mocap","capture","human-video"],
-    "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw"],
-    "Type": ["survey","system","benchmark","analysis","dataset"]
+    "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","PKU","Stanford","Tsinghua","TUM","UCSD","USC","UT-Austin","ETH-Zurich","AgiBot","Physical-Intelligence"],
+    "Task": ["grasping","grasp-synthesis","functional-grasp","in-hand-reorientation","tool-use","placing","handover","bottle-cap","valve","door","deformable-object","articulated-object","articulation"],
+    "Embodiment": ["bimanual","whole-body","humanoid","cross-embodiment"],
+    "Interaction": ["long-horizon","contact-rich","contact","non-prehensile","dynamic","coordination","tactile","haptic","affordance"],
+    "Learning": ["RL","imitation-learning","self-supervised","reset-free","reset","VLA","diffusion","equivariant","flow-matching","one-shot","multi-task","multi-agent","sample-efficient","data-efficient","fine-tuning","transformer","energy-based","compositional","representation-learning","hierarchical","evolutionary-robotics","failure-reasoning","skill-library","state-only"],
+    "Control / Planning": ["TAMP","compliance","impedance","admittance","force-control","model-based","world-model","MPC","optimization","planning","differentiable-simulation"],
+    "Data / Interface": ["teleoperation","shared-autonomy","kinesthetic-teaching","human-in-the-loop","interactive","retargeting","human-to-robot","force-feedback","data-collection","data-generation","crowdsourcing","augmentation","data-augmentation","mocap","capture","human-video","human-motion"],
+    "Transfer / Scale": ["sim-to-real","self-improving","pretraining","agentic","generalist","foundation","foundation-model","scaling","autonomous","deployment","generalization","open-source","domain-randomization","reality-gap","robustness"],
+    "Perception": ["perception","segmentation","open-vocabulary","gaussian-splatting","video","vision","RGB-D","point-cloud","video-prediction","video-generation","video-planning","visuomotor","pose-estimation","implicit-representation","language-grounding","geometry","part-aware","object-centric","VLM","LLM"],
+    "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw","hardware","tendon-driven","micro-vibration"],
+    "Benchmark": ["LIBERO","RoboTwin"],
+    "Paper Type": ["survey","system","benchmark","analysis","dataset","industrial"]
   };
-  const CAT_ORDER = ["Lab / Org","Year","Topic","Method","Perception","Hardware","Type"];
+  const CAT_ORDER = ["Lab / Org","Year","Task","Embodiment","Interaction","Learning","Control / Planning","Data / Interface","Transfer / Scale","Perception","Hardware","Benchmark","Paper Type"];
   const TAGCAT = {};
   Object.entries(TAXONOMY).forEach(([c,ts]) => ts.forEach(t => TAGCAT[t] = c));
   const catOf = (t) => t.indexOf("year:") === 0 ? "Year" : (TAGCAT[t] || "Other");
+  const HIDDEN_TAGS = new Set(["dexterous","manipulation","real-world","hand-object"]);
 
   // derive the primary 4-digit year from a venue string
   const yearOf = (p) => { const m = (p.venue||"").match(/(19|20)\d{2}/g); return m ? m[0] : null; };
-  P.forEach(p => p._year = yearOf(p));
-
-  // counts
-  const tagCounts = {}, collCounts = {}, yearCounts = {};
   P.forEach(p => {
-    (p.tags || []).forEach(t => tagCounts[t] = (tagCounts[t]||0)+1);
-    collCounts[p.collection] = (collCounts[p.collection]||0)+1;
+    p._year = yearOf(p);
+    p._group = researchGroupOf(p);
+  });
+  // counts
+  const tagCounts = {}, groupCounts = {}, yearCounts = {};
+  P.forEach(p => {
+    (p.tags || []).forEach(t => {
+      if (!HIDDEN_TAGS.has(t)) tagCounts[t] = (tagCounts[t]||0)+1;
+    });
+    groupCounts[p._group] = (groupCounts[p._group]||0)+1;
     if (p._year) { const k = "year:"+p._year; yearCounts[k] = (yearCounts[k]||0)+1; }
   });
   Object.assign(tagCounts, yearCounts);
-  const allColls = Object.keys(collCounts).sort();
+  const allGroups = GROUP_ORDER.filter(g => groupCounts[g]);
 
   // tags per category (year newest-first; others by count desc)
   const catTags = {};
@@ -204,11 +344,12 @@
 
   function renderBars() {
     collbar.innerHTML = "";
-    allColls.forEach(c => {
+    allGroups.forEach(c => {
       const el = document.createElement("span");
-      el.className = "chip coll" + (activeColls.has(c) ? " on" : "");
-      el.innerHTML = c + ' <span class="n">' + collCounts[c] + '</span>';
-      el.onclick = () => { activeColls.has(c) ? activeColls.delete(c) : activeColls.add(c); render(); };
+      el.className = "chip coll" + (activeGroups.has(c) ? " on" : "");
+      el.title = c + " · " + GROUP_DESCRIPTIONS[c];
+      el.innerHTML = GROUP_LABELS[c] + ' <span class="n">' + groupCounts[c] + '</span>';
+      el.onclick = () => { activeGroups.has(c) ? activeGroups.delete(c) : activeGroups.add(c); render(); };
       collbar.appendChild(el);
     });
     filters.innerHTML = "";
@@ -250,7 +391,7 @@
   function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
 
   function match(p) {
-    if (activeColls.size && !activeColls.has(p.collection)) return false;
+    if (activeGroups.size && !activeGroups.has(p._group)) return false;
     // AND across categories, OR within a category
     const groups = {};
     for (const t of activeTags) { const c = catOf(t); (groups[c] = groups[c] || []).push(t); }
@@ -263,73 +404,63 @@
       if (!ok) return false;
     }
     if (query) {
-      const hay = (p.title + " " + (p.tags||[]).join(" ") + " " + (p.venue||"")).toLowerCase();
+      const hay = (p.title + " " + (IDEAS[p.title]||"") + " " + (p.desc||"") + " " + p._group + " " +
+        (p.tags||[]).join(" ") + " " + (p.venue||"") + " " + (p.collection||"")).toLowerCase();
       if (!hay.includes(query)) return false;
     }
     return true;
   }
 
-  function linkEl(label, href, cls) {
-    if (href) return '<a class="'+cls+'" href="'+href+'" target="_blank" rel="noopener">'+label+'</a>';
-    return '<a class="'+cls+' disabled">'+label+'</a>';
-  }
-
   function render() {
     renderBars();
-    const nActive = activeTags.size + activeColls.size;
+    const nActive = activeTags.size + activeGroups.size;
     zoneSummary.textContent = nActive ? "· " + nActive + " active" : "";
     const list = P.filter(match);
     countEl.textContent = "· " + list.length + " / " + P.length;
-    grid.innerHTML = "";
     if (!list.length) { grid.innerHTML = '<div class="empty">No papers match.</div>'; return; }
+    grid.innerHTML = '<div class="paper-list"></div>';
+    const paperList = grid.querySelector(".paper-list");
     list.forEach(p => {
-      const wrap = document.createElement("div");
-      wrap.className = "rowwrap";
-      const row = document.createElement("div");
-      row.className = "prow";
-      row.innerHTML =
-        '<span class="caret">▶</span>' +
-        '<span class="pt">'+p.title+'</span>' +
-        (p.venue ? '<span class="pmeta">'+p.venue+'</span>' : '') +
-        (p.cites != null ? '<span class="pcites">'+p.cites+' cit</span>' : '') +
-        '<span class="pcoll">'+p.collection+'</span>';
-
-      const detail = document.createElement("div");
-      detail.className = "pdetail";
-      detail.hidden = true;
-      const tags = (p.tags||[]).map(t =>
-        '<span class="ctag'+(activeTags.has(t)?' on':'')+'" data-tag="'+t+'">'+t+'</span>').join("");
-      detail.innerHTML =
-        (p.image ? '<div class="pimg"><img loading="lazy" src="'+p.image+'" alt="" ' +
-                     'onerror="this.parentNode.remove()"></div>' : '') +
-        '<div class="pbody">' +
-          (p.desc ? '<div class="pdesc">'+p.desc+'</div>' : '') +
-          '<div class="ctags">'+tags+'</div>' +
-          '<div class="links">' +
-            (p.summary ? '<a href="'+p.summary+'">📄 Summary</a>' : '') +
-            (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>'
-                    : '<a class="pdf disabled">PDF</a>') +
-            linkEl("arXiv", p.arxiv, "") +
-            linkEl("Project", p.project, "") +
-          '</div>' +
-        '</div>';
-
-      row.onclick = () => {
-        const willOpen = detail.hidden;
-        detail.hidden = !willOpen;
-        row.classList.toggle("open", willOpen);
+      const item = document.createElement("article");
+      item.className = "paper-item";
+      const idea = IDEAS[p.title] || p.desc || "Summary pending.";
+      const status = STATUS[p.title] || {};
+      const imageLink = p.summary || p.project || p.arxiv || "#";
+      item.innerHTML =
+        '<div class="paper-row"><div class="row-title"><strong>'+p.title+'</strong>' +
+          (p.venue || status.read ? '<div class="row-meta">'+(p.venue || '')+
+            (status.read ? '<span class="read-badge" title="'+(status.note || 'Reviewed')+'">✓ Read</span>' : '')+
+          '</div>' : '') + '</div>' +
+        '<span class="row-area">'+GROUP_LABELS[p._group]+'</span>' +
+        '<div class="row-idea">'+idea+'</div>' +
+        '<div class="row-links">' +
+          (p.summary ? '<a href="'+p.summary+'">Summary</a>' : '') +
+          (p.file ? '<a class="pdf" href="'+pdfHref(p.file)+'" data-pdf="1">PDF</a>' : '') +
+          (p.arxiv ? '<a href="'+p.arxiv+'" target="_blank" rel="noopener">arXiv</a>' : '') +
+          (p.project ? '<a href="'+p.project+'" target="_blank" rel="noopener">Project</a>' : '') +
+        '</div><button class="teaser-toggle" type="button" aria-expanded="false">Teaser ▸</button></div>' +
+        '<div class="teaser-panel" hidden><a class="teaser-frame" href="'+imageLink+'"'+
+          (imageLink === "#" || p.summary ? '' : ' target="_blank" rel="noopener"') +
+          '><img loading="lazy" alt=""></a></div>';
+      const toggle = item.querySelector(".teaser-toggle");
+      const panel = item.querySelector(".teaser-panel");
+      toggle.onclick = () => {
+        const opening = panel.hidden;
+        if (opening && !panel.dataset.loaded) {
+          attachTeaser(panel.querySelector("img"), teaserSources(p));
+          panel.dataset.loaded = "1";
+        }
+        panel.hidden = !opening;
+        toggle.setAttribute("aria-expanded", String(opening));
+        toggle.textContent = opening ? "Hide ▾" : "Teaser ▸";
       };
-      detail.querySelectorAll(".ctag").forEach(e =>
-        e.onclick = () => toggleTag(e.dataset.tag));
-      detail.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
+      item.querySelectorAll("a.pdf[data-pdf]").forEach(a =>
         a.onclick = (e) => {
-          if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let new-tab work
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
           e.preventDefault();
           openPdf(a.getAttribute("href"), p.title);
         });
-      wrap.appendChild(row);
-      wrap.appendChild(detail);
-      grid.appendChild(wrap);
+      paperList.appendChild(item);
     });
   }
 
@@ -337,7 +468,7 @@
     query = e.target.value.trim().toLowerCase(); render();
   });
   document.getElementById("clear").onclick = () => {
-    activeTags.clear(); activeColls.clear(); query = "";
+    activeTags.clear(); activeGroups.clear(); query = "";
     document.getElementById("search").value = ""; render();
   };
 

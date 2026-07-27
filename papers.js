@@ -1750,5 +1750,97 @@ window.PAPERS = [
     arxiv: null, project: null, venue: "ECAL 1995",
     desc: "Classic analysis of the simulation-reality gap and the role of noise in transferring evolved controllers to real robots.",
     tags: ["sim-to-real", "reality-gap", "evolutionary-robotics", "analysis"]
+  },
+
+  // ===== VLA: hierarchical / compositional / object-centric =====
+  {
+    title: "An Atomic Skill Library Construction Method for Data-Efficient Embodied Manipulation",
+    image: "https://arxiv.org/html/2501.15068/extracted/6179957/skill_set_architecture5.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2501.15068", project: null, venue: "arXiv 2025",
+    desc: "Vision-language planning splits tasks into subtasks, abstracts them into reusable atomic skills, and fine-tunes a VLA per skill to build a dynamically updated skill library — one of the earliest hierarchical VLA designs.",
+    tags: ["VLA", "hierarchical", "skill-library", "manipulation", "data-efficient"]
+  },
+  {
+    title: "Hi Robot: Open-Ended Instruction Following with Hierarchical Vision-Language-Action Models",
+    image: "https://arxiv.org/html/2502.19417/x2.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2502.19417", project: "https://www.pi.website/research/hirobot", venue: "ICML 2025",
+    desc: "System 2 VLM reasoner turns open-ended prompts and situated human feedback into atomic language subgoals that a low-level pi-0 VLA executes; 76% instruction-following accuracy vs 36% for a flat VLA.",
+    tags: ["VLA", "hierarchical", "Physical-Intelligence", "manipulation", "language-grounding", "long-horizon"]
+  },
+  {
+    title: "Libra-VLA: Achieving Learning Equilibrium via Asynchronous Coarse-to-Fine Dual-System",
+    image: "https://libra-vla.github.io/figs/realtask.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2604.24921", project: "https://libra-vla.github.io/", venue: "ACL 2026",
+    desc: "Semantic Planner emits low-frequency discrete macro-action tokens that an Action Refiner turns into high-frequency continuous poses, run asynchronously; 97.2% on LIBERO and 44-53% lower inference latency.",
+    tags: ["VLA", "hierarchical", "AgiBot", "manipulation", "LIBERO"]
+  },
+  {
+    title: "Hierarchical Vision Language Action Model Using Success and Failure Demonstrations",
+    image: "https://vine-vla.github.io/assets/pipeline.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2512.03913", project: "https://vine-vla.github.io/", venue: "arXiv 2025",
+    desc: "VINE separates System 2 subgoal planning from System 1 motor control and trains on both successful and failed teleop data, doing feasibility-guided tree search over a scene graph to prune brittle plans before execution.",
+    tags: ["VLA", "hierarchical", "failure-reasoning", "manipulation", "long-horizon", "imitation-learning"]
+  },
+  {
+    title: "Grounding Hierarchical Vision-Language-Action Models Through Explicit Language-Action Alignment",
+    image: "https://arxiv.org/html/2604.05614v1/x1.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2604.05614", project: null, venue: "arXiv 2026",
+    desc: "Adds explicit language-action alignment to a hierarchical VLA: a contrastive model ranks language-trajectory pairs and refines the high-level decomposition via offline preference learning, matching supervised fine-tuning with less annotation.",
+    tags: ["VLA", "hierarchical", "language-grounding", "manipulation", "imitation-learning"]
+  },
+  {
+    title: "Unleashing More Actions via Action Compositional Training for VLA Models",
+    image: "https://arxiv.org/html/2607.00351v1/x1.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2607.00351", project: null, venue: "arXiv 2026",
+    desc: "ACT-VLA recombines latent task representations and behavior segments from existing demonstrations offline to synthesize novel compositional trajectories, improving OOD LIBERO splits with no deployment-time overhead.",
+    tags: ["VLA", "compositional", "data-augmentation", "manipulation", "LIBERO"]
+  },
+  {
+    title: "MoS-VLA: A Vision-Language-Action Model with One-Shot Skill Adaptation",
+    image: "https://arxiv.org/html/2510.16617/x1.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2510.16617", project: null, venue: "arXiv 2025",
+    desc: "Represents policies as linear combinations of learned basis skills pretrained across Open X-Embodiment; a new task needs one demo, with coefficients solved by lightweight convex optimization and no gradient updates.",
+    tags: ["VLA", "compositional", "one-shot", "UT-Austin", "manipulation"]
+  },
+  {
+    title: "Generalizable Hierarchical Skill Learning via Object-Centric Representation",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2510.21121", project: null, venue: "arXiv 2025",
+    desc: "GSL uses object-canonicalized skill primitives as the interface between a VLM that predicts (skill, object) pairs and a low-level visuomotor policy; 3 demos/task beat baselines trained on 30x more data by 15.5%.",
+    tags: ["VLA", "hierarchical", "compositional", "object-centric", "manipulation", "data-efficient"]
+  },
+  {
+    title: "ControlVLA: Few-shot Object-centric Adaptation for Pre-trained Vision-Language-Action Models",
+    image: "https://arxiv.org/html/2506.16211/x1.png",
+    collection: "VLA", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2506.16211", project: "https://controlvla.github.io/", venue: "CoRL 2025",
+    desc: "Injects object-centric conditions into a pretrained VLA through a ControlNet-style branch with zero-initialized projections, reaching 76.7% success on 6 real tasks from only 10-20 demonstrations.",
+    tags: ["VLA", "object-centric", "one-shot", "manipulation", "real-world", "imitation-learning"]
+  },
+  {
+    title: "Robust Vision-Language-Action Models via Object-Centric Learning and Distance-Based Chunk Alignment",
+    collection: "VLA", file: null, cites: null,
+    arxiv: null, project: "https://doi.org/10.3390/app16073376", venue: "Applied Sciences 2026",
+    desc: "Trains the policy on three views sharing one action label — raw RGB, an object-masked image, and an object-only crop — so it attends to the manipulated object rather than background, plus distance-based alignment between action chunks.",
+    tags: ["VLA", "object-centric", "manipulation", "robustness", "imitation-learning"]
+  },
+  {
+    title: "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors",
+    image: "https://afforddex.github.io/static/images/pipeline.png",
+    collection: "Grasp Synthesis", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2508.08896",
+    paper: "https://doi.org/10.48550/arXiv.2508.08896",
+    summary: "overview/afforddex.html",
+    project: "https://afforddex.github.io/",
+    venue: "AAAI 2026",
+    desc: "Freezes a human-motion prior, then learns a PPO residual that makes the grasp physically successful while avoiding an automatically predicted negative-affordance region; a DAgger student removes privileged object state at deployment.",
+    tags: ["dexterous", "grasping", "imitation-learning", "reinforcement-learning", "affordance", "vision", "residual-policy", "teacher-student"]
   }
 ];

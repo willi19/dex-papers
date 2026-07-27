@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper summary · dex-papers</title>
+  <style>
+    :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;--green:#78d6a8;--red:#ee9b9b}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+    .wrap{max-width:960px;margin:0 auto;padding:20px 22px 80px}
+    .nav a,.links a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text)}
+    h1{font-size:23px;line-height:1.3;margin:16px 0 8px}
+    .badges,.links{display:flex;gap:7px;flex-wrap:wrap}
+    .badges{margin-bottom:15px}
+    .badge{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--border)}
+    .badge:first-child{color:var(--accent)}
+    .figure{width:100%;max-height:460px;object-fit:contain;border:1px solid var(--border);border-radius:10px;background:#fff;display:block;margin:7px 0 16px}
+    .caption{color:var(--muted);font-size:11.5px;margin:-9px 2px 18px}
+    .report{display:flex;flex-direction:column;gap:12px}
+    .summary{padding:15px 17px;border:1px solid #385a82;border-radius:10px;background:#172131}
+    .summary .label{display:block;color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+    .summary p{font-size:16px;line-height:1.5;margin:0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .block{padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}
+    .block h2{font-size:13px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);margin:0 0 8px}
+    .block h3{font-size:13px;margin:15px 0 5px;color:var(--accent)}
+    .block p{margin:0;color:#c9ced8}
+    .block ul,.block ol{margin:0;padding-left:19px}
+    .block li+li{margin-top:6px}
+    .steps{list-style:none;padding:0!important;counter-reset:step}
+    .steps li{position:relative;padding-left:34px;min-height:26px}
+    .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:#263b57;color:var(--accent);font-size:11px;font-weight:700}
+    .eq{white-space:pre-wrap;overflow-x:auto;margin:8px 0;padding:11px 13px;border-radius:8px;border:1px solid #343c49;background:#11151b;color:#e8edf5;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .meaning{color:var(--muted)!important;font-size:12px}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    th,td{padding:8px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+    th{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}
+    tr:last-child td{border-bottom:0}
+    .takeaway{border-color:#365744;background:#17251e}
+    .takeaway h2{color:var(--green)}
+    .links{margin-top:20px}
+    .links a{font-size:13px;padding:7px 13px}
+    .links a:hover{border-color:var(--accent);color:var(--accent)}
+    .note{color:var(--muted);font-size:12px;margin-top:22px}
+    .error{padding:18px;border:1px solid #694242;background:#291c1c;border-radius:10px;color:var(--red);margin-top:18px}
+    @media(max-width:680px){.grid{grid-template-columns:1fr}.wrap{padding-left:14px;padding-right:14px}}
+  </style>
+</head>
+<body>
+  <main class="wrap" id="app">
+    <div class="nav"><a href="../index.html">← Back to library</a></div>
+  </main>
+  <script src="../paper_summaries.js"></script>
+  <script>
+    (() => {
+      const app = document.getElementById("app");
+      const id = new URLSearchParams(location.search).get("id");
+      const p = (window.DETAILED_PAPER_SUMMARIES || {})[id];
+      const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+      const list = items => "<ul>" + items.map(x => "<li>" + x + "</li>").join("") + "</ul>";
+      const block = (title, body, cls="") => '<section class="block '+cls+'"><h2>'+esc(title)+'</h2>'+body+"</section>";
+
+      if (!p) {
+        app.insertAdjacentHTML("beforeend", '<div class="error">Summary not found. Return to the library and open a completed summary.</div>');
+        return;
+      }
+
+      document.title = p.shortTitle + " · paper summary";
+      const badges = [p.venue, ...(p.badges || [])].filter(Boolean).map(x => '<span class="badge">'+esc(x)+'</span>').join("");
+      let html = '<h1>'+esc(p.title)+'</h1><div class="badges">'+badges+"</div>";
+      if (p.figure) html += '<img class="figure" src="'+esc(p.figure)+'" alt="'+esc(p.shortTitle)+' overview"><p class="caption">'+esc(p.figureCaption || "Figure from the official paper.")+"</p>";
+      html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+esc(p.tldr)+"</p></section>";
+      html += '<div class="grid">'+block("Problem",list(p.problem))+block("Output",list(p.output))+"</div>";
+      html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");
+      if (p.methodDetails) {
+        html += block("Method details",p.methodDetails.map(x =>
+          "<h3>"+esc(x.name)+'</h3><p>'+esc(x.text)+"</p>"
+        ).join(""));
+      }
+
+      const eqs = p.equations.map((eq,i) =>
+        "<h3>"+(i+1)+" · "+esc(eq.name)+'</h3><pre class="eq">'+esc(eq.formula)+'</pre><p class="meaning"><strong>Meaning:</strong> '+esc(eq.meaning)+"</p>"
+      ).join("");
+      html += block("Key equations",eqs);
+      html += block("What is actually new",list(p.novelty));
+      if (p.rewardBaseline) html += block("Reward baseline vs. special term",list(p.rewardBaseline));
+      if (p.comparison) {
+        html += block("Comparison",'<table><thead><tr>'+p.comparison.headers.map(x=>"<th>"+esc(x)+"</th>").join("")+"</tr></thead><tbody>"+
+          p.comparison.rows.map(row=>"<tr>"+row.map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("")+"</tbody></table>");
+      }
+      html += '<div class="grid">'+block("Reported evidence",list(p.evidence))+block("Limitations",list(p.limitations))+"</div>";
+      html += block("Takeaway",list(p.takeaway),"takeaway")+"</div>";
+      html += '<div class="links">'+p.links.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label)+" ↗</a>").join("")+"</div>";
+      html += '<p class="note">This reading note is based on the official paper. Equations preserve the paper’s structure but use simplified typography; consult the PDF for complete notation, weights, and implementation details.</p>';
+      app.insertAdjacentHTML("beforeend", html);
+    })();
+  </script>
+</body>
+</html>
