@@ -92,14 +92,15 @@
   <section class="block">
    <h2>Method interface</h2>
    <table>
-    <thead><tr><th>Module</th><th>Input</th><th>Output / supervision</th></tr></thead>
+    <thead><tr><th>Module</th><th>Paper notation</th><th>Released-code tensor</th><th>Output</th></tr></thead>
     <tbody>
-     <tr><td>Human prior πᴴ</td><td>Robot state R, privileged object state O, object point cloud P</td><td>24 normalized actuator commands; PPO reward tracks MANO keypoints and penalizes actuator power</td></tr>
-     <tr><td>NAA preprocessing</td><td>Raw object mesh</td><td>Negative-affordance point cloud N; produced once per object</td></tr>
-     <tr><td>Residual teacher πᵀ</td><td>R, O, P, N</td><td>24D residual added element-wise to frozen πᴴ; PPO reward handles grasp, goal, success, and forbidden contact</td></tr>
-     <tr><td>Vision student πˢ</td><td>R, partial P from five RGB-D cameras, N</td><td>DAgger regression to the teacher action without privileged O</td></tr>
+     <tr><td>Human prior πᴴ</td><td>{R, O, P}</td><td>300D = R 191 + O 16 + unused goal slot 29 + object feature slot 64. During πᴴ training the last 64 values are explicitly zero, so the effective nonzero input is 207D.</td><td>24D action mean</td></tr>
+     <tr><td>NAA preprocessing</td><td>mesh → N</td><td>No fixed N dimension is reported. NAA exports a negative-region point cloud offline.</td><td>Variable-size 3D point set</td></tr>
+     <tr><td>Residual teacher πᵀ / ℛ</td><td>{R, O, P, N}</td><td>The released state actor is 300D = 191 + 16 + 29 + 64. No separate N tensor is present in this observation layout.</td><td>24D action or residual</td></tr>
+     <tr><td>Vision student πˢ</td><td>{R, P, N}</td><td>Raw 8,492D = state buffer 300 + 1,024 × (xyzrgb 6 + hand mask 1 + object mask 1). PointNet maps the points to 128D; the final MLP receives 191 + 29 + 128 = 348D.</td><td>24D action, fit to the expert by MSE</td></tr>
     </tbody>
    </table>
+   <p class="vars" style="margin-top:9px"><strong>24D action:</strong> [0:3] wrist force direction, [3:6] wrist torque direction, [6:24] targets for 18 actuated finger joints. PPO represents a Gaussian over this 24D vector; inference uses its mean.</p>
   </section>
 
   <section class="block">
@@ -112,10 +113,20 @@
    <p>TexPainter first gives the raw mesh plausible texture, after which six cardinal views are rendered. GPT-4V names one non-touchable part. On every view, a 16 × 16 point grid prompts SAM; NMS with IoU 0.7 removes duplicate masks. Each remaining mask is turned into a visual prompt by blurring its exterior, and CLIP selects the candidate most similar to the negative-part description. The chosen 2D masks are projected back into a 3D point cloud.</p>
 
    <h3>Residual policy</h3>
-   <p>The residual is not a new grasp policy trained from scratch. The frozen πᴴ supplies a human-like nominal action, and πᵀ changes only what is needed to approach the object, lift it to a goal, and keep fingertips outside N. Both base and residual actions operate on the Shadow Hand’s 6 global wrist DOFs and 18 active finger DOFs.</p>
+   <p>In the paper, the frozen πᴴ supplies a human-like nominal 24D action and πᵀ supplies a 24D correction. Both operate on the Shadow Hand’s 6 global wrist DOFs and 18 active finger DOFs. The released <code>ResActorCritic</code>, however, concatenates the two 24D outputs and applies a learned <code>Linear(48, 24)</code>; it does not implement the printed element-wise sum literally.</p>
 
    <h3>Privileged-to-vision distillation</h3>
-   <p>The teacher has perfect object position, rotation, velocity, and complete geometry. The student instead receives a 1,024-point partial hand–object cloud reconstructed from five fixed RGB-D cameras. State policies use four-layer MLPs with widths 1024–1024–512–512; the student adds a PointNet+Transformer encoder.</p>
+   <p>The teacher has perfect object position, rotation, velocity, and a 64D object feature. The student instead receives a 1,024-point partial hand–object cloud reconstructed from five fixed RGB-D cameras. The released training command selects a PointNet encoder; a PointNet+Transformer alternative also exists. State policies use four-layer MLPs with widths 1024–1024–512–512.</p>
+  </section>
+
+  <section class="block">
+   <h2>Paper–code discrepancy</h2>
+   <ul>
+    <li>The paper never specifies the numerical dimensions of R, O, P, or N. The dimensions above come from tensor slicing in the released repository, not from the PDF.</li>
+    <li>The released student point tensor contains xyz, RGB, a hand mask, and an object mask. It contains no explicit negative-affordance mask or separate N point set.</li>
+    <li>The released state task’s reward code contains distance, lifting, goal, and success terms, but no distance-to-N penalty matching the paper’s supplementary equation.</li>
+    <li>The provided state-training script runs a standard 300D→24D PPO actor. A residual actor class exists under the separate <code>ppo_pose</code> path, but that is not the path selected by the script documented for residual training.</li>
+   </ul>
   </section>
 
   <section class="block">
@@ -132,7 +143,7 @@ rᴴ_smooth = −w_smooth Σ_i |τ_t,i · q̇_t,i|</div>
    <h3>2 · Residual action</h3>
    <div class="eq">Δa_t = πᵀ(R_t, O_t, P_t, N_t)
 a_t  = πᴴ(R_t, O_t, P_t) + Δa_t</div>
-   <p class="vars"><strong>R</strong>: robot state · <strong>O</strong>: privileged object pose and velocity · <strong>P</strong>: scene point cloud · <strong>N</strong>: negative-affordance point cloud. The frozen prior supplies the nominal action; the teacher supplies a correction.</p>
+   <p class="vars"><strong>R</strong>: robot state · <strong>O</strong>: privileged object pose and velocity · <strong>P</strong>: scene/object geometry · <strong>N</strong>: negative-affordance point cloud. This is the paper’s interface; the released tensor interface differs as documented above.</p>
 
    <h3>3 · Teacher reward</h3>
    <div class="eq">rᵀ = −r_distance − r_goal + r_success − r_negative</div>
