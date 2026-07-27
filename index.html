@@ -261,11 +261,13 @@
       const id = arxivId[1].replace(/v\d+$/, "");
       sources.push("https://arxiv.org/html/" + id + "/x1.png");
       sources.push("https://arxiv.org/html/" + id + "/x1.svg");
+      sources.push("https://ar5iv.labs.arxiv.org/html/" + id + "/assets/x1.png");
+      sources.push("https://ar5iv.labs.arxiv.org/html/" + id + "/assets/x1.svg");
     }
     // Papers without arXiv HTML are mostly publisher-only proceedings.
     // A project-page or publisher-page capture is preferable to a generic card,
     // and often exposes the paper's hero figure or graphical abstract.
-    const sourcePage = p.project || p.paper || p.arxiv || TEASER_PAGE_OVERRIDES[p.title];
+    const sourcePage = p.project || p.paper || TEASER_PAGE_OVERRIDES[p.title];
     if (sourcePage && /^https?:\/\//.test(sourcePage)) {
       sources.push("https://image.thum.io/get/width/1200/crop/675/noanimate/" + sourcePage);
     }
