@@ -170,6 +170,35 @@ Sˢ_t = {R_t,      P_t, N_t}</div>
   </section>
 
   <section class="block">
+   <h2>How the rewards divide the work</h2>
+   <table>
+    <thead><tr><th>Stage</th><th>Training signal</th><th>What it learns—and does not learn</th></tr></thead>
+    <tbody>
+     <tr><td>Human prior πᴴ</td><td>0.8 × keypoint imitation + 0.05 × power penalty</td><td>Tracks the human MANO trajectory with smooth joint motion. It has no grasp-success, goal-reaching, or NAA reward, so it is not explicitly taught to avoid a blade.</td></tr>
+     <tr><td>Residual teacher πᵀ</td><td>Hand–object distance + object–goal distance + success bonus + negative-affordance penalty</td><td>Corrects the frozen human motion so that the hand reaches the object, lifts it to the goal, and moves its fingertips away from forbidden regions.</td></tr>
+     <tr><td>Vision student πˢ</td><td>DAgger action MSE</td><td>Receives no task reward directly; it regresses the 24D action produced by the privileged teacher.</td></tr>
+    </tbody>
+   </table>
+
+   <h3>Teacher reward in operational form</h3>
+   <div class="eq">rᵀ ≈ −‖p_hand − p_object‖
+     − ‖p_object − p_goal‖
+     + 𝟙[‖p_object − p_goal‖ &lt; 0.05]
+     − 10 Σ_f 𝟙[min_{p ∈ N} ‖p_tip^f − p‖ &lt; 0.03]</div>
+   <ul>
+    <li><strong>Approach:</strong> remaining far from the object continuously reduces return.</li>
+    <li><strong>Transport:</strong> after contact, moving the object closer to the goal continuously improves return.</li>
+    <li><strong>Finish:</strong> entering the 5 cm goal radius adds a sparse +1 bonus.</li>
+    <li><strong>Avoid N:</strong> each fingertip entering 3 cm of the forbidden point set incurs −10. The check is binary and covers fingertips, not the palm or intermediate links.</li>
+   </ul>
+
+   <h3>Why the terms do not make the hand avoid the object entirely</h3>
+   <p>The policy cannot maximize return by staying away: doing so keeps both distance costs large and makes the success bonus unreachable. Approaching a forbidden region is expensive, but approaching an allowed region reduces the grasp cost and enables goal transport. The resulting objective is therefore “touch the object, but not N.” For example, a successful safe state with 2 cm hand–object distance and 3 cm goal distance scores approximately <code>−0.02 − 0.03 + 1 = 0.95</code>; one forbidden fingertip changes it to approximately <code>−9.05</code>.</p>
+
+   <p class="vars"><strong>Two caveats:</strong> the printed reward contains no explicit <code>−‖Δa‖²</code> term, so the residual is not directly forced to remain small. Also, the main equation places minus signs outside the distance and affordance terms while the supplement assigns their λ values negative signs. Applying both literally would double-negate the costs; the text and ablations clearly describe the operational interpretation above.</p>
+  </section>
+
+  <section class="block">
    <h2>How negative affordance is produced</h2>
    <ol>
     <li>Apply TexPainter to the raw mesh and render six fixed views.</li>
