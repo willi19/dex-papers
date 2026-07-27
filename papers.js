@@ -1756,5 +1756,16 @@ window.PAPERS = [
     arxiv: null, project: "https://doi.org/10.3390/app16073376", venue: "Applied Sciences 2026",
     desc: "Trains the policy on three views sharing one action label — raw RGB, an object-masked image, and an object-only crop — so it attends to the manipulated object rather than background, plus distance-based alignment between action chunks.",
     tags: ["VLA", "object-centric", "manipulation", "robustness", "imitation-learning"]
+  },
+  {
+    title: "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors",
+    collection: "Grasp Synthesis", file: null, cites: null,
+    arxiv: "https://arxiv.org/abs/2508.08896",
+    paper: "https://doi.org/10.48550/arXiv.2508.08896",
+    summary: "overview/afforddex.html",
+    project: "https://afforddex.github.io/",
+    venue: "AAAI 2026",
+    desc: "Freezes a human-motion prior, then learns a PPO residual that makes the grasp physically successful while avoiding an automatically predicted negative-affordance region; a DAgger student removes privileged object state at deployment.",
+    tags: ["dexterous", "grasping", "imitation-learning", "reinforcement-learning", "affordance", "vision", "residual-policy", "teacher-student"]
   }
 ];
