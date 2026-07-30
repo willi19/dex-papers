@@ -1850,6 +1850,7 @@ window.PAPERS = [
   // ===== Additional papers (dexterous manipulation, grasping, VLA, compliance) =====
 {
     title: "Tilde: Teleoperation for Dexterous In-Hand Manipulation Learning with a DeltaHand",
+    image: "https://lh3.googleusercontent.com/sitesv/AG8ngQUhjzAqSUnz46kHdiy1j8eDwylNJwiiP8xqVgCu1NkIyW4hfqlHbw4O9SvT8k0Ig3Bnij0zasaVKAzJe2BMGnBIZnV37XzX2fRN0NXQ-gTcB41qwwwsYx6eKf7KW9BFtATTEruOu1pG-51JNsQWWWgUmZcFdEgrkjDVEeVoeK_HoIrfwkkZhPMJdY4QWlN4L_C3e2dsOfUTjX9uu4-TGYk8iKkgGdJBEj6B_xLX=w1280",
     collection: "Dex Manipulation",
     file: null,
     desc: "Combines a kinematic-twin teleoperation interface, the soft DeltaHand, and vision-conditioned diffusion policies; learned policies complete seven real-world in-hand tasks with a reported 90% average success rate.",
@@ -1861,6 +1862,7 @@ window.PAPERS = [
   },
   {
     title: "Dynamic On-Palm Manipulation via Controlled Sliding",
+    image: "https://dynamic-controlled-sliding.github.io/images/task_models.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Applies contact-implicit model predictive control to dynamic three-dimensional on-palm manipulation, deliberately controlling sliding rather than constraining contacts to stick.",
@@ -1872,6 +1874,7 @@ window.PAPERS = [
   },
   {
     title: "Jacta: A Versatile Planner for Learning Dexterous and Whole-body Manipulation",
+    image: "https://jacta-manipulation.github.io/static/images/overview.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Generates demonstrations with a system-agnostic motion planner and uses them to bootstrap reinforcement learning for dexterous and whole-body tasks that are difficult to explore from scratch.",
@@ -1883,6 +1886,7 @@ window.PAPERS = [
   },
   {
     title: "DexCatch: Learning to Catch Arbitrary Objects with Dexterous Hands",
+    image: "https://dexcatch.github.io/resources/fig3.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses stability-constrained reinforcement learning for dynamic throwing and catching across diverse hand poses and object shapes, including zero-shot transfer to unseen objects.",
@@ -1894,6 +1898,7 @@ window.PAPERS = [
   },
   {
     title: "3D-ViTac: Learning Fine-Grained Manipulation with Visuo-Tactile Sensing",
+    image: "https://binghao-huang.github.io/3D-ViTac/combined_cropped_image.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Fuses dense tactile measurements and vision in a shared 3D representation for diffusion-policy learning, enabling precise bimanual manipulation of fragile objects and long-horizon in-hand tasks.",
@@ -1916,6 +1921,7 @@ window.PAPERS = [
   },
   {
     title: "DIFFTACTILE: A Physics-based Differentiable Tactile Simulator for Contact-rich Robotic Manipulation",
+    image: "https://difftactile.github.io/static/gifs/surface.gif",
     collection: "Dex Manipulation",
     file: null,
     desc: "Introduces a differentiable FEM-based tactile simulator for rigid and deformable contact, supporting system identification and gradient-based learning of tactile-assisted manipulation skills.",
@@ -1938,6 +1944,7 @@ window.PAPERS = [
   },
   {
     title: "DOGlove: Dexterous Manipulation with a Low-Cost Open-Source Haptic Force Feedback Glove",
+    image: "https://do-glove.github.io/static/images/glove_explosion.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Provides a sub-$600 open-source glove with 21-DoF motion capture plus force and fingertip haptic feedback for dexterous teleoperation and imitation-learning data collection.",
@@ -1949,6 +1956,7 @@ window.PAPERS = [
   },
   {
     title: "Complementarity-Free Multi-Contact Modeling and Optimization for Dexterous Manipulation",
+    image: "https://arxiv.org/html/2408.07855/extracted/6379382/figures/physics_interpretation.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Derives a complementarity-free contact model with closed-form stepping and differentiability, enabling 50-100 Hz contact-implicit MPC on TriFinger and Allegro manipulation tasks.",
@@ -1960,6 +1968,7 @@ window.PAPERS = [
   },
   {
     title: "CordViP: Correspondence-based Visuomotor Policy for Dexterous Manipulation in Real-World",
+    image: "https://aureleopku.github.io/CordViP/static/images/teaser.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Builds interaction-aware object-hand point correspondences and contact maps for 3D imitation learning, reporting a 90% average success rate across four real dexterous tasks.",
@@ -1971,6 +1980,7 @@ window.PAPERS = [
   },
   {
     title: "GeoDEx: A Unified Geometric Framework for Tactile Dexterous and Extrinsic Manipulation under Force Uncertainty",
+    image: "https://arxiv.org/html/2505.00647/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses geometric force-equilibrium primitives for planning, force estimation, and admittance control when tactile force readings are noisy or poorly calibrated.",
@@ -1982,6 +1992,7 @@ window.PAPERS = [
   },
   {
     title: "ViTaSCOPE: Visuo-tactile Implicit Representation for In-hand Pose and Extrinsic Contact Estimation",
+    image: "https://arxiv.org/html/2506.12239/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Represents objects with signed distance fields and distributed touch with neural shear fields to jointly estimate in-hand pose and external contacts under partial observations.",
@@ -1993,6 +2004,7 @@ window.PAPERS = [
   },
   {
     title: "You Only Teach Once: Learn One-Shot Bimanual Robotic Manipulation from Video Demonstrations",
+    image: "https://hnuzhy.github.io/projects/YOTO/img/teaser.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Extracts bimanual action patterns from one third-person binocular human demonstration, expands them into varied robot demonstrations, and trains a bimanual diffusion policy.",
@@ -2004,6 +2016,7 @@ window.PAPERS = [
   },
   {
     title: "VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning",
+    image: "https://lqts.github.io/VTDexManip/resources/dataset.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "Pairs human visual-tactile data from 10 tasks and 182 objects with a six-task dexterous benchmark, comparing 18 pretraining and reinforcement-learning variants.",
@@ -2015,6 +2028,7 @@ window.PAPERS = [
   },
   {
     title: "DexTrack: Towards Generalizable Neural Tracking Control for Dexterous Manipulation from Human References",
+    image: "https://meowuu7.github.io/DexTrack/static/images/teaser-5.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Builds a data flywheel of successful human-reference tracking demonstrations and combines reinforcement learning, imitation learning, and homotopy optimization for a general dexterous controller.",
@@ -2026,6 +2040,7 @@ window.PAPERS = [
   },
   {
     title: "Rapidly Adapting Policies to the Real-World via Simulation-Guided Fine-Tuning",
+    image: "https://weirdlabuw.github.io/sgft/static/images/intro_figure.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses a simulator-trained value function to guide real-world exploration, reducing the samples needed to adapt policies on five force-sensitive dexterous manipulation tasks.",
@@ -2048,6 +2063,7 @@ window.PAPERS = [
   },
   {
     title: "Rethinking Bimanual Robotic Manipulation: Learning with Decoupled Interaction Framework",
+    image: "https://arxiv.org/html/2503.09186/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Assigns an independent policy stream to each arm and selectively exchanges information, improving both coordinated and uncoordinated tasks in the RoboTwin benchmark.",
@@ -2059,6 +2075,7 @@ window.PAPERS = [
   },
   {
     title: "Diffusion-Based Imaginative Coordination for Bimanual Manipulation",
+    image: "https://raw.githubusercontent.com/return-sleep/Diffusion_based_imaginative_Coordination/main/assets/model.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Jointly trains future-video and action prediction with diffusion while removing the video branch at inference, improving coordination on ALOHA, RoboTwin, and real tasks.",
@@ -2070,6 +2087,7 @@ window.PAPERS = [
   },
   {
     title: "CIMER: Combining Imitation and Emulation to Learn Prehensile Dexterity from State-only Observations",
+    image: "https://arxiv.org/html/2404.05582/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "First imitates coupled hand-object motion as a structured dynamical system, then uses reinforcement learning to refine contact effects without action labels or task-specific reward shaping.",
@@ -2081,6 +2099,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Dexterous Bimanual Catch Skills through Adversarial-Cooperative Heterogeneous-Agent Reinforcement Learning",
+    image: "https://arxiv.org/html/2502.11437/extracted/6208671/images/fig1_new.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Trains adversarial throw and cooperative catch agents to coordinate two dexterous hands, evaluating robustness across 15 simulated object types.",
@@ -2092,6 +2111,7 @@ window.PAPERS = [
   },
   {
     title: "One-Shot Real-World Demonstration Synthesis for Scalable Bimanual Manipulation",
+    image: "https://arxiv.org/html/2512.09297/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "BiDemoSyn decomposes one real demonstration into invariant coordination blocks and object-dependent adjustments, synthesizing thousands of physically grounded bimanual demonstrations.",
@@ -2103,6 +2123,7 @@ window.PAPERS = [
   },
   {
     title: "DexImit: Learning Bimanual Dexterous Manipulation from Monocular Human Videos",
+    image: "https://arxiv.org/html/2602.10105/src/pipeline_new.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Converts monocular human videos into physically plausible bimanual robot trajectories through reconstruction, subtask scheduling, robot-motion synthesis, and augmentation.",
@@ -2114,6 +2135,7 @@ window.PAPERS = [
   },
   {
     title: "Contact-Grounded Policy: Dexterous Visuotactile Policy with Generative Contact Grounding",
+    image: "https://contact-grounded-policy.github.io/static/images/pipeline.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Predicts coupled robot-state and tactile trajectories and maps them into controller-executable compliance targets, explicitly grounding evolving multi-point contact during dexterous tasks.",
@@ -2125,6 +2147,7 @@ window.PAPERS = [
   },
   {
     title: "TactAlign: Human-to-Robot Policy Transfer via Tactile Alignment",
+    image: "https://arxiv.org/html/2602.13579/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses rectified flow to align unpaired human and robot tactile observations across different sensors and embodiments, enabling few-minute and zero-shot transfer on contact-rich tasks.",
@@ -2136,6 +2159,7 @@ window.PAPERS = [
   },
   {
     title: "ViTacFormer: Learning Cross-Modal Representation for Visuo-Tactile Dexterous Manipulation",
+    image: "https://arxiv.org/html/2506.15953/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Fuses high-resolution vision and touch with cross-attention and autoregressive tactile prediction, supporting long-horizon real-world dexterous tasks of up to 11 stages.",
@@ -2147,6 +2171,7 @@ window.PAPERS = [
   },
   {
     title: "ViserDex: Visual Sim-to-Real for Robust Dexterous In-hand Reorientation",
+    image: "https://rffr.leggedrobotics.com/works/viserdex/images/ViserDexPipeline-4.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "Randomizes objects in 3D Gaussian space to train monocular RGB pose estimation and distills a simulation teacher into a robust real-world Allegro reorientation policy.",
@@ -2158,6 +2183,7 @@ window.PAPERS = [
   },
   {
     title: "SimToolReal: An Object-Centric Policy for Zero-Shot Dexterous Tool Manipulation",
+    image: "https://arxiv.org/html/2602.16863/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Trains one object-centric RL policy on procedurally generated tool primitives and deploys it zero-shot across real grasping, in-hand rotation, and tool-use tasks.",
@@ -2169,6 +2195,7 @@ window.PAPERS = [
   },
   {
     title: "DextER: Language-driven Dexterous Grasp Generation with Embodied Reasoning",
+    image: "https://junha-l.github.io/dexter/static/images/teaser.webp",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Autoregressively reasons about which finger links should contact which object points before generating a language-conditioned grasp, providing steerable embodied contact constraints.",
@@ -2180,6 +2207,7 @@ window.PAPERS = [
   },
   {
     title: "GeoDexGrasp: Geometry-aware Generation for Data-efficient and Physics-plausible Dexterous Grasping",
+    image: "https://xjtbinghan.github.io/GDG.github.io/static/images/img1.jpg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Disentangles SIM(3)-equivariant object geometry into shape, size, pose, and interaction direction to improve the data efficiency and physical plausibility of generated grasps.",
@@ -2191,6 +2219,7 @@ window.PAPERS = [
   },
   {
     title: "MaskDexGrasp: Generative Masked Modeling for Part-Aware Dexterous Grasp Synthesis",
+    image: "https://binghui-z.github.io/MaskDexGrasp/images/teaser.jpg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Tokenizes palm and finger parts and uses bidirectional masked generation conditioned on object geometry and task text, enabling compositional grasp synthesis and part-level editing.",
@@ -2202,6 +2231,7 @@ window.PAPERS = [
   },
   {
     title: "DemoFunGrasp: Universal Dexterous Functional Grasping via Demonstration-Editing Reinforcement Learning",
+    image: "https://beingbeyond.github.io/DemoFunGrasp/images/pipeline.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Factorizes functional grasps into style and affordance, then edits a single demonstration with one-step reinforcement learning for zero-shot sim-to-real functional grasping.",
@@ -2213,6 +2243,7 @@ window.PAPERS = [
   },
   {
     title: "EnergyAction: Unimanual to Bimanual Composition with Energy-Based Models",
+    image: "https://arxiv.org/html/2603.20236/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Represents pretrained single-arm policies as energy models and composes them with temporal-spatial constraints, transferring unimanual skills to bimanual tasks with little paired data.",
@@ -2224,6 +2255,7 @@ window.PAPERS = [
   },
   {
     title: "UniDex: A Robot Foundation Suite for Universal Dexterous Hand Control from Egocentric Human Videos",
+    image: "https://unidex-ai.github.io/assets/images/new_teaser.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Combines 50K robot-centric trajectories across eight hand embodiments, a function-actuator-aligned action space, a 3D VLA, and a portable human-data capture setup.",
@@ -2235,6 +2267,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations",
+    image: "https://arxiv.org/html/2410.02477/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "BiDexHD automatically turns human bimanual interaction datasets into simulation tasks and distills multi-task state teachers into a vision policy across TACO and ARCTIC interactions.",
@@ -2246,6 +2279,7 @@ window.PAPERS = [
   },
   {
     title: "TouchWorld: A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation",
+    image: "https://arxiv.org/html/2607.07287/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Combines tactile prediction, action generation, and reactive refinement in a hierarchical world-model framework for long-horizon contact-rich dexterous manipulation.",
@@ -2257,6 +2291,7 @@ window.PAPERS = [
   },
   {
     title: "DemoBot: Efficient Learning of Bimanual Manipulation with Dexterous Hands From Third-Person Human Videos",
+    image: "https://arxiv.org/html/2601.01651/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Extracts task structure and trajectories from a single third-person RGB-D human video, then uses reinforcement learning to acquire long-horizon bimanual assembly skills.",
@@ -2268,6 +2303,7 @@ window.PAPERS = [
   },
   {
     title: "World Models Can Leverage Human Videos for Dexterous Manipulation",
+    image: "https://arxiv.org/html/2512.13644/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Pretrains a dexterous world model on more than 900 hours of human and non-dexterous robot video, using hand-consistency objectives to transfer useful interaction structure.",
@@ -2279,6 +2315,7 @@ window.PAPERS = [
   },
   {
     title: "Towards Human-level Dexterous Teleoperation",
+    image: "https://arxiv.org/html/2607.11481/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Couples hand-object co-tracking with a reinforcement-learned controller for robust dexterous teleoperation, including zero-shot real-world execution and demonstration collection.",
@@ -2290,6 +2327,7 @@ window.PAPERS = [
   },
   {
     title: "Towards Human-Like Manipulation through RL-Augmented Teleoperation and Mixture-of-Dexterous-Experts VLA",
+    image: "https://arxiv.org/html/2603.08122/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Combines RL-augmented teleoperation for atomic dexterous skills with a mixture-of-experts VLA that injects force and tactile residuals for bimanual contact-rich tasks.",
@@ -2301,6 +2339,7 @@ window.PAPERS = [
   },
   {
     title: "KineDex: Learning Tactile-Informed Visuomotor Policies via Kinesthetic Teaching for Dexterous Manipulation",
+    image: "https://dinomini00.github.io/KineDex/static/images/teaser.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses hand-over-hand kinesthetic teaching and fingertip tactile signals to learn force-aware visuomotor policies for nine real-world dexterous tasks.",
@@ -2312,6 +2351,7 @@ window.PAPERS = [
   },
   {
     title: "Text2Touch: Tactile In-Hand Manipulation with LLM-Designed Reward Functions",
+    image: "https://hpfield.github.io/text2touch-website/assets/images/splash.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses an LLM to translate natural-language goals into tactile reward functions, enabling multi-axis in-hand manipulation with a sensorized dexterous hand.",
@@ -2323,6 +2363,7 @@ window.PAPERS = [
   },
   {
     title: "DexWild: Dexterous Human Interactions for In-the-Wild Robot Policies",
+    image: "https://dexwild.github.io/resources/images/human_hardware_setup.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Collects low-cost in-the-wild human hand interactions and co-trains them with robot data to improve cross-embodiment dexterous manipulation in unseen environments.",
@@ -2334,6 +2375,7 @@ window.PAPERS = [
   },
   {
     title: "Vib2Move: In-Hand Object Reconfiguration via Fingertip Micro-Vibrations",
+    image: "https://vib2move.github.io/img/teaser.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "Modulates fingertip friction with micro-vibrations to produce precise in-hand object translations using a compact parallel-jaw gripper.",
@@ -2345,6 +2387,7 @@ window.PAPERS = [
   },
   {
     title: "PP-Tac: Paper Picking Using Omnidirectional Tactile Feedback in Dexterous Robotic Hands",
+    image: "https://peilin-666.github.io/projects/PP-Tac/images/tong.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses omnidirectional tactile sensing, online slip control, and a diffusion policy to pick thin deformable paper-like objects with a multi-fingered hand.",
@@ -2356,6 +2399,7 @@ window.PAPERS = [
   },
   {
     title: "Touch in the Wild: Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper",
+    image: "https://binghao-huang.github.io/touch_in_the_wild/static/img/visuo-tactile-gripper.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Introduces a portable visuo-tactile gripper and cross-modal representation learning pipeline for collecting and executing fine-grained manipulation skills in everyday settings.",
@@ -2367,6 +2411,7 @@ window.PAPERS = [
   },
   {
     title: "BimArt: A Unified Approach for the Synthesis of 3D Bimanual Interaction with Articulated Objects",
+    image: "https://arxiv.org/html/2412.05066v2/extracted/6308249/figs/pics/bimart_overlay.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Generates diverse 3D bimanual interactions with articulated objects by predicting articulation-aware contact maps and using them to guide hand-motion synthesis.",
@@ -2378,6 +2423,7 @@ window.PAPERS = [
   },
   {
     title: "ManiVideo: Generating Hand-Object Manipulation Video with Dexterous and Generalizable Grasping",
+    image: "https://arxiv.org/html/2412.16212/extracted/6077639/fig_imgs/obja.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Generates temporally coherent bimanual hand-object videos with a multi-layer occlusion representation and training across motion and large-scale 3D object data.",
@@ -2389,6 +2435,7 @@ window.PAPERS = [
   },
   {
     title: "TASTE-Rob: Advancing Video Generation of Task-Oriented Hand-Object Interaction for Generalizable Robotic Manipulation",
+    image: "https://arxiv.org/html/2503.11423/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Provides 100,856 language-aligned egocentric interaction videos and a pose-refined video diffusion pipeline for task-oriented robotic demonstration generation.",
@@ -2400,6 +2447,7 @@ window.PAPERS = [
   },
   {
     title: "DexUMI: Using Human Hand as the Universal Manipulation Interface for Dexterous Manipulation",
+    image: "https://dex-umi.github.io/static/images/teaser.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses an exoskeleton interface and robot-hand inpainting to collect portable, cross-embodiment demonstrations for high-precision dexterous manipulation.",
@@ -2411,6 +2459,7 @@ window.PAPERS = [
   },
   {
     title: "RUKA: Rethinking the Design of Humanoid Hands with Learning",
+    image: "https://ruka-hand.github.io/static/images/Grasps.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Presents an open-source, tendon-driven humanoid hand with 15 underactuated degrees of freedom and learned actuator models derived from motion-capture data.",
@@ -2470,6 +2519,7 @@ window.PAPERS = [
   },
   {
     title: "Neural Attention Field: Emerging Point Relevance in 3D Scenes for One-Shot Dexterous Grasping",
+    image: "https://arxiv.org/html/2410.23039/extracted/5965833/figures/attention_field.jpg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "One-shot transfer of dexterous grasps to novel scenes with object and context variations has been a challenging problem. While distilled feature fields from large vision models have enabled semantic correspondences across 3D scenes, their features are point-based and restricted to object surfaces, limiting their capability of modeling complex semantic...",
@@ -2482,6 +2532,7 @@ window.PAPERS = [
   },
   {
     title: "OPEN TEACH: A Versatile Teleoperation System for Robotic Manipulation",
+    image: "https://arxiv.org/html/2403.07870/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Open-sourced, user-friendly tools form the bedrock of scientific advancement across disciplines. The widespread adoption of data-driven learning has led to remarkable progress in multi-fingered dexterity, bimanual manipulation, and applications ranging from logistics to home robotics.",
@@ -2494,6 +2545,7 @@ window.PAPERS = [
   },
   {
     title: "ThinkGrasp: A Vision-Language System for Strategic Part Grasping in Clutter",
+    image: "https://arxiv.org/html/2407.11298/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Robotic grasping in cluttered environments remains a significant challenge due to occlusions and complex object arrangements. We have developed ThinkGrasp, a plug-and-play vision-language grasping system that makes use of GPT-4o's advanced contextual reasoning for heavy clutter environment grasping strategies.",
@@ -2506,6 +2558,7 @@ window.PAPERS = [
   },
   {
     title: "G-HOP: Generative Hand-Object Prior for Interaction Reconstruction and Grasp Synthesis",
+    image: "https://arxiv.org/html/2404.12383/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We propose G-HOP, a denoising diffusion based generative prior for hand-object interactions that allows modeling both the 3D object and a human hand, conditioned on the object category.",
@@ -2518,6 +2571,7 @@ window.PAPERS = [
   },
   {
     title: "GEARS: Local Geometry-Aware Hand-Object Interaction Synthesis",
+    image: "https://ar5iv.labs.arxiv.org/html/2404.01758/assets/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Generating realistic hand motion sequences in interaction with objects has gained increasing attention with the growing interest in digital humans. Prior work has illustrated the effectiveness of employing occupancy-based or distance-based virtual sensors to extract hand-object interaction features.",
@@ -2530,6 +2584,7 @@ window.PAPERS = [
   },
   {
     title: "Generalizing 6-DoF Grasp Detection via Domain Prior Knowledge",
+    image: "https://arxiv.org/html/2404.01727/extracted/2404.01727v1/figure/poor_gen-a.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We focus on the generalization ability of the 6-DoF grasp detection method in this paper. While learning-based grasp detection methods can predict grasp poses for unseen ob-jects using the grasp distribution learned from the training set, they often exhibit a significant performance drop when encountering objects with diverse shapes and struc-tures.",
@@ -2542,6 +2597,7 @@ window.PAPERS = [
   },
   {
     title: "TACO: Benchmarking Generalizable Bimanual Tool-ACtion-Object Understanding",
+    image: "https://arxiv.org/html/2401.08399/extracted/2401.08399v2/imgs/teaser.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Humans commonly work with multiple objects in daily life and can intuitively transfer manipulation skills to novel objects by understanding object functional regularities.",
@@ -2554,6 +2610,7 @@ window.PAPERS = [
   },
   {
     title: "Text2HOI: Text-Guided 3D Motion Generation for Hand-Object Interaction",
+    image: "https://arxiv.org/html/2404.00562/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "This paper introduces the first text-guided work for generating the sequence of hand-object interaction in 3D. The main challenge arises from the lack of labeled data where existing ground-truth datasets are nowhere near generalizable in interaction type and object category, which inhibits the modeling of diverse 3D hand-object interaction with the...",
@@ -2578,6 +2635,7 @@ window.PAPERS = [
   },
   {
     title: "RegionGrasp: A Novel Task for Contact Region Controllable Hand Grasp Generation",
+    image: "https://arxiv.org/html/2410.07995/extracted/5911655/images/overview_v10.jpeg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Can machine automatically generate multiple distinct and natural hand grasps, given specific contact region of an object in 3D? This motivates us to consider a novel task of \\textit{Region Controllable Hand Grasp Generation (RegionGrasp)}, as follows: given as input a 3D object, together with its specific surface area selected as the intended contact...",
@@ -2590,6 +2648,7 @@ window.PAPERS = [
   },
   {
     title: "GeneOH Diffusion: Towards Generalizable Hand-Object Interaction Denoising via Denoising Diffusion",
+    image: "https://arxiv.org/html/2402.14810/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "In this work, we tackle the challenging problem of denoising hand-object interactions (HOI). Given an erroneous interaction sequence, the objective is to refine the incorrect hand trajectory to remove interaction artifacts for a perceptually realistic sequence.",
@@ -2602,6 +2661,7 @@ window.PAPERS = [
   },
   {
     title: "VinT-6D: A Large-Scale Object-in-hand Dataset from Vision, Touch and Proprioception",
+    image: "https://arxiv.org/html/2501.00510/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "This paper addresses the scarcity of large-scale datasets for accurate object-in-hand pose estimation, which is crucial for robotic in-hand manipulation within the ``Perception-Planning-Control\"paradigm.",
@@ -2614,6 +2674,7 @@ window.PAPERS = [
   },
   {
     title: "A Surprisingly Efficient Representation for Multi-Finger Grasping",
+    image: "https://arxiv.org/html/2408.02455/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "The problem of grasping objects using a multi-finger hand has received significant attention in recent years. However, it remains challenging to handle a large number of unfamiliar objects in real and cluttered environments.",
@@ -2626,6 +2687,7 @@ window.PAPERS = [
   },
   {
     title: "Adaptive Whole-body Robotic Tool-use Learning on Low-rigidity Plastic-made Humanoids Using Vision and Tactile Sensors",
+    image: "https://arxiv.org/html/2405.04826/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Various robots have been developed so far; however, we face challenges in modeling the low-rigidity bodies of some robots. In particular, the deflection of the body changes during tool-use due to object grasping, resulting in significant shifts in the tool-tip position and the body’s center of gravity.",
@@ -2638,6 +2700,7 @@ window.PAPERS = [
   },
   {
     title: "An Electromagnetism-Inspired Method for Estimating In-Grasp Torque from Visuotactile Sensors",
+    image: "https://arxiv.org/html/2404.15626/extracted/2404.15626v1/figures/tactile-fig-1-v20.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Tactile sensing has become a popular sensing modality for robot manipulators, due to the promise of providing robots with the ability to measure the rich contact information that gets transmitted through its sense of touch.",
@@ -2650,6 +2713,7 @@ window.PAPERS = [
   },
   {
     title: "Autonomous and Teleoperation Control of a Drawing Robot Avatar",
+    image: "https://arxiv.org/html/2407.20156/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "A drawing robot avatar is a robotic system that allows for telepresence-based drawing, enabling users to remotely control a robotic arm and create drawings in real-time from a remote location.",
@@ -2662,6 +2726,7 @@ window.PAPERS = [
   },
   {
     title: "Bi-KVIL: Keypoints-based Visual Imitation Learning of Bimanual Manipulation Tasks",
+    image: "https://arxiv.org/html/2403.03270/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Visual imitation learning has achieved impressive progress in learning unimanual manipulation tasks from a small set of visual observations, thanks to the latest advances in computer vision.",
@@ -2674,6 +2739,7 @@ window.PAPERS = [
   },
   {
     title: "CushSense: Soft, Stretchable, and Comfortable Tactile-Sensing Skin for Physical Human-Robot Interaction",
+    image: "https://arxiv.org/html/2405.03155/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Whole-arm tactile feedback is crucial for robots to ensure safe physical interaction with their surroundings. This paper introduces CushSense, a fabric-based soft and stretchable tactile-sensing skin designed for physical human-robot interaction (pHRI) tasks such as robotic caregiving.",
@@ -2686,6 +2752,7 @@ window.PAPERS = [
   },
   {
     title: "Efficient End-to-End Detection of 6-DoF Grasps for Robotic Bin Picking",
+    image: "https://arxiv.org/html/2405.06336/extracted/2405.06336v1/figures/giga_pile_scenes_280_test_grasp.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Bin picking is an important building block for many robotic systems, in logistics, production or in household use-cases. In recent years, machine learning methods for the prediction of 6-DoF grasps on diverse and unknown objects have shown promising progress.",
@@ -2710,6 +2777,7 @@ window.PAPERS = [
   },
   {
     title: "Generalize by Touching: Tactile Ensemble Skill Transfer for Robotic Furniture Assembly",
+    image: "https://arxiv.org/html/2404.17684/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Furniture assembly remains an unsolved problem in robotic manipulation due to its long task horizon and nongeneralizable operations plan. This paper presents the Tactile Ensemble Skill Transfer (TEST) framework, a pioneering offline reinforcement learning (RL) approach that incorporates tactile feedback in the control loop.",
@@ -2722,6 +2790,7 @@ window.PAPERS = [
   },
   {
     title: "Grasp Anything: Combining Teacher-Augmented Policy Gradient Learning with Instance Segmentation to Grasp Arbitrary Objects",
+    image: "https://arxiv.org/html/2403.10187/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Interactive grasping from clutter, akin to human dexterity, is one of the longest-standing problems in robot learning. Challenges stem from the intricacies of visual perception, the demand for precise motor skills, and the complex interplay between the two.",
@@ -2734,6 +2803,7 @@ window.PAPERS = [
   },
   {
     title: "Harnessing the Synergy between Pushing, Grasping, and Throwing to Enhance Object Manipulation in Cluttered Scenarios",
+    image: "https://arxiv.org/html/2402.16045/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "In this work, we delve into the intricate synergy among non-prehensile actions like pushing, and prehensile actions such as grasping and throwing, within the domain of robotic manipulation.",
@@ -2746,6 +2816,7 @@ window.PAPERS = [
   },
   {
     title: "Hierarchical Deep Learning for Intention Estimation of Teleoperation Manipulation in Assembly Tasks",
+    image: "https://arxiv.org/html/2403.19770/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "In human-robot collaboration, shared control presents an opportunity to teleoperate robotic manipulation to improve the efficiency of manufacturing and assembly processes.",
@@ -2818,6 +2889,7 @@ window.PAPERS = [
   },
   {
     title: "Neural Rearrangement Planning for Object Retrieval from Confined Spaces Perceivable by Robot’s In-hand RGB-D Sensor",
+    image: "https://arxiv.org/html/2402.06976/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Rearrangement planning for object retrieval tasks from confined spaces is a challenging problem, primarily due to the lack of open space for robot motion and limited perception.",
@@ -2842,6 +2914,7 @@ window.PAPERS = [
   },
   {
     title: "RainbowSight: A Family of Generalizable, Curved, Camera-Based Tactile Sensors For Shape Reconstruction",
+    image: "https://arxiv.org/html/2409.13649/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Camera-based tactile sensors can provide high resolution positional and local geometry information for robotic manipulation. Curved and rounded fingers are often advantageous, but it can be difficult to derive illumination systems that work well within curved geometries.",
@@ -2854,6 +2927,7 @@ window.PAPERS = [
   },
   {
     title: "Sim2Real Manipulation on Unknown Objects with Tactile-based Reinforcement Learning",
+    image: "https://arxiv.org/html/2403.12170/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Using tactile sensors for manipulation remains one of the most challenging problems in robotics. At the heart of these challenges is generalization: How can we train a tactile-based policy that can manipulate unseen and diverse objects?",
@@ -2890,6 +2964,7 @@ window.PAPERS = [
   },
   {
     title: "TactileAR: Active Tactile Pattern Reconstruction",
+    image: "https://arxiv.org/html/2410.08619/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "High-resolution (HR) contact surface information is essential for robotic grasping and precise manipulation tasks. However, it remains a challenge for current taxel-based sensors to obtain HR tactile information.",
@@ -2902,6 +2977,7 @@ window.PAPERS = [
   },
   {
     title: "The Grasp Loop Signature: A Topological Representation for Manipulation Planning with Ropes and Cables",
+    image: "https://arxiv.org/html/2403.01611/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "This paper studies robotic manipulation of deformable, one-dimensional objects (DOOs) like ropes or cables, which has important potential applications in manufacturing, agriculture, and surgery.",
@@ -2914,6 +2990,7 @@ window.PAPERS = [
   },
   {
     title: "The Grasp Reset Mechanism: An Automated Apparatus for Conducting Grasping Trials",
+    image: "https://arxiv.org/html/2402.18650/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Advancing robotic grasping and manipulation requires the ability to test algorithms and/or train learning models on large numbers of grasps. Towards the goal of more advanced grasping, we present the Grasp Reset Mechanism (GRM), a fully automated apparatus for conducting large-scale grasping trials.",
@@ -2962,6 +3039,7 @@ window.PAPERS = [
   },
   {
     title: "Unknown Object Grasping for Assistive Robotics",
+    image: "https://arxiv.org/html/2404.15001/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We propose a novel pipeline for unknown object grasping in shared robotic autonomy scenarios. State-of-the-art methods for fully autonomous scenarios are typically learning-based approaches optimised for a specific end-effector, that generate grasp poses directly from sensor input.",
@@ -2998,6 +3076,7 @@ window.PAPERS = [
   },
   {
     title: "You Only Scan Once: A Dynamic Scene Reconstruction Pipeline for 6-DoF Robotic Grasping of Novel Objects",
+    image: "https://arxiv.org/html/2404.03462v1/extracted/2404.03462v1/teaser_final.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "In the realm of robotic grasping, achieving accurate and reliable interactions with the environment is a pivotal challenge. Traditional methods of grasp planning methods utilizing partial point clouds derived from depth image often suffer from reduced scene understanding due to occlusion, ultimately impeding their grasping accuracy.",
@@ -3034,6 +3113,7 @@ window.PAPERS = [
   },
   {
     title: "Constrained 6-DoF Grasp Generation on Complex Shapes for Improved Dual-Arm Manipulation",
+    image: "https://arxiv.org/html/2404.04643/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Efficiently generating grasp poses tailored to specific regions of an object is vital for various robotic manipulation tasks, especially in a dual-arm setup.",
@@ -3046,6 +3126,7 @@ window.PAPERS = [
   },
   {
     title: "DexSkills: Skill Segmentation Using Haptic Data for Learning Autonomous Long-Horizon Robotic Manipulation Tasks",
+    image: "https://ar5iv.org/html/2405.03476/assets/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Effective execution of long-horizon tasks with dexterous robotic hands remains a significant challenge in real-world problems. While learning from human demonstrations has shown encouraging results, they require extensive data collection for training.",
@@ -3106,6 +3187,7 @@ window.PAPERS = [
   },
   {
     title: "In-Hand Singulation and Scooping Manipulation with a 5 DOF Tactile Gripper",
+    image: "https://arxiv.org/html/2408.00610/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Manipulation tasks often require a high degree of dexterity, typically necessitating grippers with multiple degrees of freedom (DoF). While a robotic hand equipped with multiple fingers can execute precise and intricate manipulation tasks, the inherent redundancy stemming from its extensive DoF often adds unnecessary complexity.",
@@ -3118,6 +3200,7 @@ window.PAPERS = [
   },
   {
     title: "Inverse Kinematics for Neuro-Robotic Grasping with Humanoid Embodied Agents",
+    image: "https://arxiv.org/html/2404.08825/x1.jpg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "This paper introduces a novel zero-shot motion planning method that allows users to quickly design smooth robot motions in Cartesian space. A Bézier curve-based Cartesian plan is transformed into a joint space trajectory by our neuro-inspired inverse kinematics (IK) method CycleIK, for which we enable platform independence by scaling it to arbitrary...",
@@ -3130,6 +3213,7 @@ window.PAPERS = [
   },
   {
     title: "Large-scale Deployment of Vision-based Tactile Sensors on Multi-fingered Grippers",
+    image: "https://arxiv.org/html/2408.02206/x1.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "Vision-based Tactile Sensors (VBTSs) show significant promise in that they can leverage image measurements to provide high-spatial-resolution human-like performance.",
@@ -3154,6 +3238,7 @@ window.PAPERS = [
   },
   {
     title: "LocoMan: Advancing Versatile Quadrupedal Dexterity with Lightweight Loco-Manipulators",
+    image: "https://arxiv.org/html/2403.18197/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Quadrupedal robots have emerged as versatile agents capable of locomoting and manipulating in complex environments. Traditional designs typically rely on the robot’s inherent body parts or incorporate top-mounted arms for manipulation tasks.",
@@ -3214,6 +3299,7 @@ window.PAPERS = [
   },
   {
     title: "PreAfford: Universal Affordance-Based Pre-Grasping for Diverse Objects and Environments",
+    image: "https://arxiv.org/html/2404.03634/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Robotic manipulation with two-finger grippers is challenged by objects lacking distinct graspable features. Traditional pre-grasping methods, which typically involve repositioning objects or utilizing external aids like table edges, are limited in their adaptability across different object categories and environments.",
@@ -3262,6 +3348,7 @@ window.PAPERS = [
   },
   {
     title: "Touch-GS: Visual-Tactile Supervised 3D Gaussian Splatting",
+    image: "https://arxiv.org/html/2403.09875/extracted/5794436/figure/final4/splash.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "In this work, we propose a novel method to supervise 3D Gaussian Splatting (3DGS) scenes using optical tactile sensors. Optical tactile sensors have become widespread in their use in robotics for manipulation and object representation; however, raw optical tactile sensor data is unsuitable to directly supervise a 3DGS scene.",
@@ -3310,6 +3397,7 @@ window.PAPERS = [
   },
   {
     title: "RoboPack: Learning Tactile-Informed Dynamics Models for Dense Packing",
+    image: "https://arxiv.org/html/2407.01418/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Tactile feedback is critical for understanding the dynamics of both rigid and deformable objects in many manipulation tasks, such as non-prehensile manipulation and dense packing.",
@@ -3322,6 +3410,7 @@ window.PAPERS = [
   },
   {
     title: "World Models for General Surgical Grasping",
+    image: "https://arxiv.org/html/2405.17940/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Intelligent vision control systems for surgical robots should adapt to unknown and diverse objects while being robust to system disturbances. Previous methods did not meet these requirements due to mainly relying on pose estimation and feature tracking.",
@@ -3358,6 +3447,7 @@ window.PAPERS = [
   },
   {
     title: "BIGS: Bimanual Category-agnostic Interaction Reconstruction from Monocular Videos via 3D Gaussian Splatting",
+    image: "https://arxiv.org/html/2504.09097/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Reconstructing 3Ds of hand-object interaction (HOI) is a fundamental problem that can find numerous applications. Despite recent advances, there is no comprehensive pipeline yet for bimanual class-agnostic interaction reconstruction from a monocular RGB video, where two hands and an unknown object are interacting with each other.",
@@ -3382,6 +3472,7 @@ window.PAPERS = [
   },
   {
     title: "ZeroGrasp: Zero-Shot Shape Reconstruction Enabled Robotic Grasping",
+    image: "https://arxiv.org/html/2504.10857/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Robotic grasping is a cornerstone capability of embodied systems. Many methods directly output grasps from partial information without modeling the geometry of the scene, leading to suboptimal motion and even collisions.",
@@ -3394,6 +3485,7 @@ window.PAPERS = [
   },
   {
     title: "2HandedAfforder: Learning Precise Actionable Bimanual Affordances from Human Videos",
+    image: "https://arxiv.org/html/2503.09320/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "When interacting with objects, humans effectively reason about which regions of objects are viable for an intended action, i.e., the affordance regions of the object.",
@@ -3406,6 +3498,7 @@ window.PAPERS = [
   },
   {
     title: "Evolvinggrasp: Evolutionary Grasp Generation Via Efficient Preference Alignment",
+    image: "https://arxiv.org/html/2503.14329/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Dexterous robotic hands often struggle to generalize effectively in complex environments due to models trained on low-diversity data. However, the real world presents an inherently unbounded range of scenarios.",
@@ -3418,6 +3511,7 @@ window.PAPERS = [
   },
   {
     title: "GraspCoT: Integrating Physical Property Reasoning for 6-DoF Grasping Under Flexible Language Instructions",
+    image: "https://arxiv.org/html/2503.16013/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Flexible instruction-guided 6-DoF grasping is a significant yet challenging task for real-world robotic systems. Existing methods utilize the contextual understanding capabilities of the large language models (LLMs) to establish mappings between expressions and targets, allowing robots to comprehend users' intentions in the instructions.",
@@ -3430,6 +3524,7 @@ window.PAPERS = [
   },
   {
     title: "Do Egocentric Video-Language Models Truly Understand Hand-Object Interactions?",
+    image: "https://arxiv.org/html/2405.17719/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Egocentric video-language pretraining is a crucial step in advancing the understanding of hand-object interactions in first-person scenarios. Despite successes on existing testbeds, we find that current EgoVLMs can be easily misled by simple modifications, such as changing the verbs or nouns in interaction descriptions, with models struggling to...",
@@ -3514,6 +3609,7 @@ window.PAPERS = [
   },
   {
     title: "GraspSAM: When Segment Anything Model Meets Grasp Detection",
+    image: "https://arxiv.org/html/2409.12521v2/extracted/5872403/figures/compare.jpg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Grasp detection requires flexibility to handle objects of various shapes without relying on prior object knowledge, while also offering intuitive, user-guided control.",
@@ -3526,6 +3622,7 @@ window.PAPERS = [
   },
   {
     title: "Hand-Object Interaction Pretraining from Videos",
+    image: "https://arxiv.org/html/2409.08273v1/extracted/5851282/figures/figure1_rebuttal.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We present an approach to learn general robot manipulation priors from 3D hand-object interaction trajectories. We build a framework to use in-the-wild videos to generate sensorimotor robot trajectories.",
@@ -3538,6 +3635,7 @@ window.PAPERS = [
   },
   {
     title: "Hybrid Gripper with Passive Pneumatic Soft Joints for Grasping Deformable Thin Objects",
+    image: "https://arxiv.org/html/2410.05789/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Grasping a variety of objects remains a key challenge in the development of versatile robotic systems. The human hand is remarkably dexterous, capable of grasping and manipulating objects with diverse shapes, mechanical properties, and textures.",
@@ -3550,6 +3648,7 @@ window.PAPERS = [
   },
   {
     title: "In the Wild Ungraspable Object Picking with Bimanual Nonprehensile Manipulation",
+    image: "https://arxiv.org/html/2409.15465v1/extracted/5874184/figures/bottom_shelf_grasp_square.jpeg",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Picking diverse objects in the real world is a fundamental robotics skill. However, many objects in such settings are bulky, heavy, or irregularly shaped, making them ungraspable by conventional end effectors like suction grippers and parallel jaw grippers (PJGs).",
@@ -3610,6 +3709,7 @@ window.PAPERS = [
   },
   {
     title: "SuperQ-GRASP: Superquadrics-Based Grasp Pose Estimation on Larger Objects for Mobile-Manipulation",
+    image: "https://arxiv.org/html/2411.04386/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Grasp planning and estimation have been a longstanding research problem in robotics, with two main approaches to find graspable poses on the objects: 1) geometric approach, which relies on 3D models of objects and the gripper to estimate valid grasp poses, and 2) data-driven, learning-based approach, with models trained to identify grasp poses from raw...",
@@ -3730,6 +3830,7 @@ window.PAPERS = [
   },
   {
     title: "B4P: Simultaneous Grasp and Motion Planning for Object Placement via Parallelized Bidirectional Forests and Path Repair",
+    image: "https://arxiv.org/html/2504.04598/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Robot pick and place systems have traditionally decoupled grasp, placement, and motion planning to build sequential optimization pipelines with an assumption that the individual components will be able to work together.",
@@ -3742,6 +3843,7 @@ window.PAPERS = [
   },
   {
     title: "Bimanual Robot-Assisted Dressing: A Spherical Coordinate-Based Strategy for Tight-Fitting Garments",
+    image: "https://arxiv.org/html/2508.12274/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Robot-assisted dressing is a popular but challenging topic in the field of robotic manipulation, offering significant potential to improve the quality of life for individuals with mobility limitations.",
@@ -3754,6 +3856,7 @@ window.PAPERS = [
   },
   {
     title: "CATCH-FORM-3D: Compliance-Aware Tactile Control and Hybrid Deformation Regulation for 3D Viscoelastic Object Manipulation",
+    image: "https://arxiv.org/html/2504.08238/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "This paper investigates a framework (CATCH-FORM-3D) for the precise contact force control and surface deformation regulation in viscoelastic material manipulation.",
@@ -3790,6 +3893,7 @@ window.PAPERS = [
   },
   {
     title: "Diff-IP2D: Diffusion-Based Hand-Object Interaction Prediction on Egocentric Videos",
+    image: "https://arxiv.org/html/2405.04370/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Understanding how humans would behave during hand-object interaction (HOI) is vital for applications in service robot manipulation and extended reality.",
@@ -3802,6 +3906,7 @@ window.PAPERS = [
   },
   {
     title: "Disambiguate Gripper State in Grasp-Based Tasks: Pseudo-Tactile as Feedback Enables Pure Simulation Learning",
+    image: "https://arxiv.org/html/2503.23835/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Grasp-based manipulation tasks are fundamental to robots interacting with their environments, yet gripper state ambiguity significantly reduces the robustness of imitation learning policies for these tasks.",
@@ -3814,6 +3919,7 @@ window.PAPERS = [
   },
   {
     title: "DTactive: A Vision-Based Tactile Sensor with Active Surface",
+    image: "https://arxiv.org/html/2410.08337/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "The development of vision-based tactile sensors has significantly enhanced robots’ perception and manipulation capabilities, especially for tasks requiring contact-rich interactions with objects.",
@@ -3826,6 +3932,7 @@ window.PAPERS = [
   },
   {
     title: "Grasp EveryThing (GET): 1-DoF, 3-Fingered Gripper with Tactile Sensing for Robust Grasping",
+    image: "https://arxiv.org/html/2505.09771/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We introduce the Grasp EveryThing (GET) gripper, a novel 1-DoF, 3-finger design for securely grasping objects of many shapes and sizes. Mounted on a standard parallel jaw actuator, the design features three narrow, tapered fingers arranged in a two-against-one configuration, where the two fingers converge into a V-shape.",
@@ -3862,6 +3969,7 @@ window.PAPERS = [
   },
   {
     title: "KGN-Pro: Keypoint-Based Grasp Prediction through Probabilistic 2D-3D Correspondence Learning",
+    image: "https://arxiv.org/html/2507.14820/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "High-level robotic manipulation tasks demand flexible 6-DoF grasp estimation to serve as a basic function. Previous approaches either directly generate grasps from point-cloud data, suffering from challenges with small objects and sensor noise, or infer 3D information from RGB images, which introduces expensive annotation requirements and discretization...",
@@ -3886,6 +3994,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Force Distribution Estimation for the GelSight Mini Optical Tactile Sensor Based on Finite Element Analysis",
+    image: "https://arxiv.org/html/2411.03315/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Contact-rich manipulation remains a major challenge in robotics. Optical tactile sensors like GelSight Mini offer a low-cost solution for contact sensing by capturing softbody deformations of the silicone gel.",
@@ -3898,6 +4007,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Object Compliance via Young’s Modulus from Single Grasps using Camera-Based Tactile Sensors",
+    image: "https://arxiv.org/html/2406.15304/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Compliance is a useful parametrization of tactile information that humans often utilize in manipulation tasks. It can be used to inform low-level contact-rich actions or characterize objects at a high-level.",
@@ -3910,6 +4020,7 @@ window.PAPERS = [
   },
   {
     title: "Low-Fidelity Visuo-Tactile Pre-Training Improves Vision-Only Manipulation Performance",
+    image: "https://arxiv.org/html/2406.15639v2/extracted/5691057/figures/Figure1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Tactile perception is essential for real-world manipulation tasks, yet the high cost and fragility of tactile sensors can limit their practicality. In this work, we explore BeadSight (a low-cost, open-source tactile sensor) alongside a tactile pre-training approach, an alternative method to precise, pre-calibrated sensors.",
@@ -3922,6 +4033,7 @@ window.PAPERS = [
   },
   {
     title: "ManiGaussian++: General Robotic Bimanual Manipulation with Hierarchical Gaussian World Model",
+    image: "https://arxiv.org/html/2506.19842/x1.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Multi-task robotic bimanual manipulation is becoming increasingly popular as it enables sophisticated tasks that require diverse dual-arm collaboration patterns.",
@@ -3934,6 +4046,7 @@ window.PAPERS = [
   },
   {
     title: "MISCGrasp: Leveraging Multiple Integrated Scales and Contrastive Learning for Enhanced Volumetric Grasping",
+    image: "https://arxiv.org/html/2507.02672/extracted/6593478/fig/fig1_300.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Robotic grasping faces challenges in adapting to objects with varying shapes and sizes. In this paper, we introduce MISCGrasp, a volumetric grasping method that integrates multi-scale feature extraction with contrastive feature enhancement for self-adaptive grasping.",
@@ -3970,6 +4083,7 @@ window.PAPERS = [
   },
   {
     title: "Omni-Scan: Creating Visually-Accurate Digital Twin Object Models Using a Bimanual Robot with Handover and Gaussian Splat Merging",
+    image: "https://arxiv.org/html/2508.00354v1/images/splashv8.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "3D Gaussian Splats (3DGSs) are 3D object models derived from multi-view images. Such “digital twins” are useful for simulations, virtual reality, E-commerce, robot policy fine-tuning, and part inspection.",
@@ -3994,6 +4108,7 @@ window.PAPERS = [
   },
   {
     title: "ORCA: An Open-Source, Reliable, Cost-Effective, Anthropomorphic Robotic Hand for Uninterrupted Dexterous Task Learning",
+    image: "https://arxiv.org/html/2504.04259/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "General-purpose robots should possess humanlike dexterity and agility to perform tasks with the same versatility as us. A human-like form factor further enables the use of vast datasets of human-hand interactions.",
@@ -4078,6 +4193,7 @@ window.PAPERS = [
   },
   {
     title: "Tactile-based force estimation for interaction control with robot fingers",
+    image: "https://arxiv.org/html/2411.13335/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Fine dexterous manipulation requires reactive control based on rich sensing of manipulator-object interactions. Tactile sensing arrays provide rich contact information across the manipulator’s surface.",
@@ -4162,6 +4278,7 @@ window.PAPERS = [
   },
   {
     title: "VTAO-BiManip: Masked Visual-Tactile-Action Pre-training with Object Understanding for Bimanual Dexterous Manipulation",
+    image: "https://arxiv.org/html/2501.03606v2/figs/Teaser.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Bimanual dexterous manipulation remains a significant challenge in robotics due to the high DoFs of each hand and their coordination. Existing single-hand manipulation techniques often leverage human demonstrations to guide RL methods but fail to generalize to complex bimanual tasks involving multiple sub-skills.",
@@ -4198,6 +4315,7 @@ window.PAPERS = [
   },
   {
     title: "DexGarmentLab: Dexterous Garment Manipulation Environment with Generalizable Policy",
+    image: "https://arxiv.org/html/2505.11032/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Garment manipulation is a critical challenge due to the diversity in garment categories, geometries, and deformations. Despite this, humans can effortlessly handle garments, thanks to the dexterity of our hands.",
@@ -4222,6 +4340,7 @@ window.PAPERS = [
   },
   {
     title: "HO-Cap: A Capture System and Dataset for 3D Reconstruction and Pose Tracking of Hand-Object Interaction",
+    image: "https://arxiv.org/html/2406.06843/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We introduce a data capture system and a new dataset, HO-Cap, for 3D reconstruction and pose tracking of hands and objects in videos. The system leverages multiple RGBD cameras and a HoloLens headset for data collection, avoiding the use of expensive 3D scanners or mocap systems.",
@@ -4234,6 +4353,7 @@ window.PAPERS = [
   },
   {
     title: "Taccel: Scaling Up Vision-based Tactile Robotics via High-performance GPU Simulation",
+    image: "https://arxiv.org/html/2504.12908/x1.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Tactile sensing is crucial for achieving human-level robotic capabilities in manipulation tasks. As a promising solution, Vision-Based Tactile Sensors (VBTSs) offer high spatial resolution and cost-effectiveness, but present unique challenges in robotics for their complex physical characteristics and visual signal processing requirements.",
@@ -4318,6 +4438,7 @@ window.PAPERS = [
   },
   {
     title: "VPHO: Joint Visual-Physical Cue Learning and Aggregation for Hand-Object Pose Estimation",
+    image: "https://arxiv.org/html/2511.12030/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Estimating the 3D poses of hands and objects from a single RGB image is a fundamental yet challenging problem, with broad applications in augmented reality and human-computer interaction.",
@@ -4390,6 +4511,7 @@ window.PAPERS = [
   },
   {
     title: "Video Prediction Policy: A Generalist Robot Policy with Predictive Visual Representations",
+    image: "https://video-prediction-policy.github.io/media/images/title-3.png",
     collection: "VLA",
     file: null,
     desc: "Uses future representations from a video diffusion model as predictive visual features for a generalist policy trained on robot data and human manipulation video.",
@@ -4402,6 +4524,7 @@ window.PAPERS = [
   },
   {
     title: "Flow-based Domain Randomization for Learning and Sequencing Robotic Skills",
+    image: "https://arxiv.org/html/2502.01800/x1.png",
     collection: "Related: autonomous",
     file: null,
     desc: "Learns a normalizing-flow distribution for domain randomization and applies it to robust contact-rich skills and uncertainty-aware multi-step manipulation planning.",
@@ -4414,6 +4537,7 @@ window.PAPERS = [
   },
   {
     title: "ReinboT: Amplifying Robot Visual-Language Manipulation with Reinforcement Learning",
+    image: "https://arxiv.org/html/2505.07395/extracted/6430064/figures/method_overview_3.png",
     collection: "VLA",
     file: null,
     desc: "Adds dense return prediction and offline reinforcement learning objectives to an end-to-end VLA model so it can learn robustly from mixed-quality manipulation data.",
@@ -4426,6 +4550,7 @@ window.PAPERS = [
   },
   {
     title: "Decomposed Vector-Quantized Variational Autoencoder for Human Grasp Generation",
+    image: "https://arxiv.org/html/2407.14062/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Decomposes the hand into separately encoded parts and uses a two-stage decoder to generate fine-grained human grasps with improved finger-object interaction.",
@@ -4438,6 +4563,7 @@ window.PAPERS = [
   },
   {
     title: "Language-Driven 6-DoF Grasp Detection Using Negative Prompt Guidance",
+    image: "https://airvlab.github.io/grasp-anything/assets/images/grasp-anything-teaser.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Introduces language-conditioned 6-DoF grasp detection with negative-prompt diffusion guidance and a large point-cloud grasp dataset for cluttered scenes.",
@@ -4450,6 +4576,7 @@ window.PAPERS = [
   },
   {
     title: "Controlling the World by Sleight of Hand",
+    image: "https://arxiv.org/html/2408.07147/x1.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Learns an action-conditioned generative world model from unlabeled hand-object videos and transfers its predicted interaction effects to robot embodiments.",
