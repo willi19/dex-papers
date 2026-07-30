@@ -98,9 +98,11 @@ A landscape survey of papers, separate from the main browser:
   **📄 Summary** button per card → its per-paper page, plus a button linking
   back and forth with `index.html`.
 - `overview/<key>.html` — one **report-style** summary page per paper.
-- `overview_assets/<key>.png` — the paper's teaser figure. **Git-ignored**
-  (`.gitignore`) — kept local only (copyright; do not upload). Reproducible
-  anytime by re-rendering, so missing on a fresh clone is expected.
+- `overview_assets/<key>.png` — the paper's teaser figure. **Tracked** (the repo
+  is public, so these figure crops are published — that is a deliberate choice).
+  `papers.js` `image` may also point here (`overview_assets/foo.png`) for papers
+  whose figures cannot be hotlinked from arXiv / a project page / an OA
+  publisher; a local crop is the only way those cards get a figure at all.
 
 **HARD RULES for these pages:**
 

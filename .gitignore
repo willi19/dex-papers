@@ -1,6 +1,5 @@
-# Rendered paper teaser figures — kept LOCAL only (copyright; do not upload to GitHub).
-# overview.html / overview/*.html reference these but they are not tracked.
-overview_assets/
+# Rendered paper teaser figures (overview_assets/) ARE tracked: papers with no
+# hotlinkable figure point `image` at a local crop, and it has to survive a clone.
 
 # Paper PDFs — kept LOCAL only (copyright; do not upload to GitHub).
 # The browser's PDF buttons work locally; on a fresh public clone they are disabled.

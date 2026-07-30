@@ -1262,6 +1262,7 @@ window.PAPERS = [
   },
   {
     title: "PartDexTOG: Generating Dexterous Task-Oriented Grasping via Language-driven Part Analysis",
+    image: "overview_assets/partdextog.png",
     collection: "Grasp Synthesis", file: null, cites: 2,
     arxiv: "https://arxiv.org/abs/2505.12294", project: null, venue: "arXiv 2025",
     desc: "LLM generates category/part-level grasp descriptions; a part-conditional diffusion model synthesizes task-oriented grasps.",
@@ -1505,6 +1506,7 @@ window.PAPERS = [
   },
   {
     title: "Toward Human-Like Grasp: Dexterous Grasping via Semantic Representation of Object-Hand",
+    image: "overview_assets/human_like_grasp.png",
     collection: "Grasp Synthesis", file: null, cites: 70,
     arxiv: null, project: null, venue: "ICCV 2021",
     desc: "Object-hand semantic representation segments functional areas to guide human-like functional dexterous grasps.",
@@ -1811,6 +1813,7 @@ window.PAPERS = [
   },
   {
     title: "Generalizable Hierarchical Skill Learning via Object-Centric Representation",
+    image: "overview_assets/generalizable_hierarchical_skill.png",
     collection: "VLA", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2510.21121", project: null, venue: "arXiv 2025",
     desc: "GSL uses object-canonicalized skill primitives as the interface between a VLM that predicts (skill, object) pairs and a low-level visuomotor policy; 3 demos/task beat baselines trained on 30x more data by 15.5%.",
