@@ -260,14 +260,10 @@
     const localSummary = (p.summary || "").match(/^overview\/([^/]+)\.html$/);
     if (localSummary) sources.push("overview_assets/" + localSummary[1] + ".png");
     if (p.image) sources.push(p.image);
-    const arxivId = (p.arxiv || "").match(/arxiv\.org\/abs\/([^?#]+)/);
-    if (arxivId) {
-      const id = arxivId[1].replace(/v\d+$/, "");
-      sources.push("https://arxiv.org/html/" + id + "/x1.png");
-      sources.push("https://arxiv.org/html/" + id + "/x1.svg");
-      sources.push("https://ar5iv.labs.arxiv.org/html/" + id + "/assets/x1.png");
-      sources.push("https://ar5iv.labs.arxiv.org/html/" + id + "/assets/x1.svg");
-    }
+    // No arXiv "x1" fallback on purpose: the first figure of a paper is just as
+    // often a results plot or a violin chart as it is the teaser, and a graph on
+    // the card tells you nothing about the paper. Teasers are curated per paper
+    // in papers.js (`image`) instead — a pipeline diagram or the robot working.
     // Papers without arXiv HTML are mostly publisher-only proceedings.
     // A project-page or publisher-page capture is preferable to a generic card,
     // and often exposes the paper's hero figure or graphical abstract.
