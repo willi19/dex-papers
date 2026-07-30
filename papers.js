@@ -1813,7 +1813,6 @@ window.PAPERS = [
   },
   {
     title: "Generalizable Hierarchical Skill Learning via Object-Centric Representation",
-    image: "overview_assets/generalizable_hierarchical_skill.png",
     collection: "VLA", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2510.21121", project: null, venue: "arXiv 2025",
     desc: "GSL uses object-canonicalized skill primitives as the interface between a VLM that predicts (skill, object) pairs and a low-level visuomotor policy; 3 demos/task beat baselines trained on 30x more data by 15.5%.",
