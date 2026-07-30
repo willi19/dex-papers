@@ -1826,6 +1826,7 @@ window.PAPERS = [
   },
   {
     title: "Robust Vision-Language-Action Models via Object-Centric Learning and Distance-Based Chunk Alignment",
+    image: "https://mdpi-res.com/d_attachment/applsci/applsci-16-03376/article_deploy/html/images/applsci-16-03376-g001.png",
     collection: "VLA", file: null, cites: null,
     arxiv: null, project: "https://doi.org/10.3390/app16073376", venue: "Applied Sciences 2026",
     desc: "Trains the policy on three views sharing one action label — raw RGB, an object-masked image, and an object-only crop — so it attends to the manipulated object rather than background, plus distance-based alignment between action chunks.",
