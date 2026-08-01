@@ -1,5 +1,88 @@
 // Source-checked detailed reading notes. Only completed records are linked from the library.
 window.DETAILED_PAPER_SUMMARIES = {
+  "multi-keypoint-affordance": {
+    shortTitle: "Multi-Keypoint Affordance",
+    title: "Multi-Keypoint Affordance Representation for Functional Dexterous Grasping",
+    venue: "RA-L 2025",
+    badges: ["affordance learning", "large vision models", "contact-guided", "functional grasp"],
+    figure: "https://arxiv.org/html/2502.20018/x2.png",
+    figureCaption: "CMKA learns three task-relevant object keypoints from Ego images with Exo human-contact supervision; KGT turns their calibrated 3D geometry into a wrist target pose.",
+    tldr: "CMKA uses paired Ego object images and Exo human-operation images during training. SAM/DINO clustering proposes object points; task-conditioned selection chooses three points whose Ego features match an Exo contact prototype. At inference, RGB-D lifts those points to 3D and KGT computes a wrist pose. A separate FAH/GAAF-Dex coarse gesture class supplies the hand configuration.",
+    problem: [
+      "A single affordance heatmap says where an interaction may occur, but does not constrain the full orientation of a dexterous hand.",
+      "Functional grasping needs object-side points associated with the functional finger, little finger, and wrist geometry.",
+      "The method seeks weak supervision from human Exo interaction images instead of training CMKA with dense contact-point labels."
+    ],
+    output: [
+      "At inference: three 2D task-relevant object keypoints from an Ego image and an affordance class.",
+      "With RGB-D plus calibration: a wrist target pose (R, T) from KGT.",
+      "The paper reuses a coarse hand-gesture parameter J from the FAH/GAAF-Dex setup; it does not itself predict a geometry-refined full-hand grasp."
+    ],
+    pipeline: [
+      {name:"Ego candidate proposal",text:"During CMKA training, DINOv2 features feed an Ego-only LMSC module: SAM produces S region masks, then K-means finds J feature clusters per mask. Each center is mapped to its nearest real pixel, yielding N=S×J candidate 2D points (best reported setting: S=3, J=4, N=12)."},
+      {name:"Task-conditioned Ego selection",text:"A learnable table W∈R^(T×N), indexed by the affordance class, selects three candidates. Features in circular neighborhoods around those three Ego points are projected and summed into fgk."},
+      {name:"Exo contact supervision",text:"A parallel Exo image goes through DINOv2 and an affordance-specific CAM. LOCATE Extract/PartSelect yields an object-part contact prototype fop. Cosine similarity between fop and fgk supervises the Ego selection."},
+      {name:"RGB-D and KGT",text:"At inference only the Ego branch and task label are used. Depth at the three 2D locations produces 3D points. Calibration converts them to object-side Fo, Lo, Wo; the corresponding hand anchors F, L, W define two coordinate frames, whose relative transform is the wrist target (R,T)."},
+      {name:"Coarse hand execution",text:"The real-robot setup combines the wrist target with a coarse gesture J from FAH/GAAF-Dex. That predecessor represents J as one of 14 gesture prototypes with five-finger flexion and thumb-abduction angles. The MKA paper does not specify its arm IK, trajectory, or low-level controller."}
+    ],
+    methodDetails: [
+      {name:"What a candidate keypoint is",text:"K-means operates in PCA-reduced DINO feature space, not image-coordinate space. For each cluster center Cn, the nearest actual mask pixel feature is selected; that pixel's (u,v) is Kn. The cluster number itself has no wrist/finger semantic meaning."},
+      {name:"What Exo transfers",text:"Exo does not provide three point coordinates. It provides a class-specific contact-region feature prototype. The loss therefore says that the selected Ego points jointly resemble a human-contact region for the task."},
+      {name:"KGT geometry",text:"KGT uses calibrated object anchors Fo, Lo, Wo to make an object frame: origin Wo, x along Wo→Fo, and z normal to the Fo–Lo plane. The analogous hand frame comes from robot-hand anchors W, F, L. Their relative pose yields the wrist transform."},
+      {name:"FAH versus MKA",text:"FAH is the Functional Affordance Hand-object Interaction dataset. Its predecessor GAAF-Dex predicts one of 14 coarse gesture classes; each class stores hand-angle parameters. MKA uses this coarse gesture J but contributes the multi-keypoint wrist-pose calculation."}
+    ],
+    equations: [
+      {
+        name:"Candidate-point recovery",
+        formula:"K_n = arg min_(x ∈ X_i^PCA) ||x − C_n||²",
+        meaning:"For a K-means center Cn in one SAM mask's feature set, choose the nearest real pixel feature x. Its image location becomes a candidate keypoint."
+      },
+      {
+        name:"Ego–Exo contact alignment",
+        formula:"f_gk = Σ_(i=1)^3 proj(F_ki)\nL_cos = 1 − cos(f_op, f_gk)",
+        meaning:"The three selected Ego neighborhood features are summed, then matched to the Exo contact prototype. This loss is permutation-invariant over the three selected features."
+      },
+      {
+        name:"KGT frame alignment",
+        formula:"x_o = normalize(W_oF_o)\nz_o = normalize(W_oF_o × W_oL_o)\ny_o = z_o × x_o\nR = (R_O^I)^(-1) R_H^I",
+        meaning:"Three non-collinear calibrated object points define an object frame. KGT aligns it with the frame defined by the hand's wrist, functional-finger, and little-finger anchors."
+      }
+    ],
+    novelty: [
+      "<strong>Candidate points from foundation-model features:</strong> SAM constrains proposals to object regions, while multi-scale DINO features separate visually distinct parts inside each region.",
+      "<strong>Cross-view weak supervision:</strong> Exo human-contact features supervise Ego keypoint selection without requiring CMKA to train on dense point labels.",
+      "<strong>Three-point wrist geometry:</strong> calibrated functional-finger, little-finger, and wrist anchors define a full object-side coordinate frame for KGT."
+    ],
+    comparison: {
+      headers:["Method family","Affordance representation","Task adaptation"],
+      rows:[
+        ["Heatmap-based affordance","Coarse interaction regions","Often requires retraining"],
+        ["Grasp-quality prediction","Scalar score per candidate","Limited to predefined grasp set"],
+        ["<strong>Multi-Keypoint Affordance</strong>","Three task-relevant candidate-selected points","KGT supplies wrist pose; FAH/GAAF-Dex supplies coarse hand gesture"]
+      ]
+    },
+    evidence: [
+      "FAH contains 5,858 images over 18 tools and 6 affordance classes, spanning Ego and Exo views.",
+      "The paper reports its best candidate configuration at S=3 masks and J=4 clusters per mask (N=12).",
+      "On FAH affordance grounding, it reports a 45.35% KLD improvement over its ReKep* baseline.",
+      "Real-robot results report average functional-grasp success of 60% across Click Flashlight, Press Drill, and Press Spraybottle, versus 20% for GAAF-Dex."
+    ],
+    limitations: [
+      "The paper says W selects three candidates but does not give an explicit scoring/assignment equation for the top-3 operation or role-specific ordering of those points.",
+      "Because fgk is a sum of the three Ego features, its stated Exo alignment loss alone does not distinguish permutations of functional-finger, little-finger, and wrist roles.",
+      "The authors add little-finger and wrist-projection annotations to the FAH test set and use hand-model calibration for real execution; this is more qualified than a fully annotation-free end-to-end system.",
+      "MKA outputs a static wrist target and relies on an external coarse gesture J. It does not specify detailed object geometry reconstruction, trajectory generation, collision optimization, arm IK, or force-feedback control."
+    ],
+    takeaway: [
+      "<strong>Classification:</strong> weakly supervised affordance localization + geometric wrist-pose construction; it is not an end-to-end dexterous grasp policy.",
+      "<strong>Read it for:</strong> the candidate-keypoint / Exo-contact-transfer design and the three-point KGT construction; keep the external calibration and coarse-gesture dependency in mind."
+    ],
+    links: [
+      {label:"arXiv",url:"https://arxiv.org/abs/2502.20018"},
+      {label:"Code & demos",url:"https://github.com/PopeyePxx/MKA"}
+    ]
+  },
+
   "object-centric-motion-priors": {
     shortTitle: "Object-Centric Motion Priors",
     title: "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation",
