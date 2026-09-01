@@ -4,3 +4,7 @@
 # Paper PDFs — kept LOCAL only (copyright; do not upload to GitHub).
 # The browser's PDF buttons work locally; on a fresh public clone they are disabled.
 *.pdf
+
+# Teaser figures downloaded for local browsing only (copyright; do not upload).
+# Not referenced by papers.js on this branch - overview_assets/ holds the published crops.
+teasers/
