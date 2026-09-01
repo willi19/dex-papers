@@ -855,7 +855,7 @@ window.PAPERS = [
     collection: "Landscape: bimanual-dex",
     file: null,
     summary: "overview/enpire.html",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2606.19980",
     project: "https://research.nvidia.com/labs/gear/enpire/",
     venue: "2026",
     tags: ["NVIDIA", "self-improving", "agentic", "RL", "bimanual", "dexterous", "real-world"]
@@ -4712,5 +4712,67 @@ window.PAPERS = [
     project: null,
     venue: "ECCV 2024",
     tags: ["world-model", "hand-object", "human-video", "video-prediction", "cross-embodiment", "generalization"]
+  },
+
+  // ===== Agentic / code-as-policy robot control (LLM & VLM agents, self-improvement loops) =====
+  {
+    title: "ASPIRE: Agentic Skills Discovery for Robotics",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2607.00272",
+    project: "https://research.nvidia.com/labs/gear/aspire/",
+    venue: "2026",
+    desc: "Self-improving continual learning that writes and repairs code-as-policy programs from execution feedback; validated repairs compound into a growing skill library (two-arm handover 20% to 92%).",
+    tags: ["NVIDIA", "agentic", "code-as-policy", "self-improving", "skill-library", "LLM", "manipulation"]
+  },
+  {
+    title: "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2603.22435",
+    project: "https://github.com/capgym/cap-x",
+    venue: "2026",
+    desc: "CaP-Gym plus CaP-Bench for code-as-policy agents; scaling test-time interaction, execution feedback and skill synthesis gives CaP-Agent0 (training-free) and CaP-RL (sim-to-real).",
+    tags: ["Berkeley", "NVIDIA", "agentic", "code-as-policy", "benchmark", "LLM", "VLM", "manipulation"]
+  },
+  {
+    title: "Uni-Skill: Building Self-Evolving Skill Repository for Generalizable Robotic Manipulation",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2603.02623",
+    project: null,
+    venue: "ICRA 2026",
+    desc: "SkillFolder, a VerbNet-inspired skill repository mined from unstructured robot video; the robot requests a new skill implementation when the existing ones fall short.",
+    tags: ["agentic", "skill-library", "self-improving", "VLM", "manipulation", "human-video"]
+  },
+  {
+    title: "Demonstration-Free Robotic Control via LLM Agents",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2601.20334",
+    project: null,
+    venue: "IROS 2026",
+    desc: "FAEA repurposes a software-engineering LLM agent loop for manipulation: 84.9% LIBERO, 85.7% ManiSkill3, 96% MetaWorld from privileged state with no demonstrations.",
+    tags: ["agentic", "LLM", "planning", "benchmark", "manipulation"]
+  },
+  {
+    title: "Autonomous Improvement of Instruction Following Skills via Foundation Models",
+    collection: "Related: autonomous",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2407.20635",
+    project: "https://auto-improvement.github.io/",
+    venue: "CoRL 2024",
+    desc: "SOAR: VLMs propose and grade tasks while a diffusion subgoal generator drives autonomous collection; 30.5K trajectories on five WidowX robots and a 2x skill improvement.",
+    tags: ["Berkeley", "autonomous", "self-improving", "VLM", "data-collection", "diffusion", "dataset", "real-world"]
+  },
+  {
+    title: "Inspect Robots",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: null,
+    project: "https://github.com/robocurve/inspect-robots",
+    venue: "",
+    desc: "Not a paper, a harness: define a robotics benchmark once, then run any policy (LLM agent or VLA) against any compatible embodiment, with auditable logs and Rerun visualisation.",
+    tags: ["agentic", "benchmark", "system", "VLA", "LLM", "manipulation"]
   }
 ];

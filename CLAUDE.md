@@ -99,8 +99,14 @@ unreachable and 10 of those papers were missing from `papers.js` entirely.
 
 ## Collections (current)
 
-`Dex Manipulation`, `Survey`, `Related: autonomous`, `Related: dexterous`,
-`Related: real`, `Related: system`, `Related: misc`.
+`Dex Manipulation`, `Grasp Synthesis`, `Compliance Control`, `Agentic Control`,
+`VLA`, `Perception`, `Survey`, `Landscape: bimanual-dex`, `Related: autonomous`,
+`Related: dexterous`, `Related: real`, `Related: system`, `Related: misc`.
+
+`Agentic Control` is LLM/VLM agents that write, run and repair robot programs,
+plus the self-improvement loops around them (ASPIRE, CaP-X, ENPIRE, Uni-Skill).
+`index.html` gives them their own research area, driven by the `agentic` /
+`code-as-policy` tags.
 
 ## Tag conventions
 
@@ -110,7 +116,8 @@ Tags are flat strings; a paper carries 4–8. Drawn from these axes (reuse exact
   `DeepMind`, `Google`, `UT-Austin`, `Brown`, `TUM` …
 - **Method**: `RL`, `imitation-learning`, `sim-to-real`, `teleoperation`,
   `self-supervised`, `reset-free`, `TAMP`, `VLA`, `diffusion`, `equivariant`,
-  `one-shot`, `self-improving`
+  `one-shot`, `self-improving`, `agentic`, `code-as-policy`, `skill-library`,
+  `LLM`, `VLM`, `planning`
 - **Topic**: `dexterous`, `grasping`, `manipulation`, `in-hand-reorientation`,
   `tool-use`, `bimanual`, `data-collection`, `dataset`, `scaling`, `reset`,
   `mocap`, `human-video`, `real-world`, `long-horizon`

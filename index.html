@@ -203,6 +203,7 @@
     "RL & Control",
     "Imitation & Demonstration Learning",
     "Foundation / Generalist Policies",
+    "Agentic & Code-as-Policy",
     "Grasping & Motion Generation",
     "Data / Teleoperation / Task Generation",
     "Benchmarks / Perception / Infrastructure"
@@ -211,6 +212,7 @@
     "RL & Control": "reward-driven exploration, curriculum, control",
     "Imitation & Demonstration Learning": "BC, DAgger, diffusion/flow policies, retargeting",
     "Foundation / Generalist Policies": "VLA, pretrained behavior models, cross-task controllers",
+    "Agentic & Code-as-Policy": "LLM/VLM agents that write, run and repair robot programs; self-improvement loops",
     "Grasping & Motion Generation": "grasp synthesis, grasp policies, physically plausible motion",
     "Data / Teleoperation / Task Generation": "datasets, teleoperation, augmentation, autonomous collection",
     "Benchmarks / Perception / Infrastructure": "evaluation, sensing, planning, surveys, systems"
@@ -219,6 +221,7 @@
     "RL & Control": "RL",
     "Imitation & Demonstration Learning": "IL",
     "Foundation / Generalist Policies": "Foundation",
+    "Agentic & Code-as-Policy": "Agentic",
     "Grasping & Motion Generation": "Grasp/Motion",
     "Data / Teleoperation / Task Generation": "Data/Teleop",
     "Benchmarks / Perception / Infrastructure": "Benchmark/Infra"
@@ -233,7 +236,7 @@
     "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning": "RL & Control",
     "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation": "RL & Control",
     "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity": "RL & Control",
-    "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World": "RL & Control"
+    "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World": "Agentic & Code-as-Policy"
   };
   function researchGroupOf(p) {
     if (GROUP_OVERRIDES[p.title]) return GROUP_OVERRIDES[p.title];
@@ -242,6 +245,8 @@
     const has = (...values) => values.some(v => tags.includes(v));
     const hasPart = value => tags.some(t => t.toLowerCase().includes(value));
 
+    if (has("agentic", "code-as-policy"))
+      return "Agentic & Code-as-Policy";
     if (has("survey", "benchmark", "analysis", "perception", "segmentation", "TAMP"))
       return "Benchmarks / Perception / Infrastructure";
     if (has("dataset", "teleoperation", "crowdsourcing", "mocap", "capture") ||
