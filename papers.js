@@ -4401,6 +4401,116 @@ window.PAPERS = [
     tags: ["bimanual", "diffusion", "imitation-learning", "language-grounding", "vision", "hardware", "long-horizon"]
   },
   {
+    title: "π₀: A Vision-Language-Action Flow Model for General Robot Control",
+    image: "https://arxiv.org/html/2410.24164v3/teaser_fig.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/pi0.html",
+    arxiv: "https://arxiv.org/abs/2410.24164",
+    project: "https://www.pi.website/blog/pi0",
+    venue: "2024",
+    tags: ["Physical-Intelligence", "VLA", "flow-matching", "generalist", "dexterous", "manipulation"]
+  },
+  {
+    title: "Gemini Robotics: Bringing AI into the Physical World",
+    image: "https://arxiv.org/html/2503.20020v1/gr_overview.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/gemini_robotics.html",
+    arxiv: "https://arxiv.org/abs/2503.20020",
+    project: "https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/",
+    venue: "2025",
+    tags: ["DeepMind", "VLA", "generalist", "foundation-model", "dexterous", "manipulation"]
+  },
+  {
+    title: "GR00T N1: An Open Foundation Model for Generalist Humanoid Robots",
+    image: "https://arxiv.org/html/2503.14734v2/data_pyramid.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/groot_n1.html",
+    arxiv: "https://arxiv.org/abs/2503.14734",
+    project: "https://research.nvidia.com/labs/lpr/publication/gr00tn1_2025/",
+    venue: "2025",
+    tags: ["NVIDIA", "VLA", "diffusion", "foundation-model", "humanoid", "dexterous"]
+  },
+  {
+    title: "RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation",
+    image: "https://arxiv.org/html/2410.07864v2/framework.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/rdt_1b.html",
+    arxiv: "https://arxiv.org/abs/2410.07864",
+    project: "https://rdt-robotics.github.io/rdt-robotics/",
+    venue: "ICLR 2025",
+    tags: ["Tsinghua", "diffusion", "foundation-model", "bimanual", "manipulation", "imitation-learning"]
+  },
+  {
+    title: "DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control",
+    image: "https://arxiv.org/html/2502.05855v3/framework2.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/dexvla.html",
+    arxiv: "https://arxiv.org/abs/2502.05855",
+    project: "https://dex-vla.github.io/",
+    venue: "2025",
+    tags: ["VLA", "diffusion", "cross-embodiment", "dexterous", "manipulation"]
+  },
+  {
+    title: "DemoStart: Demonstration-led Auto-curriculum Applied to Sim-to-Real with Multi-fingered Robots",
+    image: "https://arxiv.org/html/2409.06613v2/figures/figure1a.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/demostart.html",
+    arxiv: "https://arxiv.org/abs/2409.06613",
+    project: "https://sites.google.com/view/demostart",
+    venue: "2024",
+    tags: ["DeepMind", "RL", "sim-to-real", "dexterous", "grasping", "manipulation"]
+  },
+  {
+    title: "Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations (BiDexHD)",
+    image: "https://arxiv.org/html/2410.02477v1/framework.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/diverse_bimanual_human.html",
+    arxiv: "https://arxiv.org/abs/2410.02477",
+    project: "https://sites.google.com/view/bidexhd",
+    venue: "2024",
+    tags: ["PKU", "imitation-learning", "bimanual", "dexterous", "human-video", "manipulation"]
+  },
+  {
+    title: "A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation",
+    image: "https://arxiv.org/html/2507.05331v1/figures_final/lbm_teaser_new_fixed.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/lbm_multitask.html",
+    arxiv: "https://arxiv.org/abs/2507.05331",
+    project: "https://toyotaresearchinstitute.github.io/lbm1/",
+    venue: "Science Robotics 2025",
+    tags: ["TRI", "diffusion", "multi-task", "benchmark", "dexterous", "manipulation"]
+  },
+  {
+    title: "ManiDP: Manipulability-Aware Diffusion Policy for Posture-Dependent Bimanual Manipulation",
+    image: "https://arxiv.org/html/2510.23016v1/figs/fig6.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/manidp.html",
+    arxiv: "https://arxiv.org/abs/2510.23016",
+    project: null,
+    venue: "IROS 2025",
+    tags: ["diffusion", "bimanual", "imitation-learning", "manipulation"]
+  },
+  {
+    title: "Sim-to-Real Reinforcement Learning for Vision-Based Dexterous Manipulation on Humanoids",
+    image: "https://arxiv.org/html/2502.20396v2/fig1.png",
+    collection: "Landscape: bimanual-dex",
+    file: null,
+    summary: "overview/simreal_humanoid.html",
+    arxiv: "https://arxiv.org/abs/2502.20396",
+    project: "https://toruowo.github.io/recipe/",
+    venue: "CoRL 2025",
+    tags: ["Berkeley", "RL", "sim-to-real", "bimanual", "dexterous", "humanoid"]
+  },
+  {
     title: "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation",
     collection: "Dex Manipulation",
     file: null,
