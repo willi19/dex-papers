@@ -1813,6 +1813,7 @@ window.PAPERS = [
   },
   {
     title: "Generalizable Hierarchical Skill Learning via Object-Centric Representation",
+    image: "https://arxiv.org/html/2510.21121v1/img/fig1_dian.png",
     collection: "VLA", file: null, cites: null,
     arxiv: "https://arxiv.org/abs/2510.21121", project: null, venue: "arXiv 2025",
     desc: "GSL uses object-canonicalized skill primitives as the interface between a VLM that predicts (skill, object) pairs and a low-level visuomotor policy; 3 demos/task beat baselines trained on 30x more data by 15.5%.",
@@ -1850,7 +1851,7 @@ window.PAPERS = [
   // ===== Additional papers (dexterous manipulation, grasping, VLA, compliance) =====
 {
     title: "Tilde: Teleoperation for Dexterous In-Hand Manipulation Learning with a DeltaHand",
-    image: "https://lh3.googleusercontent.com/sitesv/AG8ngQUhjzAqSUnz46kHdiy1j8eDwylNJwiiP8xqVgCu1NkIyW4hfqlHbw4O9SvT8k0Ig3Bnij0zasaVKAzJe2BMGnBIZnV37XzX2fRN0NXQ-gTcB41qwwwsYx6eKf7KW9BFtATTEruOu1pG-51JNsQWWWgUmZcFdEgrkjDVEeVoeK_HoIrfwkkZhPMJdY4QWlN4L_C3e2dsOfUTjX9uu4-TGYk8iKkgGdJBEj6B_xLX=w1280",
+    image: "https://arxiv.org/html/2405.18804v2/figs/teaser.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Combines a kinematic-twin teleoperation interface, the soft DeltaHand, and vision-conditioned diffusion policies; learned policies complete seven real-world in-hand tasks with a reported 90% average success rate.",
@@ -1910,6 +1911,7 @@ window.PAPERS = [
   },
   {
     title: "SparseDFF: Sparse-View Feature Distillation for One-Shot Dexterous Manipulation",
+    image: "https://arxiv.org/html/2310.16838v2/teaser.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Distills view-consistent semantic features from sparse RGB-D views into a 3D field and optimizes dexterous end-effector poses from a single demonstration across rigid and deformable objects.",
@@ -2052,6 +2054,7 @@ window.PAPERS = [
   },
   {
     title: "Scaffolding Dexterous Manipulation with Vision-Language Models",
+    image: "https://arxiv.org/html/2506.19212v3/overview.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Uses an off-the-shelf VLM to identify task keypoints and synthesize coarse hand/object trajectories, then trains residual reinforcement-learning policies without human demonstrations or handcrafted rewards.",
@@ -2623,6 +2626,7 @@ window.PAPERS = [
   },
   {
     title: "Dense Hand-Object(HO) GraspNet with Full Grasping Taxonomy and Dynamics",
+    image: "https://arxiv.org/html/2409.04033v1/figure/AllSample_filtered.jpg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Existing datasets for 3D hand-object interaction are limited either in the data cardinality, data variations in interaction scenarios, or the quality of annotations.",
@@ -2829,6 +2833,7 @@ window.PAPERS = [
   },
   {
     title: "Kinesthetic-based In-Hand Object Recognition with an Underactuated Robotic Hand",
+    image: "https://arxiv.org/html/2401.16802v1/figures/hand.jpeg",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Tendon-based underactuated hands are intended to be simple, compliant and affordable. Often, they are 3D printed and do not include tactile sensors.",
@@ -3460,6 +3465,7 @@ window.PAPERS = [
   },
   {
     title: "DexHandDiff: Interaction-aware Diffusion Planning for Adaptive Dexterous Manipulation",
+    image: "https://arxiv.org/html/2411.18562v3/teaser_dexdiff.png",
     collection: "Dex Manipulation",
     file: null,
     desc: "Dexterous manipulation with contact-rich interactions is crucial for advanced robotics. While recent diffusion-based planning approaches show promise for simple manipulation tasks, they often produce unrealistic ghost states (e.g., the object automatically moves without hand contact) or lack adaptability when handling complex sequential interactions.",
@@ -3770,6 +3776,7 @@ window.PAPERS = [
   },
   {
     title: "VITaL Pretraining: Visuo-Tactile Pretraining for Tactile and Non-Tactile Manipulation Policies",
+    image: "https://arxiv.org/html/2403.11898v2/figures/Model_Overview.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "Tactile information is a critical tool for dexterous manipulation. As humans, we rely heavily on tactile information to understand objects in our environments and how to interact with them.",
@@ -3806,6 +3813,7 @@ window.PAPERS = [
   },
   {
     title: "Ag2x2: Robust Agent-Agnostic Visual Representations for Zero-Shot Bimanual Manipulation",
+    image: "https://arxiv.org/html/2507.19817v1/model.png",
     collection: "Landscape: bimanual-dex",
     file: null,
     desc: "Bimanual manipulation, fundamental to human daily activities, remains a challenging task due to its inherent complexity of coordinated control. Recent advances have enabled zero-shot learning of single-arm manipulation skills through agent-agnostic visual representations derived from human videos; however, these methods overlook crucial agentspecific...",
@@ -3957,6 +3965,7 @@ window.PAPERS = [
   },
   {
     title: "KARL: Kalman-Filter Assisted Reinforcement Learner for Dynamic Object Tracking and Grasping",
+    image: "https://arxiv.org/html/2506.15945v1/intro.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "We present Kalman-Filter Assisted Reinforcement Learner (KARL) for dynamic object tracking and grasping over eye-on-hand (EoH) systems, significantly expanding such systems’ capabilities in challenging, realistic environments.",
@@ -4169,6 +4178,7 @@ window.PAPERS = [
   },
   {
     title: "Six-DoF Hand-Based Teleoperation for Omnidirectional Aerial Robots",
+    image: "https://arxiv.org/html/2506.15009v2/figs/1_tele-op_v4.jpg",
     collection: "Dex Manipulation",
     file: null,
     desc: "Omnidirectional aerial robots offer full 6-DoF independent control over position and orientation, making them popular for aerial manipulation. Although advancements in robotic autonomy, human operation remains essential in complex aerial environments.",
