@@ -89,6 +89,7 @@ window.PAPER_SUMMARIES = {
   "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation": "overview/paper.html?id=latentvla",
   "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment": "overview/paper.html?id=pkda",
   "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "overview/paper.html?id=sns-grasp",
+  "Twisting Lids Off with Two Hands": "overview/paper.html?id=twisting-lids",
   "ASPIRE: Agentic Skills Discovery for Robotics": "overview/paper.html?id=aspire",
   "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation": "overview/paper.html?id=capx"
 };

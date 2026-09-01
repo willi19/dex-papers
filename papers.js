@@ -9,7 +9,7 @@ window.PAPERS = [
     file: "2024_Berkeley_TwistingLidsOffTwoHands.pdf",
     arxiv: "https://arxiv.org/abs/2403.02338",
     project: "https://toruowo.github.io/bimanual-twist/",
-    venue: "CoRL 2025",
+    venue: "CoRL 2024",
     tags: ["Berkeley", "RL", "sim-to-real", "bimanual", "bottle-cap", "Allegro", "manipulation"]
   },
   {
