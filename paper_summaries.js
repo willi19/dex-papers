@@ -451,5 +451,184 @@ window.DETAILED_PAPER_SUMMARIES = {
       {label:"AAAI paper",url:"https://ojs.aaai.org/index.php/AAAI/article/view/37909"},
       {label:"PDF",url:"https://ojs.aaai.org/index.php/AAAI/article/download/37909/41871"}
     ]
+  },
+
+  "aspire": {
+    shortTitle: "ASPIRE",
+    title: "ASPIRE: Agentic Skills Discovery for Robotics",
+    venue: "arXiv 2026",
+    badges: ["code-as-policy", "coding agent", "skill library", "evolutionary search"],
+    figure: "../overview_assets/aspire.png",
+    figureCaption: "A coordinator dispatches actor coding agents; each debugs a robot program against the execution engine, evolutionary search samples program variants, and audited repairs flow back into a shared skill library.",
+    tldr: "A frontier coding agent writes code-as-policy robot programs, reads a per-primitive multimodal trace of what actually went wrong, patches the program, and distils the validated fix into a shared skill library that later tasks retrieve as in-context guidance. The trace engine — not the search — carries most of the gain, and the library is what transfers across tasks and embodiments.",
+    problem: [
+      "With only a binary success signal, an agent cannot tell whether a failure came from incorrect perception, an unstable grasp, a planning error, or a downstream recovery failure, so it cannot localise a root cause or target a repair.",
+      "Fixes are discarded once a task ends: in the authors’ phrasing, the agent solving its hundredth task is effectively no more experienced than the agent solving its first.",
+      "Prior robotic coding agents operate inside fixed, human-engineered pipelines and receive only coarse task-level feedback."
+    ],
+    output: [
+      "An executable code-as-policy program per task, written over a predefined perception / planning / control API.",
+      "A growing shared skill library whose entries are failure signature, when-to-apply condition, repair strategy and a representative code sketch.",
+      "Skills that transfer zero-shot to held-out long-horizon tasks and reduce token cost when programming a different real robot."
+    ],
+    pipeline: [
+      {name:"Robot execution engine", text:"Every primitive call is logged with the invoked API, its inputs and outputs, return status and multimodal evidence — RGB keyframes, overlays, grasp candidates, object poses and motion-planning results. The agent inspects salient primitive logs selectively rather than reading everything, progressively localises the failure, and validates a candidate repair by re-execution."},
+      {name:"Diagnosis and patch", text:"The actor coding agent reads the trace, forms a hypothesis about the failing primitive, edits the program, and validates the fix on debugging configurations before proposing it as reusable."},
+      {name:"Coordinator audit", text:"Actors report structured findings summarising the failure mode, the validated fix and the potentially transferable repair pattern. A coordinator checks compliance with the allowed API policy and promotes only debug-validated, reusable repairs into the shared library. Actors never exchange raw trajectories."},
+      {name:"Evolutionary search", text:"Each generation proposes K candidate programs conditioned on the top-performing previous programs and the failure traces they produced, executes all of them, and keeps the best. The stated purpose is to avoid collapse into local repair loops where the agent repeatedly patches the same failed strategy."},
+      {name:"Retrieval on new tasks", text:"Future actors retrieve library entries as in-context guidance. Categories span localisation, navigation, motion primitives, object-level grasping, scene understanding and debugging workflows, so adaptation gets faster as the library grows."}
+    ],
+    methodDetails: [
+      {name:"What a skill actually is", text:"Not a macro-action or a learned policy: a compact in-context record of a debugging pattern. The paper’s worked example is a navigate-and-pick-up-radio task where repeated navigate_to_pose calls return PLANNING_ERROR because the generated navigation target lies too close to the table boundary; the admitted skill says to sample alternative approach directions around the object before retrying perception and grasping when planner errors recur near an obstacle boundary."},
+      {name:"Coordinator–actor split", text:"A central coordinator dispatches actor coding agents to individual tasks and owns the shared library. Parallelism is across tasks, and the only channel between actors is the audited library, which keeps the shared state small and vetted."},
+      {name:"Relationship to CaP-X", text:"ASPIRE is built on CaP-Gym, and its principal baseline throughout is CaP-Agent0 — the training-free agent from the CaP-X paper by an overlapping author group. Read the two together: CaP-X measures how far test-time interaction gets you, ASPIRE adds persistence across tasks."},
+      {name:"Where the gain comes from", text:"The ablation is unusually clear. Without the execution engine or evolutionary search the agent reaches 14% macro-average on LIBERO-Pro; adding the engine alone reaches 62%; adding evolutionary search on top reaches 72%. Fine-grained failure attribution is worth roughly five times what the search is worth."}
+    ],
+    equations: [
+      {
+        name:"Evolutionary search over programs (Algorithm 1)",
+        formula:"P* ← P₀ ; H ← ∅\nfor i = 1 … T:\n    {P₁ … P_K} ~ Agent( P*, H_failures )\n    score_k, trace_k ← Execute(P_k)   ;   H ← H ∪ trace_k\n    P* ← argmax_k score_k   (if it beats P*)\n    break if score(P*) ≥ θ\nvalidate P* on held-out configs → extract skills",
+        meaning:"Each generation samples K whole-program variants conditioned on the best program so far together with the failure traces from previous evaluations, so the agent explores distinct strategies instead of refining one solution. Search terminates on a success threshold θ, and only the validated best program contributes skills."
+      },
+      {
+        name:"Skill admission",
+        formula:"finding = ( failure_signature, when_to_apply, repair_strategy, code_sketch )\nLibrary ← Library ∪ {finding}\n    iff  debug_validated(finding) ∧ coordinator_audit(finding)",
+        meaning:"Nothing enters the shared library on the strength of a single successful run. A repair must have been validated on debugging configurations and then pass a coordinator audit for API-policy compliance and reusability, which is what keeps the library from filling with task-specific noise."
+      }
+    ],
+    novelty: [
+      "<strong>Per-primitive multimodal traces instead of binary reward:</strong> failure attribution becomes a lookup over logged perception, planning and control calls with their visual evidence, which is what makes targeted repair possible at all.",
+      "<strong>Repairs promoted to durable skills:</strong> an audit step turns one-off debugging into shared, retrievable knowledge, so the agent’s hundredth task genuinely benefits from the first ninety-nine.",
+      "<strong>Population search over programs:</strong> conditioning K variants on prior failures explores alternative task strategies rather than re-patching one failing approach.",
+      "<strong>Sim-to-real skill transfer without policy transfer:</strong> what crosses the embodiment gap is debugging knowledge in text, not weights or trajectories."
+    ],
+    comparison: {
+      headers:["Benchmark", "ASPIRE", "CaP-Agent0 (CaP-X)"],
+      rows:[
+        ["LIBERO-Pro, macro-average", "<strong>0.72</strong>", "0.18"],
+        ["Robosuite, mean over 7 tasks (100 trials each)", "<strong>0.81</strong>", "0.68"],
+        ["Robosuite two_arm_handover", "<strong>0.92</strong>", "0.20"],
+        ["Robosuite nut_assembly", "0.09", "0.00"],
+        ["BEHAVIOR-1K radio pickup, task success", "<strong>0.88</strong>", "0.56 (human 0.36)"],
+        ["Zero-shot LIBERO-Pro long-horizon", "<strong>0.305</strong>", "0.038 (with retries)"]
+      ]
+    },
+    evidence: [
+      "LIBERO-Pro: 0.72 macro-average against 0.18 for CaP-Agent0; best case libero-object under position perturbation, 0.98 vs 0.22.",
+      "Robosuite over 100 trials per task: mean 0.81 vs 0.68, driven by two_arm_handover going from 0.20 to 0.92. Not uniform — two_arm_lift is slightly worse (0.71 vs 0.74) and nut_assembly remains near-unsolved at 0.09.",
+      "BEHAVIOR-1K over 25 seeds: radio pickup 0.88 task success against a human baseline of 0.36 and CaP-Agent0’s 0.56; soda can 0.88 vs human 0.72.",
+      "Zero-shot transfer scales with library size on held-out long-horizon tasks: 0.047 at N=0, 0.137 at N=25, 0.215 at N=50, 0.305 at N=90, against 0.038 for CaP-Agent0 with retries.",
+      "Real bimanual YAM station: tokens-to-first-success drop 41% / 89% / 76% across three tasks, and the open-drawer task goes from 0/20 to 11/20 successes when sim-discovered skills are supplied.",
+      "Ablation on LIBERO-Pro macro-average: 14% with neither component, 62% with the execution engine, 72% with engine plus evolutionary search."
+    ],
+    limitations: [
+      "The authors state it is not yet a fully autonomous real-world lifelong learner: real deployment still needs robust success detection, safe reset, safety monitoring and calibration maintenance.",
+      "The loop depends on a frozen frontier LLM (Claude Opus 4.6 with a 1M-token context) and they have not verified that smaller or weaker models can sustain the same debugging loop.",
+      "Programs are written against a predefined primitive API; a task needing sensing, control or interaction outside those primitives must be approximated inefficiently or the API extended by a human.",
+      "Skill-library memory management is unsolved — entries can become stale, overly specific, redundant or misleading, and retrieval, pruning, ranking and re-validation are named as future work.",
+      "The debug-and-search loop is compute-intensive, consuming many LLM calls and rollouts per task; scaling to very large task suites needs cheaper inference or more sample-efficient search."
+    ],
+    takeaway: [
+      "<strong>Classification:</strong> an agentic code-as-policy system with persistent cross-task memory — not a learned policy, and not a new RL algorithm.",
+      "<strong>Read it for:</strong> the trace-engine design and the evidence that fine-grained failure attribution (14% → 62%) dominates clever search (62% → 72%), plus the library-size scaling curve as a concrete measure of compounding experience.",
+      "<strong>Read alongside:</strong> CaP-X, whose CaP-Gym it builds on and whose CaP-Agent0 is its baseline, and ENPIRE, which pushes the same agentic loop onto real hardware."
+    ],
+    links: [
+      {label:"arXiv",url:"https://arxiv.org/abs/2607.00272"},
+      {label:"PDF",url:"https://arxiv.org/pdf/2607.00272"},
+      {label:"Project",url:"https://research.nvidia.com/labs/gear/aspire/"},
+      {label:"Code",url:"https://github.com/NVlabs/ASPIRE"}
+    ]
+  },
+
+  "capx": {
+    shortTitle: "CaP-X",
+    title: "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation",
+    venue: "arXiv 2026",
+    badges: ["code-as-policy", "benchmark", "test-time scaling", "GRPO sim-to-real"],
+    figure: "../overview_assets/capx.png",
+    figureCaption: "Task success over model release date across 7 tasks and 12 models against human-written programs, above the CaP-Gym / CaP-Bench / CaP-Agent0 stack.",
+    tldr: "A measuring apparatus for code-as-policy agents — CaP-Gym, a REPL environment over 187 manipulation tasks, and CaP-Bench, which sweeps abstraction, interaction and perceptual grounding — plus two answers built from what it reveals: CaP-Agent0, training-free, and CaP-RL, a post-trained 7B coder. The organising finding is that frontier models still trail human experts at low-level robot code, and that interaction budget closes the gap far more than nicer primitives do.",
+    problem: [
+      "Code-as-policy results had been reported anecdotally, without a controlled way to separate what the agent contributes from what human-designed primitives contribute.",
+      "High-level primitives flatter an agent and, in the authors’ words, impose a generality ceiling that masks failures in low-level reasoning.",
+      "It was unclear whether the shortfall of coding agents is a reasoning limit or simply a limit on how much interaction and visual grounding they are given."
+    ],
+    output: [
+      "CaP-Gym: a hierarchical control framework on the Gymnasium interface binding the environment loop to a stateful code executor, exposed as a Read-Eval-Print Loop over 187 tasks.",
+      "CaP-Bench: eight tiers crossing abstraction level, single- vs multi-turn interaction and perceptual grounding, with a measured human-expert baseline.",
+      "CaP-Agent0, a training-free agent, and CaP-RL, a GRPO post-trained Qwen2.5-Coder-7B-Instruct that transfers sim-to-real."
+    ],
+    pipeline: [
+      {name:"CaP-Gym environment", text:"Integrates 187 tasks — Robosuite (7), LIBERO-PRO (130) and BEHAVIOR (50) — covering tabletop, bimanual and mobile manipulation. Perception primitives include SAM3 for language-conditioned segmentation and Molmo 2 for open-vocabulary pointing, alongside OpenCV and Open3D; control primitives include motion planners and IK solvers such as PyRoki, so the agent reasons in Cartesian space while collision checking, reachability and action-space transforms are delegated."},
+      {name:"Abstraction axis", text:"The same task is solvable with human-designed high-level primitives such as stack_objs_in_order(), or with atomic ones such as solve_ik() and sam3_text_prompt(). Making this a controlled variable is what exposes the low-level reasoning gap."},
+      {name:"Tier sweep", text:"S1–S4 are single-turn: privileged state with high-level primitives, noisy perception with high-level primitives, low-level primitives with usage examples, low-level primitives without examples. M1–M4 are multi-turn: text-only execution feedback, raw RGB observations, the Visual Differencing Module, and low-level primitives with visual differencing. Seven core tasks, 100 trials per tier, 12 models."},
+      {name:"Visual Differencing Module", text:"Rather than interleaving raw frames, a VLM converts observations into structured natural language — a scene description on the first turn, then an explicit description of what changed between the previous and current observation."},
+      {name:"Skill synthesis and ensembling", text:"Recurring successful function definitions are harvested from rollouts into a library of 9 verified task-agnostic primitives; parallel ensembled reasoning issues 9 queries, either to one model or 3 each to GPT-5.2, Claude Opus 4.5 and Gemini-3-Pro, with temperature variation for output diversity."},
+      {name:"CaP-RL post-training", text:"GRPO on Qwen2.5-Coder-7B-Instruct over Cube Lift, Cube Stack and Spill Wipe, deliberately using the privileged state-based APIs of tier S1 so that perception and control error do not compound during training."}
+    ],
+    methodDetails: [
+      {name:"The human baseline is measured, not assumed", text:"Seven of the authors, each with 2+ years of robotics experience, wrote programs at tier S4 (low-level primitives, no examples) and averaged 88.5% single-turn success. Every model comparison is against that number rather than against another model."},
+      {name:"Why multi-turn helps so much", text:"Text-only execution traces already let agents introspect state — they proactively inject diagnostic print statements to surface hidden symbolic variables, then verify and retry. Visual differencing adds what stdout cannot show, and beats both raw image interleaving and execution-only feedback across all tasks."},
+      {name:"The result that reframes the field", text:"Agents on low-level primitives with multi-turn feedback (M4) not only surpass high-level single-turn (S2) but reach parity with high-level multi-turn (M3). The ceiling was the interaction budget, not the API abstraction."},
+      {name:"What survives sim-to-real", text:"The paper’s explanation for its small sim-to-real gap is that the transferred object is the code-as-action-space: the agent learns to compose perception and control tools that are fixed across simulation and reality, so nothing embodiment-specific has to cross the boundary."}
+    ],
+    equations: [
+      {
+        name:"Multi-turn code-as-policy loop (tiers M1–M4)",
+        formula:"c_t   ← LLM( task, API, {c_i, r_i}_{i<t}, d_t )\nr_t   ← Exec(c_t)            // stdout / stderr / return status\nd_t   ← VDM(o_{t-1}, o_t)    // structured language description of the change\nrepeat until verified success or turn budget exhausted",
+        meaning:"Each turn the agent emits a program, receives structured execution feedback and a language description of what visibly changed, and revises. The tiers differ only in which of r_t and d_t are available and in whether the API is high- or low-level."
+      },
+      {
+        name:"Visual differencing",
+        formula:"t = 1 :  d_1 = VLM_describe(o_1)\nt > 1 :  d_t = VLM_diff(o_{t-1}, o_t)",
+        meaning:"The first turn grounds the scene; every later turn reports only the delta. Converting pixels to structured text before they reach the coding agent outperforms handing it the raw frames."
+      },
+      {
+        name:"Parallel ensembled reasoning",
+        formula:"single-model : 9 samples from one model\nmulti-model  : 3 samples each from {GPT-5.2, Claude Opus 4.5, Gemini-3-Pro}\nselect by execution verification",
+        meaning:"Nine independent attempts with temperature variation, resolved by which program actually verifies in the environment — test-time compute spent on breadth rather than on longer single chains."
+      }
+    ],
+    novelty: [
+      "<strong>Abstraction as a controlled variable:</strong> separating what the agent contributes from what the primitive library contributes, which anecdotal code-as-policy demos conflate.",
+      "<strong>A real human-expert baseline (88.5% at S4):</strong> the comparison target is people writing the same low-level programs, not another model.",
+      "<strong>Visual differencing instead of raw frames:</strong> structured language deltas beat image interleaving for a coding agent.",
+      "<strong>Evidence that interaction beats abstraction:</strong> low-level plus multi-turn reaches high-level multi-turn parity, relocating the bottleneck from API design to interaction budget.",
+      "<strong>Code-as-action-space as the transfer mechanism:</strong> a 7B coder post-trained in sim holds up on real hardware because the tools are identical on both sides."
+    ],
+    comparison: {
+      headers:["Task", "Base 7B", "CaP-RL (sim)", "Human (sim)", "CaP-RL (real)", "Human (real)"],
+      rows:[
+        ["Cube Lift", "25%", "<strong>80%</strong>", "93%", "84%", "92%"],
+        ["Cube Stack", "4%", "<strong>44%</strong>", "73%", "76%", "84%"],
+        ["Spill Wipe", "30%", "<strong>93%</strong>", "100%", "—", "—"]
+      ]
+    },
+    evidence: [
+      "Human expert baseline: 88.5% average single-turn success at tier S4, from 7 authors with 2+ years of robotics experience. No frontier model among the 12 evaluated matches it.",
+      "Success rises monotonically with primitive abstraction, but M4 (low-level plus multi-turn with visual differencing) surpasses S2 and reaches parity with M3.",
+      "CaP-Agent0, operating only on low-level primitives, matches or exceeds human-written programs on 4 of 7 tasks.",
+      "BEHAVIOR mobile manipulation: CaP-Agent0 reaches 80% on Pick up Radio against a human 36%, and ties at 72% on Pick up Soda Can.",
+      "LIBERO-PRO against trained VLAs without any task-specific training data: libero-object under position perturbation 0.22 for CaP-Agent0 vs 0.17 for π0.5, and it is notably more robust to instruction variation where VLAs degrade under task perturbation.",
+      "CaP-RL over 100 sim trials: Cube Lift 25% → 80%, Cube Stack 4% → 44%, Spill Wipe 30% → 93%. Over 25 real trials on a Franka Emika: Cube Lift 84%, Cube Stack 76%."
+    ],
+    limitations: [
+      "There is no dedicated limitations section; the constraints below are read off the setup and appendices.",
+      "RL post-training was restricted to privileged state-based APIs at tier S1 to avoid compounding perception and control error, so behaviour under real perception noise is less established.",
+      "The 9 task-agnostic skill primitives were synthesised from S3 rollouts across the 12 models on the 7 Robosuite tasks, so their coverage is bounded by that seed set.",
+      "Evaluating all 12 models over broader task distributions is called prohibitively expensive, so the wider VLA comparisons lean on CaP-Agent0 alone rather than the full model sweep.",
+      "Real-world results are demonstrations on specific tasks and embodiments rather than a quantified sweep across conditions."
+    ],
+    takeaway: [
+      "<strong>Classification:</strong> a benchmark and framework paper that also ships two agents — the contribution is the controlled measurement, and CaP-Agent0 / CaP-RL are what the measurement implies.",
+      "<strong>Read it for:</strong> the tier design, the 88.5% human baseline, and the M4-reaches-M3 result, which is the strongest available argument that code-as-policy is interaction-limited rather than abstraction-limited.",
+      "<strong>Read alongside:</strong> ASPIRE, which takes CaP-Gym as its substrate and CaP-Agent0 as its baseline, and adds persistence across tasks."
+    ],
+    links: [
+      {label:"arXiv",url:"https://arxiv.org/abs/2603.22435"},
+      {label:"PDF",url:"https://arxiv.org/pdf/2603.22435"},
+      {label:"Code",url:"https://github.com/capgym/cap-x"}
+    ]
   }
 };

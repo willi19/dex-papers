@@ -140,12 +140,40 @@ A landscape survey of papers, separate from the main browser:
 - `overview.html` — grouped card grid (figure + tagline + links), with a
   **📄 Summary** button per card → its per-paper page, plus a button linking
   back and forth with `index.html`.
-- `overview/<key>.html` — one **report-style** summary page per paper.
+- `overview/<key>.html` — one **report-style** summary page per paper. This is
+  the **legacy** form: a hand-written standalone HTML file. ~40 of them exist and
+  they still work; do not write new ones (see "Writing a new summary" below).
 - `overview_assets/<key>.png` — the paper's teaser figure. **Tracked** (the repo
   is public, so these figure crops are published — that is a deliberate choice).
   `papers.js` `image` may also point here (`overview_assets/foo.png`) for papers
   whose figures cannot be hotlinked from arXiv / a project page / an OA
   publisher; a local crop is the only way those cards get a figure at all.
+
+### Writing a new summary (the current mechanism)
+
+**Do not add `summary:` to `papers.js` by hand, and do not write a new
+`overview/<key>.html`.** `paper_ideas.js` injects `p.summary` at load time and
+will overwrite whatever `papers.js` says. Three steps instead:
+
+1. Add a structured record to `window.DETAILED_PAPER_SUMMARIES` in
+   `paper_summaries.js`, keyed by a kebab-case slug. `overview/paper.html` is
+   the renderer and it does **not** guard most fields — these are all required:
+   `shortTitle`, `title`, `venue`, `badges`, `tldr`, `problem`, `output`,
+   `pipeline` (`{name, text}[]`), `equations` (`{name, formula, meaning}[]`),
+   `novelty`, `evidence`, `limitations`, `takeaway`, `links`
+   (`{label, url}[]`). Optional: `figure`, `figureCaption`, `methodDetails`,
+   `rewardBaseline`, `comparison` (`{headers, rows}`). `novelty` / `takeaway` /
+   `comparison` rows are inserted unescaped, so `<strong>` is allowed there.
+   For a systems paper with no real math, `equations` should restate the actual
+   algorithm or interaction loop as pseudocode — never invent notation.
+2. Register it in `window.PAPER_SUMMARIES` in `paper_ideas.js`:
+   `"<exact papers.js title>": "overview/paper.html?id=<slug>"`.
+3. Save the teaser to `overview_assets/<slug>.png`. The loader forces
+   `p.image = "overview_assets/<slug>.png"` for every `?id=` summary, so the
+   library card's figure breaks without it — a hotlinked `figure` in the record
+   does not cover this.
+
+`node scripts/summary-audit.mjs` reports total / completed / remaining.
 
 **HARD RULES for these pages:**
 

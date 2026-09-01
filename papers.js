@@ -4737,6 +4737,7 @@ window.PAPERS = [
   },
   {
     title: "Uni-Skill: Building Self-Evolving Skill Repository for Generalizable Robotic Manipulation",
+    image: "https://arxiv.org/html/2603.02623v1/x1.png",
     collection: "Agentic Control",
     file: null,
     arxiv: "https://arxiv.org/abs/2603.02623",
@@ -4757,6 +4758,7 @@ window.PAPERS = [
   },
   {
     title: "Autonomous Improvement of Instruction Following Skills via Foundation Models",
+    image: "https://arxiv.org/html/2407.20635v2/x1.png",
     collection: "Related: autonomous",
     file: null,
     arxiv: "https://arxiv.org/abs/2407.20635",

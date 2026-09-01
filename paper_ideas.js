@@ -88,7 +88,9 @@ window.PAPER_SUMMARIES = {
   "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation": "overview/paper.html?id=object-centric-motion-priors",
   "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation": "overview/paper.html?id=latentvla",
   "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment": "overview/paper.html?id=pkda",
-  "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "overview/paper.html?id=sns-grasp"
+  "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "overview/paper.html?id=sns-grasp",
+  "ASPIRE: Agentic Skills Discovery for Robotics": "overview/paper.html?id=aspire",
+  "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation": "overview/paper.html?id=capx"
 };
 
 // Metadata corrections discovered after the main database was assembled.
