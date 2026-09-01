@@ -183,6 +183,7 @@ window.PAPERS = [
   },
   {
     title: "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning",
+    summary: "overview/bidexhands.html",
     image: "https://ar5iv.labs.arxiv.org/html/2206.08686/assets/x2.png",
     collection: "Dex Manipulation", file: null, cites: 194,
     arxiv: "https://arxiv.org/abs/2206.08686", project: null, venue: "NeurIPS 2022",
@@ -191,6 +192,7 @@ window.PAPERS = [
   },
   {
     title: "DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning",
+    summary: "overview/dexmimicgen.html",
     image: "https://dexmimicgen.github.io/resources/pipeline.jpg",
     collection: "Dex Manipulation", file: null, cites: 146,
     arxiv: "https://arxiv.org/abs/2410.24185", project: null, venue: "ICRA 2025",
@@ -207,6 +209,7 @@ window.PAPERS = [
   },
   {
     title: "Learning Visuotactile Skills with Two Multifingered Hands",
+    summary: "overview/hato.html",
     image: "https://toruowo.github.io/hato/figures/overview.png",
     collection: "Dex Manipulation", file: null, cites: 131,
     arxiv: "https://arxiv.org/abs/2404.16823", project: null, venue: "arXiv 2024",
@@ -796,6 +799,7 @@ window.PAPERS = [
     title: "DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes",
     collection: "Landscape: bimanual-dex",
     file: null,
+    summary: "overview/dexgraspnet2.html",
     image: "https://raw.githubusercontent.com/PKU-EPIC/DexGraspNet2/main/figure/teaser.png",
     arxiv: "https://arxiv.org/abs/2410.23004",
     project: "https://github.com/PKU-EPIC/DexGraspNet2",
@@ -1296,6 +1300,7 @@ window.PAPERS = [
   },
   {
     title: "UniDexGrasp++: Improving Dexterous Grasping Policy Learning via Geometry-aware Curriculum and Iterative Generalist-Specialist Learning",
+    summary: "overview/unidexgrasppp.html",
     image: "https://pku-epic.github.io/UniDexGrasp++/images/teaser.jpg",
     collection: "Grasp Synthesis", file: null, cites: 169,
     arxiv: "https://arxiv.org/abs/2304.00464", project: "https://pku-epic.github.io/UniDexGrasp++/", venue: "ICCV 2023",
@@ -1344,6 +1349,7 @@ window.PAPERS = [
   },
   {
     title: "DexGraspVLA: A Vision-Language-Action Framework Towards General Dexterous Grasping",
+    summary: "overview/dexgraspvla.html",
     image: "https://dexgraspvla.github.io/assets/images/method.jpg",
     collection: "Grasp Synthesis", file: null, cites: 106,
     arxiv: "https://arxiv.org/abs/2502.20900", project: "https://dexgraspvla.github.io/", venue: "AAAI 2026",

@@ -9,6 +9,9 @@ PDFs + a self-contained local HTML browser. No build step, no server.
 dex_papers/
 ├── index.html          # local browser (open via file:// — double-click)
 ├── papers.js           # THE database — one object per paper (edit this to add papers)
+├── paper_status.js     # reading status — window.PAPER_STATUS, keyed by exact title
+├── paper_ideas.js      # one-line "key idea" per paper, keyed by exact title
+├── paper_summaries.js  # longer summary text, keyed by exact title
 ├── README.md           # human-facing index / tables
 ├── references.bib      # BibTeX (optional; not required by the browser)
 ├── *.pdf               # dexterous-manipulation reading list (repo root)
@@ -60,6 +63,39 @@ other file needs editing. The tag bar and counts are computed automatically.
    *manipulation skills* (RL policies: in-hand reorientation, bottle-cap, tool use)
    and dexterous-grasp *data collection* (AutoDex related work). Tag and place a
    paper by what it actually is; don't relabel to fit.
+
+## Reading status (`paper_status.js`)
+
+Which papers have actually been read lives in `paper_status.js`, keyed by the
+**exact `title` string** from `papers.js`:
+
+```js
+window.PAPER_STATUS = {
+  "Exact Paper Title": { read: true, note: "what was actually checked" }
+};
+```
+
+**`read` is a human judgement, not a derived flag.** In particular it is NOT
+"a summary page exists" — the two differ on purpose, and a paper with an
+`overview/<key>.html` page still counts as unread until someone says otherwise.
+Absent from the file == unread.
+
+Marking is done in the browser, not by hand-editing:
+
+- Each row carries a `✓ Read` / `○ Unread` badge; clicking it toggles.
+- Toggles are stored in `localStorage` under `dexpapers.read` — **this browser
+  only**, invisible to git and to other machines.
+- **⬇ export read list** (next to `✕ clear filters`) renders the merged result
+  as a complete `paper_status.js`. Paste it over the file and commit to make the
+  marks permanent. Curated `note` text is preserved on export; newly toggled
+  papers get a placeholder note worth replacing with something real.
+- The **Reading status** chip bar (`✓ read` / `○ unread`) filters the list, AND-ed
+  with the research-area and tag filters.
+
+Invariant worth re-checking after bulk edits: every `overview/<key>.html`
+(except `overview/paper.html`, which is a template, not a paper) is reachable
+from some entry's `summary:` field. It drifted once — 16 summaries were
+unreachable and 10 of those papers were missing from `papers.js` entirely.
 
 ## Collections (current)
 

@@ -31,6 +31,8 @@
   .chip.on { background: var(--chipOn); border-color: var(--chipOn); color: #fff; }
   .chip.on .n { color: #dce6ff; }
   .chip.coll { background: #20303f; }
+  .chip.stat { background: #2b2436; }
+  .chip.stat.on { background: #7a5af0; border-color: #7a5af0; }
   .chip.coll.on { background: var(--accent2); border-color: var(--accent2); }
   .zonetoggle { cursor: pointer; user-select: none; display: inline-flex; align-items: center; gap: 6px; }
   .zonetoggle:hover { color: var(--text); }
@@ -70,8 +72,21 @@
   .row-title { min-width: 0; }
   .row-title strong { display: block; color: var(--text); font-size: 13px; line-height: 1.3; }
   .row-meta { margin-top: 2px; color: var(--muted); font-size: 10.5px; }
-  .read-badge { display: inline-block; margin-left: 6px; padding: 0 5px; border: 1px solid #35664d;
-    border-radius: 999px; background: rgba(74,160,110,.1); color: #78d6a8; font-size: 9.5px; }
+  .read-badge { display: inline-block; margin-left: 6px; padding: 1px 6px; border: 1px solid #35664d;
+    border-radius: 999px; background: rgba(74,160,110,.1); color: #78d6a8; font-size: 9.5px;
+    font-family: inherit; cursor: pointer; }
+  .read-badge:hover { border-color: #4aa06e; }
+  .read-badge.off { border-color: #3a4150; background: transparent; color: var(--muted); }
+  .read-badge.off:hover { border-color: var(--accent); color: var(--accent); }
+  .exportbox { position: fixed; inset: 0; background: rgba(0,0,0,.65); display: none;
+    align-items: center; justify-content: center; z-index: 60; padding: 24px; }
+  .exportbox.open { display: flex; }
+  .exportbox .inner { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px; width: min(820px, 100%); max-height: 85vh; display: flex; flex-direction: column; gap: 8px; }
+  .exportbox textarea { flex: 1; min-height: 320px; background: #0e1218; color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px; padding: 10px; font-family: ui-monospace,
+    Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.45; resize: vertical; }
+  .exportbox .hint { color: var(--muted); font-size: 11.5px; }
   .row-area { display: inline-block; padding: 2px 7px; border: 1px solid #314765;
     border-radius: 5px; background: rgba(63,130,190,.07); color: var(--accent); font-size: 10px; }
   .row-idea { min-width: 0; color: #c5cad3; font-size: 11.5px; line-height: 1.4;
@@ -126,13 +141,23 @@
   <input class="search" id="search" type="search" placeholder="Search title, idea, method, or hardware…" autocomplete="off">
   <div class="barlabel">Research area</div>
   <div class="chips" id="collbar"></div>
+  <div class="barlabel">Reading status</div>
+  <div class="chips" id="statbar"></div>
   <div class="barlabel zonetoggle" id="zoneToggle"><span class="caret">▶</span> <span id="zoneLabel">More filters</span> <span class="zonesummary" id="zoneSummary"></span></div>
   <div id="filterZone">
     <div class="barlabel">Tags <span style="text-transform:none">(AND across categories · OR within)</span></div>
     <div id="filters"></div>
   </div>
-  <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span></div>
+  <div class="meta-row"><span class="clear" id="clear">✕ clear filters</span>
+    <span class="clear" id="exportRead">⬇ export read list</span></div>
 </header>
+<div class="exportbox" id="exportBox"><div class="inner">
+  <div class="hint">Paste this over <strong>paper_status.js</strong> and commit — that makes the marks
+    permanent and shared. Until then they live only in this browser.</div>
+  <textarea id="exportText" spellcheck="false" readonly></textarea>
+  <div class="meta-row"><span class="clear" id="exportCopy">copy</span>
+    <span class="clear" id="exportClose">close</span></div>
+</div></div>
 <section class="library-title">
   <h2>Choose a paper</h2>
   <p>Scan one paper per row and open its teaser only when you need it.</p>
@@ -155,8 +180,24 @@
   const P = window.PAPERS || [];
   const IDEAS = window.PAPER_IDEAS || {};
   const STATUS = window.PAPER_STATUS || {};
+  // "read" is a hand-curated judgement (paper_status.js), not "a summary page exists".
+  // Clicking the badge records an override in this browser only; "export read list"
+  // turns the result back into paper_status.js so it can be committed.
+  const LS_KEY = "dexpapers.read";
+  let LOCAL = {};
+  try { LOCAL = JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {}; } catch (e) { LOCAL = {}; }
+  const isRead = (p) => Object.prototype.hasOwnProperty.call(LOCAL, p.title)
+    ? !!LOCAL[p.title]
+    : !!(STATUS[p.title] && STATUS[p.title].read);
+  function setRead(p, val) {
+    const base = !!(STATUS[p.title] && STATUS[p.title].read);
+    if (val === base) delete LOCAL[p.title]; else LOCAL[p.title] = val;
+    try { localStorage.setItem(LS_KEY, JSON.stringify(LOCAL)); } catch (e) {}
+    render();
+  }
   const activeTags = new Set();
   const activeGroups = new Set();
+  const activeStatus = new Set();
   let query = "";
   const GROUP_ORDER = [
     "RL & Control",
@@ -220,6 +261,7 @@
   const grid = document.getElementById("grid");
   const filters = document.getElementById("filters");
   const collbar = document.getElementById("collbar");
+  const statbar = document.getElementById("statbar");
   const countEl = document.getElementById("count");
   const zoneToggle = document.getElementById("zoneToggle");
   const filterZone = document.getElementById("filterZone");
@@ -298,7 +340,7 @@
     p._group = researchGroupOf(p);
   });
   // counts
-  const tagCounts = {}, groupCounts = {}, yearCounts = {};
+  const tagCounts = {}, groupCounts = {}, yearCounts = {}, statCounts = { read: 0, unread: 0 };
   P.forEach(p => {
     (p.tags || []).forEach(t => {
       if (!HIDDEN_TAGS.has(t)) tagCounts[t] = (tagCounts[t]||0)+1;
@@ -325,7 +367,19 @@
   const openCats = new Set();   // expanded category panels
   const chipLabel = (t) => t.indexOf("year:") === 0 ? t.slice(5) : t;
 
+  const STAT_LABEL = { read: "✓ read", unread: "○ unread" };
   function renderBars() {
+    statCounts.read = 0; statCounts.unread = 0;
+    P.forEach(p => statCounts[isRead(p) ? "read" : "unread"]++);
+    statbar.innerHTML = "";
+    ["read", "unread"].forEach(st => {
+      if (!statCounts[st]) return;
+      const el = document.createElement("span");
+      el.className = "chip stat" + (activeStatus.has(st) ? " on" : "");
+      el.innerHTML = STAT_LABEL[st] + ' <span class="n">' + statCounts[st] + '</span>';
+      el.onclick = () => { activeStatus.has(st) ? activeStatus.delete(st) : activeStatus.add(st); render(); };
+      statbar.appendChild(el);
+    });
     collbar.innerHTML = "";
     allGroups.forEach(c => {
       const el = document.createElement("span");
@@ -375,6 +429,7 @@
 
   function match(p) {
     if (activeGroups.size && !activeGroups.has(p._group)) return false;
+    if (activeStatus.size && !activeStatus.has(isRead(p) ? "read" : "unread")) return false;
     // AND across categories, OR within a category
     const groups = {};
     for (const t of activeTags) { const c = catOf(t); (groups[c] = groups[c] || []).push(t); }
@@ -396,7 +451,7 @@
 
   function render() {
     renderBars();
-    const nActive = activeTags.size + activeGroups.size;
+    const nActive = activeTags.size + activeGroups.size + activeStatus.size;
     zoneSummary.textContent = nActive ? "· " + nActive + " active" : "";
     const list = P.filter(match);
     countEl.textContent = "· " + list.length + " / " + P.length;
@@ -411,9 +466,10 @@
       const imageLink = p.summary || p.project || p.arxiv || "#";
       item.innerHTML =
         '<div class="paper-row"><div class="row-title"><strong>'+p.title+'</strong>' +
-          (p.venue || status.read ? '<div class="row-meta">'+(p.venue || '')+
-            (status.read ? '<span class="read-badge" title="'+(status.note || 'Reviewed')+'">✓ Read</span>' : '')+
-          '</div>' : '') + '</div>' +
+          '<div class="row-meta">'+(p.venue || '')+
+            '<button class="read-badge'+(isRead(p) ? '' : ' off')+'" type="button">'+
+              (isRead(p) ? '✓ Read' : '○ Unread')+'</button>'+
+          '</div></div>' +
         '<span class="row-area">'+GROUP_LABELS[p._group]+'</span>' +
         '<div class="row-idea">'+idea+'</div>' +
         '<div class="row-links">' +
@@ -425,6 +481,9 @@
         '<div class="teaser-panel" hidden><a class="teaser-frame" href="'+imageLink+'"'+
           (imageLink === "#" || p.summary ? '' : ' target="_blank" rel="noopener"') +
           '><img loading="lazy" alt=""></a></div>';
+      const readBtn = item.querySelector(".read-badge");
+      readBtn.title = status.note || (isRead(p) ? "Marked read — click to unmark" : "Click to mark as read");
+      readBtn.onclick = (e) => { e.stopPropagation(); setRead(p, !isRead(p)); };
       const toggle = item.querySelector(".teaser-toggle");
       const panel = item.querySelector(".teaser-panel");
       toggle.onclick = () => {
@@ -451,7 +510,7 @@
     query = e.target.value.trim().toLowerCase(); render();
   });
   document.getElementById("clear").onclick = () => {
-    activeTags.clear(); activeGroups.clear(); query = "";
+    activeTags.clear(); activeGroups.clear(); activeStatus.clear(); query = "";
     document.getElementById("search").value = ""; render();
   };
 
@@ -471,6 +530,42 @@
   pdfModal.addEventListener("click", e => { if (e.target === pdfModal) closePdf(); });
   document.addEventListener("keydown", e => {
     if (e.key === "Escape" && pdfModal.classList.contains("open")) closePdf();
+  });
+
+  // ---- export the current read marks as a paper_status.js file ----
+  function buildStatusFile() {
+    const NL = String.fromCharCode(10);
+    const titles = P.filter(isRead).map(p => p.title).sort((a, b) => a.localeCompare(b));
+    const body = titles.map(t => {
+      const note = (STATUS[t] && STATUS[t].note) || "Marked read in the browser.";
+      return [
+        "  " + JSON.stringify(t) + ": {",
+        "    read: true,",
+        "    note: " + JSON.stringify(note),
+        "  }"
+      ].join(NL);
+    }).join("," + NL);
+    return "window.PAPER_STATUS = {" + NL + body + NL + "};" + NL;
+  }
+  const exportBox = document.getElementById("exportBox");
+  const exportText = document.getElementById("exportText");
+  document.getElementById("exportRead").onclick = () => {
+    exportText.value = buildStatusFile();
+    exportBox.classList.add("open");
+    exportText.focus(); exportText.select();
+  };
+  document.getElementById("exportCopy").onclick = () => {
+    exportText.select();
+    const done = (ok) => { const el = document.getElementById("exportCopy");
+      el.textContent = ok ? "copied ✓" : "press Ctrl+C"; setTimeout(() => el.textContent = "copy", 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(exportText.value).then(() => done(true), () => done(false));
+    else done(false);
+  };
+  const closeExport = () => exportBox.classList.remove("open");
+  document.getElementById("exportClose").onclick = closeExport;
+  exportBox.addEventListener("click", e => { if (e.target === exportBox) closeExport(); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && exportBox.classList.contains("open")) closeExport();
   });
 
   applyZone();
