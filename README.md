@@ -10,7 +10,7 @@ contact-rich / multi-finger 손 작업 (병뚜껑, 재배치, 도구 사용 등)
 
 | PDF | 랩/기업 | 방법론 | 하드웨어 | 대표 task | venue |
 |---|---|---|---|---|---|
-| `2024_Berkeley_TwistingLidsOffTwoHands.pdf` | UC Berkeley | sim-to-real RL | 양손 Allegro ×2 | 병뚜껑 열기 | CoRL 2025 |
+| `2024_Berkeley_TwistingLidsOffTwoHands.pdf` | UC Berkeley | sim-to-real RL | 양손 Allegro ×2 | 병뚜껑 열기 | CoRL 2024 |
 | `2023_MIT_VisualDexterity_SciRobotics.pdf` | MIT | sim RL + sim-to-real | 다지 손 + depth cam | in-hand reorientation | Science Robotics 2023 |
 | `2023_NVIDIA_DeXtreme.pdf` | NVIDIA | Isaac Gym RL | Allegro | 큐브 재배치 | ICRA 2023 |
 | `2023_Stanford_SequentialDexterity.pdf` | Stanford | policy chaining RL | Allegro | 도구 사용 + 장기작업 | CoRL 2023 |
