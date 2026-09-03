@@ -83,7 +83,7 @@ window.PAPER_IDEAS = {
 
 // Summary pages can be attached without editing the main paper database.
 window.PAPER_SUMMARIES = {
-  "Multi-Keypoint Affordance Representation for Functional Dexterous Grasping": "overview/paper.html?id=multi-keypoint-affordance&from=library",
+  "Multi-Keypoint Affordance Representation for Functional Dexterous Grasping": "overview/paper.html?id=multi-keypoint-affordance",
   "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors": "overview/afforddex.html",
   "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation": "overview/paper.html?id=object-centric-motion-priors",
   "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation": "overview/paper.html?id=latentvla",

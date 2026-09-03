@@ -8,10 +8,17 @@ PDFs + a self-contained local HTML browser. No build step, no server.
 ```
 dex_papers/
 ├── index.html          # local browser (open via file:// — double-click)
+├── overview.html       # card grid, generated from papers.js + groups.js
 ├── papers.js           # THE database — one object per paper (edit this to add papers)
+├── groups.js           # research-area taxonomy, shared by index.html and overview.html
+├── teasers.js          # teaser image resolution, shared by both views
 ├── paper_status.js     # reading status — window.PAPER_STATUS, keyed by exact title
 ├── paper_ideas.js      # one-line "key idea" per paper, keyed by exact title
-├── paper_summaries.js  # longer summary text, keyed by exact title
+├── paper_summaries.js  # structured summary records, keyed by slug
+├── overview/           # per-paper summary pages: paper.html renderer + legacy <key>.html
+├── overview_assets/    # <key>/teaser.png plus in-report figures (tracked)
+├── review/             # snapshots of rewritten summaries
+├── scripts/            # summary-audit.mjs, slop-check.mjs
 ├── README.md           # human-facing index / tables
 ├── references.bib      # BibTeX (optional; not required by the browser)
 ├── *.pdf               # dexterous-manipulation reading list (repo root)
@@ -171,11 +178,13 @@ will overwrite whatever `papers.js` says. Three steps instead:
    drop `equations` or restate the actual algorithm or interaction loop as
    pseudocode. Never invent notation.
 2. Register it in `window.PAPER_SUMMARIES` in `paper_ideas.js`:
-   `"<exact papers.js title>": "overview/paper.html?id=<slug>"`.
-3. Save the teaser to `overview_assets/<slug>.png`. The loader forces
-   `p.image = "overview_assets/<slug>.png"` for every `?id=` summary, so the
-   library card's figure breaks without it — a hotlinked `figure` in the record
-   does not cover this.
+   `"<exact papers.js title>": "overview/paper.html?id=<slug>"`. Nothing else may
+   follow the slug: the loader matches `?id=([^&]+)$`, so a trailing `&from=...`
+   silently skips the image fallback.
+3. Set `id: "<slug>"` on the paper's `papers.js` row and save the teaser to
+   `overview_assets/<slug>/teaser.png`. `teasers.js` builds the card image from
+   `p.id`, so a row without `id` falls back to the generated placeholder. In-report
+   figures go beside it as `overview_assets/<slug>/figNN_name.png`.
 
 `node scripts/summary-audit.mjs` reports total / completed / remaining.
 

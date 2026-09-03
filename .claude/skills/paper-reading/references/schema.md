@@ -1,8 +1,11 @@
 # Where the report goes
 
 The report is one object in `window.DETAILED_PAPER_SUMMARIES` in `paper_summaries.js`,
-keyed by a slug. `overview/paper.html?id=<key>` renders it. Nothing else needs
-editing, except the title-to-URL map in `paper_ideas.js` for a new paper.
+keyed by a slug. `overview/paper.html?id=<key>` renders it. A new paper needs two more
+edits: the title-to-URL map in `paper_ideas.js`
+(`"<exact papers.js title>": "overview/paper.html?id=<key>"`, nothing after the slug,
+because the loader matches `?id=([^&]+)$`), and `id: "<key>"` on the paper's `papers.js`
+row, which is what `teasers.js` builds the library card image from.
 
 ## Field map
 
@@ -59,8 +62,10 @@ beside the argument it carries.
 
 ## Figures
 
-- Teaser: `overview_assets/<key>.png`, referenced from the entry as
-  `../overview_assets/<key>.png` because the renderer sits in `overview/`.
+- Everything for one paper lives in `overview_assets/<key>/`.
+- Teaser: `overview_assets/<key>/teaser.png`, referenced from the entry as
+  `../overview_assets/<key>/teaser.png` because the renderer sits in `overview/`.
+  The same file is the library card image, resolved from `papers.js` `id`.
 - In-report figures: `overview_assets/<key>/figNN_name.png`, referenced as
   `../overview_assets/<key>/figNN_name.png`.
 - 200 DPI, cropped tight. `overview_assets/` is tracked, so these get published.
