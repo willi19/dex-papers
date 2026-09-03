@@ -2553,7 +2553,7 @@ window.PAPERS = [
     desc: "A CoRL 2024 paper on mobile aloha: learning bimanual mobile manipulation using low-cost whole-body teleoperation.",
     cites: null,
     paper: "https://dblp.org/rec/conf/corl/FuZF24",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2401.02117",
     project: null,
     venue: "CoRL 2024",
     tags: ["bimanual", "teleoperation"]
@@ -3581,12 +3581,13 @@ window.PAPERS = [
   },
   {
     title: "$\\mathcal{D}(\\mathcal{R}, \\mathcal{O})$ Grasp: A Unified Representation of Robot and Object Interaction for Cross-Embodiment Dexterous Grasping",
+    image: "https://arxiv.org/html/2410.01702v4/imgs/teaser4.png",
     collection: "Grasp Synthesis",
     file: null,
     desc: "Dexterous grasping is a fundamental yet challenging skill in robotic manipulation, requiring precise interaction between robotic hands and objects. In this paper, we present $\\mathcal{D}(\\mathcal{R}, \\mathcal{O})$ Grasp, a novel framework that models the interaction between the robotic hand in its grasping pose and the object, enabling broad...",
     cites: null,
     paper: "https://doi.org/10.1109/ICRA55743.2025.11127754",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2410.01702",
     project: null,
     venue: "ICRA 2025",
     tags: ["dexterous", "grasping", "hardware"]
@@ -4420,7 +4421,7 @@ window.PAPERS = [
     desc: "The inherent difficulty and limited scalability of collecting manipulation data using multi-fingered robot hand hardware platforms have resulted in severe data scarcity, impeding research on data-driven dexterous manipulation policy learning.",
     cites: null,
     paper: "https://doi.org/10.1609/aaai.v40i22.38874",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2511.10987",
     project: null,
     venue: "AAAI 2026",
     tags: ["dexterous", "imitation-learning", "hardware"]
@@ -4628,7 +4629,7 @@ window.PAPERS = [
     desc: "Trains a multi-task manipulation policy to interpret interleaved visual and language prompts using expert trajectories, pretraining, and task-level fine-tuning.",
     cites: null,
     paper: "https://proceedings.mlr.press/v235/li24x.html",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2310.09676",
     project: null,
     venue: "ICML 2024",
     tags: ["VLA", "language-grounding", "pretraining", "multi-task", "imitation-learning", "manipulation"]
@@ -4664,7 +4665,7 @@ window.PAPERS = [
     desc: "Adapts a visual foundation model to sequence imitation, joining generalizable scene understanding with long-horizon action prediction for multi-task 3D manipulation.",
     cites: null,
     paper: "https://proceedings.mlr.press/v235/zhang24c.html",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2405.19586",
     project: null,
     venue: "ICML 2024",
     tags: ["foundation-model", "imitation-learning", "vision", "multi-task", "long-horizon", "manipulation"]
@@ -4676,7 +4677,7 @@ window.PAPERS = [
     desc: "Learns unsupervised foundation policies in a Hilbert representation and evaluates zero-shot goal-conditioned control on robotic locomotion and manipulation benchmarks.",
     cites: null,
     paper: "https://proceedings.mlr.press/v235/park24g.html",
-    arxiv: null,
+    arxiv: "https://arxiv.org/abs/2402.15567",
     project: null,
     venue: "ICML 2024",
     tags: ["foundation", "self-supervised", "RL", "generalist", "benchmark", "manipulation"]
