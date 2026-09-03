@@ -32,6 +32,19 @@
 "Observation and action" 항목과 완전 중복. `output`은 **이 시스템이 남기는 산출물**
 (정책 하나, 데이터셋, 라이브러리…)만.
 
+### 1.4 하나의 인과 사슬을 필드마다 조각내서 반복함
+2026-09-03, v4를 다시 읽으면서 나온 사례. "exploration이 병목이다 → contact reward와 early
+termination으로 양쪽에서 제약한다 → ablation이 그걸 지지한다"는 **하나의 이야기**인데,
+`coreInsight` / `problem` / `designDecisions` / `evidence` / `whatMatters` / `novelty` /
+`takeaway` 일곱 필드에 조각으로 나뉘어 있었다. 1.1과 다른 점: 같은 문장을 반복한 게 아니라,
+인과의 각 마디를 서로 다른 섹션에 흩어 놓아서 독자가 매번 앞뒤를 재조립해야 했다.
+
+- 규칙: 문제와 통찰과 메커니즘과 근거가 **하나의 인과 사슬이면 한 문단으로 쓴다.**
+  "X가 어려우니 저자들은 Y를 했고, Z가 그것을 뒷받침한다."
+- 스키마의 필드 목록은 **쓸 자리 목록이지 채울 의무가 아니다.** 앞에서 한 말의 재진술밖에
+  못 채우는 필드는 지운다. 렌더러가 빈 필드를 건너뛰도록 고쳐 두었다.
+- `whatMatters` / `novelty`가 특히 위험하다. 둘 다 구조상 "앞에서 말한 것의 요약"이 되기 쉽다.
+
 ---
 
 ## 2. 반복해서 놓치는 정보
@@ -92,6 +105,8 @@ regrasping이고, 논문 자신이 진짜 dynamic의 예로 드는 건 throw-and
 
 **초고 후 redundancy 점검**
 - [ ] 핵심 아이디어 키워드를 grep해서 등장 횟수를 센다. 4번 이상이면 자른다.
+- [ ] 하나의 인과 사슬이 여러 필드에 조각나 있지 않은가? 합치고, 합쳐서 빈 필드는 지운다.
+- [ ] 각 필드를 논문에 쓸 게 있어서 채웠는가, 스키마에 있어서 채웠는가?
 - [ ] `problem`에 해법 어휘가 들어갔는가?
 - [ ] `output`이 `pipeline`을 요약하고 있지 않은가?
 - [ ] `limitations` 항목 중 다른 항목의 재진술인 것은 합친다.
@@ -117,3 +132,4 @@ regrasping이고, 논문 자신이 진짜 dynamic의 예로 드는 건 throw-and
 | 날짜 | 논문 | 주요 누락 | 주요 중복 |
 |---|---|---|---|
 | 2026-09-02 | Twisting Lids Off with Two Hands | 지표 정의(AD/TTF trade-off), reset의 위상, min의 의미, ArUco/ZeroMQ, "dynamic" 검증 | contact reward ×9, two-point ×5, large-network ×3 |
+| 2026-09-03 | Twisting Lids Off with Two Hands (v4 → v5) | Figure 5의 reward 정성 비교(gait constraint baseline), "first" 주장을 검증 안 했다는 명시 | exploration 서사가 7개 필드에 분산. `designDecisions`를 `evidence`로 흡수하고 `whatMatters` / `novelty` 삭제 |

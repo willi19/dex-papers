@@ -15,12 +15,16 @@
 | v0 | 2026-07-27 | `paper_insights.js` (삭제됨) | `b3fe343` 추가 → `beb87bb` 삭제 | [twisting-lids.v0.html](twisting-lids.v0.html) |
 | v1 | 2026-09-02 07:14 | `paper_summaries.js` | `0d1eef4` | [paper.html?id=twisting-lids-v1](paper.html?id=twisting-lids-v1) |
 | v2 | 2026-09-02 09:48 | `paper_summaries.js` | `9e8fc12` | [paper.html?id=twisting-lids-v2](paper.html?id=twisting-lids-v2) |
-| v3 (현행) | 2026-09-03 | `paper_summaries.js` | (this session) | [paper.html?id=twisting-lids-v3](paper.html?id=twisting-lids-v3) |
+| v3 | 2026-09-03 | `paper_summaries.js` | `9e9a5c3` | [paper.html?id=twisting-lids-v3](paper.html?id=twisting-lids-v3) |
+| v4 | 2026-09-03 | `paper_summaries.js` | `a5602ab` | [paper.html?id=twisting-lids-v4](paper.html?id=twisting-lids-v4) |
+| v5 (현행) | 2026-09-03 | `paper_summaries.js` | (this session) | [paper.html?id=twisting-lids-v5](paper.html?id=twisting-lids-v5) |
 
-- **v0** — 한국어 4필드(`problem`/`idea`/`delta`/`basis`) 노트. `overview/` 바깥에 있던 최초 버전.
-- **v1** — 첫 report-style 요약. `overview/paper.html?id=twisting-lids`로 렌더링됨.
-- **v2** — 사람이 직접 읽은 노트와 대조해 개정.
-- **v3** — `stop-slop` 스킬을 적용해 문장만 다시 쓴 현행본.
+- **v0**: 한국어 4필드(`problem`/`idea`/`delta`/`basis`) 노트. `overview/` 바깥에 있던 최초 버전.
+- **v1**: 첫 report-style 요약. `overview/paper.html?id=twisting-lids`로 렌더링됨.
+- **v2**: 사람이 직접 읽은 노트와 대조해 개정.
+- **v3**: `stop-slop` 스킬을 적용해 문장만 다시 씀.
+- **v4**: `paper-reading` 스킬로 PDF와 프로젝트 페이지부터 다시 읽음. 본문 그림 3장, 설계 결정 표 추가.
+- **v5**: 같은 독해를 구조만 다시 쓴 현행본.
 
 v1 → v2 차이:
 
@@ -41,7 +45,21 @@ v2 → v3 차이 (내용 아닌 문장):
 - 수동태와 무생물 주어를 사람 주어로 교체
 - 검사: `node scripts/slop-check.mjs twisting-lids`
 
+v4 → v5 차이 (내용 아닌 구조):
+
+- 숫자 multiset이 v4와 완전히 같다 (기계로 대조함). 새로 만든 숫자도, 없앤 숫자도 없다.
+- exploration 서사가 v4에서는 `coreInsight` / `problem` / `designDecisions` / `evidence` /
+  `whatMatters` / `novelty` / `takeaway` 일곱 군데에 나뉘어 있었다. v5는 `coreInsight` 한 문단에
+  문제 → 두 메커니즘 → ablation을 인과로 이어 붙이고, 나머지는 뒤에서 참조만 한다.
+- `designDecisions` 표를 없애고 각 결정을 `evidence`의 인과 문단으로 흡수했다
+  ("배포 정책이 시뮬레이터 상태를 못 읽으니 critic에만 준다 → 없애면 30.00 s 잡고 18.67°").
+- `whatMatters`와 `novelty` 삭제. 둘 다 앞에서 한 말의 재진술이었다.
+- 새로 넣은 것: Figure 5의 세 reward 정성 비교(gait constraint baseline), 그리고 논문의 "first"
+  주장을 이 요약이 검증하지 않았다는 명시.
+- 렌더러(`overview/paper.html`, `review/paper.html`)가 모든 섹션을 optional로 다루도록 고쳤다.
+  그 전에는 필드를 빼면 페이지가 깨져서, "논문에 없으면 비운다"가 실행 불가능했다.
+
 ## 리뷰에 대한 리뷰
 
-[SUMMARY_REVIEW_NOTES.md](SUMMARY_REVIEW_NOTES.md) — 위 v1 → v2 개정에서 드러난 redundancy 패턴과
+[SUMMARY_REVIEW_NOTES.md](SUMMARY_REVIEW_NOTES.md): 위 v1 → v2 개정에서 드러난 redundancy 패턴과
 반복되는 blind spot을, 새 요약을 쓸 때 쓰는 체크리스트로 정리한 것. 새 사례가 나오면 여기에 추가한다.

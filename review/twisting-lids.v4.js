@@ -1,4 +1,4 @@
-// Twisting Lids Off with Two Hands — review v4 (2026-09-03, source-read rewrite; current)
+// Twisting Lids Off with Two Hands — review v4 (2026-09-03, source-read rewrite; superseded by v5)
 // Written with the paper-reading skill against the arXiv PDF (2403.02338v2, 16 pages) and the
 // project page. Figures cropped from pages 3, 4 and 5 at 200 DPI into overview_assets/twisting-lids/.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.

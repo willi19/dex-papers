@@ -72,6 +72,7 @@
   <script src="twisting-lids.v2.js"></script>
   <script src="twisting-lids.v3.js"></script>
   <script src="twisting-lids.v4.js"></script>
+  <script src="twisting-lids.v5.js"></script>
   <script>
     (() => {
       const VERSIONS = [
@@ -83,8 +84,10 @@
          meta:"2026-09-02 09:48 · paper_summaries.js · 9e8fc12 · 사람 노트와 대조해 개정. em dash 42개, -ly 부사 37개"},
         {id:"twisting-lids-v3", label:"v3",
          meta:"2026-09-03 · 9e9a5c3 · stop-slop 문체 교정만. 숫자 99개 전부 v2와 동일"},
-        {id:"twisting-lids-v4", label:"v4 (current)",
+        {id:"twisting-lids-v4", label:"v4",
          meta:"2026-09-03 · paper-reading 스킬로 PDF부터 다시 읽음. 그림 3장 본문 삽입, 설계 결정 표, 수식 4개 → 2개"},
+        {id:"twisting-lids-v5", label:"v5 (current)",
+         meta:"2026-09-03 · 같은 독해를 구조만 다시 씀. exploration 서사를 한 곳으로, 설계 결정 표를 evidence 인과 문단에 흡수, designDecisions/whatMatters/novelty 삭제. 숫자 multiset 은 v4 와 동일"},
       ];
       const app = document.getElementById("app");
       const tabs = document.getElementById("tabs");
@@ -92,6 +95,9 @@
       const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
       const list = items => "<ul>" + items.map(x => "<li>" + x + "</li>").join("") + "</ul>";
       const block = (title, body, cls="") => '<section class="block '+cls+'"><h2>'+esc(title)+'</h2>'+body+"</section>";
+      // Optional fields, matching overview/paper.html: a snapshot only fills the sections it has.
+      const maybe = (title, items, cls="") => (items && items.length) ? block(title, list(items), cls) : "";
+      const grid = (a, b) => (a && b) ? '<div class="grid">'+a+b+"</div>" : (a || b);
 
       function render(id) {
         const p = (window.DETAILED_PAPER_SUMMARIES || {})[id];
@@ -115,9 +121,11 @@
         if (p.figure) html += '<img class="figure" src="'+esc(p.figure)+'" alt="'+esc(p.shortTitle)+' overview"><p class="caption">'+esc(p.figureCaption || "Figure from the official paper.")+"</p>";
         html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+esc(p.tldr)+"</p></section>";
         if (p.coreInsight) html += block("Core insight", list(p.coreInsight), "insight");
-      html += '<div class="grid">'+block("Problem",list(p.problem))+block("Output",list(p.output))+"</div>";
-        html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");
-        if (p.methodDetails) {
+        html += grid(maybe("Problem", p.problem), maybe("Output", p.output));
+        if (p.pipeline && p.pipeline.length) {
+          html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");
+        }
+        if (p.methodDetails && p.methodDetails.length) {
           html += block("Method details",p.methodDetails.map(x => "<h3>"+esc(x.name)+'</h3><p>'+esc(x.text)+"</p>").join(""));
         }
         const figures = p.figures || [];
@@ -138,7 +146,7 @@
               d.motivation+"</td><td>"+d.mechanism+"</td><td>"+(d.evidence || "<em>none reported</em>")+"</td></tr>").join("")+
             "</tbody></table>");
         }
-      const eqs = p.equations.map((eq,i) => {
+        const eqs = (p.equations || []).map((eq,i) => {
           let s = "<h3>"+(i+1)+" · "+esc(eq.name)+'</h3><pre class="eq">'+esc(eq.formula)+"</pre>";
           if (eq.meaning) return s + '<p class="meaning"><strong>Meaning:</strong> '+esc(eq.meaning)+"</p>";
           s += '<p class="meaning"><strong>Intuition:</strong> '+esc(eq.intuition)+"</p>";
@@ -147,22 +155,22 @@
           if (eq.consequence) s += '<p class="meaning"><strong>Consequence:</strong> '+esc(eq.consequence)+"</p>";
           return s;
         }).join("");
-        html += block("Key equations",eqs);
-        html += (p.whatMatters ? block("What actually matters",list(p.whatMatters)) : "")+block("What is actually new",list(p.novelty));
+        if (eqs) html += block("Key equations",eqs);
+        html += maybe("What actually matters", p.whatMatters)+maybe("What is actually new", p.novelty);
         if (p.rewardBaseline) html += block("Reward baseline vs. special term",list(p.rewardBaseline));
         if (p.comparison) {
           html += block("Comparison",'<table><thead><tr>'+p.comparison.headers.map(x=>"<th>"+esc(x)+"</th>").join("")+"</tr></thead><tbody>"+
             p.comparison.rows.map(row=>"<tr>"+row.map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("")+"</tbody></table>");
         }
-        html += '<div class="grid">'+block("Reported evidence",list(p.evidence))+block("Limitations",list(p.limitations))+"</div>";
-        html += block("Takeaway",list(p.takeaway),"takeaway")+(p.researchNotes ? block("Research notes",list(p.researchNotes),"notes") : "")+"</div>";
-        html += '<div class="links">'+p.links.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label)+" ↗</a>").join("")+"</div>";
+        html += grid(maybe("Reported evidence", p.evidence), maybe("Limitations", p.limitations));
+        html += maybe("Takeaway", p.takeaway, "takeaway")+maybe("Research notes", p.researchNotes, "notes")+"</div>";
+        if (p.links && p.links.length) html += '<div class="links">'+p.links.map(x=>'<a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.label)+" ↗</a>").join("")+"</div>";
         html += '<p class="note">스냅샷 사본입니다. 현행 내용은 루트 paper_summaries.js 를 보세요.</p>';
         app.innerHTML = html;
       }
 
       const q = new URLSearchParams(location.search).get("id");
-      render(q && (window.DETAILED_PAPER_SUMMARIES || {})[q] ? q : "twisting-lids-v4");
+      render(q && (window.DETAILED_PAPER_SUMMARIES || {})[q] ? q : "twisting-lids-v5");
     })();
   </script>
 </body>
