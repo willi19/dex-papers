@@ -639,103 +639,184 @@ window.DETAILED_PAPER_SUMMARIES = {
     badges: ["sim-to-real RL", "bimanual", "Allegro × 2", "exploration shaping", "zero-shot transfer"],
     figure: "../overview_assets/twisting-lids.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that differ in shape, size, mass, material and colour.",
-    tldr: "Two multi-fingered hands hold a bottle in mid-air and keep unscrewing its lid. One hand stabilises the body while the other grips the cap, rotates it, releases and grips again. Nobody demonstrates any of this: PPO in Isaac Gym learns the whole behaviour. The authors spend the paper on making that search tractable, and they attack it from two sides, with a keypoint contact reward that says which fingertips belong on the body and which on the lid, and early-termination rules that kill rollouts stuck in the failure modes exploration keeps rediscovering. Two supporting decisions carry the transfer. A brake link fakes the static friction of a threaded joint the simulator cannot model, and the object representation shrinks to two 3D points (body centre, lid centre) from SAM + XMem masks with noisy depth. On the best real bottle the policy twists 946° in 30 s, where every baseline manages single digits.",
+    tldr: "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, with no demonstrations anywhere in the pipeline. The authors argue that the barrier is exploration rather than control: across 32 finger DoF almost every interaction mode RL discovers is a dead end, and nothing tells it which ones are not. So they constrain which fingertips belong on which part of the object and terminate the rollouts that have entered a known trap, leaving a plain RL objective to reward turning the lid. A policy trained on simulated cylinders transfers zero-shot and turns the best real bottle 946° in 30 s, where every baseline stays in single or double digits.",
+    coreInsight: [
+      "The hard part of bimanual multi-part manipulation is choosing contact modes, not computing controls. Two hands can hold an articulated object in an enormous number of ways and almost none of them permit twisting, so exploration spends its budget in configurations from which the task is unreachable.",
+      "The fix is to put the prior on contact structure. Say which surface each fingertip belongs on, and delete the rollouts that have fallen into a trap. <em>Interpretation:</em> these are the same intervention from two directions, one naming where to go and one deleting where not to go, and the paper treats them as separate contributions.",
+      "Everything else can be as coarse as the task tolerates. The object is two points, the threads are a friction approximation, and the policy is a small MLP."
+    ],
     problem: [
-      "The object is <em>multi-part and articulated</em>: two near-cylindrical rigid bodies joined by a continuous revolute joint. Both hands hold it in the air, with 32 finger DoF to coordinate and no table or fixture to lean on. The policy has to rotate the lid as far as it can while the object stays in the hands.",
-      "Three phases have to happen, and nobody tells the policy about any of them. Catch the dropped object and reorient it in-grasp into a workable pose. Move the hand nearer the cap into a finger placement that can start the rotation. Then coordinate both hands so the object survives the moment the twisting hand lets go to re-grip.",
-      "That last moment decides the task. Every cycle breaks the contact set and rebuilds it, and during each release one hand holds the whole object. Most interaction modes RL stumbles into lead nowhere: the bottle wedges between fingers, or gets pinched low where no finger motion recovers it into the palm. Raw exploration spends its budget on rollouts that teach nothing.",
-      "Simulation blocks the other route. Physics engines still have no good model of static friction inside a threaded revolute joint, and the authors report that tuning friction between two revolute-jointed bodies does not reach the realism they need.",
-      "For tasks this contact-rich the field reaches for demonstrations: build a teleoperation rig, cover the task distribution, imitate. That works with parallel jaws. With two multi-fingered hands it stalls, because nobody has collected high-quality bimanual multi-finger demonstrations, and the available gloves, exoskeletons and vision-based retargeting rigs each give up latency, accuracy, dexterity or cost.",
-      "Reusing the reward recipes from single-hand in-hand reorientation fails too. Those rewards describe one hand rotating a single-part rigid body, and they say nothing about which surface each finger belongs on."
+      "The object is <em>multi-part and articulated</em>: two near-cylindrical rigid bodies on a continuous revolute joint. Both hands hold it in the air, with 32 finger DoF to coordinate and no table or fixture to lean on. The lid has to turn as far as possible while the object stays in the hands.",
+      "Three phases have to happen and nobody tells the policy about any of them. Catch the dropped object and reorient it in-grasp into a workable pose. Move the second hand into a finger placement that can start the rotation. Then coordinate both hands so the object survives the moment the twisting hand lets go to re-grip.",
+      "That last moment decides the task. Every cycle breaks the contact set and rebuilds it, and during each release one hand holds the whole object. Most interaction modes RL stumbles into lead nowhere: the bottle wedges between fingers, or gets pinched low where no finger motion recovers it into the palm.",
+      "Simulation blocks the other route. Modelling friction and contact in a threaded revolute joint has been a long-standing difficulty in robotic simulation, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need.",
+      "For tasks this contact-rich the field reaches for demonstrations. With parallel jaws that works. With two multi-fingered hands it stalls, because high-quality bimanual multi-finger demonstration data does not exist, and the available gloves, exoskeletons and vision-based retargeting rigs each give up latency, accuracy, dexterity or cost.",
+      "Reward recipes carried over from single-hand in-hand reorientation describe one hand rotating a single-part rigid body. They say nothing about which surface each finger belongs on."
     ],
     output: [
       "One RL policy. It trains in simulation on synthetic cylinders, transfers zero-shot, and runs at 10 Hz on two Allegro hands that UR5e arms hold in fixed poses.",
       "Behaviour the authors never scripted: in-grasp reorientation into a stable holding pose, a stabilising grasp by one hand, and a repeated grip-rotate-release gait by the other.",
-      "Generalisation to 10 novel household containers (peanut butter, Nutella, gummy jars, hair mask, earplug tubes). On some of them the continuous twisting takes the lid <em>off</em>, which nobody trained the policy to do."
+      "A skill that reaches 10 novel household containers. On some of them the continuous twisting takes the lid <em>off</em>, a task outside the training objective."
     ],
     pipeline: [
-      {name:"Brake-link object model", text:"The simulated bottle URDF carries three parts: a base link, a lid link on a continuous revolute joint, and a brake link that a prismatic joint presses against the lid. That normal force produces the frictional resistance of a screwed-on cap, and no thread geometry enters the simulation. It stays cheap enough for large-scale parallel RL, and the authors report it as the one approach they found that reproduces the static friction well."},
-      {name:"Initialisation without a grasp", text:"Both hands start in a canonical palms-up pose with Gaussian noise on the joint angles, and the simulator drops the object onto the fingers with randomised translation and rotation. The authors hand the policy no stable grasp to begin from. The choice is deliberate: the policy has to learn in-grasp reorientation into a stable holding pose before any twisting can start."},
-      {name:"Reset strategy as exploration pruning", text:"Two early-termination rules, which the paper introduces to circumvent the dimensionality of the exploration problem. Reset when the hands fail to bring the bottle into a twist-ready pose inside a short time limit. Reset when the bottle's z-position drops below a threshold, the signature of the pinch-too-low trap where the fingertips hold the object somewhere they cannot recover it from. Neither rule rewards anything. They stop the sampler from paying for rollouts that cannot teach."},
-      {name:"Observation and action", text:"The policy sees hand joint positions, the previous commanded targets, and the estimated 3D centres of bottle base and lid. It emits relative joint targets: clipped to [-1, 1], scaled by 0.1, smoothed by an exponential moving average with coefficient 0.75, then integrated into the PD controller's target. That smoothing keeps real fingers from chattering against a held object."},
-      {name:"Reward", text:"Twisting reward (lid rotation per step) supplies the objective. The keypoint finger contact reward supplies the structure. A pose reward keeps the bottle axis aligned with a target direction, and work and action penalties suppress jerky motion. The weights run 2.5 / 500.0 / 20 / -0.001 / -1.0, which puts the contact term two orders of magnitude above the objective it serves."},
-      {name:"Training", text:"PPO with an asymmetric critic. The value network sees privileged state that the policy never gets: joint velocities, all fingertip and contact keypoint positions, object orientation and velocities, the applied random forces, brake torque, and the mass, friction and shape randomisation scales. Domain randomisation covers object mass (0.03 to 0.1 kg), friction, ±5% shape scale, PD gains, random pushes, and noise on observations, actions and frame lag."},
-      {name:"Real-time perception", text:"Segment Anything produces two masks (body, lid) on the first frame of each trajectory, and XMem tracks them from there. Noisy depth from one RealSense D435 lifts the mask centres into 3D, which gives the two points the policy trained on, at 10 Hz to match the control loop."},
-      {name:"Systems plumbing", text:"Extrinsics come from one marker tag, through a trick worth stealing. The authors model the same tag in the simulation scene, which gives them corner coordinates in the camera frame and the world frame as matched pairs, so the extrinsic matrix solves in one step with no checkerboard sweep. ZeroMQ carries messages between hands, camera and workstation to hold the 10 Hz loop. Each real trial starts from a tabulated canonical finger pose, with a person placing the object onto the upturned fingers."}
+      {name:"Object model in simulation", text:"The bottle URDF has three links: a base, a lid on a continuous revolute joint, and a brake link that a prismatic joint presses against the lid. Bodies range from 82 to 86 in diameter and 55 to 67 in height with caps of 62 to 70 by 20 to 33, in the units the paper prints. Training runs in Isaac Gym."},
+      {name:"Episode start", text:"Both hands hold a canonical palms-up pose with Gaussian noise on the joint angles. The simulator drops a bottle onto the fingers with randomised translation and z-rotation. No stable grasp exists at t=0."},
+      {name:"Termination", text:"An episode resets when the hands fail to bring the bottle into a twist-ready pose inside a short time limit, and when the bottle's z-position falls below a threshold."},
+      {name:"Observation and action", text:"The policy reads hand joint positions, the previous commanded targets, and the estimated 3D centres of base and lid. It emits relative joint targets, clipped to [-1, 1], scaled by 0.1, smoothed by an exponential moving average with coefficient 0.75, then added to the PD controller's target."},
+      {name:"Reward", text:"Four terms with weights 2.5 / 500.0 / 20 / -0.001 and -1.0: lid rotation per step, the keypoint finger contact term, a pose term holding the bottle axis against a fixed direction, and work and action penalties."},
+      {name:"Training", text:"PPO with an asymmetric critic (clip 0.2, horizon 16, γ 0.99, GAE 0.95, adaptive learning rate at KL 0.016). The value network reads privileged state the policy never sees: joint velocities, fingertip and contact keypoint positions, object orientation and velocities, applied random forces, brake torque, and the mass, friction and shape randomisation scales. Domain randomisation spans object mass 0.03 to 0.1 kg, friction 0.5 to 1.5, ±5% shape, PD gains, random pushes, and noise on observations, actions and frame lag."},
+      {name:"Perception at deployment", text:"Segment Anything produces a body mask and a lid mask on the first frame of a trajectory and XMem tracks them afterwards. Noisy depth from one RealSense D435 lifts the two mask centres into 3D at 10 Hz."},
+      {name:"Systems plumbing", text:"Camera extrinsics come from a single marker tag that the authors also model in the simulation scene, which yields corner coordinates in the camera and world frames as matched pairs. ZeroMQ carries messages between hands, camera and workstation. Each real trial starts from a tabulated canonical finger pose with a person placing the object onto the upturned fingers."}
+    ],
+    figures: [
+      {
+        src:"../overview_assets/twisting-lids/fig02_object_model.png",
+        title:"Figure 2: the object model and the four object sets",
+        shows:"Panel A is the simulated bottle: a base link, a lid link on a revolute joint, and the brake link that a prismatic joint drives along the same axis. B is the simulated training set, C the 3D-printed evaluation bottles, D the household containers.",
+        read:"Follow the two joint labels in A. The revolute joint A-B is the degree of freedom the policy turns. The prismatic joint A-C is the one the authors added.",
+        matters:"It makes the central simulation trick inspectable. There is no thread geometry anywhere, only a third body pressed against the lid, and the resulting normal force stands in for a screwed cap.",
+        supports:"The physical modelling contribution, and the size of the transfer gap: B is four plain cylinders, D is a shelf of jars that differ in shape, size, mass, material and mechanism."
+      },
+      {
+        src:"../overview_assets/twisting-lids/fig03_perception_reward.png",
+        title:"Figure 3: what the policy sees and what the reward asks for",
+        shows:"Left, the deployment perception stack from RGB frame to two segmentation masks to a depth reading. Right, the three task rewards drawn onto the hands, with the reference contact point sets marked in green on the body and red on the lid.",
+        read:"On the right, yellow arrows mark the finger contact term pulling fingertips towards their assigned point set, the white arrow marks lid rotation, and the blue arrow marks the axis the pose term holds.",
+        matters:"The green and red point clouds are the fingertip-to-surface assignment made visible. The reward is not asking for a motion, it is asking for a contact configuration, and the picture shows how coarse that specification is.",
+        supports:"The reward design contribution and the claim that a two-point object representation carries deployment."
+      },
+      {
+        src:"../overview_assets/twisting-lids/fig04_ablations.png",
+        title:"Figure 4: the contact reward intensity sweep and the vision ablation",
+        shows:"Training curves over 5 seeds. Top row single-object training, bottom row multi-object. The left half varies the contact reward intensity across disabled, reduced to 50%, and full. The right half compares the full policy against a proprioception-only policy.",
+        read:"x-axis is environment steps, up to 2e8 and 3e8. The AD curves are averaged per execution step rather than reported in degrees, so the values are small and only the ordering matters. Shading is one standard deviation.",
+        matters:"The disabled curve stays flat on the floor for the whole run while the 50% curve lands between it and the full method. That ordering is the strongest causal evidence in the paper, and it shows a graded effect rather than a threshold.",
+        supports:"The claim that exploration, not control, is what blocks this task."
+      }
+    ],
+    designDecisions: [
+      {
+        decision:"Brake link",
+        problem:"A threaded joint's static friction has no faithful and cheap model in the simulator.",
+        motivation:"Large-scale parallel RL needs an object model that runs at full speed, and a cap with no resistance is a different task.",
+        mechanism:"A prismatic joint presses a third link against the lid; the normal force supplies the resistance.",
+        evidence:"<em>None.</em> No ablation trains against an alternative friction model. The authors report it as the only approach they found that simulates the static friction well."
+      },
+      {
+        decision:"Keypoint finger contact reward",
+        problem:"Exploration wanders through contact modes from which twisting is unreachable.",
+        motivation:"Twisting demands a specific holding pattern, and the authors argue RL cannot find it inside the training budget without being told.",
+        mechanism:"Each fingertip is scored by its distance to the nearest point in the set sampled on its assigned surface, base for one hand and lid for the other.",
+        evidence:"Figure 4, 5 seeds. Disabled leaves the policy on the floor; reduced to 50% lands in between. Intensity correlates with both sample efficiency and final performance."
+      },
+      {
+        decision:"Two early-termination rules",
+        problem:"The same dead-end modes get rediscovered every rollout.",
+        motivation:"Introduced to circumvent the dimensionality of the search, in the paper's own words.",
+        mechanism:"Reset on failure to reach a twist-ready pose in time, and on the bottle's height dropping, which is the signature of the pinch-too-low trap.",
+        evidence:"<em>None.</em> No ablation removes them. This is asserted, and it sits beside the contact reward as the paper's other exploration claim."
+      },
+      {
+        decision:"Two-point object representation",
+        problem:"Perception has to run at the control rate and survive objects the policy never trained on.",
+        motivation:"The authors expected the task to need precise object state and shape, and report their surprise that it does not. Mask centres are what segmentation and tracking can deliver at 10 Hz.",
+        mechanism:"Mask centres for body and lid, lifted to 3D by noisy depth.",
+        evidence:"Partial. No-Vis reaches 1.33° against 946.33° on the blue bottle, so <em>some</em> object state is necessary. Nothing compares two points against a denser representation, so sufficiency rests on the full system working."
+      },
+      {
+        decision:"Asymmetric critic",
+        problem:"The policy has to transfer, so it cannot read privileged simulator state.",
+        motivation:"Value learning can use that state without contaminating the deployed network.",
+        mechanism:"Privileged observations enter the value network only.",
+        evidence:"Table 1. No-Asym reaches 18.67° AD at a full 30.00 s TTF."
+      },
+      {
+        decision:"Small actor network",
+        problem:"Capacity buys simulation performance that does not survive transfer.",
+        motivation:"The authors read the failure as overfitting to the simulator.",
+        mechanism:"A three-layer MLP of 256-256-128 for the actor against 512-512-512 for the critic, which never has to transfer.",
+        evidence:"Table 1. The enlarged actor reaches 2.00° AD on the robot. The authors state it matched the full policy in simulation, without a table."
+      }
     ],
     methodDetails: [
-      {name:"Why the reward samples points and takes a min", text:"The reward samples a finite point set on the base and another on the lid, then scores each fingertip by its distance to the <em>nearest</em> point in its set. That discretisation does more work than the formula shows. A continuous be-in-contact-somewhere term would carve one smooth basin over the whole surface. A min over K sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface assignment discrete, so the gradient pulls towards one configuration instead of the average of all valid ones. The paper skips this analysis and reports only that the intensity of the term correlates with sample efficiency and final performance. It stays the most plausible account of why so blunt a term unlocks the task."},
-      {name:"Reward and reset are one idea from two directions", text:"Both mechanisms shrink the search, and reading one without the other misstates the paper. The contact reward supplies a prior about where the fingers should end up. The termination rules delete the trajectories where they will not. Neither counts as a control insight. Both are exploration engineering, and the paper's claim is that for bimanual multi-part manipulation the difficulty lives there."},
-      {name:"What the metrics measure, and what they let a policy hide", text:"The paper reports no success rate. Angular Displacement (AD) counts the total degrees the lid turned. Time-to-Fail (TTF) measures the interval from the object being held until it slips or becomes lodged, capped at the 30 s trial. Velocity is AD/TTF. AD and TTF trade off against each other, so you have to read them as a pair. A policy that grips the bottle and never turns it scores a full 30.00 s TTF with AD near zero, which is the No-Asym and Large signature in the table. Holding is the easy half of this task, and the metric pair keeps that from reading as success."},
-      {name:"Two points suffice, and the vision cannot be dropped", text:"The authors expected a fine-grained contact task to need dense object geometry, and a two-point representation surprised them. The converse holds as well. The proprioception-only policy, which works for single-hand rotation through implicit tactile sensing in prior work, collapses here: 1.33° AD on the blue bottle against 946.33°. Joint angles alone do not say where the lid sits relative to the body."},
-      {name:"A bigger network transfers worse", text:"The enlarged actor matches the full policy in simulation and fails on the robot (2.00° AD on the blue bottle). The authors read that as overfitting to simulation and treat policy capacity as a sim-to-real hyperparameter for contact-rich tasks. The final actor is a three-layer MLP (256-256-128). The critic, which never has to transfer, runs 512-512-512."},
-      {name:"How dynamic is this?", text:"The paper describes the task as requiring dynamic dexterity, and that claim deserves a closer look. The motion is quasi-static regrasping. The paper's own contrast case for dynamic bimanual dexterity is throw-and-catch, which it separates out as brief rather than sustained. What the task demands is continuous coordination through repeated contact transitions, and the difficulty comes from the object being unsupported at every one of them, not from speed."},
-      {name:"The setup is the hard one by choice", text:"An appendix retrains the same system on bottles held vertically, changing the initialisation and switching perception off. The authors note that the horizontal setup in the main text is harder, because holding the object mid-air against gravity is where the common failure lives: stabilisation goes first, then the object drops. The vertical variant designs that failure away."},
-      {name:"An accidental robustness", text:"The project page reports a side effect of XMem favouring spatial continuity. When a lid comes free, the tracker keeps following the exposed thread region instead of chasing the detached cap, which holds the observation together through the one event the simulation never modelled."}
+      {name:"Why the contact term samples points and takes a min", text:"A continuous be-in-contact-somewhere term would carve one smooth basin over the whole surface. A min over sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface relation into a discrete assignment, so the gradient pulls towards one configuration instead of the average of all valid ones. <em>Interpretation:</em> the paper does not analyse the form and reports only the intensity correlation, but this is the most plausible account of why so blunt a term unlocks the task."},
+      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, Time-to-Fail measures the interval from the object being held until it slips or lodges (capped at 30 s), and Velocity is their ratio. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in Table 1. Holding is the easy half of the task, and the pair is what stops that from reading as success. Note that the simulation curves in Figure 4 report AD averaged per execution step, so those axis values are not degrees."},
+      {name:"How dynamic is this?", text:"The abstract calls the behaviour dynamic and dexterous. The motion is quasi-static regrasping. The paper's own point of comparison for dynamic bimanual work is throwing and catching, which it distinguishes as less contact-rich rather than as faster. <em>Interpretation:</em> the demand here is continuous coordination through repeated contact transitions, and the difficulty is that the object is unsupported at every one of them."},
+      {name:"The horizontal setup is the hard one by choice", text:"An appendix retrains the system on vertically held bottles, changing the initialisation and switching perception off, with no other change. The authors state that the vertical setup prevents the most common failure, loss of stabilisation followed by a drop, by design."},
+      {name:"An accidental robustness", text:"The project page reports that the mask tracker prioritises spatial continuity over semantics. When a lid comes free the tracker follows the exposed thread rather than the detached cap, which keeps the observation coherent through the one event the simulation never modelled."}
     ],
     equations: [
       {
-        name:"Twisting reward",
-        formula:"r_twisting = Δθ = q_bottle^{t+1} − q_bottle^{t}",
-        meaning:"The per-step rotation of the lid about the object axis. It is dense, unbounded and direction-signed. The reward asks the policy to keep turning and never names a goal angle, which is why the headline metric counts total angular displacement instead of successes."
-      },
-      {
         name:"Keypoint finger contact reward",
         formula:"r_contact = Σ_i [ 1 / (1 + α·d(X^L, F_i^L)) + 1 / (1 + α·d(X^R, F_i^R)) ]\n\n    d(A, x) = min_i ‖A_i − x‖₂",
-        meaning:"X^L and X^R are point sets sampled on base and lid. F^L, F^R ∈ ℝ^{4×3} hold the two hands' fingertips. The min inside d carries the load: each fingertip scores against its nearest sampled point, which turns the term into a discrete assignment of fingertips to surfaces instead of a motion specification."
+        intuition:"Pay each fingertip for sitting near the surface it has been assigned, and pay it most at the point of contact. This is the whole exploration prior: a statement about where hands belong on the object, with nothing said about how to move.",
+        terms:[
+          "<code>X^L, X^R</code>: reference point sets sampled on the base and on the lid.",
+          "<code>F^L, F^R ∈ ℝ^{4×3}</code>: the four fingertips of each hand.",
+          "<code>d</code>: distance to the <em>nearest</em> reference point, not to the surface.",
+          "<code>α</code>: scaling inside the reciprocal, which sets the rate at which the reward decays with distance."
+        ],
+        matters:"Without it the policy never acquires the skill. The reciprocal form keeps the term bounded and dense everywhere, so it supplies gradient from the first random rollout, which is when the objective term supplies nothing.",
+        consequence:"Its weight is 500.0 against 2.5 on the objective it serves, two orders of magnitude. Lowering the intensity to 50% costs sample efficiency and final performance rather than breaking training outright, and disabling it removes the skill."
       },
       {
-        name:"Pose reward",
-        formula:"r_pose = − arccos( ⟨ x_axis , v ⟩ )",
-        meaning:"Keeps the bottle's main axis aligned with a fixed direction v, so the object stays in an orientation where both hands can reach their assigned surfaces."
-      },
-      {
-        name:"Action integration",
-        formula:"q̃_{t+1} = q̃_t + η · EMA(a_t)",
-        meaning:"Actions are increments on the PD target rather than absolute poses, and a low-pass filter smooths them before integration. This is the standard recipe for keeping a high-gain position-controlled hand from destabilising its own grasp."
+        name:"Twisting reward",
+        formula:"r_twisting = Δθ = q_bottle^{t+1} − q_bottle^{t}",
+        intuition:"Pay for lid rotation accumulated this step. There is no goal angle and no terminal bonus, so the task has no completion condition.",
+        terms:["<code>q_bottle</code>: the revolute joint angle between base and lid, read from the simulator."],
+        matters:"It defines what the system is for, and it defines the evaluation. Angular Displacement is this quantity integrated over a trial, which is why the paper reports degrees rather than a success rate.",
+        consequence:"A reward with no terminus produces a policy with no terminus. The behaviour never stops turning, and removal, the thing the household experiments measure, never appears in the objective."
       }
-    ],
-    novelty: [
-      "<strong>Simulating a threaded joint by not simulating it:</strong> a brake link on a prismatic joint reproduces the static friction of a screwed cap at a fraction of the cost of contact-accurate thread modelling, and it opens large-scale RL on this object class.",
-      "<strong>Exploration shaped from both ends:</strong> a reward that assigns fingertips to surfaces, paired with termination rules that delete the known dead-end interaction modes. The transferable lesson is that for bimanual multi-part manipulation the bottleneck is the contact mode, so spend the prior there rather than on control architecture.",
-      "<strong>A two-point object representation:</strong> body centre and lid centre, nothing else. A segmentation-and-tracking stack can deliver those two points in real time, and they carry no shape information by design, which is why a policy trained on plain cylinders transfers to a Nutella jar.",
-      "<strong>First sim-to-real RL system on bimanual multi-fingered hands</strong> for a task requiring sustained coordinated contact, as opposed to prior bimanual dexterous work that was simulation-only or dynamic-but-brief."
     ],
     comparison: {
       headers:["Real, BlueBottle unless noted", "AD° ↑", "TTF s ↑", "Vel °/s ↑", "SquareBottle AD° (OOD) ↑"],
       rows:[
-        ["<strong>Ours</strong>", "<strong>946.33</strong>", "23.67", "<strong>41.26</strong>", "<strong>43.00</strong>"],
-        ["Open-loop replay of a sim trajectory", "128.33", "7.67", "11.68", "29.67"],
+        ["<strong>Ours</strong>", "<strong>946.33</strong> ±383.81", "23.67", "<strong>41.26</strong>", "<strong>43.00</strong>"],
+        ["Open-loop replay of a sim trajectory", "128.33 ±217.96", "7.67", "11.68", "29.67"],
         ["No vision (proprioception only)", "1.33", "21.67", "0.04", "5.00"],
         ["No asymmetric critic", "18.67", "<strong>30.00</strong>", "0.62", "0.00"],
         ["Larger actor network", "2.00", "22.33", "0.14", "1.67"]
       ]
     },
     evidence: [
-      "Real-world Table 1: five 3D-printed bottles, 20 trials each capped at 30 s, three best policies out of ten seeds. The full method wins on both metrics for every object, survives the full 30 s without dropping on four of five, and one deployed policy averages four complete turns in 30 s on the blue bottle.",
-      "The baselines show the metric trade-off. No-Asym holds the blue bottle for the full 30.00 s and turns it 18.67°. That TTF looks strong until you read it against AD, which exposes a policy that learned to grip and stall.",
-      "The open-loop replay baseline has the <em>lowest</em> time-to-fail (7.67 s): replaying a trajectory that succeeded in simulation makes the bottle roll off the fingers. This is the cleanest evidence that the task demands closed-loop reaction to object state rather than a deterministic motion pattern.",
-      "Simulation ablations over 5 seeds: reducing the finger contact reward makes policies fail to acquire the skill at all, and replacing it with an in-hand-reorientation-style gait constraint reward yields erratic finger motion and unnatural grasps.",
-      "Multi-object training edges out single-object training even when each is evaluated on its own setup. The authors read the object spread as an implicit curriculum rather than a generalisation tax.",
-      "Perturbation test: the object is poked and pushed with a picker tool at random times; the policy reorients it back into a stable pose and resumes twisting.",
-      "Generalisation to 10 unseen household containers, scored on the novel task of fully removing the lid: 33.75% overall, 60% on HairMask and 50% on FiberGummies (few turns needed), down to 10% on PeanutButter and EmptyNutella (five turns needed). Under the paper's per-turn accounting, in-distribution objects requiring one turn are removed 100% of the time.",
-      "The vertical-bottle variant keeps the reward, the object model and the training recipe untouched. The initial hand pose is the one change."
+      "<strong>Claim: exploration is the bottleneck.</strong> The intensity sweep in Figure 4 varies only the contact reward and holds the rest fixed. Disabled policies stay at the floor of both AD and TTF for the full run, 50% lands between, full wins, over 5 seeds in both single and multi-object setups. The ordering is monotone, which reads as a graded prior rather than a switch.",
+      "<strong>Claim: the task needs closed-loop reaction.</strong> Replaying a trajectory that succeeded in simulation gives the <em>lowest</em> time-to-fail of any method, 7.67 s, because the bottle rolls off the fingers. A deterministic motion pattern does not survive contact with a real object.",
+      "<strong>Claim: object state must be observed.</strong> Proprioception alone reaches 1.33° AD where the full policy reaches 946.33°, so the implicit tactile sensing that carries single-hand rotation in prior work does not locate a lid relative to a body. Note what this does not establish: no baseline uses a richer representation, so the paper shows that two points are enough for its system, not that they are the minimum.",
+      "<strong>Claim: capacity harms transfer.</strong> The enlarged actor drops to 2.00° AD on the robot. The authors report it matching the full policy in simulation, which is the half of the comparison that makes it interesting, and that half appears only as a sentence.",
+      "<strong>Real-world protocol.</strong> Five 3D-printed bottles, 20 trials each, 30 s cap, three best policies from ten seeds. The full method leads on both metrics for every object, holds four of five for the full 30 s, and one deployed policy averages four complete turns in 30 s on the blue bottle.",
+      "<strong>Generalisation, scored on a task nobody trained.</strong> Ten household containers, judged by whether the lid comes off: 33.75% overall. The spread tracks turns required rather than familiarity, from 60% on HairMask (1 turn) down to 10% on PeanutButter and EmptyNutella (5 turns). FiberGummies reaches 50% while also needing 5 turns. Under the paper's accounting, where in-distribution objects are defined to need one turn, those are removed 100% of the time.",
+      "<strong>Perturbation.</strong> A picker tool pokes and pushes the object at random times and the policy recovers a stable pose and resumes. The authors swap the vision stack for marker-based detection here to separate force robustness from occlusion, so the two are never demonstrated together.",
+      "<strong>Multi-object training.</strong> A small edge over single-object training even when each is evaluated on its own setup. The authors call this a surprise and read the object spread as an implicit curriculum."
+    ],
+    whatMatters: [
+      "Contact structure is the load-bearing prior. It is the one intervention with a graded, multi-seed ablation behind it, and it is the one the paper's framing rests on.",
+      "The two transfer failures, No-Vis and Large, are both about the policy's relationship to information: too little about the object, or too much capacity to memorise the simulator. Neither shows up as a simulation failure, which is what makes them worth remembering.",
+      "The metric pair is a finding in its own right. On TTF alone the stalling baselines beat the working policy."
+    ],
+    novelty: [
+      "<strong>Conceptual:</strong> framing bimanual multi-part manipulation as a contact-mode search problem, and putting the prior there rather than into the control architecture.",
+      "<strong>Algorithmic:</strong> the keypoint contact reward, a discrete fingertip-to-surface assignment expressed as a bounded distance term.",
+      "<strong>System:</strong> the brake-link object model, the two-point perception stack, and the calibration trick of modelling the marker tag in simulation to solve extrinsics from matched corner pairs.",
+      "<strong>Evaluation:</strong> the AD and TTF pair, which is what makes the grip-and-stall failure legible.",
+      "<strong>Not assessed here:</strong> the authors claim this is the first sim-to-real RL system enabling such capabilities on bimanual multi-fingered hands, qualified by to the best of our knowledge. This summary has not checked that against the literature."
     ],
     limitations: [
-      "<strong>It fixes contact-level control, not task-level structure.</strong> No planner, no subtask decomposition, no goal state. The reward is per-step lid rotation, so the policy learns to keep turning without end. Nothing in the formulation represents removal itself, the moment the threads run out and the cap has to come away, and that is where the household-object numbers fall off (33.75% overall, 10% on objects needing five turns).",
-      "The simulated cap twists without end by construction, so the transition the downstream task cares about, the lid coming free, sits outside the training distribution.",
-      "The arms do not move. Two UR5e arms hold the hands in fixed poses and only the 16-DoF hands are controlled, and a person places the object onto the upturned fingers to start each trial. This is a skill, not an autonomous pipeline.",
-      "Both exploration mechanisms are hand-authored for this object class. Someone had to choose which surfaces to sample contact points on, and someone had to know that pinch-too-low was the failure worth terminating on. The recipe generalises as an idea; the instantiation does not.",
-      "Reported numbers come from the three best of ten seeds, and the spreads stay wide even there (946.33 ± 383.81°, 499.50 ± 578.23° on the wood bottle). Read this as seed sensitivity rather than average behaviour. The Large-actor result, which matched in simulation and died in transfer, points the same way.",
-      "The out-of-distribution square bottle is held for the full 30 s but barely turned (43° against 946° in-distribution), so shape generalisation is much weaker for twisting than for stabilising.",
-      "The perturbation experiment swaps the vision stack for marker-based detection to isolate occlusion. Robustness to external forces and robustness of the SAM/XMem pipeline under heavy occlusion therefore appear in separate experiments, never in the same one.",
-      "Perception needs a first-frame segmentation per trajectory to seed the tracker, and there is no tactile or force sensing anywhere in the loop despite contact defining the whole task."
+      "<strong>Contact-level control, not task-level structure.</strong> The objective is per-step rotation with no goal and no planner, and the simulated cap turns without end. The transition the household experiments score, the lid coming free, is absent from training and from the reward, which is where the numbers fall off: 10% on the objects needing five turns.",
+      "Both exploration mechanisms are authored by hand for this object class. Someone chose which surfaces carry contact points and someone knew that pinch-too-low was the trap worth terminating on. The idea transfers; this instantiation does not.",
+      "Reported numbers come from the three best of ten seeds, and the spreads stay wide there (946.33 ± 383.81°, and 499.50 ± 578.23° on the wood bottle, a standard deviation larger than the mean). Read this as seed sensitivity rather than expected behaviour.",
+      "The arms never move. Two UR5e arms hold the hands fixed, only the 16-DoF hands are controlled, and a person places the object onto the upturned fingers to start every trial.",
+      "Shape generalisation is far weaker for turning than for holding: the out-of-distribution square bottle survives the full 30 s but reaches 43° against 946°."
     ],
     takeaway: [
-      "<strong>Classification:</strong> a sim-to-real RL system paper for one continuous bimanual dexterous skill, with no demonstrations, no learned dynamics model and no task planner.",
-      "<strong>Read it for:</strong> the case that exploration over contact modes is the binding constraint in contact-rich bimanual manipulation, and that the fix stays unglamorous at both ends, a reward encoding fingertip-to-surface assignment and termination rules deleting the dead-end modes. Two negative results come free: proprioception alone does not carry this task, and a bigger policy transfers worse.",
-      "<strong>Steal from it:</strong> the AD/TTF metric pair for any task where holding on is easier than making progress, and the simulate-your-own-calibration-tag trick for solving camera extrinsics without a checkerboard.",
-      "<strong>Read alongside:</strong> AsymDex, which builds the stabilise-versus-manipulate asymmetry into its structure rather than its reward; DexMachina and ManipTrans, which reach bimanual dexterity from human demonstrations instead of from scratch; and Sequential Dexterity for the task-level chaining this paper leaves out."
+      "When a task's difficulty lives in which contacts to make rather than in what torques to send, spend the prior there. The rest of the stack can be coarse.",
+      "Design the metric pair before running the experiment. Where holding on is easier than making progress, a single-axis metric will rank a stalling policy first.",
+      "Policy capacity is a sim-to-real hyperparameter. A network that matches in simulation and dies on the robot is reporting overfitting to the simulator, not a control failure."
+    ],
+    researchNotes: [
+      "<strong>Worth stealing:</strong> modelling your own calibration tag inside the simulation scene, which turns camera extrinsics into one matched-pair solve with no checkerboard sweep.",
+      "<strong>Open question:</strong> the reference point sets are placed by a person. Could they come from a segmentation model at training time, which would turn the contact prior from an object-specific annotation into a procedure?",
+      "<strong>Open question:</strong> the brake link is never validated against a thread-accurate simulator or against measured torques, so its fidelity is asserted rather than measured. A torque comparison would be cheap and would settle it.",
+      "<strong>Read alongside:</strong> AsymDex, which builds the stabilise-versus-manipulate asymmetry into its structure rather than its reward; DexMachina and ManipTrans, which reach bimanual dexterity from human demonstrations; and Sequential Dexterity for the task-level chaining this paper leaves out."
     ],
     links: [
       {label:"arXiv",url:"https://arxiv.org/abs/2403.02338"},

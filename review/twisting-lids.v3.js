@@ -1,8 +1,6 @@
-// Twisting Lids Off with Two Hands — review v3 (2026-09-03, anti-slop rewrite; current)
-// Snapshot of the paper_summaries.js entry after running the stop-slop skill over v2.
-// Prose only: all 99 numeric claims, mechanisms and citations carry over from v2 unchanged.
-// The PDF is gitignored and absent on this machine, so no source was re-read and no claim was added.
-// The live copy is paper_summaries.js. Edit that, not this snapshot.
+// Twisting Lids Off with Two Hands — review v3 (2026-09-03, anti-slop rewrite)
+// Snapshot of the paper_summaries.js entry at commit 9e9a5c3, before the v4 source-read rewrite.
+// Prose-only pass over v2: em dash 42 -> 0, -ly adverbs 37 -> 2, all 99 numbers unchanged.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v3"] = {
     shortTitle: "Twisting Lids Off",

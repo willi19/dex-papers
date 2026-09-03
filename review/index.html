@@ -53,9 +53,14 @@
         <td>사람이 직접 읽은 노트와 대조해 개정</td>
       </tr>
       <tr>
-        <td><a href="paper.html?id=twisting-lids-v3">v3</a> <span class="cur">current</span></td><td>2026-09-03</td>
-        <td><code>paper_summaries.js</code> (현행)</td><td>(this session)</td>
+        <td><a href="paper.html?id=twisting-lids-v3">v3</a></td><td>2026-09-03</td>
+        <td><code>paper_summaries.js</code></td><td><code>9e9a5c3</code></td>
         <td>stop-slop 스킬 적용, 문장만 다시 씀</td>
+      </tr>
+      <tr>
+        <td><a href="paper.html?id=twisting-lids-v4">v4</a> <span class="cur">current</span></td><td>2026-09-03</td>
+        <td><code>paper_summaries.js</code> (현행)</td><td>(this session)</td>
+        <td>paper-reading 스킬로 PDF부터 다시 읽고 재구성</td>
       </tr>
     </tbody>
   </table>
@@ -81,6 +86,18 @@
     <li>PDF가 이 머신에 없어서 원문 재확인은 못 했다. 그래서 사실은 하나도 더하지 않았다.</li>
   </ul></section>
   <p>검사 도구: <code>node scripts/slop-check.mjs twisting-lids</code></p>
+
+  <h2>v3 → v4 에서 바뀐 것</h2>
+  <section class="block"><ul>
+    <li>arXiv PDF(16쪽)와 프로젝트 페이지를 실제로 읽고 다시 씀. v0~v3는 전부 원문 재확인 없이 쓰였다.</li>
+    <li>논문 그림 3장을 200 DPI로 잘라 본문에 넣음 (Fig 2 물체 모델, Fig 3 지각·보상, Fig 4 ablation). 각 그림에 무엇을 보여주는지 / 어떻게 읽는지 / 왜 중요한지 / 무슨 주장을 뒷받침하는지 4부 캡션.</li>
+    <li>설계 결정 6개를 표로 분리. <strong>Evidence 칸이 비어 있는 두 줄</strong>(brake link, early termination)이 드러난다. 논문에 ablation이 없다.</li>
+    <li>수식 4개 → 2개. 남긴 2개에는 intuition / terms / why it matters / consequence를 붙임.</li>
+    <li>TL;DR 8문장 → 4문장. 모듈 나열(SAM, XMem, PPO, Isaac Gym) 제거.</li>
+    <li>Core insight, What actually matters, Research notes 섹션 신설. 저자 주장 / 실험 근거 / 내 해석을 라벨로 구분.</li>
+    <li>기존 섹션 합계는 19,932자 → 16,276자로 줄었다. 전체가 커진 것은 그림 캡션과 설계 표가 새로 들어왔기 때문이다.</li>
+    <li>v3의 오류 하나 수정: FiberGummies를 “few turns needed”로 적었는데 Table 4 기준 5회전이 필요하다.</li>
+  </ul></section>
 
   <h2>리뷰에 대한 리뷰</h2>
   <section class="block">
