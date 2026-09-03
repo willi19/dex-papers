@@ -175,6 +175,13 @@ will overwrite whatever `papers.js` says. Three steps instead:
 
 `node scripts/summary-audit.mjs` reports total / completed / remaining.
 
+Reading and writing one of these is a defined workflow, not a freehand task: invoke
+the **`paper-reading` skill** (`.claude/skills/paper-reading/SKILL.md`) before you
+start. It carries the reading protocol, the section contracts that keep the same fact
+from appearing in four sections, the figure and equation rules, the output schema
+(`references/schema.md`) and the domain interrogation lists
+(`references/domain-checks.md`).
+
 **HARD RULES for these pages:**
 
 1. **Summaries are report-style, never one effortless sentence.** Each
