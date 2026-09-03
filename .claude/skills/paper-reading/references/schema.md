@@ -6,27 +6,37 @@ editing, except the title-to-URL map in `paper_ideas.js` for a new paper.
 
 ## Field map
 
-| Report section | Field | Shape | Required |
+The renderer skips any field you leave out, so the schema is a menu, not a form. Only
+identity, `tldr` and `links` are structural. Everything else is filled when the paper
+has something there that no other field already says. See "Shaping the output" in
+SKILL.md.
+
+| Report section | Field | Shape | When |
 |---|---|---|---|
-| identity | `shortTitle`, `title`, `venue`, `badges` | strings, string[] | yes |
-| teaser | `figure`, `figureCaption` | string paths | yes |
-| TL;DR | `tldr` | one string, 3 to 5 sentences | yes |
-| 1. Problem | `problem` | string[] | yes |
-| 2. Core insight | `coreInsight` | string[], 1 to 3 items | yes |
-| what you get | `output` | string[] | yes |
-| 3. Pipeline | `pipeline` | `{name, text}[]` | yes |
-| in-report figures | `figures` | `{src, title, shows, read, matters, supports}[]` | when useful |
-| 4. Design decisions | `designDecisions` | `{decision, problem, motivation, mechanism, evidence}[]` | yes |
-| deeper analysis | `methodDetails` | `{name, text}[]` | optional |
-| 5. Equations | `equations` | `{name, formula, intuition, terms, matters, consequence}[]` | when the method needs them |
-| 6. Evidence | `evidence` | string[] | yes |
+| identity | `shortTitle`, `title`, `venue`, `badges` | strings, string[] | always |
+| teaser | `figure`, `figureCaption` | string paths | always |
+| TL;DR | `tldr` | one string, 2 to 4 sentences | always |
+| links | `links` | `{label, url}[]` | always |
+| Problem | `problem` | string[] | almost always |
+| Pipeline | `pipeline` | `{name, text}[]` | almost always |
+| Evidence | `evidence` | string[] | almost always |
+| Limitations | `limitations` | string[], 3 to 5 | almost always |
+| Takeaways | `takeaway` | string[], 2 to 4 | almost always |
+| Core insight | `coreInsight` | string[], 1 to 3 items | when the idea does not fit inside `problem` or `pipeline` |
+| what you get | `output` | string[] | when what the reader gets is not obvious from the pipeline |
+| in-report figures | `figures` | `{src, title, shows, read, matters, supports}[]` | when a figure carries an argument |
+| Design decisions | `designDecisions` | `{decision, problem, motivation, mechanism, evidence}[]` | when a choice needs a row the pipeline cannot hold |
+| deeper analysis | `methodDetails` | `{name, text}[]` | when analysis fits no other field |
+| Equations | `equations` | `{name, formula, intuition, terms, matters, consequence}[]` | when the method cannot be understood without the maths |
 | numbers table | `comparison` | `{headers, rows}` | when a table clarifies |
-| 7. What actually matters | `whatMatters` | string[], 2 to 4 | yes |
-| 8. Novelty | `novelty` | string[], bucketed | yes |
-| 9. Limitations | `limitations` | string[], 3 to 5 | yes |
-| 10. Takeaways | `takeaway` | string[], exactly 3 | yes |
-| 11. Research notes | `researchNotes` | string[] | optional |
-| links | `links` | `{label, url}[]` | yes |
+| What actually matters | `whatMatters` | string[], 2 to 4 | when synthesis across experiments adds something |
+| Novelty | `novelty` | string[], bucketed | when what is new needs separating from standard practice |
+| Research notes | `researchNotes` | string[] | when you have ideas worth stealing |
+
+An omitted field is a decision, and it is the right one whenever filling it would
+restate something the reader already has. Padding a field costs the reader more than
+the missing section does. Merging a field's content into the field that owns the same
+causal story, then dropping it, is the intended move.
 
 `equations` accepts the older `{name, formula, meaning}` form, still used by earlier
 entries. New entries use the four-part form. The renderer handles both.
@@ -34,6 +44,9 @@ entries. New entries use the four-part form. The renderer handles both.
 `methodDetails` is for analysis that does not fit a decision row: reading the form of
 an equation, questioning the paper's framing, an accidental property worth recording.
 It is not a second pipeline.
+
+Section order is fixed by the renderer. Order the `figures` array so each figure sits
+beside the argument it carries.
 
 ## Prose conventions inside fields
 

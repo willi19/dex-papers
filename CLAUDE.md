@@ -157,15 +157,19 @@ will overwrite whatever `papers.js` says. Three steps instead:
 
 1. Add a structured record to `window.DETAILED_PAPER_SUMMARIES` in
    `paper_summaries.js`, keyed by a kebab-case slug. `overview/paper.html` is
-   the renderer and it does **not** guard most fields — these are all required:
-   `shortTitle`, `title`, `venue`, `badges`, `tldr`, `problem`, `output`,
-   `pipeline` (`{name, text}[]`), `equations` (`{name, formula, meaning}[]`),
-   `novelty`, `evidence`, `limitations`, `takeaway`, `links`
-   (`{label, url}[]`). Optional: `figure`, `figureCaption`, `methodDetails`,
-   `rewardBaseline`, `comparison` (`{headers, rows}`). `novelty` / `takeaway` /
-   `comparison` rows are inserted unescaped, so `<strong>` is allowed there.
-   For a systems paper with no real math, `equations` should restate the actual
-   algorithm or interaction loop as pseudocode — never invent notation.
+   the renderer and it skips any field you leave out, so the schema is a menu,
+   not a form. Structural: `shortTitle`, `title`, `venue`, `badges`, `tldr`,
+   `links` (`{label, url}[]`). Filled for almost every paper: `problem`,
+   `pipeline` (`{name, text}[]`), `evidence`, `limitations`, `takeaway`.
+   Filled when the paper has something there that no other field already says:
+   `coreInsight`, `output`, `figure`, `figureCaption`, `figures`,
+   `designDecisions`, `methodDetails`, `equations`, `comparison`
+   (`{headers, rows}`), `whatMatters`, `novelty`, `researchNotes`,
+   `rewardBaseline`. Omitting a field beats padding it with a restatement.
+   `novelty` / `takeaway` / `comparison` rows are inserted unescaped, so
+   `<strong>` is allowed there. For a systems paper with no real math, either
+   drop `equations` or restate the actual algorithm or interaction loop as
+   pseudocode. Never invent notation.
 2. Register it in `window.PAPER_SUMMARIES` in `paper_ideas.js`:
    `"<exact papers.js title>": "overview/paper.html?id=<slug>"`.
 3. Save the teaser to `overview_assets/<slug>.png`. The loader forces
@@ -177,9 +181,10 @@ will overwrite whatever `papers.js` says. Three steps instead:
 
 Reading and writing one of these is a defined workflow, not a freehand task: invoke
 the **`paper-reading` skill** (`.claude/skills/paper-reading/SKILL.md`) before you
-start. It carries the reading protocol, the section contracts that keep the same fact
-from appearing in four sections, the figure and equation rules, the output schema
-(`references/schema.md`) and the domain interrogation lists
+start. It carries the reading protocol, the writing philosophy (the framework is for
+thinking; the page carries the compressed result, not one section per question), the
+rule that keeps the same fact from appearing in four sections, the figure and equation
+rules, the output schema (`references/schema.md`) and the domain interrogation lists
 (`references/domain-checks.md`).
 
 **HARD RULES for these pages:**
