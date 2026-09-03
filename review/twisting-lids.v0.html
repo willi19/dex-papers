@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twisting Lids · review v0 · dex-papers</title>
+<style>
+  :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+  .wrap{max-width:800px;margin:0 auto;padding:20px 22px 70px}
+  .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text)}
+  h1{font-size:22px;line-height:1.3;margin:16px 0 6px}
+  .meta{color:var(--muted);font-size:12px;margin-bottom:18px}
+  .block{padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel);margin-bottom:12px}
+  .block h2{font-size:12px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);margin:0 0 7px}
+  .block p{margin:0;color:#c9ced8;font-size:15px}
+  .note{color:var(--muted);font-size:12px;margin-top:22px}
+  code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="nav"><a href="index.html">← Review versions</a> <a href="../index.html">Library</a></div>
+  <h1>Twisting Lids Off with Two Hands — review v0</h1>
+  <p class="meta">
+    2026-07-27 · <code>paper_insights.js</code> (삭제됨) · 추가 <code>b3fe343</code> → 삭제 <code>beb87bb</code><br>
+    한국어 4필드 노트. <code>overview/</code> 바깥에 있던 최초 버전.
+  </p>
+
+  <section class="block"><h2>problem</h2>
+    <p>나사산·마찰·양손 접촉이 얽힌 뚜껑 열기는 탐색도 어렵고 시뮬레이션도 느리거나 부정확하다.</p></section>
+
+  <section class="block"><h2>idea</h2>
+    <p>나사 결합을 빠르게 근사하는 brake 기반 물리 모델을 만들고, 병 회전·뚜껑 비틀기·손 자세·접촉 위치를 단계적으로 보상하는 RL을 학습한다.</p></section>
+
+  <section class="block"><h2>delta</h2>
+    <p>일반적인 양손 pose tracking이 아니라 과제에 필요한 fingertip–bottle 접촉 구조와 실패 상태 조기 종료를 명시해 실제 병뚜껑 비틀기를 학습 가능하게 했다.</p></section>
+
+  <section class="block"><h2>basis</h2>
+    <p>PDF · Introduction, Related Work, Method/Reward</p></section>
+
+  <p class="note">원문 그대로 옮긴 스냅샷입니다. 원본 복원: <code>git show beb87bb^:paper_insights.js</code></p>
+</main>
+</body>
+</html>

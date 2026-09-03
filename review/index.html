@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review versions · dex-papers</title>
+<style>
+  :root{--bg:#0f1115;--panel:#181b22;--panel2:#1f232c;--border:#2a2f3a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#6ea8fe;--green:#78d6a8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+  .wrap{max-width:900px;margin:0 auto;padding:20px 22px 70px}
+  a{color:var(--accent)}
+  .nav a{font-size:12.5px;text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--text)}
+  h1{font-size:23px;margin:18px 0 6px}
+  h2{font-size:14px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);margin:28px 0 10px}
+  p{color:#c9ced8}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}
+  .block{padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}
+  .block ul{margin:0;padding-left:19px;color:#c9ced8}
+  .block li+li{margin-top:6px}
+  .cur{color:var(--green);font-size:11px;border:1px solid #365744;background:#17251e;border-radius:5px;padding:1px 6px}
+  code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px}
+  .warn{border-color:#5a4a2e;background:#241f16;color:#d8c9a8}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="nav"><a href="../index.html">← Library</a> <a href="../overview.html">Overview</a></div>
+
+  <h1>Review versions</h1>
+  <p>같은 논문 리뷰의 <strong>버전 스냅샷</strong>과, 그 리뷰들을 다시 읽고 정리한 <strong>리뷰에 대한 리뷰</strong>.
+     사이트가 실제로 읽는 파일은 루트의 <code>paper_summaries.js</code>이고, 여기 있는 것은 사본이다.</p>
+
+  <h2>Twisting Lids Off with Two Hands (CoRL 2024)</h2>
+  <table>
+    <thead><tr><th>버전</th><th>날짜</th><th>원본 위치</th><th>커밋</th><th>성격</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><a href="twisting-lids.v0.html">v0</a></td><td>2026-07-27</td>
+        <td><code>paper_insights.js</code> (삭제됨)</td><td><code>b3fe343</code> → <code>beb87bb</code></td>
+        <td>한국어 4필드 노트. overview 바깥의 최초 버전</td>
+      </tr>
+      <tr>
+        <td><a href="paper.html?id=twisting-lids-v1">v1</a></td><td>2026-09-02 07:14</td>
+        <td><code>paper_summaries.js</code></td><td><code>0d1eef4</code></td>
+        <td>첫 report-style 요약</td>
+      </tr>
+      <tr>
+        <td><a href="paper.html?id=twisting-lids-v2">v2</a></td><td>2026-09-02 09:48</td>
+        <td><code>paper_summaries.js</code></td><td><code>9e8fc12</code></td>
+        <td>사람이 직접 읽은 노트와 대조해 개정</td>
+      </tr>
+      <tr>
+        <td><a href="paper.html?id=twisting-lids-v3">v3</a> <span class="cur">current</span></td><td>2026-09-03</td>
+        <td><code>paper_summaries.js</code> (현행)</td><td>(this session)</td>
+        <td>stop-slop 스킬 적용, 문장만 다시 씀</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>v1 → v2 에서 바뀐 것</h2>
+  <section class="block"><ul>
+    <li>AD / TTF / Vel 지표를 정의하고 trade-off를 설명 — 잡고 멈추기만 하는 정책이 TTF 30.00 / AD ≈ 0 을 받는 것이 No-Asym·Large의 signature. 비교 표에 Vel 추가</li>
+    <li>reset / early-termination 규칙을 contact reward와 동급의 메커니즘으로 승격 (둘 다 탐색을 쳐내기 위해 존재)</li>
+    <li>contact reward를 공식 재진술이 아니라 “왜 표면을 샘플 점으로 이산화하고 min을 취하는가”로 분석</li>
+    <li>빠져 있던 시스템 plumbing 추가 — single-marker extrinsics, ZeroMQ 10 Hz, canonical initial finger pose</li>
+    <li>논문의 “dynamic dexterity” 프레이밍을 그대로 받지 않고 의문 제기</li>
+    <li>반복 제거 — contact reward 9회 → 5회, two-point 5회 → 2회</li>
+  </ul></section>
+  <p>원본 diff: <code>git diff 0d1eef4 9e8fc12 -- paper_summaries.js</code></p>
+
+  <h2>v2 → v3 에서 바뀐 것</h2>
+  <section class="block"><ul>
+    <li>내용은 그대로 두고 문장만 다시 썼다. 숫자 99개가 v2와 하나도 다르지 않다 (기계로 대조함).</li>
+    <li>em dash 42개 → 0개. <code>no-em-dash</code> 피드백 메모리를 그동안 이 repo에서 지키지 않고 있었다.</li>
+    <li><code>-ly</code> 부사 37개 → 2개 (vertically, barely. 둘 다 사실을 나르는 단어라 남김).</li>
+    <li>수동태와 무생물 주어를 사람 주어로 바꿈. “the authors”, “the simulator”, “a person”이 행위자로 드러난다.</li>
+    <li>제목의 “not X, but Y” 대조 삭제 (“Why discretised contact points, not a surface distance” → “Why the reward samples points and takes a min”).</li>
+    <li>PDF가 이 머신에 없어서 원문 재확인은 못 했다. 그래서 사실은 하나도 더하지 않았다.</li>
+  </ul></section>
+  <p>검사 도구: <code>node scripts/slop-check.mjs twisting-lids</code></p>
+
+  <h2>리뷰에 대한 리뷰</h2>
+  <section class="block">
+    <p style="margin:0"><a href="SUMMARY_REVIEW_NOTES.md">SUMMARY_REVIEW_NOTES.md</a> —
+    위 v1 → v2 개정에서 드러난 redundancy 패턴과 반복되는 blind spot을, 새 요약을 쓸 때 쓰는 체크리스트로 정리한 것.
+    새 사례가 나오면 여기에 추가한다.</p>
+  </section>
+
+  <h2 style="color:#d8c9a8">주의</h2>
+  <section class="block warn">
+    <p style="margin:0"><code>twisting-lids.v*.js</code>는 <strong>스냅샷 사본</strong>이며 라이브러리 페이지는 이 파일들을 로드하지 않는다
+    (<code>review/paper.html</code>만 로드한다). 내용을 고치려면 루트의 <code>paper_summaries.js</code>를 고칠 것.</p>
+  </section>
+</main>
+</body>
+</html>

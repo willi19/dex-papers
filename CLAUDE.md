@@ -190,6 +190,20 @@ will overwrite whatever `papers.js` says. Three steps instead:
    colorful, body text is black/white). Do NOT use a blurry full-page downscale —
    the key-idea figure must be legible. The teaser may sit on a later page for
    long tech reports; find it, don't default to page 1.
+4. **Run the `stop-slop` skill on every summary before committing.** These pages
+   are prose, and the default LLM voice shows: v2 of the twisting-lids summary
+   carried 42 em dashes and 37 `-ly` adverbs. Rules that matter here:
+   **no em dashes anywhere** (use a comma, colon, period or parentheses), no
+   adverbs, active voice with a human subject (`the authors`, `the simulator`,
+   `a person`), no "not X, it's Y" contrasts, no throat-clearing openers.
+   Check with `node scripts/slop-check.mjs <id>` (no argument = every summary).
+   The check counts patterns; the skill does the rewriting.
+5. **A style pass must not change a single claim.** When rewriting existing prose
+   without the sources at hand, keep every number, mechanism and citation. Verify
+   it: extract the numbers from both versions and compare the multisets.
+6. **Keep old versions in `review/`.** A rewritten summary gets a snapshot
+   (`review/<key>.v<n>.js`) plus a row in `review/index.html`, so the previous
+   wording stays readable at `review/paper.html?id=<key>-v<n>`.
 
 ## Notes
 
