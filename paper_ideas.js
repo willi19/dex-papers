@@ -108,6 +108,6 @@ window.PAPER_METADATA_OVERRIDES = {
   if (window.PAPER_SUMMARIES[p.title]) {
     p.summary = window.PAPER_SUMMARIES[p.title];
     const genericId = p.summary.match(/^overview\/paper\.html\?id=([^&]+)$/);
-    if (genericId) p.image = "overview_assets/" + genericId[1] + ".png";
+    if (genericId) p.image = "overview_assets/" + genericId[1] + "/teaser.png";
   }
 });

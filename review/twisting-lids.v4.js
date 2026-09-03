@@ -8,7 +8,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v4"] = {
     title: "Twisting Lids Off with Two Hands",
     venue: "CoRL 2024",
     badges: ["sim-to-real RL", "bimanual", "Allegro × 2", "exploration shaping", "zero-shot transfer"],
-    figure: "../overview_assets/twisting-lids.png",
+    figure: "../overview_assets/twisting-lids/teaser.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that differ in shape, size, mass, material and colour.",
     tldr: "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, with no demonstrations anywhere in the pipeline. The authors argue that the barrier is exploration rather than control: across 32 finger DoF almost every interaction mode RL discovers is a dead end, and nothing tells it which ones are not. So they constrain which fingertips belong on which part of the object and terminate the rollouts that have entered a known trap, leaving a plain RL objective to reward turning the lid. A policy trained on simulated cylinders transfers zero-shot and turns the best real bottle 946° in 30 s, where every baseline stays in single or double digits.",
     coreInsight: [

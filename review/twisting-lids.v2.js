@@ -9,7 +9,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v2"] = {
     title: "Twisting Lids Off with Two Hands",
     venue: "CoRL 2024",
     badges: ["sim-to-real RL", "bimanual", "Allegro × 2", "exploration shaping", "zero-shot transfer"],
-    figure: "../overview_assets/twisting-lids.png",
+    figure: "../overview_assets/twisting-lids/teaser.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, a single RealSense D435, and a policy trained only on simplistic simulated cylinders — deployed zero-shot on household jars that differ in shape, size, mass, material and colour.",
     tldr: "Hold a bottle-like object in mid-air with two multi-fingered hands and keep unscrewing its lid: one hand stabilises the body while the other repeatedly grips the cap, rotates it, releases and re-grips. Nothing is demonstrated — PPO in Isaac Gym learns the whole behaviour. The paper is really about making that search tractable, and it attacks it from two sides: a keypoint contact reward that says which fingertips belong on the body and which on the lid, and early-termination rules that kill rollouts trapped in the failure modes exploration keeps rediscovering. Two supporting decisions carry the transfer — a brake link that fakes the static friction of a threaded joint the simulator cannot model, and an object representation of just two 3D points (body centre, lid centre) from SAM + XMem masks plus noisy depth. On the best real bottle the policy twists 946° in 30 s where every baseline manages single digits.",
     problem: [

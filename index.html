@@ -9,12 +9,14 @@
     --bg: #0f1115; --panel: #181b22; --panel2: #1f232c; --border: #2a2f3a;
     --text: #e6e8ee; --muted: #9aa3b2; --accent: #6ea8fe; --accent2: #2b8a5b;
     --chip: #262b35; --chipOn: #3a6df0;
+    --maxw: 1600px; --gutter: 20px;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--text);
     font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; }
   header { position: sticky; top: 0; z-index: 5; background: var(--bg);
-    border-bottom: 1px solid var(--border); padding: 16px 20px 12px; }
+    border-bottom: 1px solid var(--border);
+    padding: 16px max(var(--gutter), calc((100% - var(--maxw)) / 2)) 12px; }
   h1 { margin: 0 0 4px; font-size: 18px; }
   h1 .count { color: var(--muted); font-weight: 400; font-size: 14px; }
   .search { width: 100%; max-width: 460px; padding: 9px 12px; border-radius: 8px;
@@ -62,7 +64,8 @@
   .toplinks a { font-size: 12px; font-weight: 400; text-decoration: none; padding: 5px 10px;
     border-radius: 7px; border: 1px solid var(--border); background: var(--panel2); color: var(--accent); }
   .toplinks a:hover { border-color: var(--accent); }
-  main { padding: 12px 20px 60px; display: block; max-width: 1120px; }
+  main { padding: 12px var(--gutter) 60px; display: block;
+    max-width: var(--maxw); margin: 0 auto; }
   .paper-list { border: 1px solid var(--border); border-radius: 9px; overflow: hidden; }
   .paper-item { border-bottom: 1px solid var(--border); background: var(--panel); }
   .paper-item:last-child { border-bottom: 0; }
@@ -99,10 +102,10 @@
   .teaser-toggle[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); }
   .teaser-panel { padding: 0 11px 12px; background: var(--panel2); }
   .teaser-panel[hidden] { display: none; }
-  .teaser-frame { display: block; max-width: 520px; aspect-ratio: 16 / 9; overflow: hidden;
+  .teaser-frame { display: block; max-width: 640px; aspect-ratio: 16 / 9; overflow: hidden;
     border: 1px solid var(--border); border-radius: 7px; background: #11151c; }
   .teaser-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .library-title { max-width: 1120px; padding: 24px 20px 0; }
+  .library-title { max-width: var(--maxw); margin: 0 auto; padding: 24px var(--gutter) 0; }
   .library-title h2 { margin: 0; font-size: 17px; }
   .library-title p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
   @media (max-width: 620px) {
@@ -174,6 +177,8 @@
 </div>
 
 <script src="papers.js"></script>
+<script src="groups.js"></script>
+<script src="teasers.js"></script>
 <script src="paper_ideas.js"></script>
 <script src="paper_status.js"></script>
 <script>
@@ -199,70 +204,8 @@
   const activeGroups = new Set();
   const activeStatus = new Set();
   let query = "";
-  const GROUP_ORDER = [
-    "RL & Control",
-    "Imitation & Demonstration Learning",
-    "Foundation / Generalist Policies",
-    "Agentic & Code-as-Policy",
-    "Grasping & Motion Generation",
-    "Data / Teleoperation / Task Generation",
-    "Benchmarks / Perception / Infrastructure"
-  ];
-  const GROUP_DESCRIPTIONS = {
-    "RL & Control": "reward-driven exploration, curriculum, control",
-    "Imitation & Demonstration Learning": "BC, DAgger, diffusion/flow policies, retargeting",
-    "Foundation / Generalist Policies": "VLA, pretrained behavior models, cross-task controllers",
-    "Agentic & Code-as-Policy": "LLM/VLM agents that write, run and repair robot programs; self-improvement loops",
-    "Grasping & Motion Generation": "grasp synthesis, grasp policies, physically plausible motion",
-    "Data / Teleoperation / Task Generation": "datasets, teleoperation, augmentation, autonomous collection",
-    "Benchmarks / Perception / Infrastructure": "evaluation, sensing, planning, surveys, systems"
-  };
-  const GROUP_LABELS = {
-    "RL & Control": "RL",
-    "Imitation & Demonstration Learning": "IL",
-    "Foundation / Generalist Policies": "Foundation",
-    "Agentic & Code-as-Policy": "Agentic",
-    "Grasping & Motion Generation": "Grasp/Motion",
-    "Data / Teleoperation / Task Generation": "Data/Teleop",
-    "Benchmarks / Perception / Infrastructure": "Benchmark/Infra"
-  };
-  const GROUP_OVERRIDES = {
-    "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning": "Benchmarks / Perception / Infrastructure",
-    "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks": "Benchmarks / Perception / Infrastructure",
-    "DexH2R: A Benchmark for Dynamic Dexterous Grasping in Human-to-Robot Handover": "Benchmarks / Perception / Infrastructure",
-    "DexterityGen: Foundation Controller for Unprecedented Dexterity": "Foundation / Generalist Policies",
-    "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity": "Foundation / Generalist Policies",
-    "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation": "Foundation / Generalist Policies",
-    "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning": "RL & Control",
-    "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation": "RL & Control",
-    "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity": "RL & Control",
-    "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World": "Agentic & Code-as-Policy"
-  };
-  function researchGroupOf(p) {
-    if (GROUP_OVERRIDES[p.title]) return GROUP_OVERRIDES[p.title];
-    const tags = p.tags || [];
-    const lowerTitle = p.title.toLowerCase();
-    const has = (...values) => values.some(v => tags.includes(v));
-    const hasPart = value => tags.some(t => t.toLowerCase().includes(value));
-
-    if (has("agentic", "code-as-policy"))
-      return "Agentic & Code-as-Policy";
-    if (has("survey", "benchmark", "analysis", "perception", "segmentation", "TAMP"))
-      return "Benchmarks / Perception / Infrastructure";
-    if (has("dataset", "teleoperation", "crowdsourcing", "mocap", "capture") ||
-        (has("data-collection") && !has("RL")))
-      return "Data / Teleoperation / Task Generation";
-    if (hasPart("grasp") || lowerTitle.includes("grasp"))
-      return "Grasping & Motion Generation";
-    if (has("VLA", "foundation", "foundation-model", "generalist", "pretraining") ||
-        /foundation (model|policy|controller)|generalist|large behavior model/.test(lowerTitle))
-      return "Foundation / Generalist Policies";
-    if (has("RL"))
-      return "RL & Control";
-    if (has("imitation-learning", "diffusion", "flow-matching", "one-shot", "human-video"))
-      return "Imitation & Demonstration Learning";
-    return "Benchmarks / Perception / Infrastructure";
-  }
+  // GROUP_ORDER / GROUP_DESCRIPTIONS / GROUP_LABELS / researchGroupOf come from
+  // groups.js, and TAXONOMY with them; overview.html loads the same file.
   const grid = document.getElementById("grid");
   const filters = document.getElementById("filters");
   const collbar = document.getElementById("collbar");
@@ -280,58 +223,9 @@
 
   // build href for local PDF: encode each path segment (handles spaces, "?")
   const pdfHref = (f) => f.split("/").map(encodeURIComponent).join("/");
-  function placeholderTeaser(p) {
-    const initials = p.title.split(/\s+/).filter(w => /^[A-Za-z0-9]/.test(w))
-      .slice(0, 3).map(w => w[0].toUpperCase()).join("") || "DEX";
-    const label = GROUP_LABELS[p._group] || "Paper";
-    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360">' +
-      '<defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#24364b"/>' +
-      '<stop offset="1" stop-color="#141b25"/></linearGradient></defs>' +
-      '<rect width="640" height="360" fill="url(#g)"/>' +
-      '<circle cx="560" cy="58" r="130" fill="#6ea8fe" opacity=".12"/>' +
-      '<text x="42" y="190" fill="#e6e8ee" font-family="Arial,sans-serif" font-size="78" font-weight="700">' +
-      initials + '</text><text x="44" y="244" fill="#8bbce8" font-family="Arial,sans-serif" font-size="28">' +
-      label + '</text></svg>';
-    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-  }
-  function teaserSources(p) {
-    const sources = [];
-    const localSummary = (p.summary || "").match(/^overview\/([^/]+)\.html$/);
-    if (localSummary) sources.push("overview_assets/" + localSummary[1] + ".png");
-    if (p.image) sources.push(p.image);
-    // Curated teasers only (papers.js `image`, or a rendered crop in
-    // overview_assets/). Two fallbacks were tried and dropped: the arXiv "x1"
-    // figure is as often a results plot as a teaser, and a screenshot of the
-    // project/publisher page is journal chrome and an author list. Both put
-    // something on the card that says nothing about the paper, which is worse
-    // than the placeholder below.
-    sources.push(placeholderTeaser(p));
-    return [...new Set(sources)];
-  }
-  function attachTeaser(img, sources) {
-    let index = 0;
-    img.onerror = () => {
-      index += 1;
-      if (index < sources.length) img.src = sources[index];
-    };
-    img.src = sources[index];
-  }
+  // placeholderTeaser / teaserSources / attachTeaser come from teasers.js.
 
   // ---- tag taxonomy: group flat tags into categories for a drill-down filter UI ----
-  const TAXONOMY = {
-    "Lab / Org": ["Apple","Berkeley","Brown","CMU","DeepMind","Google","MIT","Meta","NVIDIA","NYU","OpenAI","PKU","Stanford","Tsinghua","TUM","UCSD","USC","UT-Austin","ETH-Zurich","AgiBot","Physical-Intelligence"],
-    "Task": ["grasping","grasp-synthesis","functional-grasp","in-hand-reorientation","tool-use","placing","handover","bottle-cap","valve","door","deformable-object","articulated-object","articulation"],
-    "Embodiment": ["bimanual","whole-body","humanoid","cross-embodiment"],
-    "Interaction": ["long-horizon","contact-rich","contact","non-prehensile","dynamic","coordination","tactile","haptic","affordance"],
-    "Learning": ["RL","imitation-learning","self-supervised","reset-free","reset","VLA","diffusion","equivariant","flow-matching","one-shot","multi-task","multi-agent","sample-efficient","data-efficient","fine-tuning","transformer","energy-based","compositional","representation-learning","hierarchical","evolutionary-robotics","failure-reasoning","skill-library","state-only"],
-    "Control / Planning": ["TAMP","compliance","impedance","admittance","force-control","model-based","world-model","MPC","optimization","planning","differentiable-simulation"],
-    "Data / Interface": ["teleoperation","shared-autonomy","kinesthetic-teaching","human-in-the-loop","interactive","retargeting","human-to-robot","force-feedback","data-collection","data-generation","crowdsourcing","augmentation","data-augmentation","mocap","capture","human-video","human-motion"],
-    "Transfer / Scale": ["sim-to-real","self-improving","pretraining","agentic","generalist","foundation","foundation-model","scaling","autonomous","deployment","generalization","open-source","domain-randomization","reality-gap","robustness"],
-    "Perception": ["perception","segmentation","open-vocabulary","gaussian-splatting","video","vision","RGB-D","point-cloud","video-prediction","video-generation","video-planning","visuomotor","pose-estimation","implicit-representation","language-grounding","geometry","part-aware","object-centric","VLM","LLM"],
-    "Hardware": ["Allegro","Shadow","LEAP","Inspire","D'Claw","parallel-jaw","hardware","tendon-driven","micro-vibration"],
-    "Benchmark": ["LIBERO","RoboTwin"],
-    "Paper Type": ["survey","system","benchmark","analysis","dataset","industrial"]
-  };
   const CAT_ORDER = ["Lab / Org","Year","Task","Embodiment","Interaction","Learning","Control / Planning","Data / Interface","Transfer / Scale","Perception","Hardware","Benchmark","Paper Type"];
   const TAGCAT = {};
   Object.entries(TAXONOMY).forEach(([c,ts]) => ts.forEach(t => TAGCAT[t] = c));

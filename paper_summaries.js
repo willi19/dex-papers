@@ -88,7 +88,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation",
     venue: "AAAI 2026",
     badges: ["RL + human HOI", "trajectory prior", "sim-to-real", "cross-embodiment"],
-    figure: "../overview_assets/object-centric-motion-priors.png",
+    figure: "../overview_assets/object-centric-motion-priors/teaser.png",
     figureCaption: "The paper's method and real-world task families: motion prediction, retargeting, trajectory-guided PPO, and deployment.",
     tldr: "Predict a human demonstration’s future hand–object trajectory, retarget the hand motion, and use the predicted object motion as a reusable PPO reward. The object trajectory—not a new RL algorithm—is the paper’s central contribution.",
     problem: [
@@ -187,7 +187,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation",
     venue: "AAAI 2026",
     badges: ["VLA", "latent action", "diffusion", "bimanual", "long-horizon"],
-    figure: "../overview_assets/latentvla.png",
+    figure: "../overview_assets/latentvla/teaser.png",
     figureCaption: "LatentVLA separates latent-action representation, diffusion planning, and low-level action decoding.",
     tldr: "Learn a continuous action latent from mixed human-video and robot data, plan a 16-step latent sequence with diffusion, then decode it into bimanual actions. Language attention removes irrelevant visual motion; absolute time disambiguates visually similar task phases.",
     problem: [
@@ -275,7 +275,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment",
     venue: "AAAI 2026",
     badges: ["RL + retargeting", "human video", "residual policy", "cross-hand"],
-    figure: "../overview_assets/pkda.png",
+    figure: "../overview_assets/pkda/teaser.png",
     figureCaption: "PKDA first proposes a kinematic trajectory, then corrects contact dynamics and reconstructs wrist motion.",
     tldr: "Turn a human RGB manipulation video into a robot trajectory in stages: precise fingertip retargeting supplies the main action, a small residual RL policy repairs grasp physics, and object motion reconstructs the wrist path after grasping.",
     problem: [
@@ -370,7 +370,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation",
     venue: "AAAI 2026",
     badges: ["grasp synthesis", "diffusion", "intent conditioning", "MANO"],
-    figure: "../overview_assets/sns-grasp.png",
+    figure: "../overview_assets/sns-grasp/teaser.png",
     figureCaption: "SNS-Grasp uses intent gradients to rescale diffusion noise per joint, followed by geometry-aware refinement.",
     tldr: "Generate a hand grasp for an intent such as use or hold, estimate which joints matter to that intent from a classifier’s gradients, reduce diffusion noise only for those joints, and refine the resulting MANO mesh against object geometry.",
     problem: [
@@ -458,7 +458,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "ASPIRE: Agentic Skills Discovery for Robotics",
     venue: "arXiv 2026",
     badges: ["code-as-policy", "coding agent", "skill library", "evolutionary search"],
-    figure: "../overview_assets/aspire.png",
+    figure: "../overview_assets/aspire/teaser.png",
     figureCaption: "A coordinator dispatches actor coding agents; each debugs a robot program against the execution engine, evolutionary search samples program variants, and audited repairs flow back into a shared skill library.",
     tldr: "A frontier coding agent writes code-as-policy robot programs, reads a per-primitive multimodal trace of what actually went wrong, patches the program, and distils the validated fix into a shared skill library that later tasks retrieve as in-context guidance. The trace engine — not the search — carries most of the gain, and the library is what transfers across tasks and embodiments.",
     problem: [
@@ -546,7 +546,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation",
     venue: "arXiv 2026",
     badges: ["code-as-policy", "benchmark", "test-time scaling", "GRPO sim-to-real"],
-    figure: "../overview_assets/capx.png",
+    figure: "../overview_assets/capx/teaser.png",
     figureCaption: "Task success over model release date across 7 tasks and 12 models against human-written programs, above the CaP-Gym / CaP-Bench / CaP-Agent0 stack.",
     tldr: "A measuring apparatus for code-as-policy agents — CaP-Gym, a REPL environment over 187 manipulation tasks, and CaP-Bench, which sweeps abstraction, interaction and perceptual grounding — plus two answers built from what it reveals: CaP-Agent0, training-free, and CaP-RL, a post-trained 7B coder. The organising finding is that frontier models still trail human experts at low-level robot code, and that interaction budget closes the gap far more than nicer primitives do.",
     problem: [
@@ -637,7 +637,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     title: "Twisting Lids Off with Two Hands",
     venue: "CoRL 2024",
     badges: ["sim-to-real RL", "bimanual", "Allegro × 2", "exploration shaping", "zero-shot transfer"],
-    figure: "../overview_assets/twisting-lids.png",
+    figure: "../overview_assets/twisting-lids/teaser.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that differ in shape, size, mass, material and colour.",
     tldr: "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, with no demonstrations anywhere in the pipeline. The authors argue that the barrier is exploration rather than control: across 32 finger DoF almost every interaction mode RL discovers is a dead end, and nothing tells it which ones are not. So they constrain which fingertips belong on which part of the object and terminate the rollouts that have entered a known trap, leaving a plain RL objective to reward turning the lid. A policy trained on simulated cylinders transfers zero-shot and turns the best real bottle 946° in 30 s, where every baseline stays in single or double digits.",
     coreInsight: [

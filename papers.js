@@ -3,6 +3,7 @@
 window.PAPERS = [
   // ===== Dexterous manipulation reading list (repo root) =====
   {
+    id: "twisting-lids",
     title: "Twisting Lids Off with Two Hands",
     image: "https://arxiv.org/html/2403.02338/x1.png",
     collection: "Dex Manipulation",
@@ -182,6 +183,7 @@ window.PAPERS = [
     tags: ["imitation-learning", "human-video", "dexterous", "manipulation"]
   },
   {
+    id: "bidexhands",
     title: "Towards Human-Level Bimanual Dexterous Manipulation with Reinforcement Learning",
     summary: "overview/bidexhands.html",
     image: "https://ar5iv.labs.arxiv.org/html/2206.08686/assets/x2.png",
@@ -191,6 +193,7 @@ window.PAPERS = [
     tags: ["RL", "bimanual", "dexterous", "benchmark", "manipulation"]
   },
   {
+    id: "dexmimicgen",
     title: "DexMimicGen: Automated Data Generation for Bimanual Dexterous Manipulation via Imitation Learning",
     summary: "overview/dexmimicgen.html",
     image: "https://dexmimicgen.github.io/resources/pipeline.jpg",
@@ -208,6 +211,7 @@ window.PAPERS = [
     tags: ["NVIDIA", "RL", "dexterous", "scaling", "manipulation"]
   },
   {
+    id: "hato",
     title: "Learning Visuotactile Skills with Two Multifingered Hands",
     summary: "overview/hato.html",
     image: "https://toruowo.github.io/hato/figures/overview.png",
@@ -620,6 +624,7 @@ window.PAPERS = [
 
   // ===== Landscape overview: bimanual & dexterous multi-task (arXiv-only, no local PDF) =====
   {
+    id: "aloha_unleashed",
     title: "ALOHA Unleashed: A Simple Recipe for Robot Dexterity",
     image: "https://arxiv.org/html/2410.13126/x1.png",
     collection: "Landscape: bimanual-dex",
@@ -631,6 +636,7 @@ window.PAPERS = [
     tags: ["DeepMind", "imitation-learning", "diffusion", "bimanual", "dexterous", "scaling"]
   },
   {
+    id: "dexteritygen",
     title: "DexterityGen: Foundation Controller for Unprecedented Dexterity",
     image: "https://zhaohengyin.github.io/dexteritygen/images/idea.png",
     collection: "Landscape: bimanual-dex",
@@ -642,6 +648,7 @@ window.PAPERS = [
     tags: ["Berkeley", "RL", "sim-to-real", "dexterous", "tool-use", "teleoperation"]
   },
   {
+    id: "mimic_one",
     title: "mimic-one: a Scalable Model Recipe for General Purpose Robot Dexterity",
     image: "https://arxiv.org/html/2506.11916/extracted/6539512/Fig1-overview.png",
     collection: "Landscape: bimanual-dex",
@@ -653,6 +660,7 @@ window.PAPERS = [
     tags: ["diffusion", "imitation-learning", "dexterous", "teleoperation"]
   },
   {
+    id: "bimanual_flow_video",
     title: "Towards a Generalizable Bimanual Foundation Policy via Flow-based Video Prediction",
     image: "https://arxiv.org/html/2505.24156/x1.png",
     collection: "Landscape: bimanual-dex",
@@ -664,6 +672,7 @@ window.PAPERS = [
     tags: ["diffusion", "bimanual", "video-prediction", "imitation-learning"]
   },
   {
+    id: "bunny_visionpro",
     title: "Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning",
     image: "https://arxiv.org/html/2407.03162/x1.png",
     collection: "Landscape: bimanual-dex",
@@ -675,6 +684,7 @@ window.PAPERS = [
     tags: ["UCSD", "teleoperation", "bimanual", "dexterous", "imitation-learning"]
   },
   {
+    id: "maniptrans",
     title: "ManipTrans: Efficient Dexterous Bimanual Manipulation Transfer via Residual Learning",
     image: "https://maniptrans.github.io/pipeline.png",
     collection: "Landscape: bimanual-dex",
@@ -686,6 +696,7 @@ window.PAPERS = [
     tags: ["RL", "bimanual", "dexterous", "sim-to-real", "retargeting"]
   },
   {
+    id: "dexmachina",
     title: "DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation",
     image: "https://project-dexmachina.github.io/dexmachina-teaser-website.png",
     collection: "Landscape: bimanual-dex",
@@ -697,6 +708,7 @@ window.PAPERS = [
     tags: ["Stanford", "NVIDIA", "RL", "bimanual", "dexterous", "retargeting"]
   },
   {
+    id: "asymdex",
     title: "AsymDex: Asymmetry and Relative Coordinates for RL-based Bimanual Dexterity",
     image: "https://arxiv.org/html/2411.13020/x1.png",
     collection: "Landscape: bimanual-dex",
@@ -708,6 +720,7 @@ window.PAPERS = [
     tags: ["RL", "bimanual", "dexterous"]
   },
   {
+    id: "dynamic_handover",
     title: "Dynamic Handover: Throw and Catch with Bimanual Hands",
     image: "https://ar5iv.labs.arxiv.org/html/2309.05655/assets/figure/pipeline.png",
     collection: "Landscape: bimanual-dex",
@@ -719,6 +732,7 @@ window.PAPERS = [
     tags: ["UCSD", "RL", "bimanual", "dexterous", "sim-to-real"]
   },
   {
+    id: "humanoidgen",
     title: "HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning",
     image: "https://openhumanoidgen.github.io/static/images/method.png",
     collection: "Landscape: bimanual-dex",
@@ -730,6 +744,7 @@ window.PAPERS = [
     tags: ["data-collection", "bimanual", "dexterous", "LLM", "dataset"]
   },
   {
+    id: "anybimanual",
     title: "AnyBimanual: Transferring Unimanual Policy for General Bimanual Manipulation",
     image: "https://anybimanual.github.io/resources/method/pipeline.png",
     collection: "Landscape: bimanual-dex",
@@ -741,6 +756,7 @@ window.PAPERS = [
     tags: ["bimanual", "imitation-learning", "manipulation"]
   },
   {
+    id: "peract2",
     title: "PerAct2: Benchmarking and Learning for Robotic Bimanual Manipulation Tasks",
     image: "https://bimanual.github.io/media/figures/system_architecture.png",
     collection: "Landscape: bimanual-dex",
@@ -752,6 +768,7 @@ window.PAPERS = [
     tags: ["bimanual", "benchmark", "imitation-learning"]
   },
   {
+    id: "voxact_b",
     title: "VoxAct-B: Voxel-Based Acting and Stabilizing Policy for Bimanual Manipulation",
     image: "https://voxact-b.github.io/static/images/figure1_v08.png",
     collection: "Landscape: bimanual-dex",
@@ -763,6 +780,7 @@ window.PAPERS = [
     tags: ["USC", "bimanual", "imitation-learning", "VLA"]
   },
   {
+    id: "anydexgrasp",
     title: "AnyDexGrasp: General Dexterous Grasping for Different Hands with Human-level Learning Efficiency",
     image: "https://graspnet.net/anydexgrasp/assets/images/model.jpg",
     collection: "Landscape: bimanual-dex",
@@ -774,6 +792,7 @@ window.PAPERS = [
     tags: ["RL", "grasping", "dexterous", "real-world"]
   },
   {
+    id: "dexgrasp_anything",
     title: "DexGrasp Anything: Towards Universal Robotic Dexterous Grasping with Physics Awareness",
     image: "https://arxiv.org/html/2503.08257/x1.png",
     collection: "Landscape: bimanual-dex",
@@ -785,6 +804,7 @@ window.PAPERS = [
     tags: ["diffusion", "grasping", "dexterous"]
   },
   {
+    id: "robustdexgrasp",
     title: "RobustDexGrasp: Robust Dexterous Grasping of General Objects from Single-view Perception",
     collection: "Landscape: bimanual-dex",
     file: null,
@@ -796,6 +816,7 @@ window.PAPERS = [
     tags: ["ETH-Zurich", "RL", "grasping", "dexterous", "sim-to-real"]
   },
   {
+    id: "dexgraspnet2",
     title: "DexGraspNet 2.0: Learning Generative Dexterous Grasping in Large-scale Synthetic Cluttered Scenes",
     collection: "Landscape: bimanual-dex",
     file: null,
@@ -817,6 +838,7 @@ window.PAPERS = [
     tags: ["PKU", "grasp-synthesis", "grasping", "dexterous", "sim-to-real", "dataset"]
   },
   {
+    id: "dexvlg",
     title: "DexVLG: Dexterous Vision-Language-Grasp Model at Scale",
     image: "https://jiaweihe.com/static/image/dexvlg.png",
     collection: "Landscape: bimanual-dex",
@@ -828,6 +850,7 @@ window.PAPERS = [
     tags: ["VLA", "grasping", "dexterous", "diffusion", "dataset"]
   },
   {
+    id: "egodex",
     title: "EgoDex: Learning Dexterous Manipulation from Large-Scale Egocentric Video",
     image: "https://arxiv.org/html/2505.11709v3/figs/collage_edit.jpg",
     collection: "Landscape: bimanual-dex",
@@ -839,6 +862,7 @@ window.PAPERS = [
     tags: ["Apple", "dataset", "dexterous", "human-video", "imitation-learning"]
   },
   {
+    id: "hug",
     title: "HUG: Human Universal Grasping",
     image: "https://grasping.io/static/images/teaser.jpg",
     collection: "Landscape: bimanual-dex",
@@ -850,6 +874,7 @@ window.PAPERS = [
     tags: ["NYU", "grasping", "dexterous", "flow-matching", "human-video", "retargeting"]
   },
   {
+    id: "enpire",
     title: "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World",
     image: "https://research.nvidia.com/labs/gear/enpire/robot_farm.min.jpg",
     collection: "Landscape: bimanual-dex",
@@ -861,6 +886,7 @@ window.PAPERS = [
     tags: ["NVIDIA", "self-improving", "agentic", "RL", "bimanual", "dexterous", "real-world"]
   },
   {
+    id: "sam3",
     title: "SAM 3: Segment Anything with Concepts",
     image: "https://raw.githubusercontent.com/facebookresearch/sam3/main/assets/model_diagram.png",
     collection: "Perception",
@@ -1265,8 +1291,9 @@ window.PAPERS = [
     tags: ["diffusion", "grasp-synthesis", "grasping", "dexterous"]
   },
   {
+    id: "partdextog",
     title: "PartDexTOG: Generating Dexterous Task-Oriented Grasping via Language-driven Part Analysis",
-    image: "overview_assets/partdextog.png",
+    image: "overview_assets/partdextog/teaser.png",
     collection: "Grasp Synthesis", file: null, cites: 2,
     arxiv: "https://arxiv.org/abs/2505.12294", project: null, venue: "arXiv 2025",
     desc: "LLM generates category/part-level grasp descriptions; a part-conditional diffusion model synthesizes task-oriented grasps.",
@@ -1299,6 +1326,7 @@ window.PAPERS = [
     tags: ["PKU", "RL", "grasping", "dexterous", "sim-to-real"]
   },
   {
+    id: "unidexgrasppp",
     title: "UniDexGrasp++: Improving Dexterous Grasping Policy Learning via Geometry-aware Curriculum and Iterative Generalist-Specialist Learning",
     summary: "overview/unidexgrasppp.html",
     image: "https://pku-epic.github.io/UniDexGrasp++/images/teaser.jpg",
@@ -1348,6 +1376,7 @@ window.PAPERS = [
     tags: ["NVIDIA", "RL", "sim-to-real", "grasping", "dexterous"]
   },
   {
+    id: "dexgraspvla",
     title: "DexGraspVLA: A Vision-Language-Action Framework Towards General Dexterous Grasping",
     summary: "overview/dexgraspvla.html",
     image: "https://dexgraspvla.github.io/assets/images/method.jpg",
@@ -1511,8 +1540,9 @@ window.PAPERS = [
     tags: ["diffusion", "grasping", "dexterous", "handover"]
   },
   {
+    id: "human_like_grasp",
     title: "Toward Human-Like Grasp: Dexterous Grasping via Semantic Representation of Object-Hand",
-    image: "overview_assets/human_like_grasp.png",
+    image: "overview_assets/human_like_grasp/teaser.png",
     collection: "Grasp Synthesis", file: null, cites: 70,
     arxiv: null, project: null, venue: "ICCV 2021",
     desc: "Object-hand semantic representation segments functional areas to guide human-like functional dexterous grasps.",
@@ -1542,6 +1572,7 @@ window.PAPERS = [
     tags: ["grasp-synthesis", "grasping", "dexterous", "one-shot"]
   },
   {
+    id: "multi-keypoint-affordance",
     title: "Multi-Keypoint Affordance Representation for Functional Dexterous Grasping",
     image: "https://arxiv.org/html/2502.20018/x2.png",
     collection: "Grasp Synthesis", file: null, cites: 3,
@@ -1842,6 +1873,7 @@ window.PAPERS = [
     tags: ["VLA", "object-centric", "manipulation", "robustness", "imitation-learning"]
   },
   {
+    id: "afforddex",
     title: "Towards Affordance-Aware Robotic Dexterous Grasping with Human-like Priors",
     image: "https://afforddex.github.io/static/images/pipeline.png",
     collection: "Grasp Synthesis", file: null, cites: null,
@@ -4381,6 +4413,7 @@ window.PAPERS = [
     tags: ["tactile", "grasping", "sim-to-real", "vision", "hardware"]
   },
   {
+    id: "pkda",
     title: "Dexterous Manipulation Transfer via Progressive Kinematic-Dynamic Alignment",
     collection: "Dex Manipulation",
     file: null,
@@ -4405,6 +4438,7 @@ window.PAPERS = [
     tags: ["grasping", "dataset", "perception"]
   },
   {
+    id: "latentvla",
     title: "LatentVLA: Taming Latent Space for Generalizable and Long-Horizon Bimanual Manipulation",
     collection: "Landscape: bimanual-dex",
     file: null,
@@ -4417,6 +4451,7 @@ window.PAPERS = [
     tags: ["bimanual", "diffusion", "imitation-learning", "language-grounding", "vision", "hardware", "long-horizon"]
   },
   {
+    id: "pi0",
     title: "π₀: A Vision-Language-Action Flow Model for General Robot Control",
     image: "https://arxiv.org/html/2410.24164v3/teaser_fig.png",
     collection: "Landscape: bimanual-dex",
@@ -4428,6 +4463,7 @@ window.PAPERS = [
     tags: ["Physical-Intelligence", "VLA", "flow-matching", "generalist", "dexterous", "manipulation"]
   },
   {
+    id: "gemini_robotics",
     title: "Gemini Robotics: Bringing AI into the Physical World",
     image: "https://arxiv.org/html/2503.20020v1/gr_overview.png",
     collection: "Landscape: bimanual-dex",
@@ -4439,6 +4475,7 @@ window.PAPERS = [
     tags: ["DeepMind", "VLA", "generalist", "foundation-model", "dexterous", "manipulation"]
   },
   {
+    id: "groot_n1",
     title: "GR00T N1: An Open Foundation Model for Generalist Humanoid Robots",
     image: "https://arxiv.org/html/2503.14734v2/data_pyramid.png",
     collection: "Landscape: bimanual-dex",
@@ -4450,6 +4487,7 @@ window.PAPERS = [
     tags: ["NVIDIA", "VLA", "diffusion", "foundation-model", "humanoid", "dexterous"]
   },
   {
+    id: "rdt_1b",
     title: "RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation",
     image: "https://arxiv.org/html/2410.07864v2/framework.png",
     collection: "Landscape: bimanual-dex",
@@ -4461,6 +4499,7 @@ window.PAPERS = [
     tags: ["Tsinghua", "diffusion", "foundation-model", "bimanual", "manipulation", "imitation-learning"]
   },
   {
+    id: "dexvla",
     title: "DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control",
     image: "https://arxiv.org/html/2502.05855v3/framework2.png",
     collection: "Landscape: bimanual-dex",
@@ -4472,6 +4511,7 @@ window.PAPERS = [
     tags: ["VLA", "diffusion", "cross-embodiment", "dexterous", "manipulation"]
   },
   {
+    id: "demostart",
     title: "DemoStart: Demonstration-led Auto-curriculum Applied to Sim-to-Real with Multi-fingered Robots",
     image: "https://arxiv.org/html/2409.06613v2/figures/figure1a.png",
     collection: "Landscape: bimanual-dex",
@@ -4483,6 +4523,7 @@ window.PAPERS = [
     tags: ["DeepMind", "RL", "sim-to-real", "dexterous", "grasping", "manipulation"]
   },
   {
+    id: "diverse_bimanual_human",
     title: "Learning Diverse Bimanual Dexterous Manipulation Skills from Human Demonstrations (BiDexHD)",
     image: "https://arxiv.org/html/2410.02477v1/framework.png",
     collection: "Landscape: bimanual-dex",
@@ -4494,6 +4535,7 @@ window.PAPERS = [
     tags: ["PKU", "imitation-learning", "bimanual", "dexterous", "human-video", "manipulation"]
   },
   {
+    id: "lbm_multitask",
     title: "A Careful Examination of Large Behavior Models for Multitask Dexterous Manipulation",
     image: "https://arxiv.org/html/2507.05331v1/figures_final/lbm_teaser_new_fixed.png",
     collection: "Landscape: bimanual-dex",
@@ -4505,6 +4547,7 @@ window.PAPERS = [
     tags: ["TRI", "diffusion", "multi-task", "benchmark", "dexterous", "manipulation"]
   },
   {
+    id: "manidp",
     title: "ManiDP: Manipulability-Aware Diffusion Policy for Posture-Dependent Bimanual Manipulation",
     image: "https://arxiv.org/html/2510.23016v1/figs/fig6.png",
     collection: "Landscape: bimanual-dex",
@@ -4516,6 +4559,7 @@ window.PAPERS = [
     tags: ["diffusion", "bimanual", "imitation-learning", "manipulation"]
   },
   {
+    id: "simreal_humanoid",
     title: "Sim-to-Real Reinforcement Learning for Vision-Based Dexterous Manipulation on Humanoids",
     image: "https://arxiv.org/html/2502.20396v2/fig1.png",
     collection: "Landscape: bimanual-dex",
@@ -4527,6 +4571,7 @@ window.PAPERS = [
     tags: ["Berkeley", "RL", "sim-to-real", "bimanual", "dexterous", "humanoid"]
   },
   {
+    id: "object-centric-motion-priors",
     title: "Learning Object-Centric Motion Priors from Human for Robotic Dexterous Manipulation",
     collection: "Dex Manipulation",
     file: null,
@@ -4551,6 +4596,7 @@ window.PAPERS = [
     tags: ["hand-object", "diffusion", "deformable-object"]
   },
   {
+    id: "sns-grasp",
     title: "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation",
     collection: "Grasp Synthesis",
     file: null,
@@ -4716,6 +4762,7 @@ window.PAPERS = [
 
   // ===== Agentic / code-as-policy robot control (LLM & VLM agents, self-improvement loops) =====
   {
+    id: "aspire",
     title: "ASPIRE: Agentic Skills Discovery for Robotics",
     collection: "Agentic Control",
     file: null,
@@ -4726,6 +4773,7 @@ window.PAPERS = [
     tags: ["NVIDIA", "agentic", "code-as-policy", "self-improving", "skill-library", "LLM", "manipulation"]
   },
   {
+    id: "capx",
     title: "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation",
     collection: "Agentic Control",
     file: null,
