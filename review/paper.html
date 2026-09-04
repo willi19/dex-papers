@@ -82,6 +82,7 @@
   <script src="twisting-lids.v5.js"></script>
   <script src="twisting-lids.v6.js"></script>
   <script src="twisting-lids.v7.js"></script>
+  <script src="twisting-lids.v8.js"></script>
   <script>
     (() => {
       const VERSIONS = [
@@ -99,8 +100,10 @@
          meta:"2026-09-03 · 같은 독해를 구조만 다시 씀. exploration 서사를 한 곳으로, 설계 결정 표를 evidence 인과 문단에 흡수, designDecisions/whatMatters/novelty 삭제. 숫자 multiset 은 v4 와 동일"},
         {id:"twisting-lids-v6", label:"v6",
          meta:"2026-09-04 · field sparsity + cross-field 중복 검사. coreInsight 를 한 문단으로, output 삭제, pipeline 8→4, methodDetails 4→1, figures 3→2, evidence 9→5. 재현용 하이퍼파라미터 제거. v5 의 65%"},
-        {id:"twisting-lids-v7", label:"v7 (current)",
+        {id:"twisting-lids-v7", label:"v7",
          meta:"2026-09-04 · skip-it-when 열로 재점검. problem 3→2, researchNotes 3→2. v6 의 98%"},
+        {id:"twisting-lids-v8", label:"v8 (current)",
+         meta:"2026-09-04 · 공개 코드(ToruOwO/twisting-lids) 대조. reward weight 매핑 오류 수정(contact 2.5 / rotation 500.0), 왼손 penalty 3배·termination 수치·keypoint 링 구조 추가, first-system 주장 확인"},
       ];
       const app = document.getElementById("app");
       const tabs = document.getElementById("tabs");

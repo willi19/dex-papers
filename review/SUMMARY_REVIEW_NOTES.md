@@ -101,6 +101,32 @@ regrasping이고, 논문 자신이 진짜 dynamic의 예로 드는 건 throw-and
 
 ---
 
+### 2.6 공개 코드를 안 열고 논문 숫자만 믿음 ★ 유일하게 "틀린 사실"을 만든 실수
+
+2026-09-04, v8. v1~v7은 전부 PDF와 프로젝트 페이지만 보고 썼다. 스킬이 세 번째 소스로
+지정한 저장소(`ToruOwO/twisting-lids`)를 열자마자 v7의 문장 하나가 반증됐다.
+
+- 논문 부록은 `α1 = 2.5, α2 = 500.0, α3 = 20, α4 = −0.001, α5 = −1.0` 다섯 값을 나열만 하고
+  **어느 항에 붙는지 쓰지 않는다.** v7은 reward 항이 (1) twisting (2) contact 순으로
+  소개된다는 이유로 contact = 500.0, twisting = 2.5 로 읽었고, "shaping 항이 목적함수의
+  200배"라는 해석을 그 위에 올렸다.
+- `configs/task/DualURBottle.yaml`은 반대로 묶는다. `rotation_reward_scale: 500.0`,
+  `finger_distance_reward_scale: 2.5`. 즉 v7의 그 문장은 틀렸다.
+- 다만 결론은 살아남았다. 코드가 rotation 항을 스텝당 0.02 rad로 clamp하고 contact 항도
+  fingertip마다 상한을 두기 때문에, 스텝당 기여는 rotation ≤ 10, contact ≤ 40 이다.
+  **가중치의 순서와 실제 예산의 순서가 반대**라서, 논문만 읽으면 어느 쪽으로도 틀린다.
+
+같은 대조에서 논문에 없는 사실 네 개가 더 나왔고, 전부 해석을 바꾸는 것들이었다.
+왼손의 action / work penalty가 오른손의 3배(잡는 손과 돌리는 손의 분업이 "창발"보다
+"지정"에 가깝다), drop termination에 -50 penalty가 같이 붙는다, pose termination은
+100 step(10 s) 이후 0.2 rad, keypoint는 사람이 찍는 게 아니라 물체 반지름에서 생성되는 링.
+
+> 규칙: 코드가 공개돼 있으면 **reward weight / termination 조건 / observation spec** 세 가지는
+> 반드시 대조한다. 논문의 나열 순서로 매핑을 추론하지 말 것. 다르면 코드가 기준이고,
+> "다르다"는 사실 자체를 요약에 쓴다.
+
+---
+
 ## 3. 다음 요약 쓸 때 체크리스트
 
 **초고 후 redundancy 점검**
@@ -118,6 +144,7 @@ regrasping이고, 논문 자신이 진짜 dynamic의 예로 드는 건 throw-and
 - [ ] 하드웨어 / 통신 / 캘리브레이션 / 초기화 절차 중 재현에 필요한 것이 남아 있는가?
 - [ ] 논문의 자기 규정(형용사)을 검증했는가?
 - [ ] 실패 사례 / 저자가 놀랐다고 쓴 부분 / 부록에만 있는 실험을 확인했는가?
+- [ ] 코드가 공개돼 있으면 reward weight / termination / observation spec을 대조했는가?
 
 **비판의 질**
 - [ ] `limitations`가 일반론("더 많은 물체가 필요하다")이 아니라 이 논문 고유의 것인가?
@@ -133,3 +160,4 @@ regrasping이고, 논문 자신이 진짜 dynamic의 예로 드는 건 throw-and
 |---|---|---|---|
 | 2026-09-02 | Twisting Lids Off with Two Hands | 지표 정의(AD/TTF trade-off), reset의 위상, min의 의미, ArUco/ZeroMQ, "dynamic" 검증 | contact reward ×9, two-point ×5, large-network ×3 |
 | 2026-09-03 | Twisting Lids Off with Two Hands (v4 → v5) | Figure 5의 reward 정성 비교(gait constraint baseline), "first" 주장을 검증 안 했다는 명시 | exploration 서사가 7개 필드에 분산. `designDecisions`를 `evidence`로 흡수하고 `whatMatters` / `novelty` 삭제 |
+| 2026-09-04 | Twisting Lids Off with Two Hands (v7 → v8) | 공개 코드를 한 번도 안 열었음. reward weight 매핑이 반대였고, 왼손 penalty 3배 / termination 수치 / keypoint 링 생성이 전부 코드에만 있었다 | 없음. v7 문장은 유지하고 코드 사실을 해석이 바뀌는 자리에만 넣음 |
