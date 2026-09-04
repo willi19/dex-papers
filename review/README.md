@@ -18,7 +18,8 @@
 | v3 | 2026-09-03 | `paper_summaries.js` | `9e9a5c3` | [paper.html?id=twisting-lids-v3](paper.html?id=twisting-lids-v3) |
 | v4 | 2026-09-03 | `paper_summaries.js` | `a5602ab` | [paper.html?id=twisting-lids-v4](paper.html?id=twisting-lids-v4) |
 | v5 | 2026-09-03 | `paper_summaries.js` | `7d81ba5` | [paper.html?id=twisting-lids-v5](paper.html?id=twisting-lids-v5) |
-| v6 (현행) | 2026-09-04 | `paper_summaries.js` | (this session) | [paper.html?id=twisting-lids-v6](paper.html?id=twisting-lids-v6) |
+| v6 | 2026-09-04 | `paper_summaries.js` | `5051235` | [paper.html?id=twisting-lids-v6](paper.html?id=twisting-lids-v6) |
+| v7 (현행) | 2026-09-04 | `paper_summaries.js` | (this session) | [paper.html?id=twisting-lids-v7](paper.html?id=twisting-lids-v7) |
 
 - **v0**: 한국어 4필드(`problem`/`idea`/`delta`/`basis`) 노트. `overview/` 바깥에 있던 최초 버전.
 - **v1**: 첫 report-style 요약. `overview/paper.html?id=twisting-lids`로 렌더링됨.
@@ -26,7 +27,8 @@
 - **v3**: `stop-slop` 스킬을 적용해 문장만 다시 씀.
 - **v4**: `paper-reading` 스킬로 PDF와 프로젝트 페이지부터 다시 읽음. 본문 그림 3장, 설계 결정 표 추가.
 - **v5**: 같은 독해를 구조만 다시 씀. 반복하던 필드 3개를 삭제.
-- **v6**: field sparsity 를 적용한 현행본. 채운 필드 안의 재현용 디테일까지 버려서 v5 의 65%.
+- **v6**: field sparsity 적용. 채운 필드 안의 재현용 디테일까지 버려서 v5 의 65%.
+- **v7**: 스킬의 `skip it when` 열로 재점검한 현행본. problem 3→2, researchNotes 3→2.
 
 v1 → v2 차이:
 
