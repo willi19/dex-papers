@@ -136,6 +136,24 @@ normally stay out. Keep such a detail only when it explains a result, reveals a 
 design choice, changes interpretation, explains a failure, or carries the central idea.
 Do not turn the notes into a reproduction manual.
 
+**Write for a reader who works in the field.** The notes assume a researcher who knows
+the standard machinery: what PPO, PD control, domain randomisation, an asymmetric critic,
+a revolute joint and a teleoperation rig are, and what each is normally good and bad at.
+Do not define them, motivate them, or argue for them. The test on any sentence is:
+
+> **Could a competent reader in this field have written it without reading the paper?**
+
+If yes it is background, and it goes however true it is. What stays is what this paper
+adds to that reader's model. Background earns a clause only when the contribution turns
+on it, and then it gets the clause and not the paragraph: "friction in a threaded
+revolute joint has no faithful cheap model" belongs in the notes on a paper whose method
+is a friction hack, while "collecting demonstrations with two multi-fingered hands is
+hard" belongs in nobody's.
+
+`problem` is where this goes wrong most often, since generic difficulty is the easiest
+thing to write and it reads like motivation. Keep the difficulty that is specific to this
+task and to this paper's framing of it, and cut what the reader already carries.
+
 ## 7. Compression
 
 The output is far shorter than the source. Rough ceilings:
@@ -415,7 +433,8 @@ identical to a sourced one on rereading.
 **Figures and equations.** Does each figure carry an argument, and does it sit beside
 that argument? Is every equation necessary, and is its role explained?
 
-**Compression.** Is anything repeated? Are implementation details crowding out ideas?
+**Compression.** Did a sentence explain something the reader already knows? Is anything
+repeated? Are implementation details crowding out ideas?
 Can a paragraph disappear without harming understanding? Did you fill a field because
 the paper had something there, or because the schema listed it? Did a request to include
 something turn into a block that did not need to exist? Is this still a set of notes

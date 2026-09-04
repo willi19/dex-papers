@@ -45,6 +45,23 @@ termination으로 양쪽에서 제약한다 → ablation이 그걸 지지한다"
   못 채우는 필드는 지운다. 렌더러가 빈 필드를 건너뛰도록 고쳐 두었다.
 - `whatMatters` / `novelty`가 특히 위험하다. 둘 다 구조상 "앞에서 말한 것의 요약"이 되기 쉽다.
 
+### 1.5 독자가 이미 아는 것을 설명함
+
+2026-09-04, v8 검토. `problem` 두 항목 중 논문 고유의 정보는 (a) RL이 빠지는 실패 모드 두 개,
+(b) threaded joint의 static friction 모델이 없다는 것뿐이었다. 나머지는 로봇 하는 사람이
+논문을 안 읽고도 쓸 수 있는 문장이었다.
+
+- 논문이 나열한 세 동작(잡고, 손가락을 뚜껑에 대고, 두 손을 협응한다)은 **독자가 예측한다.**
+  논문에 있다는 이유로 옮기면 요약이 아니라 필사가 된다.
+- "teleoperation rig은 latency / retargeting / dexterity / cost 중 하나를 포기한다"는
+  **이 분야의 사실이지 이 논문의 사실이 아니다.** 반면 static friction 얘기는 brake link라는
+  해법이 거기에 걸려 있으므로 남는다. 배경은 **기여가 그것에 걸릴 때만, 문단이 아니라 절로.**
+- 같은 검토에서 `pipeline`이 asymmetric critic이 무엇인지 설명하고 있었고, 수식 항이 "손에는
+  손가락 끝이 4개"를 정의하고 있었다. 둘 다 삭제.
+
+> 문장 단위 테스트: **이 분야 사람이 논문을 안 읽고도 이 문장을 쓸 수 있는가?**
+> 쓸 수 있으면 배경이고, 사실이어도 뺀다. 2026-09-04 스킬 §6에 규칙으로 넣었다.
+
 ---
 
 ## 2. 반복해서 놓치는 정보
@@ -161,3 +178,4 @@ regrasping이고, 논문 자신이 진짜 dynamic의 예로 드는 건 throw-and
 | 2026-09-02 | Twisting Lids Off with Two Hands | 지표 정의(AD/TTF trade-off), reset의 위상, min의 의미, ArUco/ZeroMQ, "dynamic" 검증 | contact reward ×9, two-point ×5, large-network ×3 |
 | 2026-09-03 | Twisting Lids Off with Two Hands (v4 → v5) | Figure 5의 reward 정성 비교(gait constraint baseline), "first" 주장을 검증 안 했다는 명시 | exploration 서사가 7개 필드에 분산. `designDecisions`를 `evidence`로 흡수하고 `whatMatters` / `novelty` 삭제 |
 | 2026-09-04 | Twisting Lids Off with Two Hands (v7 → v8) | 공개 코드를 한 번도 안 열었음. reward weight 매핑이 반대였고, 왼손 penalty 3배 / termination 수치 / keypoint 링 생성이 전부 코드에만 있었다 | 없음. v7 문장은 유지하고 코드 사실을 해석이 바뀌는 자리에만 넣음 |
+| 2026-09-04 | Twisting Lids Off with Two Hands (v8 검토) | 없음 | 독자가 아는 배경을 설명함. problem 180→85 words, asymmetric critic 설명과 자명한 표기 정의 삭제 |
