@@ -91,7 +91,8 @@ window.PAPER_SUMMARIES = {
   "SNS-Grasp: Semantic-guided Noise Scaling for Grasp Generation": "overview/paper.html?id=sns-grasp",
   "Twisting Lids Off with Two Hands": "overview/paper.html?id=twisting-lids",
   "ASPIRE: Agentic Skills Discovery for Robotics": "overview/paper.html?id=aspire",
-  "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation": "overview/paper.html?id=capx"
+  "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation": "overview/paper.html?id=capx",
+  "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World": "overview/paper.html?id=enpire"
 };
 
 // Metadata corrections discovered after the main database was assembled.

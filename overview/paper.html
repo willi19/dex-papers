@@ -31,7 +31,14 @@
     .steps{list-style:none;padding:0!important;counter-reset:step}
     .steps li{position:relative;padding-left:34px;min-height:26px}
     .steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:#263b57;color:var(--accent);font-size:11px;font-weight:700}
-    .eq{white-space:pre-wrap;overflow-x:auto;margin:8px 0;padding:11px 13px;border-radius:8px;border:1px solid #343c49;background:#11151b;color:#e8edf5;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    /* Formulas and pseudocode keep their own line breaks and scroll sideways.
+       pre-wrap used to break long formulas at arbitrary points and flatten indentation. */
+    .eq{white-space:pre;overflow-x:auto;max-width:100%;tab-size:2;margin:8px 0;padding:11px 13px;border-radius:8px;border:1px solid #343c49;background:#11151b;color:#e8edf5;
+      font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;overscroll-behavior-x:contain}
+    .eq::-webkit-scrollbar{height:8px}
+    .eq::-webkit-scrollbar-thumb{background:#39414f;border-radius:4px}
+    code{font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;
+      background:#11151b;border:1px solid #2c333f;border-radius:4px;padding:1px 5px;white-space:nowrap}
     .meaning{color:var(--muted)!important;font-size:12px}
     table{width:100%;border-collapse:collapse;font-size:12.5px}
     th,td{padding:8px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
@@ -66,6 +73,8 @@
       const app = document.getElementById("app");
       const id = new URLSearchParams(location.search).get("id");
       const p = (window.DETAILED_PAPER_SUMMARIES || {})[id];
+      // Prose fields render as HTML so <strong>/<em>/<code> work, matching schema.md.
+      // esc() stays on formulas, alt text, and headings, where markup must show literally.
       const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
       const list = items => "<ul>" + items.map(x => "<li>" + x + "</li>").join("") + "</ul>";
       const block = (title, body, cls="") => '<section class="block '+cls+'"><h2>'+esc(title)+'</h2>'+body+"</section>";
@@ -82,18 +91,18 @@
       const badges = [p.venue, ...(p.badges || [])].filter(Boolean).map(x => '<span class="badge">'+esc(x)+'</span>').join("");
       let html = '<h1>'+esc(p.title)+'</h1><div class="badges">'+badges+"</div>";
       if (p.figure) html += '<img class="figure" src="'+esc(p.figure)+'" alt="'+esc(p.shortTitle)+' overview"><p class="caption">'+esc(p.figureCaption || "Figure from the official paper.")+"</p>";
-      html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+esc(p.tldr)+"</p></section>";
+      html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+p.tldr+"</p></section>";
       // coreInsight takes one paragraph (preferred, when it is one connected argument)
       // or an array of independent insights.
       if (p.coreInsight) html += block("Core insight",
         Array.isArray(p.coreInsight) ? list(p.coreInsight) : "<p>"+p.coreInsight+"</p>", "insight");
       html += grid(maybe("Problem", p.problem), maybe("Output", p.output));
       if (p.pipeline && p.pipeline.length) {
-        html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");
+        html += block("Pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+x.text+"</li>").join("")+"</ol>");
       }
       if (p.methodDetails && p.methodDetails.length) {
         html += block("Method details",p.methodDetails.map(x =>
-          "<h3>"+esc(x.name)+'</h3><p>'+esc(x.text)+"</p>"
+          "<h3>"+esc(x.name)+'</h3><p>'+x.text+"</p>"
         ).join(""));
       }
 
@@ -102,10 +111,10 @@
         html += block("Figures", figures.map(f =>
           '<figure class="infig"><img src="'+esc(f.src)+'" alt="'+esc(f.title)+'">'+
           '<figcaption><strong>'+esc(f.title)+'</strong>'+
-          '<span class="fpart"><b>Shows:</b> '+esc(f.shows)+'</span>'+
-          (f.read ? '<span class="fpart"><b>How to read it:</b> '+esc(f.read)+'</span>' : "")+
-          '<span class="fpart"><b>Why it matters:</b> '+esc(f.matters)+'</span>'+
-          (f.supports ? '<span class="fpart"><b>Supports:</b> '+esc(f.supports)+'</span>' : "")+
+          '<span class="fpart"><b>Shows:</b> '+f.shows+'</span>'+
+          (f.read ? '<span class="fpart"><b>How to read it:</b> '+f.read+'</span>' : "")+
+          '<span class="fpart"><b>Why it matters:</b> '+f.matters+'</span>'+
+          (f.supports ? '<span class="fpart"><b>Supports:</b> '+f.supports+'</span>' : "")+
           "</figcaption></figure>").join(""));
       }
       if (p.designDecisions) {
@@ -117,11 +126,11 @@
       }
       const eqs = (p.equations || []).map((eq,i) => {
         let s = "<h3>"+(i+1)+" · "+esc(eq.name)+'</h3><pre class="eq">'+esc(eq.formula)+"</pre>";
-        if (eq.meaning) return s + '<p class="meaning"><strong>Meaning:</strong> '+esc(eq.meaning)+"</p>";
-        s += '<p class="meaning"><strong>Intuition:</strong> '+esc(eq.intuition)+"</p>";
+        if (eq.meaning) return s + '<p class="meaning"><strong>Meaning:</strong> '+eq.meaning+"</p>";
+        s += '<p class="meaning"><strong>Intuition:</strong> '+eq.intuition+"</p>";
         if (eq.terms) s += "<ul>"+eq.terms.map(t => "<li>"+t+"</li>").join("")+"</ul>";
-        s += '<p class="meaning"><strong>Why it matters:</strong> '+esc(eq.matters)+"</p>";
-        if (eq.consequence) s += '<p class="meaning"><strong>Consequence:</strong> '+esc(eq.consequence)+"</p>";
+        s += '<p class="meaning"><strong>Why it matters:</strong> '+eq.matters+"</p>";
+        if (eq.consequence) s += '<p class="meaning"><strong>Consequence:</strong> '+eq.consequence+"</p>";
         return s;
       }).join("");
       if (eqs) html += block("Key equations",eqs);

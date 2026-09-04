@@ -879,7 +879,6 @@ window.PAPERS = [
     image: "https://research.nvidia.com/labs/gear/enpire/robot_farm.min.jpg",
     collection: "Landscape: bimanual-dex",
     file: null,
-    summary: "overview/enpire.html",
     arxiv: "https://arxiv.org/abs/2606.19980",
     project: "https://research.nvidia.com/labs/gear/enpire/",
     venue: "2026",

@@ -104,6 +104,17 @@ When the paper asserts something it never tests, write **Not demonstrated by the
 paper.** That sentence beats a confident paraphrase. When your reading contradicts the
 authors, say so and give your reason.
 
+**Traceability.** Every sentence describing a mechanism has to be traceable to a
+sentence in the source. Before writing one, be able to point at the line you are
+compressing. The failure mode here is plausibility, not memory: a mechanism that
+follows from how the system must work, or that a video implies, is still yours rather
+than the paper's, so label it as interpretation or cut it. Writing "every cycle breaks
+the contact set and rebuilds it" when the paper says only "the two hands should
+coordinate to avoid dropping the object while one hand twists the lid" invents a
+mechanism the reader will attribute to the authors. Check the compressed sentence too,
+since compression is where an unlabelled inference slips in: the source clause gets
+dropped and the gloss survives.
+
 ## 6. What to keep and what to cut
 
 The question is not "is this interesting?" but:
@@ -396,7 +407,10 @@ Before finishing, run one separate compression pass.
 clear? Is it clear why each major design choice exists?
 
 **Evidence.** Does every major claim have evidence behind it? Is interpretation
-distinguishable from demonstrated fact? Have the weak experiments been dropped?
+distinguishable from demonstrated fact? Have the weak experiments been dropped? For
+each mechanism sentence, can you point at the source line behind it? Search the source
+for the distinctive phrase and confirm it is there, since a plausible sentence looks
+identical to a sourced one on rereading.
 
 **Figures and equations.** Does each figure carry an argument, and does it sit beside
 that argument? Is every equation necessary, and is its role explained?

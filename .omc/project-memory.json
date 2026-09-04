@@ -1,0 +1,138 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1788411286791,
+  "projectRoot": "/home/mingi/dex-papers",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "scripts"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "overview": {
+      "path": "overview",
+      "purpose": null,
+      "fileCount": 39,
+      "lastAccessed": 1788411286789,
+      "keyFiles": [
+        "afforddex.html",
+        "aloha_unleashed.html",
+        "anybimanual.html",
+        "anydexgrasp.html",
+        "asymdex.html"
+      ]
+    },
+    "overview_assets": {
+      "path": "overview_assets",
+      "purpose": null,
+      "fileCount": 47,
+      "lastAccessed": 1788411286790,
+      "keyFiles": [
+        "afforddex.png",
+        "aloha_unleashed.png",
+        "anybimanual.png",
+        "anydexgrasp.png",
+        "aspire.png"
+      ]
+    },
+    "review": {
+      "path": "review",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1788411286790,
+      "keyFiles": [
+        "README.md",
+        "SUMMARY_REVIEW_NOTES.md",
+        "index.html",
+        "paper.html",
+        "twisting-lids.v0.html"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 2,
+      "lastAccessed": 1788411286790,
+      "keyFiles": [
+        "slop-check.mjs",
+        "summary-audit.mjs"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "index.html",
+      "accessCount": 3,
+      "lastAccessed": 1785408947942,
+      "type": "file"
+    },
+    {
+      "path": "papers.js",
+      "accessCount": 2,
+      "lastAccessed": 1785407221754,
+      "type": "file"
+    },
+    {
+      "path": "CLAUDE.md",
+      "accessCount": 1,
+      "lastAccessed": 1785408697278,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/paper-reading/SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1788411219523,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/paper-reading/references/domain-checks.md",
+      "accessCount": 1,
+      "lastAccessed": 1788411242676,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/paper-reading/references/schema.md",
+      "accessCount": 1,
+      "lastAccessed": 1788411269362,
+      "type": "file"
+    },
+    {
+      "path": "overview_assets/enpire/fig07_utilization.png",
+      "accessCount": 1,
+      "lastAccessed": 1788501803458,
+      "type": "file"
+    },
+    {
+      "path": "overview_assets/enpire/fig02_framework.png",
+      "accessCount": 1,
+      "lastAccessed": 1788501807927,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

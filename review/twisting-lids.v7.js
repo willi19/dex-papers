@@ -2,7 +2,14 @@
 // v6 re-read against the skill's "skip it when" column. problem 3 items to 2 (the two
 // closed routes merge, and the reward-recipe point becomes a clause), researchNotes 3
 // to 2 (the open question restated a limitation, so its payload moved into that
-// limitation). 98% of v6. No number changed.
+// limitation). 98% of v6.
+//
+// CORRECTION, same day: problem[0] described the task as "every twisting cycle breaks
+// the contact set and rebuilds it, and during each release one hand holds the whole
+// object". Neither clause is in the paper; both were plausible reconstruction carried
+// in since v4. Replaced with the three movements Section 3 actually lists, and the
+// same gloss was removed from coreInsight. Every other clause was verified against the
+// PDF by phrase search.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v7"] = {
@@ -13,9 +20,9 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v7"] = {
     figure: "../overview_assets/twisting-lids/teaser.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that share none of the training objects' properties.",
     tldr: "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, trained by RL in simulation with no demonstrations and transferred zero-shot. The authors argue the barrier is exploration rather than control, so they tell the policy which fingertips belong on which part of the object and delete the rollouts that have entered a known trap. A policy trained on plain simulated cylinders turns the best real bottle 946° in 30 s, where every baseline stays in single or double digits.",
-    coreInsight: "Two hands can hold an articulated object in a vast number of ways and almost none of those ways permit twisting, so RL across 32 finger DoF spends its budget in configurations from which the task is unreachable. The authors put their prior on contact structure and apply it from both directions: a keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 backs the reading over 5 seeds, since disabling the reward leaves the policy on the floor for the whole run and halving it lands between that and the full method, so the prior acts by degree. The novelty sits in the framing rather than the algorithm: PPO is untouched, and what changes is treating bimanual multi-part manipulation as a contact-mode search, which leaves everything else free to be coarse. The object is two points, the threads are a normal force from a third link, the actor is a three-layer MLP, and the behaviour that emerges was never scripted: in-grasp reorientation into a stable hold, then one hand stabilising while the other runs a grip-rotate-release gait. <em>Interpretation:</em> the reward and the terminations are one intervention seen from two sides, one naming where to go and one deleting where not to go, and the paper presents them as separate contributions.",
+    coreInsight: "Two hands can hold an articulated object in a vast number of ways and almost none of those ways permit twisting, so RL across 32 finger DoF spends its budget in configurations from which the task is unreachable. The authors put their prior on contact structure and apply it from both directions: a keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 backs the reading over 5 seeds, since disabling the reward leaves the policy on the floor for the whole run and halving it lands between that and the full method, so the prior acts by degree. The novelty sits in the framing rather than the algorithm: PPO is untouched, and what changes is treating bimanual multi-part manipulation as a contact-mode search, which leaves everything else free to be coarse. The object is two points, the threads are a normal force from a third link, the actor is a three-layer MLP, and the behaviour that emerges was never scripted: in-grasp reorientation into a stable hold, then one hand holding the object stable while the other twists the lid. <em>Interpretation:</em> the reward and the terminations are one intervention seen from two sides, one naming where to go and one deleting where not to go, and the paper presents them as separate contributions.",
     problem: [
-      "The object is two near-cylindrical bodies on a continuous revolute joint, held in the air by both hands with no table or fixture. Every twisting cycle breaks the contact set and rebuilds it, and during each release one hand holds the whole object, which is where the failures live: the bottle wedges between fingers, or gets pinched low where no finger motion recovers it into the palm.",
+      "The object is two rigid, near-cylindrical parts on a continuous revolute joint, and it has to stay in the hands throughout. The paper lists three movements the policy has to find on its own: grasp the dropped bottle and rotate it into a suitable pose, place the fingers of the hand nearer the lid around it to start the twisting motion, then coordinate both hands so the object does not drop while one of them twists. Most of the interaction modes RL stumbles into lead nowhere: the object gets stuck between fingers, or the fingertips pinch it low where they cannot reposition it into the palm.",
       "Both obvious routes are closed. Demonstrations work with parallel jaws and stall with two multi-fingered hands, because high-quality bimanual multi-finger data does not exist and the available gloves, the exoskeletons and the vision-based retargeting rigs each give up latency, accuracy, dexterity or cost. Simulation has its own obstacle: modelling friction and contact in a threaded revolute joint has been a long-standing difficulty, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need. The reward recipes on the shelf come from single-hand reorientation of a single-part rigid body."
     ],
     pipeline: [
@@ -49,7 +56,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v7"] = {
         intuition:"Pay each fingertip for sitting near the surface it has been assigned. The form is the argument: a be-in-contact-somewhere term would carve one smooth basin over the whole surface, while a min over sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface relation into a discrete assignment, so the gradient pulls towards one configuration instead of the average of all valid ones. <em>Interpretation:</em> the paper reports the intensity correlation and does not analyse the form.",
         terms:[
           "<code>X^L, X^R</code>: reference point sets sampled on the base and on the lid, placed by a person.",
-          "<code>F^L, F^R ∈ ℝ^{4×3}</code>: the four fingertips of each hand.",
+          "<code>F^L, F^R ∈ ℝ⁴ˣ³</code>: the four fingertips of each hand.",
           "<code>d</code>: distance to the <em>nearest</em> reference point, rather than to the surface."
         ],
         matters:"The reciprocal keeps the term bounded and dense everywhere, so it supplies gradient from the first random rollout, which is when the objective supplies nothing.",
@@ -57,7 +64,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v7"] = {
       },
       {
         name:"Twisting reward",
-        formula:"r_twisting = Δθ = q_bottle^{t+1} − q_bottle^{t}",
+        formula:"r_twisting = Δθ = q_bottle(t+1) − q_bottle(t)",
         intuition:"Pay for lid rotation accumulated this step, where q_bottle is the revolute joint angle between base and lid. There is no goal angle and no terminal bonus.",
         matters:"Angular Displacement is this quantity integrated over a trial, which is why the paper reports degrees instead of a success rate.",
         consequence:"A reward with no terminus produces a policy with no terminus. Removal, the thing the household experiments measure, never appears in the objective."

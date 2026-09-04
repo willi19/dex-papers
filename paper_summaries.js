@@ -632,6 +632,77 @@ window.DETAILED_PAPER_SUMMARIES = {
     ]
   },
 
+  "enpire": {
+    shortTitle: "ENPIRE",
+    title: "ENPIRE: Agentic Robot Policy Self-Improvement in the Real World",
+    venue: "arXiv 2026",
+    badges: ["physical autoresearch", "coding agents", "robot fleet", "real-world RL", "NVIDIA · CMU · Berkeley"],
+    figure: "../overview_assets/enpire/teaser.png",
+    figureCaption: "Eight bimanual YAM stations. Each one owns its hardware, its compute, and its own coding agent, and the only channel between stations is a shared Git repository.",
+    tldr: "A coding agent is given write access to a robot's training code and told to raise a real task's success rate on its own. The authors argue the missing piece was never the agent but a physical feedback loop it can drive, so they pay a one-time human cost to make one task's reset and verification automatic, freeze them as APIs, and let the agent iterate against real rollouts. On pin insertion a team of agents hill-climbs to near-perfect success in about three hours, and adding robots buys wall-clock time at a token price that grows faster than the saving.",
+    coreInsight: "Every agent self-improvement loop that works runs on a substrate where a trial is free: program execution for DreamCoder, Minecraft rollouts for Voyager, thousands of simulated episodes per minute for Eureka. In each of those the real robot appears only as a transfer target, never as the medium of iteration, because a physical trial needs a person to reset the scene and judge the outcome. ENPIRE's move is to buy that person out once. A human guides the agent through writing safety limits, a binary reward from tool calls, and a reset routine for one task; those are then frozen as immutable Gym APIs, and from that point the agent runs the loop with nobody watching: reset the scene, run a policy, check the outcome, then revise. What the authors get is not a better agent but a changed cost structure, and the paper is honest that the binding resource has moved rather than vanished: with the loop closed, robot access becomes the budget, so the natural next step is a fleet, and the natural next question is how well the agent uses it. That is why the contribution most likely to outlive the system is a pair of utilization metrics rather than the framework.",
+    pipeline: [
+      {name:"Stage one, environment construction with a human in the loop", text:"The coding agent writes the task's environment through procedural tool calls: hard safety limits whose violation counts as an immediate failure and triggers a reset, a binary reward synthesised from a few minutes of success and failure demonstrations, and an automated reset that returns the scene to the start of the hardest phase rather than to the beginning. A person assesses the result and the agent refines it. The authors treat this as a one-time cost amortised over everything that follows, and once accepted the code is frozen as an immutable Gym API."},
+      {name:"Stage two, autoresearch with nobody watching", text:"The agent receives the task description, write permission on a training codebase, and the objective of maximising real success rate. It reviews literature, proposes an algorithm variant (heuristics, code-as-policy, behaviour cloning, or offline and online RL), edits the training code, launches rollouts through the frozen APIs, then reads back the logged trajectories, the video, and the reward signals to decide what to try next."},
+      {name:"Scaling by fleet, coordinated through Git", text:"Eight bimanual YAM stations each run their own agent against their own hardware, with a local FastAPI server for control. There is no central state server: stations branch from a common baseline and share results by pushing and pulling, so agents cherry-pick or merge a peer's recipe when its average success rate looks better. The fleet stays coupled through that history alone, stations fail and recover on their own, and the Git history doubles as the record of what has been tried."}
+    ],
+    methodDetails: [
+      {name:"What the success number counts", text:"Success is the chance of finishing the task in one rollout given a fixed budget of eight retries, and the retries happen after the agent has seen the previous failure rather than as independent samples. The authors argue this is the right measure for dexterous tasks because it scores in-context recovery alongside one-shot precision. It also means a reported rate is not comparable to a best-of-N number from another paper, and pin insertion adds a stricter bar on top: the agent is asked for 50 consecutive real-world successes."}
+    ],
+    figures: [
+      {
+        src:"../overview_assets/enpire/fig02_framework.png",
+        title:"Figure 2: the two stages, and what three hours of autoresearch looks like",
+        shows:"Top left, the environment the agent writes (reset, reward, observation, step). Top right, the four steps it cycles through once that environment is frozen. Middle, the hill-climb timeline for pin insertion with each accepted idea and its gain. Bottom, the four real tasks.",
+        matters:"The middle band is the paper's argument in one picture. Progress is not smooth: BC regularisation alone is worth +10.8 pp, while the four other ideas the figure labels are worth between +0.4 and +3.8 pp. An automated loop is what makes that shape affordable to discover."
+      },
+      {
+        src:"../overview_assets/enpire/fig07_utilization.png",
+        title:"Figure 7: what the fleet costs",
+        shows:"Pin insertion measured at one agent, four agents, and eight agents. Left, robot against GPU utilization. Middle, mean token utilization against a linear projection. Right, tokens to success against time to success.",
+        read:"In the middle panel the line is what token use would be if it scaled in proportion to fleet size; the bars are what it did.",
+        matters:"The two curves on the right cross the argument. Time to success falls with fleet size while tokens to success climbs, and the middle panel shows the climb leaving the linear projection behind at eight agents. The authors report this against themselves rather than burying it."
+      }
+    ],
+    equations: [
+      {
+        name:"The physical autoresearch loop",
+        formula:"# Stage one (EN): human in the loop, once per task\nenv = agent.write_environment(task, human_feedback)\n    -> safety limits | get_reward(obs, act) | reset()\nfreeze(env)                      # immutable Gym API from here on\n\n# Stage two (PIRE): no human\nrepeat:\n    idea    = agent.propose(literature, past_logs)        # PI\n    code    = agent.edit(training_codebase, idea)\n    policy  = train(code)\n    rate    = env.evaluate(policy)                        # R: reset, execute, verify\n    logs    = trajectories + video + reward\n    git.push(my_branch); git.pull(peer_branches)          # E: adopt what worked",
+        intuition:"The paper has no mathematics, so this restates the loop its four module names stand for. The whole design is the placement of the freeze: everything above it needs a person, everything below it does not, and the second half is what runs for hours unattended.",
+        matters:"Read the loop and the failure modes follow from it. The reward is written once and never revisited, so its accuracy bounds every decision the agent makes afterwards. The Git line is the only coupling between stations, which is what lets the fleet scale and also what makes agents spend time reading each other instead of driving robots.",
+        consequence:"Two things the loop cannot do: change what counts as success, since verification sits above the freeze, and generalise the environment code to a new task, since stage one is per task."
+      }
+    ],
+    evidence: [
+      "<strong>The loop closes on hardware and climbs.</strong> On pin insertion, a 4 mm clearance task, an agent team goes from the floor to a near-perfect success rate inside about three hours of research wall-clock, with BC regularisation contributing +10.8 pp and later refinements worth +0.4, +0.9, and +1.3 pp. The authors report that convergence beats a frontier human-in-the-loop method, and state a 99% success rate across their dexterous tasks.",
+      "<strong>The real world is the part that is hard, not the agent.</strong> All three coding agents solve Push-T in simulation through heuristic learning, with two of them near 95% in about two hours, and two of the three then fail on the same task in the real world. The authors attribute the gap to non-determinism the simulator does not have: robot dynamics, contact friction, and object motion that vary between trials.",
+      "<strong>Robots buy time, tokens pay for it.</strong> Going from one agent to eight cuts Push-T from about five hours to about two, and pin insertion from more than 1.5 hours to about 40 minutes. In the same experiment robot utilization falls while GPU utilization rises, and the token budget grows faster than the wall-clock saving, which the authors trace to agents spending more of their time summarising peers' branches.",
+      "<strong>The scaffolding beats a policy trained end to end, in simulation.</strong> On RoboCasa365 the agent's generated scripts outscore the GR00T N1.5 VLA and outscore CaP-X, which is agentic tool use without the autoresearch loop. The protocol is matched: 40 episodes on a fixed seed and layout list, the same instruction, the same success predicate, no oracle poses for either side.",
+      "<strong>An ablation that cuts against the obvious.</strong> Codex with native image access reaches success first on a simplified Push-T, and the agent with no visual access at all beats the one given a callable image-understanding tool. The authors read this as the agent inferring task state from logs while repeated image calls add overhead. The ablation runs on a simplified Push-T that the authors built for controlled comparisons, with a relaxed success boundary, so it is an easier setting than the real task two of three agents failed."
+    ],
+    limitations: [
+      "<strong>The autonomy starts after the hard part.</strong> A person still names the task, judges the environment code, and signs off on the verification function; the paper calls this a one-time amortised cost, which is true per task and is also the part that does not carry to a new task. Whoever blesses the reward decides what the agent will optimise for the next three hours.",
+      "The reward is a binary classifier an agent wrote from a few minutes of demonstrations. The paper describes its construction, its dual-view design against false positives, and its latency budget of under 150 ms, without reporting how often it is wrong. Every success rate downstream inherits that error.",
+      "Scaling trades token efficiency for wall-clock, and the authors say so: tokens to success grow much faster than time to success falls. A fleet is the answer to a deadline rather than to a budget.",
+      "<strong>The evidence is curves and sentences.</strong> There is no results table for the real-world tasks. The 99% headline, the claim of beating a human-in-the-loop baseline, and the transfer of pin-insertion experience to GPU insertion each arrive as one sentence or one plot, without a per-task number and protocol beside them.",
+      "Perception caps the simulation result. SAM3 returns a wrong or unusable mask for small or ambiguous objects, and raising the top camera from 256 × 256 to 480 × 640 while letting the agent rewrite its prompts improves detection without fixing it."
+    ],
+    takeaway: [
+      "A self-improvement loop is defined by what one trial costs. Prior agent loops worked because execution was free; running one on hardware means paying once to automate reset and verification, and then treating robot time as the budget.",
+      "When the substrate is physical, success rate stops being a sufficient metric. Whether the fleet was kept busy is a separate question, which is why the utilization pair here is more portable than the framework around it.",
+      "Automating a research loop moves the human upstream rather than removing them. The person who writes the verifier still chooses the objective, and that choice is now harder to see."
+    ],
+    researchNotes: [
+      "<strong>Worth stealing:</strong> coordinating a fleet through Git alone. No central state server, stations fail and recover on their own, agents cherry-pick each other's commits, and the commit history is the experiment log for free.",
+      "<strong>Read alongside:</strong> CaP-X, from an overlapping group, whose skill synthesis supplies the reset routines here; Eureka, which writes rewards with an LLM but closes its loop in simulation; and AutoRT, which orchestrates a fleet to collect data rather than to iterate inside the loop."
+    ],
+    links: [
+      {label:"arXiv",url:"https://arxiv.org/abs/2606.19980"},
+      {label:"PDF",url:"https://arxiv.org/pdf/2606.19980"},
+      {label:"Project",url:"https://research.nvidia.com/labs/gear/enpire/"}
+    ]
+  },
+
   "twisting-lids": {
     shortTitle: "Twisting Lids Off",
     title: "Twisting Lids Off with Two Hands",
@@ -640,9 +711,9 @@ window.DETAILED_PAPER_SUMMARIES = {
     figure: "../overview_assets/twisting-lids/teaser.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that share none of the training objects' properties.",
     tldr: "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, trained by RL in simulation with no demonstrations and transferred zero-shot. The authors argue the barrier is exploration rather than control, so they tell the policy which fingertips belong on which part of the object and delete the rollouts that have entered a known trap. A policy trained on plain simulated cylinders turns the best real bottle 946° in 30 s, where every baseline stays in single or double digits.",
-    coreInsight: "Two hands can hold an articulated object in a vast number of ways and almost none of those ways permit twisting, so RL across 32 finger DoF spends its budget in configurations from which the task is unreachable. The authors put their prior on contact structure and apply it from both directions: a keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 backs the reading over 5 seeds, since disabling the reward leaves the policy on the floor for the whole run and halving it lands between that and the full method, so the prior acts by degree. The novelty sits in the framing rather than the algorithm: PPO is untouched, and what changes is treating bimanual multi-part manipulation as a contact-mode search, which leaves everything else free to be coarse. The object is two points, the threads are a normal force from a third link, the actor is a three-layer MLP, and the behaviour that emerges was never scripted: in-grasp reorientation into a stable hold, then one hand stabilising while the other runs a grip-rotate-release gait. <em>Interpretation:</em> the reward and the terminations are one intervention seen from two sides, one naming where to go and one deleting where not to go, and the paper presents them as separate contributions.",
+    coreInsight: "Two hands can hold an articulated object in a vast number of ways and almost none of those ways permit twisting, so RL across 32 finger DoF spends its budget in configurations from which the task is unreachable. The authors put their prior on contact structure and apply it from both directions: a keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 backs the reading over 5 seeds, since disabling the reward leaves the policy on the floor for the whole run and halving it lands between that and the full method, so the prior acts by degree. The novelty sits in the framing rather than the algorithm: PPO is untouched, and what changes is treating bimanual multi-part manipulation as a contact-mode search, which leaves everything else free to be coarse. The object is two points, the threads are a normal force from a third link, the actor is a three-layer MLP, and the behaviour that emerges was never scripted: in-grasp reorientation into a stable hold, then one hand holding the object stable while the other twists the lid. <em>Interpretation:</em> the reward and the terminations are one intervention seen from two sides, one naming where to go and one deleting where not to go, and the paper presents them as separate contributions.",
     problem: [
-      "The object is two near-cylindrical bodies on a continuous revolute joint, held in the air by both hands with no table or fixture. Every twisting cycle breaks the contact set and rebuilds it, and during each release one hand holds the whole object, which is where the failures live: the bottle wedges between fingers, or gets pinched low where no finger motion recovers it into the palm.",
+      "The object is two rigid, near-cylindrical parts on a continuous revolute joint, and it has to stay in the hands throughout. The paper lists three movements the policy has to find on its own: grasp the dropped bottle and rotate it into a suitable pose, place the fingers of the hand nearer the lid around it to start the twisting motion, then coordinate both hands so the object does not drop while one of them twists. Most of the interaction modes RL stumbles into lead nowhere: the object gets stuck between fingers, or the fingertips pinch it low where they cannot reposition it into the palm.",
       "Both obvious routes are closed. Demonstrations work with parallel jaws and stall with two multi-fingered hands, because high-quality bimanual multi-finger data does not exist and the available gloves, the exoskeletons and the vision-based retargeting rigs each give up latency, accuracy, dexterity or cost. Simulation has its own obstacle: modelling friction and contact in a threaded revolute joint has been a long-standing difficulty, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need. The reward recipes on the shelf come from single-hand reorientation of a single-part rigid body."
     ],
     pipeline: [
@@ -676,7 +747,7 @@ window.DETAILED_PAPER_SUMMARIES = {
         intuition:"Pay each fingertip for sitting near the surface it has been assigned. The form is the argument: a be-in-contact-somewhere term would carve one smooth basin over the whole surface, while a min over sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface relation into a discrete assignment, so the gradient pulls towards one configuration instead of the average of all valid ones. <em>Interpretation:</em> the paper reports the intensity correlation and does not analyse the form.",
         terms:[
           "<code>X^L, X^R</code>: reference point sets sampled on the base and on the lid, placed by a person.",
-          "<code>F^L, F^R ∈ ℝ^{4×3}</code>: the four fingertips of each hand.",
+          "<code>F^L, F^R ∈ ℝ⁴ˣ³</code>: the four fingertips of each hand.",
           "<code>d</code>: distance to the <em>nearest</em> reference point, rather than to the surface."
         ],
         matters:"The reciprocal keeps the term bounded and dense everywhere, so it supplies gradient from the first random rollout, which is when the objective supplies nothing.",
@@ -684,7 +755,7 @@ window.DETAILED_PAPER_SUMMARIES = {
       },
       {
         name:"Twisting reward",
-        formula:"r_twisting = Δθ = q_bottle^{t+1} − q_bottle^{t}",
+        formula:"r_twisting = Δθ = q_bottle(t+1) − q_bottle(t)",
         intuition:"Pay for lid rotation accumulated this step, where q_bottle is the revolute joint angle between base and lid. There is no goal angle and no terminal bonus.",
         matters:"Angular Displacement is this quantity integrated over a trial, which is why the paper reports degrees instead of a success rate.",
         consequence:"A reward with no terminus produces a policy with no terminus. Removal, the thing the household experiments measure, never appears in the objective."
