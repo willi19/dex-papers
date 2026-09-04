@@ -21,6 +21,8 @@
     .summary{padding:15px 17px;border:1px solid #385a82;border-radius:10px;background:#172131}
     .summary .label{display:block;color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
     .summary p{font-size:16px;line-height:1.5;margin:0}
+    .summary ul{font-size:16px;line-height:1.5;margin:0;padding-left:19px}
+    .summary li+li{margin-top:6px}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .block{padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:var(--panel)}
     .block h2{font-size:13px;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);margin:0 0 8px}
@@ -91,12 +93,13 @@
       const badges = [p.venue, ...(p.badges || [])].filter(Boolean).map(x => '<span class="badge">'+esc(x)+'</span>').join("");
       let html = '<h1>'+esc(p.title)+'</h1><div class="badges">'+badges+"</div>";
       if (p.figure) html += '<img class="figure" src="'+esc(p.figure)+'" alt="'+esc(p.shortTitle)+' overview"><p class="caption">'+esc(p.figureCaption || "Figure from the official paper.")+"</p>";
-      html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+p.tldr+"</p></section>";
-      // coreInsight takes one paragraph (preferred, when it is one connected argument)
-      // or an array of independent insights.
+      html += '<div class="report"><section class="summary"><span class="label">TL;DR</span>'
+        + (Array.isArray(p.tldr) ? list(p.tldr) : "<p>"+p.tldr+"</p>") + "</section>";
+      // TL;DR and coreInsight each take one string or an array. Reading order is
+      // TL;DR, then Problem, then Core insight: the problem earns the insight.
+      html += grid(maybe("Problem", p.problem), maybe("Output", p.output));
       if (p.coreInsight) html += block("Core insight",
         Array.isArray(p.coreInsight) ? list(p.coreInsight) : "<p>"+p.coreInsight+"</p>", "insight");
-      html += grid(maybe("Problem", p.problem), maybe("Output", p.output));
       if (p.pipeline && p.pipeline.length) {
         html += block("Pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+x.text+"</li>").join("")+"</ol>");
       }

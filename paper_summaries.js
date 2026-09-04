@@ -710,7 +710,11 @@ window.DETAILED_PAPER_SUMMARIES = {
     badges: ["sim-to-real RL", "bimanual", "Allegro × 2", "exploration shaping", "zero-shot transfer"],
     figure: "../overview_assets/twisting-lids/teaser.png",
     figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that share none of the training objects' properties.",
-    tldr: "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, learned by RL in simulation on plain cylinders with no demonstrations. Exploration across 32 finger DoF is the bottleneck, so the reward assigns each fingertip a surface and two termination rules delete the rollouts that reach a known trap. The policy transfers zero-shot to real bottles and to household jars it never saw.",
+    tldr: [
+      "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, learned by RL in simulation on plain cylinders with no demonstrations.",
+      "Exploration across 32 finger DoF is the bottleneck, so the reward assigns each fingertip a surface and two termination rules delete the rollouts that reach a known trap.",
+      "The policy transfers zero-shot to real bottles and to household jars it never saw."
+    ],
     coreInsight: [
       "<strong>The bottleneck is which contacts to make.</strong> Two hands can hold an articulated object in a vast number of ways and almost none of those ways permit twisting, so RL across 32 finger DoF spends its budget in configurations from which the task is unreachable. The reward recipes on the shelf come from single-hand reorientation of a single-part body, so none of them says which surface a finger belongs on.",
       "<strong>The prior goes on that gap, from both directions.</strong> A keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 backs the reading over 5 seeds, since disabling the reward leaves the policy on the floor and halving it lands in between, so the prior acts by degree.",

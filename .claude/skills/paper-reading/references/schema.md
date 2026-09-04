@@ -18,14 +18,14 @@ below are the usual range, never a quota. See "Where the output goes" in SKILL.m
 |---|---|---|---|
 | identity | `shortTitle`, `title`, `venue`, `badges` | strings, string[] | always |
 | teaser | `figure`, `figureCaption` | string paths | always |
-| TL;DR | `tldr` | one string, 2 to 3 sentences | always |
+| TL;DR | `tldr` | one string or string[], 2 to 3 sentences either way | always |
 | links | `links` | `{label, url}[]` | always |
 | Problem | `problem` | string[] | usually |
 | Pipeline | `pipeline` | `{name, text}[]` | usually, and only the steps a reader has to follow |
 | Evidence | `evidence` | string[] | usually, around 2 to 4 that carry a claim |
 | Limitations | `limitations` | string[] | usually, the ones that bind |
 | Takeaways | `takeaway` | string[] | usually, a small number |
-| Core insight | `coreInsight` | one string (preferred) or string[] | when the idea does not fit inside `problem` or `pipeline`. One paragraph when it is one connected argument; an array only for independent insights |
+| Core insight | `coreInsight` | one string or string[] | when the idea does not fit inside `problem` or `pipeline`. A paragraph holds one connected argument; an array holds several. When it holds both, keep the causal chain inside one item rather than splitting it across items |
 | what you get | `output` | string[] | rarely. Results belong in `evidence` |
 | in-report figures | `figures` | `{src, title, shows, matters}` plus optional `read`, `supports` | when a figure carries an argument |
 | Design decisions | `designDecisions` | `{decision, problem, motivation, mechanism, evidence}[]` | when a choice needs a row the pipeline cannot hold |
@@ -50,7 +50,7 @@ entries. New entries use the four-part form. The renderer handles both.
 an equation, questioning the paper's framing, an accidental property worth recording.
 It is not a second pipeline.
 
-Section order is fixed by the renderer. Order the `figures` array so each figure sits
+Section order is fixed by the renderer, and it runs TL;DR, Problem, Core insight, so the problem earns the insight. Order the `figures` array so each figure sits
 beside the argument it carries.
 
 ## Prose conventions inside fields
