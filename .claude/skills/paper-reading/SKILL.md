@@ -137,6 +137,9 @@ The output is far shorter than the source. Rough ceilings:
 16-page paper whose idea compresses well deserves half a page. Never add material to
 reach a target, and never keep material because there is room for it.
 
+When filling an available field and keeping the notes concise pull against each other,
+choose concision. If the central idea can be understood in half a page, stop there.
+
 Ask, for every paragraph: if I delete this, is an important understanding lost? For
 every sentence: does this add information, reasoning or interpretation that is not
 already here? For every section: is this explained elsewhere already? Delete, merge,
@@ -301,22 +304,31 @@ insight is one connected argument, and an array only when the items are independ
 insights. The same preference applies wherever a field takes a list: a list of three
 fragments that belong to one thought should be one passage.
 
-One fact has one home. Filled fields own this much and refer back rather than restate:
+A record with 6 populated fields beats a complete-looking one with 14 redundant fields.
+A field may hold one sentence, or one item, or nothing. That is expected, not a gap.
 
-| Field | Owns |
-|---|---|
-| `tldr` | the story in 2 to 3 sentences |
-| `problem` | why the task is hard, why prior work falls short |
-| `coreInsight` | the idea, in conceptual terms |
-| `pipeline` | how the system runs, input to output |
-| `designDecisions` | why a choice was made, when the chain fits nowhere else |
-| `equations` | the maths that carries the method |
-| `evidence` | which experiment supports which claim |
-| `whatMatters` | conclusions synthesised across the evidence |
-| `novelty` | what is new, bucketed |
-| `limitations` | the ones that bind |
-| `takeaway` | lessons that outlive the paper |
-| `researchNotes` | ideas worth stealing, open questions |
+One fact has one home. Each field owns this much, and skips itself when the right
+column applies:
+
+| Field | Owns | Skip it when |
+|---|---|---|
+| `tldr` | the story in 2 to 3 sentences | never, it is structural |
+| `coreInsight` | the central causal story | the paper has no single argument to carry |
+| `problem` | why the task is hard, why prior work falls short | the problem is already clear from `coreInsight` |
+| `output` | what the work leaves behind | by default. Results belong in `evidence` |
+| `pipeline` | the major stages needed to understand the method | it would become an implementation manual |
+| `methodDetails` | mechanisms or analysis the pipeline and insight cannot carry | by default |
+| `figures` | why the selected figure is useful | the figure carries no argument |
+| `equations` | the maths the central mechanism needs | the method is understandable without it |
+| `designDecisions` | a choice whose chain fits nowhere else | the pipeline or the evidence already tells it |
+| `comparison` | the smallest table that makes the main comparison legible | prose carries the numbers already |
+| `evidence` | what the results establish | it would repeat a figure or table description |
+| `whatMatters` | synthesis across experiments | usually. `coreInsight` explains the importance already |
+| `novelty` | what is new, bucketed | usually. One sentence inside `coreInsight` does it |
+| `rewardBaseline` | standard objective against paper-specific term | unless that distinction is itself the insight |
+| `limitations` | the ones that change how the contribution reads | the limitation is generic |
+| `takeaway` | reusable lessons | it restates the paper |
+| `researchNotes` | genuinely interesting implications, open questions | use sparingly |
 
 ## 18. Cross-field redundancy check
 
@@ -340,10 +352,33 @@ The recurring cases:
   insight: "the novelty is not PPO, it is using contact structure and failure-aware
   termination to make bimanual exploration tractable."
 
-The rendered page should carry each important idea once, in the place where it is most
-useful.
+The division of labour, worked through on one mechanism. Once the contact reward has
+been explained in `coreInsight`, the other fields do not re-explain it:
 
-## 19. Prose rules
+    coreInsight   why it exists and what it does causally
+    equations     the form, and only if the maths is needed
+    evidence      what the ablation establishes
+    takeaway      the general lesson, with no mechanism in it
+
+Each field adds something the others do not have. The rendered page carries each
+important idea once, in the place where it is most useful.
+
+## 19. Explicitness is not completeness
+
+A request to "include" something ("explain the equations", "include the pipeline
+figure", "define the metric", "discuss the ablation") means the information must be
+**represented somewhere**. It does not mean the information gets a dedicated block.
+
+- If the pipeline figure already makes the method clear, do not write a long `pipeline`
+  to satisfy "include the pipeline".
+- If an equation is explained under the equation, its meaning does not reappear later.
+- If a result figure and its caption establish a result, `evidence` does not describe
+  the same figure again.
+
+The requirement is **include the information**, never **create a separate block for the
+information**.
+
+## 20. Prose rules
 
 Run the `stop-slop` skill on the finished text. No em dashes anywhere, no adverbs,
 active voice with a real subject (the authors, the simulator, a person), no
@@ -353,7 +388,7 @@ active voice with a real subject (the authors, the simulator, a person), no
 A style pass never changes a claim. When you rewrite existing prose, extract the numbers
 from both versions and compare the multisets before committing.
 
-## 20. Final pass
+## 21. Final pass
 
 Before finishing, run one separate compression pass.
 
@@ -368,8 +403,9 @@ that argument? Is every equation necessary, and is its role explained?
 
 **Compression.** Is anything repeated? Are implementation details crowding out ideas?
 Can a paragraph disappear without harming understanding? Did you fill a field because
-the paper had something there, or because the schema listed it? Is this still a set of
-notes rather than a rewritten paper?
+the paper had something there, or because the schema listed it? Did a request to include
+something turn into a block that did not need to exist? Is this still a set of notes
+rather than a rewritten paper?
 
 **The last question.** If a researcher had only these notes and the title, would they
 remember what was interesting about the paper? If yes, stop. Do not add more because

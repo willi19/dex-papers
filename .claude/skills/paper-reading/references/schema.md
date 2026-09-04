@@ -26,10 +26,10 @@ below are the usual range, never a quota. See "Where the output goes" in SKILL.m
 | Limitations | `limitations` | string[] | usually, the ones that bind |
 | Takeaways | `takeaway` | string[] | usually, a small number |
 | Core insight | `coreInsight` | one string (preferred) or string[] | when the idea does not fit inside `problem` or `pipeline`. One paragraph when it is one connected argument; an array only for independent insights |
-| what you get | `output` | string[] | when what the reader gets is not obvious from the pipeline |
+| what you get | `output` | string[] | rarely. Results belong in `evidence` |
 | in-report figures | `figures` | `{src, title, shows, matters}` plus optional `read`, `supports` | when a figure carries an argument |
 | Design decisions | `designDecisions` | `{decision, problem, motivation, mechanism, evidence}[]` | when a choice needs a row the pipeline cannot hold |
-| deeper analysis | `methodDetails` | `{name, text}[]` | when analysis fits no other field |
+| deeper analysis | `methodDetails` | `{name, text}[]` | rarely, and only for analysis the pipeline and core insight cannot carry |
 | Equations | `equations` | `{name, formula, intuition, terms, matters, consequence}[]` | when the method cannot be understood without the maths |
 | numbers table | `comparison` | `{headers, rows}` | when a table clarifies |
 | What actually matters | `whatMatters` | string[] | when synthesis across experiments adds something |
