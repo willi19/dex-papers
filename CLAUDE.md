@@ -147,7 +147,7 @@ A landscape survey of papers, separate from the main browser:
 - `overview.html` — grouped card grid (figure + tagline + links), with a
   **📄 Summary** button per card → its per-paper page, plus a button linking
   back and forth with `index.html`.
-- `overview/<key>.html` — one **report-style** summary page per paper. This is
+- `overview/<key>.html` — one long-form summary page per paper. This is
   the **legacy** form: a hand-written standalone HTML file. ~40 of them exist and
   they still work; do not write new ones (see "Writing a new summary" below).
 - `overview_assets/<key>.png` — the paper's teaser figure. **Tracked** (the repo
@@ -190,18 +190,20 @@ will overwrite whatever `papers.js` says. Three steps instead:
 
 Reading and writing one of these is a defined workflow, not a freehand task: invoke
 the **`paper-reading` skill** (`.claude/skills/paper-reading/SKILL.md`) before you
-start. It carries the reading protocol, the writing philosophy (the framework is for
-thinking; the page carries the compressed result, not one section per question), the
-rule that keeps the same fact from appearing in four sections, the figure and equation
-rules, the output schema (`references/schema.md`) and the domain interrogation lists
-(`references/domain-checks.md`).
+start. Its principle is *think broadly, write selectively*: the questions are a
+reasoning framework, and the record carries the compressed result rather than one
+section per question. It also holds the source protocol, the one-canonical-explanation
+rule, the figure and equation rules, the render slots (`references/schema.md`) and the
+domain interrogation lists (`references/domain-checks.md`).
 
 **HARD RULES for these pages:**
 
-1. **Summaries are report-style, never one effortless sentence.** Each
-   `overview/<key>.html` must answer, in depth: *what is this paper about? what
-   are the key ideas and contributions? what does it do?* Structure it as a
-   "What it is" paragraph + "Key ideas" + "Contributions & results" lists.
+1. **Depth is about understanding, not length or section count.** A summary must
+   answer *why does this paper exist, what did the authors change, why should it
+   help, and what does the evidence establish?* How many sections that takes is the
+   paper's call, not the schema's: a well-compressed record is the goal, and no
+   field is mandatory beyond identity, `tldr` and `links`. What is banned is the
+   effortless one-liner that answers none of it.
 2. **Ground every summary in the real sources** — read the PDF's figures and,
    when a project page exists, watch/utilize its videos & demos. Don't write
    from vague memory. Only state numbers/claims found in the sources; never

@@ -9,30 +9,30 @@ row, which is what `teasers.js` builds the library card image from.
 
 ## Field map
 
-The renderer skips any field you leave out, so the schema is a menu, not a form. Only
-identity, `tldr` and `links` are structural. Everything else is filled when the paper
-has something there that no other field already says. See "Shaping the output" in
-SKILL.md.
+The renderer skips any field you leave out, so these are render slots, not a form. Only
+identity, `tldr` and `links` are structural. Everything else exists so the paper has
+somewhere to put what it has, and a slot can be short, deep or absent. The item counts
+below are the usual range, never a quota. See "Where the output goes" in SKILL.md.
 
 | Report section | Field | Shape | When |
 |---|---|---|---|
 | identity | `shortTitle`, `title`, `venue`, `badges` | strings, string[] | always |
 | teaser | `figure`, `figureCaption` | string paths | always |
-| TL;DR | `tldr` | one string, 2 to 4 sentences | always |
+| TL;DR | `tldr` | one string, 2 to 3 sentences | always |
 | links | `links` | `{label, url}[]` | always |
-| Problem | `problem` | string[] | almost always |
-| Pipeline | `pipeline` | `{name, text}[]` | almost always |
-| Evidence | `evidence` | string[] | almost always |
-| Limitations | `limitations` | string[], 3 to 5 | almost always |
-| Takeaways | `takeaway` | string[], 2 to 4 | almost always |
-| Core insight | `coreInsight` | string[], 1 to 3 items | when the idea does not fit inside `problem` or `pipeline` |
+| Problem | `problem` | string[] | usually |
+| Pipeline | `pipeline` | `{name, text}[]` | usually, and only the steps a reader has to follow |
+| Evidence | `evidence` | string[] | usually, around 2 to 4 that carry a claim |
+| Limitations | `limitations` | string[] | usually, the ones that bind |
+| Takeaways | `takeaway` | string[] | usually, a small number |
+| Core insight | `coreInsight` | string[] | when the idea does not fit inside `problem` or `pipeline` |
 | what you get | `output` | string[] | when what the reader gets is not obvious from the pipeline |
 | in-report figures | `figures` | `{src, title, shows, read, matters, supports}[]` | when a figure carries an argument |
 | Design decisions | `designDecisions` | `{decision, problem, motivation, mechanism, evidence}[]` | when a choice needs a row the pipeline cannot hold |
 | deeper analysis | `methodDetails` | `{name, text}[]` | when analysis fits no other field |
 | Equations | `equations` | `{name, formula, intuition, terms, matters, consequence}[]` | when the method cannot be understood without the maths |
 | numbers table | `comparison` | `{headers, rows}` | when a table clarifies |
-| What actually matters | `whatMatters` | string[], 2 to 4 | when synthesis across experiments adds something |
+| What actually matters | `whatMatters` | string[] | when synthesis across experiments adds something |
 | Novelty | `novelty` | string[], bucketed | when what is new needs separating from standard practice |
 | Research notes | `researchNotes` | string[] | when you have ideas worth stealing |
 

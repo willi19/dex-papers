@@ -5,264 +5,176 @@ metadata:
   trigger: Adding or revising an entry in paper_summaries.js; any request to read, analyse or summarise a paper
 ---
 
-# Paper reading
+# Paper reading and research notes
 
-You are reconstructing a paper, not summarising it. Every sentence you write has to
-serve one question:
+## Purpose
 
-> Why did the authors do this, and why should it work?
+Read a paper deeply enough to understand why the work exists, what the authors
+changed, why those changes should help, and what the evidence establishes.
 
-A reader who has your report and not the paper should be able to remember it a year
-later, compare it against a neighbouring paper, argue with its evidence, and pull a
-research idea out of it. Optimise for that. Do not optimise for a report that looks
-thorough.
+The output is not a paper report and not a section-by-section summary. It should read
+like concise notes from a researcher who understood the paper and wants to remember
+what mattered.
 
-## Writing philosophy
+> **Think broadly. Write selectively.**
 
-**This skill defines how to think about a paper, not how to format the answer.**
+The reading inspects many details. The notes keep only what a reader needs to
+reconstruct the paper's important ideas and reasoning.
 
-The reading framework below is deliberate overkill. It is longer than the report,
-and most of what it produces never reaches the page. Use it to make sure the hard
-questions got asked. Do not expose it as a checklist.
+## 1. Reading against writing
 
-The questions in this skill are a reasoning framework, not a list of things you must
-write. Use them to understand the paper, then compress the understanding into
-natural, non-redundant prose.
+This skill is a reasoning framework, not an output template. Internally answer:
 
-Two stages, and they have opposite shapes:
+- What problem is being solved, and why is it hard?
+- What is the actual bottleneck?
+- What is the authors' key insight?
+- What did they change, and why should it help?
+- What evidence supports that explanation?
+- What does the paper fail to establish?
+- What is worth remembering?
 
-    READING   Problem -> Difficulty -> Insight -> Design -> Evidence -> Limits
-              long, exhaustive, private
+Do **not** create a section for every question. When several answers form one causal
+story, write one explanation. Prefer:
 
-    WRITING   the smallest number of connected passages that preserve the causal
-              relations between those things
-              short, public
-
-When the problem, the insight, the mechanism and the ablation form one causal story,
-write one passage, not four sections. Prefer:
-
-> Unscrewing needs a long sequence of useful contacts, and PPO exploration keeps
-> falling into the same unproductive configurations. So the authors shape exploration
-> from both sides: a contact reward pulls fingertips onto their assigned surface, and
-> early termination deletes rollouts that have entered a known trap. The intensity
-> sweep supports the reading, with the disabled run flat on the floor and 50% landing
-> between it and the full method.
+> Exploration keeps falling into unproductive contact configurations, so the authors
+> constrain it from both directions: the contact reward encourages useful body and lid
+> contacts, while early termination removes trajectories that have entered known
+> failure modes. The ablation supports the interpretation.
 
 over:
 
-> **Problem.** Exploration gets trapped.
-> **Core insight.** Exploration should be shaped.
-> **Design decision.** They use a contact reward.
-> **Evidence.** The ablation shows it helps.
-> **Takeaway.** Exploration matters.
+> **Problem:** Exploration gets stuck.
+> **Insight:** Exploration should be shaped.
+> **Design:** Contact reward.
+> **Design:** Early termination.
+> **Evidence:** Ablation improves performance.
 
-Both carry the same facts. The second says one thing five times.
+The first keeps the reasoning and drops the repetition. The final document should read
+like a researcher explaining the paper to another researcher, not like a filled-in form.
 
-Concretely:
-- Prefer "Because X, the authors do Y, which gives Z" over three separate sentences.
-- Prefer one passage that completes an idea over several that each restate part of it.
-- Prefer causal explanation over an inventory of components.
-- A section exists because the paper has something to put in it, not because the
-  schema lists it. Leave it out otherwise.
+## 2. Build the causal model first
 
-The finished page should read like a researcher explaining the paper to another
-researcher. Not like a form.
+Before writing, construct this internally:
 
-## Phase 0. Get the sources
+    Problem
+      -> why existing approaches struggle
+      -> the actual bottleneck
+      -> key insight
+      -> important design choices
+      -> mechanism
+      -> evidence
+      -> failure and limitation
+
+The model is for reasoning. It does not appear in the output. The writing compresses
+the graph into the smallest natural prose that keeps the important causal links.
+
+## 3. Understand before summarising
+
+Do not record what the authors did. For each important component ask what problem it
+solves, why this particular solution, and what evidence says it matters:
+
+    Problem -> design decision -> mechanism -> evidence
+
+Then integrate rather than label: "Because X makes exploration difficult, the authors
+introduce Y, which gives Z, and the ablation suggests Y matters because ...". Run this
+reasoning for important decisions only. Routine implementation choices do not earn it.
+
+## 4. Get the sources
 
 1. PDF first. Repo PDFs are gitignored, so one may not exist locally. Download the
    arXiv PDF into the scratchpad and never commit it.
-2. Project page next. Watch the videos. Behaviour that no table captures often lives
-   there, and so do failure clips.
-3. Code, if the repo exists. Reward weights, termination rules and observation specs
-   in code override the paper when they disagree. Say when they disagree.
+2. Project page next. Watch the videos. Behaviour no table captures often lives there,
+   and so do the failure clips.
+3. Code, if the repo exists. Reward weights, termination rules and observation specs in
+   code override the paper when they disagree. Say when they disagree.
 
 If you cannot obtain a source, say which one and write nothing that depends on it.
-Never reconstruct a number, a figure or a result from memory. See CLAUDE.md rules 2
-and 5.
+Never reconstruct a number, a figure or a result from memory. See CLAUDE.md rules 2 and 5.
 
-## Phase 1. Figure census
-
-Before writing prose, walk every figure and table and classify it. Keep this table in
-your working notes, not in the report.
-
-| Figure | Type | Carries | Include |
-|---|---|---|---|
-| Fig. 1 | teaser / overview | the one-glance story | usually |
-| Fig. 2 | pipeline or architecture | how the system runs | often |
-| Fig. 4 | main quantitative result | the headline claim | often |
-| Fig. 6 | ablation | which component causes what | when it settles a question |
-| Fig. 7 | failure case | what breaks | when it changes the reading |
-
-Select 2 to 4. A figure earns its place by carrying an argument you would otherwise
-have to write out. Cut the rest. See "Figures" below for extraction and captions.
-
-## Phase 2. Build the internal representation
-
-Write these seven slots for yourself before drafting. Private notes, never a section
-layout.
-
-    Problem:        what the world cannot do yet
-    Bottleneck:     the specific thing that blocks the obvious approach
-    Key insight:    the idea, stated without any implementation noun
-    Main mechanism: how the insight becomes a system
-    Evidence:       the experiment that would collapse if the insight were wrong
-    Failure:        what the paper does not solve
-    Novelty:        what is new, minus what is standard practice
-
-If you cannot state the key insight without naming a library, a network or a sensor,
-you have not found it yet. Keep reading.
-
-## Phase 3. Claim ledger
-
-List the paper's load-bearing claims. For each one, record the experiment that tests
-it, and mark claims with no experiment behind them. You will use this when you write
-about evidence, and again in the quality gate.
-
-## Labels: claim, evidence, interpretation
+## 5. Claim, evidence, interpretation
 
 Three separate things, never blurred:
 
-- **AUTHOR CLAIM.** What the authors say. Attribute it: "the authors report",
-  "the paper argues".
-- **EVIDENCE.** What an experiment demonstrates. Tie it to the specific comparison
-  that demonstrates it.
-- **INTERPRETATION.** Your reasoning about why something works. Mark it in the text:
-  "Interpretation:", "the most plausible account is", "the paper does not analyse
-  this".
+- **AUTHOR CLAIM.** What the authors say. Attribute it: "the authors report".
+- **EVIDENCE.** What an experiment demonstrates, tied to the comparison that shows it.
+- **INTERPRETATION.** Your reasoning. Mark it: "Interpretation:", "the most plausible
+  account is", "the paper does not analyse this".
 
 When the paper asserts something it never tests, write **Not demonstrated by the
-paper.** That sentence is more useful than a confident paraphrase. When your reading
-contradicts the authors, say so and give your reason.
+paper.** That sentence beats a confident paraphrase. When your reading contradicts the
+authors, say so and give your reason.
 
-## Shaping the output
+## 6. What to keep and what to cut
 
-The report lands in a schema, so the fields are fixed. What is not fixed is how many
-of them you fill. The paper decides that.
+The question is not "is this interesting?" but:
 
-**Fill these for every paper.** Without them there is no report:
-`tldr`, `problem`, `pipeline`, `evidence`, `limitations`, `takeaway`, `links`.
+> **Would removing this make it harder to understand why the paper works?**
 
-**Fill these when the paper has something there that is not already said elsewhere:**
-`coreInsight`, `output`, `figures`, `designDecisions`, `methodDetails`, `equations`,
-`comparison`, `whatMatters`, `novelty`, `researchNotes`.
+Keep what explains the problem, the bottleneck, the core idea, the important design
+choices and their mechanism, the strongest evidence, the binding limitations, and the
+research implications.
 
-The renderer skips a field you omit. A method too simple to need equations gets no
-equations block. A paper whose design decisions are already explained inside the
-pipeline gets no decisions table. Padding a field with a restatement is worse than
-leaving it empty, because the reader has to read it before discovering it was empty.
+Cut routine implementation detail, exhaustive hyperparameters, exact dimensions,
+training ranges, controller settings, infrastructure, every experiment, secondary
+metrics, repeated numbers, and any fact that does not change interpretation.
 
-One fact has one home. When you do fill a field, this is what it owns:
+Separate what is needed to **understand** the paper from what is needed to
+**reproduce** it. The default serves understanding, so PPO hyperparameters, network
+dimensions, smoothing coefficients, randomisation ranges and communication protocols
+normally stay out. Keep such a detail only when it explains a result, reveals a real
+design choice, changes interpretation, explains a failure, or carries the central idea.
+Do not turn the notes into a reproduction manual.
 
-| Field | Owns | Must not contain |
-|---|---|---|
-| `tldr` | the story in 2 to 4 sentences | module lists, hyperparameters, tool names |
-| `problem` | why the task is hard, why prior work falls short | any part of the solution |
-| `coreInsight` | the idea, in conceptual terms | implementation |
-| `pipeline` | how the system runs, input to output | justification of the choices |
-| `designDecisions` | why each choice was made | how it runs, again |
-| `equations` | the maths that carries the method | the pipeline, again |
-| `evidence` | which experiment supports which claim | method details |
-| `whatMatters` | conclusions synthesised across the evidence | the numbers again |
-| `novelty` | what is new, bucketed | the mechanism again |
-| `limitations` | the ones that bind, 3 to 5 | generic complaints |
-| `takeaway` | conceptual lessons that outlive the paper | implementation |
-| `researchNotes` | ideas worth stealing, open questions | anything the paper claims |
+## 7. Compression
 
-Later fields refer back. They do not restate. "The contact reward described above"
-is correct; explaining the contact reward a second time is not.
+The output is far shorter than the source. Rough ceilings:
 
-The TL;DR tells the paper's story. It does not cover every important detail, and it
-is not a compressed copy of the report. Write what a researcher says out loud when
-asked "so what is this paper about?"
+    5-10 pages   ->  1-2 pages
+    10-20 pages  ->  2-3 pages
+    20+ pages    ->  3-4 pages
 
-## Design decisions
+**These are ceilings, never quotas, and length does not scale with page count.** A
+16-page paper whose idea compresses well deserves half a page. Never add material to
+reach a target, and never keep material because there is room for it.
 
-Never write "they use X". Write the causal chain:
+Ask, for every paragraph: if I delete this, is an important understanding lost? For
+every sentence: does this add information, reasoning or interpretation that is not
+already here? For every section: is this explained elsewhere already? Delete, merge,
+or replace with a back reference. One precise sentence beats several that circle the
+same idea.
 
-> Because ___ is difficult, the authors introduce ___, which works by ___.
+An important idea gets **one canonical explanation**. The TL;DR states it briefly, one
+later passage explains it properly, the evidence refers back to it, and the takeaway
+distils the implication. Once the contact reward has been explained, later writing says
+"the ablation supports this exploration hypothesis" and does not explain the reward again.
 
-Then answer, for each important choice: what problem it addresses, what else could
-have been used, why this choice is reasonable, and whether any experiment shows it
-matters. A decision with no experiment behind it is a decision the paper asserts.
-Say that.
+## 8. Natural prose over checklist writing
 
-Where the chain already appears in the pipeline or the equations, leave the decision
-there and skip the table. The table is for choices that need a row of their own.
+Do not expose categories such as Problem, Motivation, Mechanism, Evidence and
+Interpretation as labels unless doing so genuinely helps the reader navigate. A strong
+paragraph carries several of them without naming any. Prefer:
 
-## Equations
+> The difficulty is discovering a useful contact configuration rather than generating
+> torque, which is why the authors spend the method on exploration shaping instead of
+> policy architecture.
 
-Include an equation only when the method cannot be understood without it. Copying a
-loss because it appears in the paper is the thing to avoid.
+over three labelled fragments saying the same thing.
 
-Every equation you include gets four parts:
+## 9. TL;DR
 
-- **Intuition.** What it is trying to accomplish, in plain language.
-- **Terms.** The variables that carry meaning. Skip standard notation.
-- **Why it matters.** What breaks in the method without it.
-- **Consequence.** What changes if an important term or coefficient moves. Only when
-  the paper or the structure of the equation supports an answer.
+Answer "what is this paper about, and why should I care?" in 2 to 3 sentences: the
+problem, the central idea, the strongest result. It is not a compressed copy of the
+notes, and implementation detail does not belong in it.
 
-Read the form of the equation, do not transcribe it. A `min` over sampled points, a
-coefficient two orders of magnitude above the objective, a term that is dense where
-you expected sparse: each of those is an argument the authors made without writing it
-in prose. Say what it does and, if the paper never analyses it, label your reading as
-interpretation.
+## 10. Figures
 
-## Evidence
+Inspect every figure before choosing. Include at most 3, and normally the pipeline or
+system overview, the main result, and the most informative ablation or qualitative
+figure. A figure earns its place by carrying an argument you would otherwise write out.
+Place each one next to the argument it carries.
 
-Organise by claim, never by the paper's experiment order. For each important result:
-
-    Claim -> Hypothesis -> Experiment -> Result -> Interpretation
-
-Write it as one connected statement, not as five labelled parts.
-
-Then push: what question is this comparison actually testing, what does the result
-establish, what does it not establish, and is there an alternative explanation.
-
-Numbers on their own are not evidence for anything. A number becomes evidence when
-you say which comparison makes it meaningful. Watch for metrics that let a degenerate
-policy score well, and read metric pairs together when one trades off against the
-other.
-
-For every ablation: what was removed, what hypothesis that tests, whether the
-comparison is fair, whether it establishes causation, and what stays unexplained.
-Give particular attention to reward design, representation, architecture, training
-recipe, initialisation, privileged information, perception, data, simulator
-assumptions, and filtering or termination rules.
-
-Report the spread and the seed protocol. "Best three of ten seeds" changes what a
-mean means.
-
-## Novelty, read conservatively
-
-Sort contributions into buckets and keep them apart:
-
-    conceptual | algorithmic | system | engineering | evaluation
-
-Standard components are not novel because the paper foregrounds them. Do not write
-"first", "only" or "state of the art" unless the paper establishes it or you checked
-the literature yourself. Emphasis is not evidence.
-
-## Failure modes
-
-Name what the paper does not solve: reported failures, distribution shift, the
-assumptions holding the setup together, simulator and embodiment limits, perception
-limits, generalisation and scaling limits. Then answer in one line:
-
-> What does this paper actually solve, and what remains open?
-
-Keep 3 to 5 limitations that bind. A limitation specific to this paper beats five
-generic ones.
-
-## Domain passes
-
-Robotics, RL, manipulation, agent, VLM and VLA papers each have a required
-interrogation list. Read [references/domain-checks.md](references/domain-checks.md)
-and run the ones that apply before drafting. Those lists are reading questions.
-Almost none of their answers become sentences.
-
-## Figures
+A caption needs what it shows and why it matters. Add how to read it when the axes or
+colours are not obvious. Do not write a mini-review of every figure.
 
 Extraction, when a PDF is available:
 
@@ -272,85 +184,158 @@ pdftoppm -r 200 -f 3 -l 3 -png paper.pdf out/page
 python3 -c "from PIL import Image; im=Image.open('out/page-03.png'); im.crop((L,T,R,B)).save('fig02_pipeline.png')"
 ```
 
-In this repo, figures live in `overview_assets/<key>/` with descriptive names
-(`fig01_pipeline.png`, `fig04_main_result.png`). That directory is tracked and is
-where `papers.js` and the summary schema already point. Outside this repo, use
-`artifacts/paper_figures/`. Crop tight, render at 200 DPI, and never ship a blurry
-full-page downscale. Never fabricate, redraw or reconstruct a figure, and never read
-numbers off a plot and report them as data.
+In this repo figures live in `overview_assets/<key>/` with descriptive names
+(`teaser.png`, `fig02_pipeline.png`). That directory is tracked and published. Outside
+this repo use `artifacts/paper_figures/`. Crop tight, render at 200 DPI, never ship a
+blurry full-page downscale. Never fabricate, redraw or reconstruct a figure, and never
+read numbers off a plot and report them as data.
 
-Every selected figure carries a caption with four parts: what it shows, how to read
-it (axes, colours, stages), why it matters, and which claim it supports. Order the
-figures so each one sits beside the argument it carries, the pipeline figure with the
-method and the result figure with its claim. "See Figure 3" is not a caption.
+## 11. Equations
 
-## Where the output goes
+Include an equation only when an important idea cannot be understood without it.
+Copying a loss because the paper prints it is the thing to avoid.
 
-The report becomes an entry in `paper_summaries.js`, rendered by
-`overview/paper.html?id=<key>`. Field mapping, which fields are optional and the
-figure conventions are in [references/schema.md](references/schema.md). Read it
-before you start writing.
+For each one explain, in plain language, what it tries to achieve, what the meaningful
+terms are, why this form matters, and what changes when an important term moves. Skip
+trivial notation. Read the form rather than transcribing it: a `min` over sampled
+points, a coefficient two orders of magnitude above the objective, a term that is dense
+where you expected sparse, each is an argument the authors made without writing it in
+prose. If the paper never analyses it, label your reading as interpretation.
 
-## Compression pass
+## 12. Evidence, results and ablations
 
-Mandatory, after drafting and before committing. The report gets shorter here.
+Do not summarise every experiment. Ask what claim each one is needed to establish, and
+reason:
 
-1. Pick the three or four keywords naming the paper's central ideas. Count them:
-   `node scripts/slop-check.mjs <key>` reports patterns, and a plain
-   `grep -o` count on the entry catches the rest. More than three or four mentions of
-   one idea means it is being re-explained.
-2. For every passage: has this information already appeared? Delete it, merge it,
-   or replace it with a back reference.
-3. Look for the same causal story split across fields. Problem, insight, decision and
-   evidence describing one mechanism belong together, in whichever field owns the
-   thing the reader needs. Merge, then delete what the merge made redundant. Dropping
-   a field is the correct outcome, not a gap to patch.
-4. For every field: does it add anything the reader does not already have? If not,
-   remove it.
-5. Re-read the TL;DR last. It drifts into a compressed version of the whole report.
-   Hold it to 2 to 4 sentences answering only: what problem, what core idea, what
-   strongest result.
+    claim -> experimental question -> comparison -> result -> interpretation
 
-## Prose rules
+Write it as one connected statement. Around 2 to 4 pieces of evidence normally survive.
+Prefer "the proprioception-only policy reaches 1.33° where the full system reaches 946°,
+so the task needs object-relative visual information" over the full protocol and every
+measured value.
+
+Numbers appear when they make the argument clearer, never because a table printed them.
+Distinguish what a result demonstrates, what it suggests, and what it does not
+establish. Watch for metrics a degenerate policy scores well on, and read a metric pair
+together when one trades off against the other. Report the spread and the seed
+protocol when they change what a mean means.
+
+For ablations ask what changed, what hypothesis that tests, whether the comparison is
+fair, whether it establishes causation, and what alternative explanations remain. When
+several ablations tell one story, tell it once.
+
+## 13. Novelty
+
+Assess conservatively, and separate conceptual, algorithmic, system, engineering and
+evaluation contributions. Standard components are not novel because the paper
+foregrounds them. Do not repeat a "first" or "state of the art" claim as established
+unless the paper establishes it or you checked the literature yourself.
+
+## 14. Limitations
+
+Prefer the few that change how the contribution should be read, usually 3 to 5 rather
+than an exhaustive list. They usually concern
+assumptions, generalisation, embodiment, data, simulation, perception, evaluation, task
+structure, or missing causal evidence. Do not copy the paper's own limitations section.
+Name what the experiments reveal, and answer in one line: what does this paper solve,
+and what stays open?
+
+## 15. Research notes
+
+Allowed, and kept apart from what the authors claim: an idea worth reusing, an
+unexplored question, a surprising result, a connection to a neighbouring paper. Not
+every observation is a research idea. A good one says why it is interesting.
+
+## 16. Domain passes
+
+Robotics, RL, manipulation, agent, VLM and VLA papers each have an interrogation list
+in [references/domain-checks.md](references/domain-checks.md). Run the ones that apply
+before drafting. They are reading questions, not headings, and almost none of their
+answers become sentences.
+
+For an RL paper, reason explicitly about what makes exploration possible. For a
+manipulation paper, about what physical behaviour has to emerge and which part of it is
+learned rather than hand-specified. For an agent, VLM or VLA paper, about whether the
+gain comes from the model, the scaffolding, inference-time compute, the tools, or the data.
+
+## 17. Where the output goes
+
+The notes become one record in `window.DETAILED_PAPER_SUMMARIES` in
+`paper_summaries.js`, rendered by `overview/paper.html?id=<key>`. Registration and the
+figure conventions are in [references/schema.md](references/schema.md).
+
+**The record's fields are render slots, not a form to fill.** The renderer skips a
+field you leave out. Only the identity fields, `tldr` and `links` are structural.
+Everything else exists so that the paper has somewhere to put what it has.
+
+Concretely, this is what the freedom means:
+
+- A field can be short. `pipeline` may hold three steps where another paper needs eight.
+  Write the steps a reader needs to follow the method, not every stage that exists.
+- A field can be absent. `methodDetails`, `designDecisions`, `whatMatters`, `novelty`,
+  `coreInsight`, `output`, `comparison`, `equations`, `researchNotes` and `figures` are
+  all optional, and dropping one is the correct outcome when its content already lives
+  somewhere else.
+- A field can be deep. When the maths carries the paper, `equations` earns more space
+  than the rest of the record combined.
+
+A compact default is `tldr`, one passage that explains the problem and the idea
+together, `pipeline`, `evidence`, `limitations`, `takeaway`. Everything beyond that is
+there when the paper calls for it. Do not fill a field because the schema lists it.
+
+One fact has one home. Filled fields own this much and refer back rather than restate:
+
+| Field | Owns |
+|---|---|
+| `tldr` | the story in 2 to 3 sentences |
+| `problem` | why the task is hard, why prior work falls short |
+| `coreInsight` | the idea, in conceptual terms |
+| `pipeline` | how the system runs, input to output |
+| `designDecisions` | why a choice was made, when the chain fits nowhere else |
+| `equations` | the maths that carries the method |
+| `evidence` | which experiment supports which claim |
+| `whatMatters` | conclusions synthesised across the evidence |
+| `novelty` | what is new, bucketed |
+| `limitations` | the ones that bind |
+| `takeaway` | lessons that outlive the paper |
+| `researchNotes` | ideas worth stealing, open questions |
+
+## 18. Prose rules
 
 Run the `stop-slop` skill on the finished text. No em dashes anywhere, no adverbs,
 active voice with a real subject (the authors, the simulator, a person), no
 "not X, it's Y" contrasts, no throat-clearing openers. Verify with
 `node scripts/slop-check.mjs <key>`. See CLAUDE.md rule 4.
 
-A style pass never changes a claim. When you rewrite existing prose, extract the
-numbers from both versions and compare the multisets before committing.
+A style pass never changes a claim. When you rewrite existing prose, extract the numbers
+from both versions and compare the multisets before committing.
 
-## Quality gate
+## 19. Final pass
 
-Do not finish until each of these holds. If one fails, go back to the paper.
+Before finishing, run one separate compression pass.
 
-**Understanding**
-- Can you say why this paper exists, in one paragraph?
-- Can you state the core insight without naming an implementation?
-- Can you justify every major design decision?
+**Understanding.** Can the core idea be stated in a few sentences? Is the bottleneck
+clear? Is it clear why each major design choice exists?
 
-**Evidence**
-- Does every load-bearing claim map to an experiment in your ledger?
-- Is every interpretation labelled as one?
-- Is every limitation grounded in the paper or in an experiment?
+**Evidence.** Does every major claim have evidence behind it? Is interpretation
+distinguishable from demonstrated fact? Have the weak experiments been dropped?
 
-**Mathematics**
-- Does every equation have intuition, terms and a reason for existing?
-- Would a reader who does not know the paper understand each equation's role?
+**Figures and equations.** Does each figure carry an argument, and does it sit beside
+that argument? Is every equation necessary, and is its role explained?
 
-**Figures**
-- Did you inspect all of them before choosing?
-- Does each figure sit beside the argument it carries?
-- Does every included figure carry an argument?
+**Compression.** Is anything repeated? Are implementation details crowding out ideas?
+Can a paragraph disappear without harming understanding? Did you fill a field because
+the paper had something there, or because the schema listed it? Is this still a set of
+notes rather than a rewritten paper?
 
-**Writing**
-- Is the TL;DR 2 to 4 sentences?
-- Did the compression pass make the report shorter?
-- Does each central idea get explained once, with later mentions referring back?
-- Can any passage be deleted without losing information?
-- Did you fill a field because the paper had something there, or because the schema
-  listed it?
-- Is it shorter than a naive section-by-section summary would be?
+**The last question.** If a researcher had only these notes and the title, would they
+remember what was interesting about the paper? If yes, stop. Do not add more because
+more is available.
 
 When the paper cannot answer a question, write that it cannot. Do not guess.
+
+## Core principle
+
+**Deep reading does not mean writing more.** Understand more so that less needs to be
+written. Keep the reasoning, the evidence and the insights. Discard everything that
+does not carry them.
