@@ -48,6 +48,10 @@
 // nowhere, which is the same fact as the first core insight bullet, where it comes with
 // the reason. coreInsight keeps it. problem keeps the two concrete traps, which is what
 // the second bullet means by a known trap and what the terminations delete.
+// NINTH CORRECTION, same day: "Figure 4 backs the reading ... so the prior acts by
+// degree" was compressed past the point of meaning. It named no reading, used an idiom
+// for a curve at zero, left "in between" without its two endpoints, and buried the
+// point, which is that performance scales with the reward's strength. Same claim, said.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
@@ -64,7 +68,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     ],
     coreInsight: [
       "<strong>The bottleneck is which contacts to make.</strong> Two hands can hold an articulated object in a vast number of ways and almost none of those ways permit twisting, so RL across 32 finger DoF spends its budget in configurations from which the task is unreachable. The reward recipes on the shelf come from single-hand reorientation of a single-part body, so none of them says which surface a finger belongs on.",
-      "<strong>The prior goes on that gap, from both directions.</strong> A keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 backs the reading over 5 seeds, since disabling the reward leaves the policy on the floor and halving it lands in between, so the prior acts by degree.",
+      "<strong>The prior goes on that gap, from both directions.</strong> A keypoint contact reward pays each fingertip for sitting near the surface it has been assigned, base for one hand and lid for the other, while two early-termination rules delete rollouts that have already fallen into a known trap. Figure 4 is the evidence, over 5 seeds: with the contact reward disabled the curve never leaves the bottom of the plot, and half intensity lands between that and full strength, so performance scales with the intensity of the prior.",
       "<strong>The novelty sits in the framing rather than the algorithm.</strong> PPO is untouched, and treating bimanual multi-part manipulation as a contact-mode search leaves everything else free to be coarse, down to a two-point object and a three-layer MLP.",
       "<strong>What the authors call emergent needs one qualification.</strong> The policy has to reorient a dropped bottle into a stable hold before twisting is possible, and the gaits that do it appear on their own. The division of labour is closer to specified, since the reward assigns the left hand to the base and the released code charges that hand three times the action and work penalty it charges the right."
     ],
