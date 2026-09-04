@@ -73,6 +73,7 @@
   <script src="twisting-lids.v3.js"></script>
   <script src="twisting-lids.v4.js"></script>
   <script src="twisting-lids.v5.js"></script>
+  <script src="twisting-lids.v6.js"></script>
   <script>
     (() => {
       const VERSIONS = [
@@ -86,8 +87,10 @@
          meta:"2026-09-03 · 9e9a5c3 · stop-slop 문체 교정만. 숫자 99개 전부 v2와 동일"},
         {id:"twisting-lids-v4", label:"v4",
          meta:"2026-09-03 · paper-reading 스킬로 PDF부터 다시 읽음. 그림 3장 본문 삽입, 설계 결정 표, 수식 4개 → 2개"},
-        {id:"twisting-lids-v5", label:"v5 (current)",
+        {id:"twisting-lids-v5", label:"v5",
          meta:"2026-09-03 · 같은 독해를 구조만 다시 씀. exploration 서사를 한 곳으로, 설계 결정 표를 evidence 인과 문단에 흡수, designDecisions/whatMatters/novelty 삭제. 숫자 multiset 은 v4 와 동일"},
+        {id:"twisting-lids-v6", label:"v6 (current)",
+         meta:"2026-09-04 · field sparsity + cross-field 중복 검사. coreInsight 를 한 문단으로, output 삭제, pipeline 8→4, methodDetails 4→1, figures 3→2, evidence 9→5. 재현용 하이퍼파라미터 제거. v5 의 65%"},
       ];
       const app = document.getElementById("app");
       const tabs = document.getElementById("tabs");
@@ -120,7 +123,10 @@
         let html = '<h1>'+esc(p.title)+'</h1><div class="badges">'+badges+"</div>";
         if (p.figure) html += '<img class="figure" src="'+esc(p.figure)+'" alt="'+esc(p.shortTitle)+' overview"><p class="caption">'+esc(p.figureCaption || "Figure from the official paper.")+"</p>";
         html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+esc(p.tldr)+"</p></section>";
-        if (p.coreInsight) html += block("Core insight", list(p.coreInsight), "insight");
+        // coreInsight takes one paragraph (preferred, when it is one connected argument)
+        // or an array of independent insights.
+        if (p.coreInsight) html += block("Core insight",
+          Array.isArray(p.coreInsight) ? list(p.coreInsight) : "<p>"+p.coreInsight+"</p>", "insight");
         html += grid(maybe("Problem", p.problem), maybe("Output", p.output));
         if (p.pipeline && p.pipeline.length) {
           html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");
@@ -170,7 +176,7 @@
       }
 
       const q = new URLSearchParams(location.search).get("id");
-      render(q && (window.DETAILED_PAPER_SUMMARIES || {})[q] ? q : "twisting-lids-v5");
+      render(q && (window.DETAILED_PAPER_SUMMARIES || {})[q] ? q : "twisting-lids-v6");
     })();
   </script>
 </body>

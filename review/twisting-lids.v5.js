@@ -1,4 +1,4 @@
-// Twisting Lids Off with Two Hands — review v5 (2026-09-03, structural rewrite; current)
+// Twisting Lids Off with Two Hands — review v5 (2026-09-03, structural rewrite; superseded by v6)
 // Same reading as v4, reshaped under the paper-reading skill's writing philosophy: the
 // exploration story is told once instead of across five fields, the design-decision table
 // is folded into causal evidence passages, and designDecisions / whatMatters / novelty are

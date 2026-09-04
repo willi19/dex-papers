@@ -83,7 +83,10 @@
       let html = '<h1>'+esc(p.title)+'</h1><div class="badges">'+badges+"</div>";
       if (p.figure) html += '<img class="figure" src="'+esc(p.figure)+'" alt="'+esc(p.shortTitle)+' overview"><p class="caption">'+esc(p.figureCaption || "Figure from the official paper.")+"</p>";
       html += '<div class="report"><section class="summary"><span class="label">TL;DR</span><p>'+esc(p.tldr)+"</p></section>";
-      if (p.coreInsight) html += block("Core insight", list(p.coreInsight), "insight");
+      // coreInsight takes one paragraph (preferred, when it is one connected argument)
+      // or an array of independent insights.
+      if (p.coreInsight) html += block("Core insight",
+        Array.isArray(p.coreInsight) ? list(p.coreInsight) : "<p>"+p.coreInsight+"</p>", "insight");
       html += grid(maybe("Problem", p.problem), maybe("Output", p.output));
       if (p.pipeline && p.pipeline.length) {
         html += block("Training pipeline",'<ol class="steps">'+p.pipeline.map(x=>"<li><strong>"+esc(x.name)+":</strong> "+esc(x.text)+"</li>").join("")+"</ol>");

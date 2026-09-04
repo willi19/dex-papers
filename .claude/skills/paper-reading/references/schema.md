@@ -25,9 +25,9 @@ below are the usual range, never a quota. See "Where the output goes" in SKILL.m
 | Evidence | `evidence` | string[] | usually, around 2 to 4 that carry a claim |
 | Limitations | `limitations` | string[] | usually, the ones that bind |
 | Takeaways | `takeaway` | string[] | usually, a small number |
-| Core insight | `coreInsight` | string[] | when the idea does not fit inside `problem` or `pipeline` |
+| Core insight | `coreInsight` | one string (preferred) or string[] | when the idea does not fit inside `problem` or `pipeline`. One paragraph when it is one connected argument; an array only for independent insights |
 | what you get | `output` | string[] | when what the reader gets is not obvious from the pipeline |
-| in-report figures | `figures` | `{src, title, shows, read, matters, supports}[]` | when a figure carries an argument |
+| in-report figures | `figures` | `{src, title, shows, matters}` plus optional `read`, `supports` | when a figure carries an argument |
 | Design decisions | `designDecisions` | `{decision, problem, motivation, mechanism, evidence}[]` | when a choice needs a row the pipeline cannot hold |
 | deeper analysis | `methodDetails` | `{name, text}[]` | when analysis fits no other field |
 | Equations | `equations` | `{name, formula, intuition, terms, matters, consequence}[]` | when the method cannot be understood without the maths |
@@ -36,8 +36,10 @@ below are the usual range, never a quota. See "Where the output goes" in SKILL.m
 | Novelty | `novelty` | string[], bucketed | when what is new needs separating from standard practice |
 | Research notes | `researchNotes` | string[] | when you have ideas worth stealing |
 
-An omitted field is a decision, and it is the right one whenever filling it would
-restate something the reader already has. Padding a field costs the reader more than
+These slots turn redundant most often and each needs a reason before it is filled:
+`problem`, `output`, `methodDetails`, `whatMatters`, `novelty`, `rewardBaseline`,
+`researchNotes`. An omitted field is a decision, and it is the right one whenever
+filling it would restate something the reader already has. Padding a field costs the reader more than
 the missing section does. Merging a field's content into the field that owns the same
 causal story, then dropping it, is the intended move.
 
@@ -69,8 +71,9 @@ beside the argument it carries.
 - In-report figures: `overview_assets/<key>/figNN_name.png`, referenced as
   `../overview_assets/<key>/figNN_name.png`.
 - 200 DPI, cropped tight. `overview_assets/` is tracked, so these get published.
-- Each entry in `figures` carries all four caption parts. A figure without them is a
-  decoration, so cut it instead.
+- A `figures` entry needs `shows` and `matters`. `read` and `supports` stay empty unless
+  the axes are unobvious or the figure's claim is not clear from where it sits. A figure
+  with nothing to say in `matters` is decoration, so cut the figure instead.
 
 ## Versioning
 

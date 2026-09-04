@@ -173,8 +173,10 @@ system overview, the main result, and the most informative ablation or qualitati
 figure. A figure earns its place by carrying an argument you would otherwise write out.
 Place each one next to the argument it carries.
 
-A caption needs what it shows and why it matters. Add how to read it when the axes or
-colours are not obvious. Do not write a mini-review of every figure.
+A caption needs two things: what it shows, and why it matters. The record also has
+`read` and `supports` slots, and both stay empty by default. Fill `read` when the axes,
+colours or stages are not self-evident, and `supports` when the figure's claim is not
+obvious from where it sits. Four filled parts per figure is a mini-review, not a caption.
 
 Extraction, when a PDF is available:
 
@@ -279,9 +281,25 @@ Concretely, this is what the freedom means:
 - A field can be deep. When the maths carries the paper, `equations` earns more space
   than the rest of the record combined.
 
-A compact default is `tldr`, one passage that explains the problem and the idea
-together, `pipeline`, `evidence`, `limitations`, `takeaway`. Everything beyond that is
-there when the paper calls for it. Do not fill a field because the schema lists it.
+**Never read the existence of a field as an instruction to populate it.** For each one
+ask: does this paper genuinely benefit from this information being shown separately? If
+not, leave it empty.
+
+These are the slots that turn redundant most often, and each needs a reason before it
+gets filled: `problem`, `output`, `methodDetails`, `whatMatters`, `novelty`,
+`rewardBaseline`, `researchNotes`. Do not populate them by default. `output` in
+particular tends to restate the evidence, and `whatMatters` tends to restate the core
+insight.
+
+A record may legitimately hold only `tldr`, `coreInsight`, `pipeline`, `figures`,
+`equations`, `comparison`, `evidence`, `limitations`, `takeaway`, or fewer.
+
+**The goal is not schema completeness. The goal is information completeness.**
+
+`coreInsight` accepts either one paragraph or an array. Use a single paragraph when the
+insight is one connected argument, and an array only when the items are independent
+insights. The same preference applies wherever a field takes a list: a list of three
+fragments that belong to one thought should be one passage.
 
 One fact has one home. Filled fields own this much and refer back rather than restate:
 
@@ -300,7 +318,32 @@ One fact has one home. Filled fields own this much and refer back rather than re
 | `takeaway` | lessons that outlive the paper |
 | `researchNotes` | ideas worth stealing, open questions |
 
-## 18. Prose rules
+## 18. Cross-field redundancy check
+
+Before finalising the record, compare every populated field against the others. When
+the same idea appears twice:
+
+1. Keep the most informative version.
+2. Move it to the field where it belongs most naturally.
+3. Delete it from the other field, and delete the field if nothing else is left in it.
+
+The recurring cases:
+
+- The core insight already explains why a design choice matters, so `whatMatters` does
+  not repeat it.
+- The evidence already explains a result, so `output` does not repeat it.
+- A figure caption already explains an ablation, so `evidence` does not reproduce the
+  explanation. One of the two refers to the other.
+- A method passage already explains an equation's role, so `takeaway` distils the
+  lesson instead of restating the mechanism.
+- `novelty` restates mechanisms by construction. Prefer one sentence inside the core
+  insight: "the novelty is not PPO, it is using contact structure and failure-aware
+  termination to make bimanual exploration tractable."
+
+The rendered page should carry each important idea once, in the place where it is most
+useful.
+
+## 19. Prose rules
 
 Run the `stop-slop` skill on the finished text. No em dashes anywhere, no adverbs,
 active voice with a real subject (the authors, the simulator, a person), no
@@ -310,7 +353,7 @@ active voice with a real subject (the authors, the simulator, a person), no
 A style pass never changes a claim. When you rewrite existing prose, extract the numbers
 from both versions and compare the multisets before committing.
 
-## 19. Final pass
+## 20. Final pass
 
 Before finishing, run one separate compression pass.
 
