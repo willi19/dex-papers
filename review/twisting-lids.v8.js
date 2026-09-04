@@ -52,6 +52,14 @@
 // degree" was compressed past the point of meaning. It named no reading, used an idiom
 // for a curve at zero, left "in between" without its two endpoints, and buried the
 // point, which is that performance scales with the reward's strength. Same claim, said.
+// TENTH CORRECTION, same day: the same read-it-alone pass over every remaining field.
+// One accuracy fix, since the household objects share plenty with the training set and
+// it is their physical properties that lie outside it. Units restored on the two reward
+// budgets. Two sentences that ran on wordplay ("no terminus", "deleted and priced") say
+// the thing instead. Two headings that named an abstraction now name the result. "the
+// minimum" replaced, since the paper shows two points suffice and never shows they are
+// the least the task needs. methodDetails splits, so the metric pair and the table's
+// composition stop sharing one block.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
@@ -60,7 +68,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     venue: "CoRL 2024",
     badges: ["sim-to-real RL", "bimanual", "Allegro × 2", "exploration shaping", "zero-shot transfer"],
     figure: "../overview_assets/twisting-lids/teaser.png",
-    figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars that share none of the training objects' properties.",
+    figureCaption: "Two 16-DoF Allegro hands on fixed UR5e arms, one RealSense D435, and a policy trained on plain simulated cylinders. It runs zero-shot on household jars whose physical properties lie far outside the training set.",
     tldr: [
       "Two multi-fingered hands hold a bottle in the air and keep unscrewing its lid, learned by RL in simulation on plain cylinders with no demonstrations.",
       "Exploration across 32 finger DoF is the bottleneck, so the reward assigns each fingertip a surface and two termination rules delete the rollouts that reach a known trap.",
@@ -78,12 +86,13 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     ],
     pipeline: [
       {name:"Object model", text:"The bottle URDF is a base, a lid on a continuous revolute joint, and a brake link that a prismatic joint presses against the lid. That normal force stands in for a screwed cap, and the authors report it as the only approach they found that simulates the static friction well. No thread geometry exists anywhere in the model."},
-      {name:"Episode and termination", text:"Both hands start palms-up and the simulator drops a bottle onto the fingers with randomised pose, so no stable grasp exists at t=0. An episode resets when the hands fail to reach a twist-ready pose in time, and when the bottle's z-position drops, which is the signature of the pinch-too-low trap. The released config puts numbers on both: from the tenth second the bottle axis has to stay within 0.2 rad of the target direction, and dropping below the height threshold also costs a penalty of 50, so the trap is deleted and priced."},
+      {name:"Episode and termination", text:"Both hands start palms-up and the simulator drops a bottle onto the fingers with randomised pose, so no stable grasp exists at t=0. An episode resets when the hands fail to reach a twist-ready pose in time, and when the bottle's z-position drops, which is the signature of the pinch-too-low trap. The released config puts numbers on both: from the tenth second the bottle axis has to stay within 0.2 rad of the target direction, and dropping below the height threshold also costs a penalty of 50, so the trap ends the episode and costs reward."},
       {name:"Policy and reward", text:"The policy reads joint positions, its own previous targets, and the estimated 3D centres of base and lid, then emits relative joint targets for a PD controller at 10 Hz. Four reward terms shape it: lid rotation, the keypoint contact term, a pose term on the bottle axis, and work and action penalties. PPO trains it with an asymmetric critic under wide domain randomisation."},
       {name:"Perception at deployment", text:"Segment Anything masks the body and the lid on the first frame of a trajectory, XMem tracks them afterwards, and noisy depth from one RealSense D435 lifts the two mask centres into 3D."}
     ],
     methodDetails: [
-      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, and Time-to-Fail measures the interval from the object being held until it slips or lodges, capped at 30 s. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in the table below. Holding is the easy half of the task, and the metric pair is what stops that from reading as success. Every row in that table is a lesion of the same system, since the authors report no learning-based method comparable on this task. The table establishes which components the system needs and compares it to no alternative approach: the one borrowed component, a gait constraint reward taken from in-hand reorientation work, stays in Figure 5 as qualitative analysis, where it produces erratic finger motion and unnatural grasps."}
+      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, and Time-to-Fail measures the interval from the object being held until it slips or lodges, capped at 30 s. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in the table below. Holding is the easy half of the task, and reading the pair together is what stops a stalling policy from looking successful."},
+      {name:"What the table compares", text:"Every row is a lesion of the same system, since the authors report no learning-based method comparable on this task. The table establishes which components the system needs and compares it to no alternative approach. The one borrowed component, a gait constraint reward taken from in-hand reorientation work, stays in Figure 5 as qualitative analysis, where it produces erratic finger motion and unnatural grasps."}
     ],
     figures: [
       {
@@ -97,7 +106,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
         title:"Figure 4: the contact reward intensity sweep",
         shows:"Training curves over 5 seeds, single-object training on top and multi-object below, comparing the contact reward disabled, reduced to 50%, and at full strength.",
         read:"AD is averaged per execution step rather than reported in degrees, so the values are small and the ordering is what carries meaning. Shading is one standard deviation.",
-        matters:"The same ordering appears in both rows, which is what turns the exploration claim into the paper's strongest causal evidence."
+        matters:"The ordering repeats for single-object and for multi-object training, so the effect does not depend on one training setup. This is the paper's strongest causal evidence for the exploration account."
       }
     ],
     equations: [
@@ -110,14 +119,14 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
           "<code>d</code>: distance to the <em>nearest</em> reference point, rather than to the surface."
         ],
         matters:"The reciprocal keeps the term bounded and dense everywhere, so it supplies gradient from the first random rollout, which is when the objective supplies nothing.",
-        consequence:"The paper prints five weights without saying which term takes which, and the released config binds them: 2.5 here against 500.0 on lid rotation. The per-step budget reverses that ordering, since the clamp below holds rotation to 10 while this term reaches 40 with every fingertip on a reference point. Halving the intensity costs sample efficiency and final performance, and disabling it removes the skill."
+        consequence:"The paper prints five weights without saying which term takes which, and the released config binds them: 2.5 here against 500.0 on lid rotation. The per-step budget reverses that ordering: the clamp on rotation, below, caps that term at 10 reward per step, while this one reaches 40 when every fingertip sits on a reference point. Halving the intensity costs sample efficiency and final performance, and disabling it removes the skill."
       },
       {
         name:"Twisting reward",
         formula:"r_twisting = Δθ = q_bottle(t+1) − q_bottle(t)",
         intuition:"Pay for lid rotation accumulated this step, where q_bottle is the revolute joint angle between base and lid. There is no goal angle and no terminal bonus.",
         matters:"Angular Displacement is this quantity integrated over a trial, which is why the paper reports degrees instead of a success rate.",
-        consequence:"A reward with no terminus produces a policy with no terminus. Removal, the thing the household experiments measure, never appears in the objective. The released code also clamps Δθ at 0.02 rad per step, so the term saturates at 11°/s, and the deployed policy runs more than three times past that at 41.26°/s. <em>Interpretation:</em> the speed comes from the contact configuration rather than from reward pressure."
+        consequence:"The reward has no end state, so the policy has none either. Removing the lid is what the household experiments score, and it never appears in the objective. The released code also clamps Δθ at 0.02 rad per step, so the term saturates at 11°/s, and the deployed policy runs more than three times past that at 41.26°/s. <em>Interpretation:</em> the speed comes from the contact configuration rather than from reward pressure."
       }
     ],
     comparison: {
@@ -132,8 +141,8 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     },
     evidence: [
       "<strong>The task needs closed-loop reaction.</strong> Replaying a trajectory that succeeded in simulation gives the <em>lowest</em> time-to-fail of any method, 7.67 s, because the bottle rolls off the fingers. A deterministic motion pattern does not survive contact with a real object.",
-      "<strong>Object state has to be observed, and two points of it are enough here.</strong> Prior single-hand rotation work runs on implicit tactile sensing through proprioception, and that baseline reaches 1.33° AD where the full policy reaches 946.33°. No baseline uses a richer representation, so two points are enough for this system rather than shown to be the minimum.",
-      "<strong>Both transfer failures concern the policy's relationship to information.</strong> Feeding privileged state to the critic alone is what makes transfer work, since without the asymmetry the policy holds the bottle a full 30.00 s and turns it 18.67°. An enlarged actor matches the full policy in simulation and reaches 2.00° on the robot, which the authors read as overfitting to the simulator. Neither failure is visible in simulation.",
+      "<strong>Object state has to be observed, and two points of it are enough here.</strong> Prior single-hand rotation work runs on implicit tactile sensing through proprioception, and that baseline reaches 1.33° AD where the full policy reaches 946.33°. No baseline tries a richer representation, so two points are shown to be enough here and never shown to be the least the task needs.",
+      "<strong>Two failures appear only on the robot.</strong> Feeding privileged state to the critic alone is what makes transfer work, since without the asymmetry the policy holds the bottle a full 30.00 s and turns it 18.67°. An enlarged actor matches the full policy in simulation and reaches 2.00° on the robot, which the authors read as overfitting to the simulator. Neither failure is visible in simulation.",
       "<strong>Generalisation, scored on a task nobody trained.</strong> Ten household containers judged by whether the lid comes off: 33.75% overall, tracking turns required rather than familiarity, from 60% on HairMask (1 turn) down to 10% on PeanutButter and EmptyNutella (5 turns). An accident helps here, which the project page reports: the mask tracker follows spatial continuity, so when a lid comes free it reads the exposed thread instead of the detached cap and the observation stays coherent through the one event the simulation never modelled.",
       "<strong>Protocol, and what the first-system claim rests on.</strong> Five 3D-printed bottles, 20 trials each, 30 s cap, three best policies from ten seeds, and one deployed policy averages four complete turns in 30 s on the blue bottle. The authors also state that theirs is the first sim-to-real RL system enabling such capabilities on bimanual multi-fingered hands, qualified by to the best of our knowledge. Their own related work names the nearest neighbour: Dynamic Handover throws and catches between two dexterous hands on real hardware, and the authors separate it from their task by contact richness and by having to hold the object stable throughout. The claim rests on that distinction rather than on bimanual sim-to-real transfer being new."
     ],
