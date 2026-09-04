@@ -722,7 +722,7 @@ window.DETAILED_PAPER_SUMMARIES = {
       "<strong>What the authors call emergent needs one qualification.</strong> The policy has to reorient a dropped bottle into a stable hold before twisting is possible, and the gaits that do it appear on their own. The division of labour is closer to specified, since the reward assigns the left hand to the base and the released code charges that hand three times the action and work penalty it charges the right."
     ],
     problem: [
-      "The object is articulated and has to stay in the hands throughout. Most of the interaction modes RL stumbles into lead nowhere: the object gets stuck between fingers, or the fingertips pinch it low where they cannot reposition it into the palm.",
+      "The object is articulated and has to stay in the hands throughout. Two failures recur: the object gets stuck between fingers, and the fingertips pinch it low where they cannot reposition it into the palm.",
       "Demonstration data for two multi-fingered hands does not exist, and the simulation route has a gap of its own. A threaded joint has no faithful cheap model, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need."
     ],
     pipeline: [

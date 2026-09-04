@@ -44,6 +44,10 @@
 // the field, not of this paper), keeping the two RL failure modes and the friction gap
 // the brake link answers. 180 words to 85. The pipeline stops explaining what an
 // asymmetric critic is, and the equation stops defining that a hand has four fingertips.
+// EIGHTH CORRECTION, same day: problem said most interaction modes RL falls into lead
+// nowhere, which is the same fact as the first core insight bullet, where it comes with
+// the reason. coreInsight keeps it. problem keeps the two concrete traps, which is what
+// the second bullet means by a known trap and what the terminations delete.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
@@ -65,7 +69,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
       "<strong>What the authors call emergent needs one qualification.</strong> The policy has to reorient a dropped bottle into a stable hold before twisting is possible, and the gaits that do it appear on their own. The division of labour is closer to specified, since the reward assigns the left hand to the base and the released code charges that hand three times the action and work penalty it charges the right."
     ],
     problem: [
-      "The object is articulated and has to stay in the hands throughout. Most of the interaction modes RL stumbles into lead nowhere: the object gets stuck between fingers, or the fingertips pinch it low where they cannot reposition it into the palm.",
+      "The object is articulated and has to stay in the hands throughout. Two failures recur: the object gets stuck between fingers, and the fingertips pinch it low where they cannot reposition it into the palm.",
       "Demonstration data for two multi-fingered hands does not exist, and the simulation route has a gap of its own. A threaded joint has no faithful cheap model, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need."
     ],
     pipeline: [

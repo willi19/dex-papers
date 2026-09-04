@@ -85,8 +85,14 @@ reasoning for important decisions only. Routine implementation choices do not ea
    arXiv PDF into the scratchpad and never commit it.
 2. Project page next. Watch the videos. Behaviour no table captures often lives there,
    and so do the failure clips.
-3. Code, if the repo exists. Reward weights, termination rules and observation specs in
-   code override the paper when they disagree. Say when they disagree.
+3. Code, when the paper released a repo. This one is not optional, and it is the source
+   that gets skipped. Cross-check three things against the config: the reward weights,
+   the termination conditions, and the observation spec. These are what a paper
+   compresses hardest, and the code is what ran, so it wins when they disagree. Say that
+   they disagree, and say what changes.
+   A paper that lists weights without binding them to terms has not given you the
+   mapping. Recovering it from the order the terms were introduced is an inference, and
+   it can come out backwards.
 
 If you cannot obtain a source, say which one and write nothing that depends on it.
 Never reconstruct a number, a figure or a result from memory. See CLAUDE.md rules 2 and 5.
@@ -114,6 +120,10 @@ coordinate to avoid dropping the object while one hand twists the lid" invents a
 mechanism the reader will attribute to the authors. Check the compressed sentence too,
 since compression is where an unlabelled inference slips in: the source clause gets
 dropped and the gloss survives.
+
+The same holds for a paper's layout. Order in a list, adjacency in a table, a figure
+sitting beside a paragraph: none of these states a binding. A conclusion drawn from one
+is your inference, and it belongs to you until a source says it outright.
 
 ## 6. What to keep and what to cut
 
@@ -198,6 +208,12 @@ Answer "what is this paper about, and why should I care?" in 2 to 3 sentences: t
 problem, the central idea, the strongest result. It is not a compressed copy of the
 notes, and implementation detail does not belong in it.
 
+A number earns a place here only when a reader can read it without the rest of the page.
+A quantity that needs the metric's definition, the seed protocol or the spread standing
+next to it belongs in `evidence` or `comparison`, where those things are. Alone in the
+TL;DR it reads firmer than the result is, and "946° in 30 s" says less than "it transfers
+zero-shot to containers it never saw". The strongest result is often not a number.
+
 ## 10. Figures
 
 Inspect every figure before choosing. Include at most 3, and normally the pipeline or
@@ -253,6 +269,14 @@ Distinguish what a result demonstrates, what it suggests, and what it does not
 establish. Watch for metrics a degenerate policy scores well on, and read a metric pair
 together when one trades off against the other. Report the spread and the seed
 protocol when they change what a mean means.
+
+Check who the baselines are, and say it. A table whose every row is the same system with
+one part removed establishes which components the system needs and compares it to no
+alternative approach. That is a strong kind of evidence and a reader takes a results
+table for a method comparison by default, so name which one it is. Note also that "the
+method beats its baselines" carries close to no information, since a paper that failed
+to would not have been published. The information is in which comparison, by how much,
+and against what spread.
 
 For ablations ask what changed, what hypothesis that tests, whether the comparison is
 fair, whether it establishes causation, and what alternative explanations remain. When
