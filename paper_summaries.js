@@ -723,7 +723,7 @@ window.DETAILED_PAPER_SUMMARIES = {
       {name:"Perception at deployment", text:"Segment Anything masks the body and the lid on the first frame of a trajectory, XMem tracks them afterwards, and noisy depth from one RealSense D435 lifts the two mask centres into 3D."}
     ],
     methodDetails: [
-      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, and Time-to-Fail measures the interval from the object being held until it slips or lodges, capped at 30 s. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in the table below. Holding is the easy half of the task, and the metric pair is what stops that from reading as success."}
+      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, and Time-to-Fail measures the interval from the object being held until it slips or lodges, capped at 30 s. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in the table below. Holding is the easy half of the task, and the metric pair is what stops that from reading as success. Every row in that table is a lesion of the same system, since the authors report no learning-based method comparable on this task. The table establishes which components the system needs and compares it to no alternative approach: the one borrowed component, a gait constraint reward taken from in-hand reorientation work, stays in Figure 5 as qualitative analysis, where it produces erratic finger motion and unnatural grasps."}
     ],
     figures: [
       {

@@ -18,6 +18,10 @@
 // file. Two things went, both owned elsewhere: the baseline comparison (comparison and
 // evidence carry it) and the "the authors argue the barrier is exploration rather than
 // control" wrapper, which framed a fact instead of stating it. 68 words, same claims.
+// THIRD CORRECTION, same day: methodDetails now says that every row of Table 1 is a
+// lesion of the same system and that the authors report no comparable learning-based
+// method, so the table is not read as a method comparison. This also closes the
+// gait-constraint baseline, flagged as missing when v5 was reviewed.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
@@ -40,7 +44,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
       {name:"Perception at deployment", text:"Segment Anything masks the body and the lid on the first frame of a trajectory, XMem tracks them afterwards, and noisy depth from one RealSense D435 lifts the two mask centres into 3D."}
     ],
     methodDetails: [
-      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, and Time-to-Fail measures the interval from the object being held until it slips or lodges, capped at 30 s. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in the table below. Holding is the easy half of the task, and the metric pair is what stops that from reading as success."}
+      {name:"What the metrics hide", text:"The paper reports no success rate. Angular Displacement counts degrees turned, and Time-to-Fail measures the interval from the object being held until it slips or lodges, capped at 30 s. The two trade off: a policy that grips and never turns scores a full TTF with AD near zero, which is what No-Asym and Large do in the table below. Holding is the easy half of the task, and the metric pair is what stops that from reading as success. Every row in that table is a lesion of the same system, since the authors report no learning-based method comparable on this task. The table establishes which components the system needs and compares it to no alternative approach: the one borrowed component, a gait constraint reward taken from in-hand reorientation work, stays in Figure 5 as qualitative analysis, where it produces erratic finger motion and unnatural grasps."}
     ],
     figures: [
       {
