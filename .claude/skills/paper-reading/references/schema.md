@@ -43,6 +43,12 @@ filling it would restate something the reader already has. Padding a field costs
 the missing section does. Merging a field's content into the field that owns the same
 causal story, then dropping it, is the intended move.
 
+`formula` is plain text in a `<pre>`, and the renderer turns `^{...}` and `_{...}` into
+real superscripts and subscripts, parentheses too (`^(-1)`). Write `r_{contact}`,
+`X^{L}`, `min_{i}`, `‖A_{i} − x‖_{2}`. A bare `_` stays literal on purpose, because a
+few records hold pseudocode where `get_reward` and `peer_branches` are identifiers, so
+braces are the only way to ask for a subscript.
+
 `equations` accepts the older `{name, formula, meaning}` form, still used by earlier
 entries. New entries use the four-part form. The renderer handles both.
 

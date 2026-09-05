@@ -37,6 +37,7 @@
        pre-wrap used to break long formulas at arbitrary points and flatten indentation. */
     .eq{white-space:pre;overflow-x:auto;max-width:100%;tab-size:2;margin:8px 0;padding:11px 13px;border-radius:8px;border:1px solid #343c49;background:#11151b;color:#e8edf5;
       font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;overscroll-behavior-x:contain}
+    .eq sup,.eq sub{line-height:0;font-size:.78em}
     .eq::-webkit-scrollbar{height:8px}
     .eq::-webkit-scrollbar-thumb{background:#39414f;border-radius:4px}
     code{font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;
@@ -113,6 +114,12 @@
       // Prose fields render as HTML so <strong>/<em>/<code> work, matching schema.md.
       // esc() stays on formulas, alt text, and headings, where markup must show literally.
       const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+        // Formulas are plain text, so ^{...} and _{...} (also with parentheses) become real
+        // superscripts and subscripts. Bare underscores stay literal on purpose: several
+        // records hold pseudocode, where get_reward and peer_branches are identifiers.
+        const mathify = s => esc(s)
+        .replace(/\^\{([^}]*)\}/g, "<sup>$1</sup>").replace(/_\{([^}]*)\}/g, "<sub>$1</sub>")
+        .replace(/\^\(([^)]*)\)/g, "<sup>$1</sup>").replace(/_\(([^)]*)\)/g, "<sub>$1</sub>");
       const list = items => "<ul>" + items.map(x => "<li>" + x + "</li>").join("") + "</ul>";
       const block = (title, body, cls="") => '<section class="block '+cls+'"><h2>'+esc(title)+'</h2>'+body+"</section>";
       // Optional fields, matching overview/paper.html: a snapshot only fills the sections it has.
@@ -171,7 +178,7 @@
             "</tbody></table>");
         }
         const eqs = (p.equations || []).map((eq,i) => {
-          let s = "<h3>"+(i+1)+" · "+esc(eq.name)+'</h3><pre class="eq">'+esc(eq.formula)+"</pre>";
+          let s = "<h3>"+(i+1)+" · "+esc(eq.name)+'</h3><pre class="eq">'+mathify(eq.formula)+"</pre>";
           if (eq.meaning) return s + '<p class="meaning"><strong>Meaning:</strong> '+eq.meaning+"</p>";
           s += '<p class="meaning"><strong>Intuition:</strong> '+eq.intuition+"</p>";
           if (eq.terms) s += "<ul>"+eq.terms.map(t => "<li>"+t+"</li>").join("")+"</ul>";

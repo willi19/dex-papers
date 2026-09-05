@@ -117,10 +117,10 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     equations: [
       {
         name:"Keypoint finger contact reward",
-        formula:"r_contact = Σ_i [ 1 / (1 + α·d(X^L, F_i^L)) + 1 / (1 + α·d(X^R, F_i^R)) ]\n\n    d(A, x) = min_i ‖A_i − x‖₂",
+        formula:"r_{contact} = Σ_{i} [ 1/(1 + α·d(X^{L}, F_{i}^{L})) + 1/(1 + α·d(X^{R}, F_{i}^{R})) ]\n\n    d(A, x) = min_{i} ‖A_{i} − x‖_{2}",
         intuition:"Pay each fingertip for sitting near the surface it has been assigned. The form is the argument: a be-in-contact-somewhere term would carve one smooth basin over the whole surface, while a min over sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface relation into a discrete assignment, so the gradient pulls towards one configuration instead of the average of all valid ones. <em>Interpretation:</em> the paper reports the intensity correlation and does not analyse the form.",
         terms:[
-          "<code>X^L, X^R</code>: reference point sets on the base and on the lid. The released assets make them rings, eight points around the cap and two rings of eight around the base, each ring sized from that object's own measured radius.",
+          "<code>X<sup>L</sup>, X<sup>R</sup></code>: reference point sets on the base and on the lid. The released assets make them rings, eight points around the cap and two rings of eight around the base, each ring sized from that object's own measured radius.",
           "<code>d</code>: distance to the <em>nearest</em> reference point, rather than to the surface."
         ],
         matters:"The reciprocal keeps the term bounded and dense everywhere, so it supplies gradient from the first random rollout, which is when the objective supplies nothing.",
@@ -128,8 +128,8 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
       },
       {
         name:"Twisting reward",
-        formula:"r_twisting = Δθ = q_bottle(t+1) − q_bottle(t)",
-        intuition:"Pay for lid rotation accumulated this step, where q_bottle is the revolute joint angle between base and lid. There is no goal angle and no terminal bonus.",
+        formula:"r_{twisting} = Δθ = q_{bottle}(t+1) − q_{bottle}(t)",
+        intuition:"Pay for lid rotation accumulated this step, where q<sub>bottle</sub> is the revolute joint angle between base and lid. There is no goal angle and no terminal bonus.",
         matters:"Angular Displacement is this quantity integrated over a trial, which is why the paper reports degrees instead of a success rate.",
         consequence:"The reward has no end state, so the policy has none either. Removing the lid is what the household experiments score, and it never appears in the objective. The released code also clamps Δθ at 0.02 rad per step, so the term saturates at 11°/s, and the deployed policy runs more than three times past that at 41.26°/s. <em>Interpretation:</em> the speed comes from the contact configuration rather than from reward pressure."
       }
