@@ -34,17 +34,17 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Candidate-point recovery",
-        formula:"K_n = arg min_(x ∈ X_i^PCA) ||x − C_n||²",
+        formula:"K_{n} = arg min_{x ∈ X_{i}^{PCA}} ||x − C_{n}||^{2}",
         meaning:"For a K-means center Cn in one SAM mask's feature set, choose the nearest real pixel feature x. Its image location becomes a candidate keypoint."
       },
       {
         name:"Ego–Exo contact alignment",
-        formula:"f_gk = Σ_(i=1)^3 proj(F_ki)\nL_cos = 1 − cos(f_op, f_gk)",
+        formula:"f_{gk} = Σ_{i=1}^{3} proj(F_{ki})\nL_{cos} = 1 − cos(f_{op}, f_{gk})",
         meaning:"The three selected Ego neighborhood features are summed, then matched to the Exo contact prototype. This loss is permutation-invariant over the three selected features."
       },
       {
         name:"KGT frame alignment",
-        formula:"x_o = normalize(W_oF_o)\nz_o = normalize(W_oF_o × W_oL_o)\ny_o = z_o × x_o\nR = (R_O^I)^(-1) R_H^I",
+        formula:"x_{o} = normalize(W_{o}F_{o})\nz_{o} = normalize(W_{o}F_{o} × W_{o}L_{o})\ny_{o} = z_{o} × x_{o}\nR = (R_{O}^{I})^{-1} R_{H}^{I}",
         meaning:"Three non-collinear calibrated object points define an object frame. KGT aligns it with the frame defined by the hand's wrist, functional-finger, and little-finger anchors."
       }
     ],
@@ -117,27 +117,27 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Autoregressive motion prediction",
-        formula:"L_motion = Σₜ₌₁^Ω [ α‖s_t^h − ŝ_t^h‖₂ + β‖s_t^o − ŝ_t^o‖₂ ]\nα = 1,  β = 2,  history length n = 10",
+        formula:"L_{motion} = Σ_{t=1}^{Ω} [ α‖s_{t}^{h} − ŝ_{t}^{h}‖_{2} + β‖s_{t}^{o} − ŝ_{t}^{o}‖_{2} ]\nα = 1,  β = 2,  history length n = 10",
         meaning:"Supervise human-hand and object-state prediction jointly. The object term gets twice the weight because object dimensions occupy a smaller fraction of the combined state."
       },
       {
         name:"Hand-motion retargeting",
-        formula:"L_retarget(q_t) = Σᵢ₌₁⁵ ‖xᵢᵗ − fᵢ(q_t)‖₂ + β‖q_t − q_{t−1}‖₂\nsubject to q_lower ≤ q_t ≤ q_upper",
+        formula:"L_{retarget}(q_{t}) = Σ_{i=1}^{5} ‖x_{i}^{t} − f_{i}(q_{t})‖_{2} + β‖q_{t} − q_{t−1}‖_{2}\nsubject to q_{lower} ≤ q_{t} ≤ q_{upper}",
         meaning:"Match each human fingertip xᵢ to the robot fingertip produced by forward kinematics fᵢ(q), while keeping consecutive joint configurations smooth."
       },
       {
         name:"RL objective",
-        formula:"π* = arg max_π  E[ Σₜ₌₀ᴴ γᵗ r(s_t, a_t | τ_i) ]",
+        formula:"π* = arg max_{π}  E[ Σ_{t=0}^{H} γ^{t} r(s_{t}, a_{t} | τ_{i}) ]",
         meaning:"Each policy is trained against a predicted reference trajectory τᵢ. PPO itself is standard; the useful question is what information enters r."
       },
       {
         name:"Total reward",
-        formula:"R = λ₁ R_follow-hand + λ₂ R_follow-object\n    + λ₃ R_contact + λ₄ R_success",
+        formula:"R = λ_{1} R_{follow-hand} + λ_{2} R_{follow-object}\n    + λ_{3} R_{contact} + λ_{4} R_{success}",
         meaning:"Hand following, contact, and sparse success are familiar dexterous-RL terms. The reusable task signal is the object-following component."
       },
       {
         name:"Object-following reward",
-        formula:"R_follow-object = exp(−α₄ ‖T̂ᵒ_t − Tᵒ_t‖₂)\n                + exp(−α₅ ‖log((q̂ᵒ_t)⁻¹ ⊗ qᵒ_t)‖₂)",
+        formula:"R_{follow-object} = exp(−α_{4} ‖T̂_{t}^{o} − T_{t}^{o}‖_{2})\n                  + exp(−α_{5} ‖log((q̂_{t}^{o})^{-1} ⊗ q_{t}^{o})‖_{2})",
         meaning:"Reward the current object translation Tᵒ and orientation qᵒ for matching the future object state predicted from human data. This replaces a separate lift/rotate/open reward for each task."
       }
     ],
@@ -216,22 +216,22 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Task-focused visual attention",
-        formula:"A_t^(v) = softmax(E_img(I_t^(v)) E_text(ℓ)ᵀ / √d)\nf_t^visual = Concat_v E_vis(I_t^(v) ⊙ Upsample(A_t^(v)))",
+        formula:"A_{t}^{(v)} = softmax(E_{img}(I_{t}^{(v)}) E_{text}(ℓ)^{T} / √d)\nf_{t}^{visual} = Concat_{v} E_{vis}(I_{t}^{(v)} ⊙ Upsample(A_{t}^{(v)}))",
         meaning:"Use the instruction ℓ to select task-relevant regions in each camera view before learning motion, reducing background and bystander dynamics in the latent."
       },
       {
         name:"Temporally disentangled latent",
-        formula:"C_{t−k} = Concat(f_{t−k}^visual, E_ℓ(ℓ), s_{t−k}, γ(t−k)) + PE(k)\nZ_t = LatentHead(T_enc(C_{t−h}, …, C_t))",
+        formula:"C_{t−k} = Concat(f_{t−k}^{visual}, E_{ℓ}(ℓ), s_{t−k}, γ(t−k)) + PE(k)\nZ_{t} = LatentHead(T_{enc}(C_{t−h}, …, C_{t}))",
         meaning:"Absolute episode time γ says which phase the task is in; relative positional encoding PE describes order inside the short history. The paper uses h = 4 and latent dimension 512."
       },
       {
         name:"Mixed-data latent objective",
-        formula:"L_TA-LAM = L_recon + λ_act L_action\nL_recon = ‖Ô_{t+1} − O_{t+1}‖₂²\nL_action = ‖â_t − a_t‖₂²",
+        formula:"L_{TA-LAM} = L_{recon} + λ_{act} L_{action}\nL_{recon} = ‖Ô_{t+1} − O_{t+1}‖_{2}^{2}\nL_{action} = ‖â_{t} − a_{t}‖_{2}^{2}",
         meaning:"Next-frame reconstruction trains on unlabeled human and robot video; action decoding trains only on labeled robot sequences."
       },
       {
         name:"Latent diffusion planner",
-        formula:"L_LADT = E_{k, ε, c_t}[‖ε − ε_θ(Z_future,k^noisy, k, c_t)‖₂²]",
+        formula:"L_{LADT} = E_{k, ε, c_{t}}[‖ε − ε_{θ}(Z_{future,k}^{noisy}, k, c_{t})‖_{2}^{2}]",
         meaning:"Rather than autoregressing discrete codes, LADT denoises an entire future sequence in the continuous latent space."
       }
     ],
@@ -305,22 +305,22 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Kinematic alignment",
-        formula:"min_{q_t}  w_f E_f + w_o E_o + w_s E_s\nE_f = Σᵢ₌₁ᴷ ‖vᵢᴴ(H_t) − vᵢᴿ(q_t)‖²\nE_s = ‖q_t − q_{t−1}‖²",
+        formula:"min_{q_{t}}  w_{f} E_{f} + w_{o} E_{o} + w_{s} E_{s}\nE_{f} = Σ_{i=1}^{K} ‖v_{i}^{H}(H_{t}) − v_{i}^{R}(q_{t})‖^{2}\nE_{s} = ‖q_{t} − q_{t−1}‖^{2}",
         meaning:"Prioritize accurate world-frame fingertip positions, add palm-orientation alignment E_o, and smooth the joint sequence. This becomes the primary control A_primary."
       },
       {
         name:"Residual contact correction",
-        formula:"a_t = A_primary,t + Δa_t\nΔa_t ~ π_residual(s_t)",
+        formula:"a_{t} = A_{primary,t} + Δa_{t}\nΔa_{t} ~ π_{residual}(s_{t})",
         meaning:"RL does not rediscover the demonstrated motion. It only changes the proposed action enough to produce stable, robot-specific contact."
       },
       {
         name:"Unified grasp reward",
-        formula:"R = r_approach + r_grasp + r_lift\nr_grasp activates when all fingertips are within ε = 0.06 m\nr_grasp includes r_contact + r_similarity",
+        formula:"R = r_{approach} + r_{grasp} + r_{lift}\nr_{grasp} activates when all fingertips are within ε = 0.06 m\nr_{grasp} includes r_{contact} + r_{similarity}",
         meaning:"Approach targets demonstrated contacts, grasp combines collision-based multi-contact and joint-angle imitation, and lift moves the object to a shared pick-up goal."
       },
       {
         name:"Post-grasp wrist reconstruction",
-        formula:"T_t = o_t · (T_grasp⁻¹ · o_grasp)⁻¹",
+        formula:"T_{t} = o_{t} · (T_{grasp}^{-1} · o_{grasp})^{-1}",
         meaning:"Assuming little hand–object sliding after a stable grasp, use the demonstrated object pose o_t and the fixed relative transform at grasp time to recover wrist motion."
       }
     ],
@@ -399,22 +399,22 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Joint semantic criticality",
-        formula:"γ_j = |∂L_int / ∂θ_j| · σ(z)  ∈ [0, ∞)",
+        formula:"γ_{j} = |∂L_{int} / ∂θ_{j}| · σ(z)  ∈ [0, ∞)",
         meaning:"A joint is critical when changing it strongly affects intent-classification loss, weighted by the classifier’s confidence in the ground-truth intent."
       },
       {
         name:"Semantic-guided noise scaling",
-        formula:"x_{j,T}^SNS = x_{j,T} · 1/(1 + γ_j)",
+        formula:"x_{j,T}^{SNS} = x_{j,T} · 1/(1 + γ_{j})",
         meaning:"High-criticality joints receive little noise and remain semantically stable; low-criticality joints retain nearly the original noise and therefore natural variation."
       },
       {
         name:"Joint-specific variance bound",
-        formula:"Var(p(x_{j,0}^SNS)) ≤ C / (1 + γ_j)²",
+        formula:"Var(p(x_{j,0}^{SNS})) ≤ C / (1 + γ_{j})^{2}",
         meaning:"Under the paper’s DDPM derivation, increasing semantic criticality contracts that joint’s generated distribution quadratically."
       },
       {
         name:"Geometry refinement loss",
-        formula:"L = λ₁‖m̃₀ − m₀‖₂ + λ₂‖ẽ₀ − e₀‖₂\n    + λ₃ L_hand→object + λ₄ L_object→hand",
+        formula:"L = λ_{1}‖m̃_{0} − m_{0}‖_{2} + λ_{2}‖ẽ_{0} − e_{0}‖_{2}\n    + λ_{3} L_{hand→object} + λ_{4} L_{object→hand}",
         meaning:"Preserve the target mesh and edge structure while penalizing hand-to-object and object-to-hand penetration/contact errors."
       }
     ],
@@ -576,12 +576,12 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Multi-turn code-as-policy loop (tiers M1–M4)",
-        formula:"c_t   ← LLM( task, API, {c_i, r_i}_{i<t}, d_t )\nr_t   ← Exec(c_t)            // stdout / stderr / return status\nd_t   ← VDM(o_{t-1}, o_t)    // structured language description of the change\nrepeat until verified success or turn budget exhausted",
+        formula:"c_{t}   ← LLM( task, API, {c_{i}, r_{i}}_{i<t}, d_{t} )\nr_{t}   ← Exec(c_{t})            // stdout / stderr / return status\nd_{t}   ← VDM(o_{t-1}, o_{t})    // structured language description of the change\nrepeat until verified success or turn budget exhausted",
         meaning:"Each turn the agent emits a program, receives structured execution feedback and a language description of what visibly changed, and revises. The tiers differ only in which of r_t and d_t are available and in whether the API is high- or low-level."
       },
       {
         name:"Visual differencing",
-        formula:"t = 1 :  d_1 = VLM_describe(o_1)\nt > 1 :  d_t = VLM_diff(o_{t-1}, o_t)",
+        formula:"t = 1 :  d_{1} = VLM_describe(o_{1})\nt > 1 :  d_{t} = VLM_diff(o_{t-1}, o_{t})",
         meaning:"The first turn grounds the scene; every later turn reports only the delta. Converting pixels to structured text before they reach the coding agent outperforms handing it the raw frames."
       },
       {
