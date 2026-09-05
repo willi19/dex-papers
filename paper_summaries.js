@@ -216,7 +216,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Task-focused visual attention",
-        formula:"A_{t}^{(v)} = softmax(E_{img}(I_{t}^{(v)}) E_{text}(ℓ)^{T} / √d)\nf_{t}^{visual} = Concat_{v} E_{vis}(I_{t}^{(v)} ⊙ Upsample(A_{t}^{(v)}))",
+        formula:"A_{t}^{(v)} = softmax(E_{img}(I_{t}^{(v)}) \\frac{E_{text}(ℓ)^{T}}{√d})\nf_{t}^{visual} = Concat_{v} E_{vis}(I_{t}^{(v)} ⊙ Upsample(A_{t}^{(v)}))",
         meaning:"Use the instruction ℓ to select task-relevant regions in each camera view before learning motion, reducing background and bystander dynamics in the latent."
       },
       {
@@ -399,17 +399,17 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Joint semantic criticality",
-        formula:"γ_{j} = |∂L_{int} / ∂θ_{j}| · σ(z)  ∈ [0, ∞)",
+        formula:"γ_{j} = |\\frac{∂L_{int}}{∂θ_{j}}| · σ(z)  ∈ [0, ∞)",
         meaning:"A joint is critical when changing it strongly affects intent-classification loss, weighted by the classifier’s confidence in the ground-truth intent."
       },
       {
         name:"Semantic-guided noise scaling",
-        formula:"x_{j,T}^{SNS} = x_{j,T} · 1/(1 + γ_{j})",
+        formula:"x_{j,T}^{SNS} = x_{j,T} · \\frac{1}{1 + γ_{j}}",
         meaning:"High-criticality joints receive little noise and remain semantically stable; low-criticality joints retain nearly the original noise and therefore natural variation."
       },
       {
         name:"Joint-specific variance bound",
-        formula:"Var(p(x_{j,0}^{SNS})) ≤ C / (1 + γ_{j})^{2}",
+        formula:"Var(p(x_{j,0}^{SNS})) ≤ \\frac{C}{(1 + γ_{j})^{2}}",
         meaning:"Under the paper’s DDPM derivation, increasing semantic criticality contracts that joint’s generated distribution quadratically."
       },
       {
@@ -753,7 +753,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     equations: [
       {
         name:"Keypoint finger contact reward",
-        formula:"r_{contact} = Σ_{i} [ 1/(1 + α·d(X^{L}, F_{i}^{L})) + 1/(1 + α·d(X^{R}, F_{i}^{R})) ]\n\n    d(A, x) = min_{i} ‖A_{i} − x‖_{2}",
+        formula:"r_{contact} = Σ_{i} [ \\frac{1}{1 + α·d(X^{L}, F_{i}^{L})} + \\frac{1}{1 + α·d(X^{R}, F_{i}^{R})} ]\n\n    d(A, x) = min_{i} ‖A_{i} − x‖_{2}",
         intuition:"Pay each fingertip for sitting near the surface it has been assigned. The form is the argument: a be-in-contact-somewhere term would carve one smooth basin over the whole surface, while a min over sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface relation into a discrete assignment, so the gradient pulls towards one configuration instead of the average of all valid ones. <em>Interpretation:</em> the paper reports the intensity correlation and does not analyse the form.",
         terms:[
           "<code>X<sup>L</sup>, X<sup>R</sup></code>: reference point sets on the base and on the lid. The released assets make them rings, eight points around the cap and two rings of eight around the base, each ring sized from that object's own measured radius.",

@@ -38,6 +38,9 @@
     .eq{white-space:pre;overflow-x:auto;max-width:100%;tab-size:2;line-height:1.8;margin:8px 0;padding:11px 13px;border-radius:8px;border:1px solid #343c49;background:#11151b;color:#e8edf5;
       font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;overscroll-behavior-x:contain}
     .eq sup,.eq sub{font-size:.75em;line-height:0;position:relative;vertical-align:baseline}
+    .eq .frac{display:inline-block;vertical-align:-.62em;text-align:center;line-height:1.2;margin:0 .12em}
+    .eq .frac .num{display:block;padding:0 .35em}
+    .eq .frac .den{display:block;padding:0 .35em;border-top:1px solid currentColor}
     .eq sup{top:-.45em}
     .eq sub{bottom:-.25em}
     .eq::-webkit-scrollbar{height:8px}
@@ -124,7 +127,9 @@
           do {  // innermost first, so X_{i}^{PCA} nested inside min_{...} resolves
             prev = t;
             t = t.replace(/\^\{([^{}]*)\}/g, "<sup>$1</sup>").replace(/_\{([^{}]*)\}/g, "<sub>$1</sub>")
-                 .replace(/\^\(([^()]*)\)/g, "<sup>$1</sup>").replace(/_\(([^()]*)\)/g, "<sub>$1</sub>");
+                 .replace(/\^\(([^()]*)\)/g, "<sup>$1</sup>").replace(/_\(([^()]*)\)/g, "<sub>$1</sub>")
+                 .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g,
+                          '<span class="frac"><span class="num">$1</span><span class="den">$2</span></span>');
           } while (t !== prev);
           return t;
         };

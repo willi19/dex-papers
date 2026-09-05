@@ -117,7 +117,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     equations: [
       {
         name:"Keypoint finger contact reward",
-        formula:"r_{contact} = Σ_{i} [ 1/(1 + α·d(X^{L}, F_{i}^{L})) + 1/(1 + α·d(X^{R}, F_{i}^{R})) ]\n\n    d(A, x) = min_{i} ‖A_{i} − x‖_{2}",
+        formula:"r_{contact} = Σ_{i} [ \\frac{1}{1 + α·d(X^{L}, F_{i}^{L})} + \\frac{1}{1 + α·d(X^{R}, F_{i}^{R})} ]\n\n    d(A, x) = min_{i} ‖A_{i} − x‖_{2}",
         intuition:"Pay each fingertip for sitting near the surface it has been assigned. The form is the argument: a be-in-contact-somewhere term would carve one smooth basin over the whole surface, while a min over sampled points gives each fingertip its own nearest-point basin and turns the fingertip-to-surface relation into a discrete assignment, so the gradient pulls towards one configuration instead of the average of all valid ones. <em>Interpretation:</em> the paper reports the intensity correlation and does not analyse the form.",
         terms:[
           "<code>X<sup>L</sup>, X<sup>R</sup></code>: reference point sets on the base and on the lid. The released assets make them rings, eight points around the cap and two rings of eight around the base, each ring sized from that object's own measured radius.",

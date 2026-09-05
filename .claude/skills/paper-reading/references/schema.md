@@ -47,7 +47,8 @@ causal story, then dropping it, is the intended move.
 real superscripts and subscripts, parentheses too (`^(-1)`). Write `r_{contact}`,
 `X^{L}`, `min_{i}`, `‖A_{i} − x‖_{2}`. A bare `_` stays literal on purpose, because a
 few records hold pseudocode where `get_reward` and `peer_branches` are identifiers, so
-braces are the only way to ask for a subscript.
+braces are the only way to ask for a subscript. `\frac{a}{b}` renders as a stacked
+fraction, so write a real quotient instead of `a/(b)`.
 
 `equations` accepts the older `{name, formula, meaning}` form, still used by earlier
 entries. New entries use the four-part form. The renderer handles both.
