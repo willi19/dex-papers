@@ -60,6 +60,11 @@
 // minimum" replaced, since the paper shows two points suffice and never shows they are
 // the least the task needs. methodDetails splits, so the metric pair and the table's
 // composition stop sharing one block.
+// ELEVENTH CORRECTION, 2026-09-05: "a threaded joint has no faithful cheap model" was
+// an abstraction sitting in front of the concrete fact it abstracts, which the next
+// clause already stated. The abstraction goes and the sourced sentence stays, naming
+// what has to be modelled: the static friction that holds a screwed lid against the
+// body, which is what the brake link answers.
 // The live copy is paper_summaries.js. Edit that, not this snapshot.
 window.DETAILED_PAPER_SUMMARIES = window.DETAILED_PAPER_SUMMARIES || {};
 window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
@@ -82,7 +87,7 @@ window.DETAILED_PAPER_SUMMARIES["twisting-lids-v8"] = {
     ],
     problem: [
       "The object is articulated and has to stay in the hands throughout. Two failures recur: the object gets stuck between fingers, and the fingertips pinch it low where they cannot reposition it into the palm.",
-      "Demonstration data for two multi-fingered hands does not exist, and the simulation route has a gap of its own. A threaded joint has no faithful cheap model, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need."
+      "Demonstration data for two multi-fingered hands does not exist, and simulation has a gap of its own. The thing to model is the static friction that holds a screwed lid against the body, and the authors report that tuning friction between two revolute-jointed bodies does not reach the realism they need."
     ],
     pipeline: [
       {name:"Object model", text:"The bottle URDF is a base, a lid on a continuous revolute joint, and a brake link that a prismatic joint presses against the lid. That normal force stands in for a screwed cap, and the authors report it as the only approach they found that simulates the static friction well. No thread geometry exists anywhere in the model."},

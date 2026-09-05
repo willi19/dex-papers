@@ -723,7 +723,7 @@ window.DETAILED_PAPER_SUMMARIES = {
     ],
     problem: [
       "The object is articulated and has to stay in the hands throughout. Two failures recur: the object gets stuck between fingers, and the fingertips pinch it low where they cannot reposition it into the palm.",
-      "Demonstration data for two multi-fingered hands does not exist, and the simulation route has a gap of its own. A threaded joint has no faithful cheap model, and the authors report that tuning static friction between two revolute-jointed bodies does not reach the realism they need."
+      "Demonstration data for two multi-fingered hands does not exist, and simulation has a gap of its own. The thing to model is the static friction that holds a screwed lid against the body, and the authors report that tuning friction between two revolute-jointed bodies does not reach the realism they need."
     ],
     pipeline: [
       {name:"Object model", text:"The bottle URDF is a base, a lid on a continuous revolute joint, and a brake link that a prismatic joint presses against the lid. That normal force stands in for a screwed cap, and the authors report it as the only approach they found that simulates the static friction well. No thread geometry exists anywhere in the model."},
