@@ -4804,6 +4804,88 @@ window.PAPERS = [
     desc: "FAEA repurposes a software-engineering LLM agent loop for manipulation: 84.9% LIBERO, 85.7% ManiSkill3, 96% MetaWorld from privileged state with no demonstrations.",
     tags: ["agentic", "LLM", "planning", "benchmark", "manipulation"]
   },
+
+  // --- Cited by ENPIRE / CaP-X: LLM agents that write robot programs or robot rewards ---
+  {
+    title: "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2204.01691",
+    project: "https://say-can.github.io/",
+    venue: "arXiv 2022",
+    desc: "SayCan: the language model scores what to do next, a learned value function scores what the robot can do in this state, and the product picks the skill, which grounds a long instruction in the robot's own affordances.",
+    tags: ["Google", "agentic", "LLM", "planning", "language-grounding", "long-horizon", "real-world"]
+  },
+  {
+    title: "Code as Policies: Language Model Programs for Embodied Control",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2209.07753",
+    project: "https://code-as-policies.github.io/",
+    venue: "ICRA 2023",
+    desc: "Code-writing LLMs re-purposed to write robot policy code: functions and feedback loops that consume perception outputs and parameterise control primitive APIs, composed from few-shot command and code pairs.",
+    tags: ["Google", "code-as-policy", "agentic", "LLM", "planning", "manipulation"]
+  },
+  {
+    title: "ProgPrompt: Generating Situated Robot Task Plans using Large Language Models",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2209.11302",
+    project: "https://progprompt.github.io/",
+    venue: "arXiv 2022",
+    desc: "A programmatic prompt whose imports are the robot's available actions and whose variables are the scene, so the plan comes back as executable code with assertions rather than free-form text that may name impossible actions.",
+    tags: ["NVIDIA", "code-as-policy", "agentic", "LLM", "planning", "long-horizon"]
+  },
+  {
+    title: "RoboGen: Towards Unleashing Infinite Data for Automated Robot Learning via Generative Simulation",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2311.01455",
+    project: "https://robogen-ai.github.io/",
+    venue: "ICML 2024",
+    desc: "A self-guided propose-generate-learn cycle: the agent proposes tasks worth learning, generates the scene and the training supervision for each, then learns the skill, scaling robot data with little human supervision.",
+    tags: ["CMU", "agentic", "LLM", "data-generation", "multi-task", "sim-to-real"]
+  },
+  {
+    title: "Eureka: Human-Level Reward Design via Coding Large Language Models",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2310.12931",
+    project: "https://eureka-research.github.io/",
+    venue: "ICLR 2024",
+    desc: "GPT-4 runs evolutionary optimisation over reward code written against the environment source, with no task-specific prompting and no reward template, reaching skills as fine as dexterous pen spinning.",
+    tags: ["NVIDIA", "agentic", "code-as-policy", "LLM", "RL", "dexterous"]
+  },
+  {
+    title: "DrEureka: Language Model Guided Sim-To-Real Transfer",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2406.01967",
+    project: "https://eureka-research.github.io/dr-eureka/",
+    venue: "RSS 2024",
+    desc: "Carries LLM reward writing into the transfer step: the model also constructs the domain randomisation distributions, so sim-to-real needs only the physics simulation of the target task.",
+    tags: ["NVIDIA", "agentic", "LLM", "sim-to-real", "RL", "code-as-policy"]
+  },
+  {
+    title: "Text2Reward: Reward Shaping with Language Models for Reinforcement Learning",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2309.11489",
+    project: "https://text-to-reward.github.io/",
+    venue: "ICLR 2024",
+    desc: "Generates shaped dense reward functions as executable programs over a compact representation of the environment, from a goal stated in natural language, and refines them from feedback on the resulting behaviour.",
+    tags: ["agentic", "code-as-policy", "LLM", "RL", "manipulation"]
+  },
+  {
+    title: "Language to Rewards for Robotic Skill Synthesis",
+    collection: "Agentic Control",
+    file: null,
+    arxiv: "https://arxiv.org/abs/2306.08647",
+    project: "https://language-to-reward.github.io/",
+    venue: "arXiv 2023",
+    desc: "Puts reward functions between the instruction and the robot: the LLM writes reward parameters for a real-time optimiser instead of hardware-dependent low-level actions or hand-engineered control primitives.",
+    tags: ["Google", "DeepMind", "agentic", "LLM", "RL", "real-world"]
+  },
   {
     title: "Autonomous Improvement of Instruction Following Skills via Foundation Models",
     image: "https://arxiv.org/html/2407.20635v2/x1.png",

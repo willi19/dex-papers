@@ -111,7 +111,10 @@ unreachable and 10 of those papers were missing from `papers.js` entirely.
 `Related: dexterous`, `Related: real`, `Related: system`, `Related: misc`.
 
 `Agentic Control` is LLM/VLM agents that write, run and repair robot programs,
-plus the self-improvement loops around them (ASPIRE, CaP-X, ENPIRE, Uni-Skill).
+plus the self-improvement loops around them (ASPIRE, CaP-X, ENPIRE, Uni-Skill) and
+the line they come from (SayCan, Code as Policies, ProgPrompt, Eureka, RoboGen).
+The bar is that a robot is in the loop: ReAct, Reflexion and Voyager are the same
+literature but no robot, so they stay out.
 `index.html` gives them their own research area, driven by the `agentic` /
 `code-as-policy` tags.
 
